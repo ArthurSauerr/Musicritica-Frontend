@@ -3,7 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 
 const routes: Routes = [
   {
-    path: 'musicas',
+    path: '',
     loadChildren:() => import('./menu-principal/menu-principal.module').then(m => m.MenuPrincipalModule)
   },
 ];

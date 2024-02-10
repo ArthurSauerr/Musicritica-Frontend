@@ -2,21 +2,22 @@
 
 <!-- Navbar -->
 <nav class="navbar bg-gray-800 text-white p-4">
-  <div class="container mx-auto flex justify-between items-center">
+  <div class="container mx-auto flex items-center">
     <div>
       <a href="#" class="text-xl font-bold">Musicrítica</a>
     </div>
-    <div>
+    <div class="flex items-center ml-4">
       <a href="#" class="mr-4">Descobrir</a>
       <a href="#">Ranking</a>
     </div>
+    <div class="relative ml-auto mr-32 mb-2">
+      <div class="flex items-center border-b-2 border-gray-300">
+        <input type="text" [(ngModel)]="musicaProcurada" placeholder="Buscar" class="bg-gray-800 text-white px-1 py-2 rounded-full border-0 focus:outline-none">
+        <svg  (click)="enviarParametro()" class="w-4 h-4 text-gray-500 dark:text-gray-400 ml-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
+          <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"/>
+        </svg>
+      </div>
+    </div>
   </div>
 </nav>
-
-<!-- Conteúdo da Página -->
-<main class="bg-gray-900 min-h-screen">
-
-</main>
-
-
 <router-outlet></router-outlet>
