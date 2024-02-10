@@ -1,6 +1,6 @@
 import { DadosCompartilhadosService } from './../../shared/service/dados-compartilhados.service';
 import { SpotifySearchResponse } from './../../shared/model/SpotifySearchResponse';
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { MenuPrincipalService } from 'src/app/shared/service/menu-principal.service';
 import { Item } from 'src/app/shared/model/Item';
 
