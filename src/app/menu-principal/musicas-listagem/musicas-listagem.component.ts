@@ -3,6 +3,7 @@ import { SpotifySearchResponse } from './../../shared/model/SpotifySearchRespons
 import { Component, Input, OnInit } from '@angular/core';
 import { MenuPrincipalService } from 'src/app/shared/service/menu-principal.service';
 import { Item } from 'src/app/shared/model/Item';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-musicas-listagem',
@@ -11,7 +12,7 @@ import { Item } from 'src/app/shared/model/Item';
 })
 export class MusicasListagemComponent implements OnInit {
 
-  constructor(private spotifyService: MenuPrincipalService, private dadosCompartilhadosService: DadosCompartilhadosService) { }
+  constructor(private router: Router, private spotifyService: MenuPrincipalService, private dadosCompartilhadosService: DadosCompartilhadosService) { }
 
   musicas: Item[] = [];
   musicaProcurada: string = '';
@@ -36,5 +37,8 @@ export class MusicasListagemComponent implements OnInit {
         console.error('Ocorreu um erro ao buscar as músicas:', error);
       }
     );
+  }
+  avancar(musica : Item): void {
+    this.router.navigate(['/detalhes'], { state: { musica: musica } });
   }
 }
