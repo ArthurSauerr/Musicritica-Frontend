@@ -1,0 +1,91 @@
+.bg-custom-gray {
+  background-color: #0D0D0D; /* Substitua pela cor desejada */
+}
+
+.bg-custom-green {
+  background-image: radial-gradient(circle, #2F6953, #26332D); /* Substitua as cores conforme desejado */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.8);
+}
+
+.bg-custom-green h2{
+  font-family: 'Poppins', sans-serif;
+  font-weight: 700;
+  color: #fff; // Cor do texto
+  margin-bottom: 50px; // Espaçamento abaixo do título
+  font-size: 38px; // Tamanho da fonte do título
+  text-shadow: 1px 2px 5px #0D0D0D;
+}
+
+.bg-custom-blue{
+  width: 18%;
+  height: 54%;
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.8);
+}
+.overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: 10px;
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+  background-color: rgb(47, 105, 83);
+  mix-blend-mode: multiply;
+  box-shadow: inset 0 0 15px rgba(0, 0, 0, 1);
+  z-index: 1; /* Certifique-se de que este elemento fique acima da imagem */
+}
+
+.form-input {
+  font-family: 'Inter', sans-serif;
+  background: none;
+  border-bottom: 2px solid #ffffff; // Adiciona uma borda na parte inferior
+  margin-bottom: 24px; // Espaçamento entre os inputs
+  padding: 6px; // Espaçamento interno
+  color: #ffffff;
+  position: relative; // Tornar a posição relativa para que o ícone possa ser posicionado com base nela
+
+  // Adicionar espaço à esquerda do texto para acomodar o ícone
+  padding-left: 35px; // Ajuste conforme necessário
+
+  &:focus {
+    outline: none; // Remove o contorno ao focar
+  }
+}
+
+.form-button {
+  font-family: 'Inter', sans-serif;
+  margin-top: 60px;
+  position: relative;
+  background: none; // Cor de fundo do botão
+  color: #fff; // Cor do texto do botão
+  padding: 10px 20px; // Espaçamento interno do botão
+  border: none;
+  cursor: pointer;
+  overflow: hidden; // Oculta o conteúdo que transborda
+  &::before {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    width: 0;
+    height: 2px;
+    background-color: #ffffff; // Cor da borda
+    transition: width 0.3s ease, left 0.3s ease; // Transição suave
+  }
+  &:hover {
+    font-weight: bold; // Aumenta a intensidade da fonte ao passar o mouse
+  }
+  &:hover::before {
+    width: 100%;
+    left: 0;
+  }
+}
