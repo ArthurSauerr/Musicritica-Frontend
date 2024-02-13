@@ -1,0 +1,6 @@
+<form class="flex flex-col" (ngSubmit)="registrar()">
+  <input class="border rounded py-2 px-3 mb-2" type="nome" name="nome" [(ngModel)]="nome" placeholder="Nome" required>
+  <input class="border rounded py-2 px-3 mb-2" type="email" name="email" [(ngModel)]="email" placeholder="Email" required>
+  <input class="border rounded py-2 px-3 mb-2" type="password" name="senha" [(ngModel)]="senha" placeholder="Senha" required>
+  <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" type="submit">Registrar</button>
+</form>
