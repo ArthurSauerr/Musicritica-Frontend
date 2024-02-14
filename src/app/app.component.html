@@ -1,22 +1,22 @@
 <!-- app.component.html -->
 
 <!-- Navbar -->
-<nav class="navbar bg-gray-800 text-white p-4" *ngIf="mostrarNavbar">
+<nav class="navbar bg-custom-gray text-white p-4" *ngIf="mostrarNavbar">
   <div class="container mx-auto flex items-center">
     <div>
-      <a href="#" class="text-xl font-bold">Musicrítica</a>
+      <a href="#" class="text-xl font-bold custom-href2">Musicrítica</a>
     </div>
     <div class="flex items-center ml-4">
-      <a href="#" class="mr-4">Descobrir</a>
-      <a href="#">Ranking</a>
+      <a href="#" class="mr-4 custom-href">Descobrir</a>
+      <a href="#" class="mr-4 custom-href">Ranking</a>
     </div>
-    <div class="relative ml-auto mr-32 mb-2">
-      <div class="flex items-center border-b-2 border-gray-300">
-        <input type="text" [(ngModel)]="musicaProcurada" placeholder="Buscar" class="bg-gray-800 text-white px-1 py-2 rounded-full border-0 focus:outline-none">
+    <div class="relative ml-auto mr-32 mb-1">
+      <span class="absolute right-0 top-0 mt-2 ml-2">
         <svg  (click)="enviarParametro()" class="w-4 h-4 text-gray-500 dark:text-gray-400 ml-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
           <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"/>
         </svg>
-      </div>
+      </span>
+        <input type="text" [(ngModel)]="musicaProcurada" placeholder="Buscar" class="custom-input text-white px-1 py-2 focus:outline-none">
     </div>
   </div>
 </nav>

@@ -1,0 +1,42 @@
+.bg-custom-gray{
+  background-color: #181818;
+}
+
+.custom-input{
+  background: none;
+  color: white;
+  border-bottom: 2px solid #64DEA1;
+  padding-bottom: 5px;
+}
+
+.custom-href {
+  font-family: 'Inter', sans-serif;
+  color: #64DEA1;
+  position: relative; /* Adicionado para garantir que a pseudo-classe ::before fique relativa a este elemento */
+}
+.custom-href::before {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  width: 0;
+  height: 2px;
+  background-color: #64DEA1; /* Cor da borda */
+  transition: width 0.3s ease, left 0.3s ease; /* Transição suave */
+}
+.custom-href:hover {
+  font-weight: bold; /* Aumenta a intensidade da fonte ao passar o mouse */
+}
+.custom-href:hover::before {
+  width: 100%;
+  left: 0;
+}
+
+.custom-href2{
+  font-family: 'Inter', sans-serif;
+  color: #64DEA1;
+}
+
+.custom-bg{
+  background-color: #0D0D0D;
+}
