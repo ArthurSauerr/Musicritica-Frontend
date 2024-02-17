@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { SpotifySearchResponse } from '../model/SpotifySearchResponse';
 import { LastFmMusica } from '../model/LastFmMusica';
+import { Item } from '../model/Item';
 
 @Injectable({
   providedIn: 'root'
@@ -20,5 +21,8 @@ export class MenuPrincipalService {
 
   getInfoMusica(artista: string, musica: string): Observable<LastFmMusica> {
     return this.httpClient.get<LastFmMusica>(`${this.lastfmUrl}/${artista}/${musica}`);
+  }
+  getTopCharts(): Observable<SpotifySearchResponse[]> {
+    return this.httpClient.get<SpotifySearchResponse[]>(`${this.apiUrl}/topCharts`);
   }
 }
