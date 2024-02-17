@@ -23,6 +23,31 @@
           </span>
           <input class="form-input" type="password" name="senha" [(ngModel)]="senha" placeholder="Senha" required>
         </div>
+
+        <div class="w-[300px] relative border-2 border-gray-300 border-dashed p-6" id="dropzone">
+          <input #fileInput id="file-upload" name="file-upload" type="file" class="sr-only" (change)="onFileSelected($event)">
+          <div class="text-center">
+              <img class="mx-auto" width="40" height="40" src="https://img.icons8.com/ios-filled/50/FFFFFF/image.png" alt="image"/>
+              <h3 class="mt-2 text-sm font-medium custom-text">
+                  <label for="file-upload" class="relative cursor-pointer">
+                      <span>Arraste e solte</span>
+                      <span class="custom-link"> ou busque </span>
+                      <span>para fazer upload</span>
+                      <input id="file-upload" name="file-upload" type="file" class="sr-only">
+                  </label>
+              </h3>
+              <p class="mt-1 text-xs text-gray-400">
+                  PNG, JPG até 5MB
+              </p>
+          </div>
+
+          <img src="" class="mt-4 mx-auto max-h-20 hidden" id="preview">
+      </div>
+
+        <div class="flex items-center mt-4">
+          <span class="text-white mr-2 custom-text">Já possui uma conta?</span>
+          <button class="text-white underline custom-button" type="button" (click)="fazerLogin()">Faça login</button>
+        </div>
         <button class="form-button text-center mt-4" type="submit" (click)="registrar()">CADASTRAR</button>
       </div>
   </div>
