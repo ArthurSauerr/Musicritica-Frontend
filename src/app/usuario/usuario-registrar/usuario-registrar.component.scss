@@ -1,55 +1,31 @@
-.bg-custom-gray {
-  background-color: #0D0D0D; /* Substitua pela cor desejada */
+.bg-custom{
+
+  border-radius: 15px;
 }
 
 .bg-custom-green {
   background-image: radial-gradient(circle, #2F6953, #26332D); /* Substitua as cores conforme desejado */
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
   border-top-left-radius: 0;
   border-bottom-left-radius: 0;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.8);
+
 }
 
-.bg-custom-green h2{
+.custom-h2{
   font-family: 'Poppins', sans-serif;
   font-weight: 700;
   color: #fff; // Cor do texto
-  margin-bottom: 50px; // Espaçamento abaixo do título
+  margin-bottom: 80px; // Espaçamento abaixo do título
   font-size: 38px; // Tamanho da fonte do título
   text-shadow: 1px 2px 5px #0D0D0D;
-}
-
-.bg-custom-blue{
-  width: 18%;
-  height: 54%;
-  border-top-right-radius: 0;
-  border-bottom-right-radius: 0;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.8);
-}
-.overlay {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  border-radius: 10px;
-  border-top-right-radius: 0;
-  border-bottom-right-radius: 0;
-  background-color: rgb(47, 105, 83);
-  mix-blend-mode: multiply;
-  box-shadow: inset 0 0 15px rgba(0, 0, 0, 1);
-  z-index: 1; /* Certifique-se de que este elemento fique acima da imagem */
 }
 
 .form-input {
   font-family: 'Inter', sans-serif;
   background: none;
   border-bottom: 2px solid #ffffff; // Adiciona uma borda na parte inferior
-  margin-bottom: 24px; // Espaçamento entre os inputs
-  padding: 6px; // Espaçamento interno
+  margin-bottom: 40px; // Espaçamento entre os inputs
+  padding: 5px; // Espaçamento interno
   color: #ffffff;
   position: relative; // Tornar a posição relativa para que o ícone possa ser posicionado com base nela
 
@@ -63,6 +39,9 @@
 
 .form-button {
   font-family: 'Inter', sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   margin-top: 60px;
   position: relative;
   background: none; // Cor de fundo do botão
@@ -89,3 +68,30 @@
     left: 0;
   }
 }
+
+.custom-text {
+  font-family: 'Inter', sans-serif;
+  color: #ffffff; /* Cor do texto */
+  font-size: 14px; /* Tamanho da fonte */
+}
+
+.custom-button {
+  font-family: 'Inter', sans-serif;
+  color: #ffffff; /* Cor do texto */
+  font-size: 14px; /* Tamanho da fonte */
+}
+.custom-button:hover{
+    font-weight: 700;
+}
+
+.custom-link {
+  font-family: 'Inter', sans-serif;
+  color: #64DEA1; /* Cor do texto */
+  font-size: 14px; /* Tamanho da fonte */
+}
+
+.custom-border-color{
+  border-color: #64DEA1;
+}
+
+
