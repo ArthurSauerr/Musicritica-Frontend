@@ -12,7 +12,7 @@
 .custom-href {
   font-family: 'Inter', sans-serif;
   color: #64DEA1;
-  position: relative; /* Adicionado para garantir que a pseudo-classe ::before fique relativa a este elemento */
+  position: relative;
 }
 .custom-href::before {
   content: '';
