@@ -1,11 +1,11 @@
 <div class="h-screen flex flex-col">
-  <div class="bg-gradient-to-r from-gray-600 to-gray-1000 text-white p-4 flex items-end justify-between">
+  <div class="bg-gradient-to-r custom-color text-white p-16 flex items-end justify-between">
     <div class="flex items-end">
       <img [src]="musica.album.images[1].url" alt="{{ musica.name }}"
-        class="ml-8 mt-8 mb-6 w-60 h-60 overflow-hidden mr-4 flex-shrink-0 rounded-lg shadow-[0_50px_25px_-24px_rgb(0,0,0,0.5)]">
+        class="ml-2  mt-8 mb-6 w-60 h-60 overflow-hidden mr-4 flex-shrink-0 rounded-lg shadow-[0_50px_25px_-24px_rgb(0,0,0,0.5)]">
       <div>
-        <h1 class="text-6xl font-bold mb-4">{{ musica.name }}</h1>
-        <h2 class="text-2xl font-bold mb-6">{{ musica.album.name }}</h2>
+        <h1 class="text-6xl font-bold mb-4 musica-info">{{ musica.name }}</h1>
+        <h2 class="text-2xl font-bold mb-6 musica-info">{{ musica.album.name }}</h2>
       </div>
     </div>
     <div class="mb-2 flex">

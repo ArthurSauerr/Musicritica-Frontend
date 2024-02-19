@@ -21,11 +21,11 @@
   left: 50%;
   width: 0;
   height: 2px;
-  background-color: #64DEA1; /* Cor da borda */
-  transition: width 0.3s ease, left 0.3s ease; /* Transição suave */
+  background-color: #64DEA1;
+  transition: width 0.3s ease, left 0.3s ease;
 }
 .custom-href:hover {
-  font-weight: bold; /* Aumenta a intensidade da fonte ao passar o mouse */
+  font-weight: bold;
 }
 .custom-href:hover::before {
   width: 100%;
@@ -39,4 +39,9 @@
 
 .custom-bg{
   background-color: #0D0D0D;
+}
+.navbar2 {
+  overflow: hidden;
+  position: fixed;
+  top: 0;
 }

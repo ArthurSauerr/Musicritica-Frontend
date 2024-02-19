@@ -1,7 +1,4 @@
-<!-- app.component.html -->
-
-<!-- Navbar -->
-<nav class="navbar bg-custom-gray text-white p-4" *ngIf="mostrarNavbar">
+<nav class="navbar bg-custom-gray text-white p-4" style="position: fixed; top: 0; left: 0; right: 0; z-index: 1000;">
   <div class="container mx-auto flex items-center">
     <div>
       <a href="#" class="text-xl font-bold custom-href2">Musicrítica</a>
@@ -16,7 +13,7 @@
           <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"/>
         </svg>
       </span>
-        <input type="text" [(ngModel)]="musicaProcurada" placeholder="Buscar" class="custom-input text-white px-1 py-2 focus:outline-none">
+      <input type="text" [(ngModel)]="musicaProcurada" placeholder="Buscar" class="custom-input text-white px-1 py-2 focus:outline-none" (keyup.enter)="enviarParametro()">
     </div>
   </div>
 </nav>
