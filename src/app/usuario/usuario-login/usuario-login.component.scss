@@ -20,28 +20,6 @@
   text-shadow: 1px 2px 5px #0D0D0D;
 }
 
-.bg-custom-blue{
-  width: 18%;
-  height: 54%;
-  border-top-right-radius: 0;
-  border-bottom-right-radius: 0;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.8);
-}
-.overlay {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  border-radius: 10px;
-  border-top-right-radius: 0;
-  border-bottom-right-radius: 0;
-  background-color: rgb(47, 105, 83);
-  mix-blend-mode: multiply;
-  box-shadow: inset 0 0 15px rgba(0, 0, 0, 1);
-  z-index: 1; /* Certifique-se de que este elemento fique acima da imagem */
-}
-
 .form-input {
   font-family: 'Inter', sans-serif;
   background: none;
@@ -61,6 +39,9 @@
 
 .form-button {
   font-family: 'Inter', sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   margin-top: 60px;
   position: relative;
   background: none; // Cor de fundo do botão
@@ -86,7 +67,6 @@
     width: 100%;
     left: 0;
   }
-
 }
 
 .custom-text {

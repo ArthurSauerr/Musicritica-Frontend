@@ -29,4 +29,8 @@ export class UsuarioLoginComponent {
   criarConta(){
     this.router.navigate(['usuario/registrar']);
   }
+
+  esqueceuSenha(){
+    this.router.navigate(['usuario/esqueceu-senha']);
+  }
 }

@@ -4,6 +4,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Usuario } from '../model/Usuario';
+import { UsuarioDTO } from '../model/UsuarioDTO';
 
 @Injectable({
   providedIn: 'root'
@@ -20,5 +21,9 @@ export class UsuarioService {
 
   registrar(registroDTO: RegistroDTO): Observable<any> {
     return this.httpClient.post<any>(`${this.apiUrl}/registrar`, registroDTO);
+  }
+
+  esqueceuSenha(usuarioDTO: UsuarioDTO): Observable<any>{
+    return this.httpClient.post<any>(`${this.apiUrl}/esqueceuSenha`, usuarioDTO)
   }
 }
