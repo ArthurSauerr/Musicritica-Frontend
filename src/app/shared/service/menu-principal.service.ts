@@ -4,6 +4,8 @@ import { Observable } from 'rxjs';
 import { SpotifySearchResponse } from '../model/SpotifySearchResponse';
 import { LastFmMusica } from '../model/LastFmMusica';
 import { Item } from '../model/Item';
+import { TrackData } from '../model/TrackData';
+import { AlbumBuscado } from '../model/AlbumBuscado';
 
 @Injectable({
   providedIn: 'root'
@@ -22,7 +24,14 @@ export class MenuPrincipalService {
   getInfoMusica(artista: string, musica: string): Observable<LastFmMusica> {
     return this.httpClient.get<LastFmMusica>(`${this.lastfmUrl}/${artista}/${musica}`);
   }
+
   getTopCharts(): Observable<SpotifySearchResponse[]> {
     return this.httpClient.get<SpotifySearchResponse[]>(`${this.apiUrl}/topCharts`);
+  }
+  getRecommendation(generoPrimario: string, generoSecundario: string): Observable<TrackData> {
+    return this.httpClient.get<TrackData>(`${this.apiUrl}/descobrir/${generoPrimario}/${generoSecundario}`);
+  }
+  getAlbum(idAlbum: string): Observable<AlbumBuscado> {
+    return this.httpClient.get<AlbumBuscado>(`${this.apiUrl}/buscar/album/${idAlbum}`);
   }
 }

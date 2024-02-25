@@ -8,6 +8,17 @@ export class DadosCompartilhadosService {
 
   constructor() { }
 
+  private idAlbumParaProcurar: string;
+
+   setIdAlbumParaProcurar(id: string) {
+    this.idAlbumParaProcurar = id;
+  }
+
+  getIdAlbumParaProcurar(): string {
+    return this.idAlbumParaProcurar;
+  }
+
+
   private musicaProcuradaSource = new BehaviorSubject<string>('');
   musicaProcurada = this.musicaProcuradaSource.asObservable();
 

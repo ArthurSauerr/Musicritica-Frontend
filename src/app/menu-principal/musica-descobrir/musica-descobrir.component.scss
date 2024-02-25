@@ -1,4 +1,3 @@
-
 .musica-info {
   font-family: 'Poppins', sans-serif;
   background: linear-gradient(180deg, #64DEA1, #FFFFFF);
@@ -17,3 +16,17 @@
   color: #259C50;
 }
 
+.musica-selecione {
+  font-family: 'Poppins', sans-serif;
+  background: linear-gradient(180deg, #007F4F, #64DEA5);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+.buttons-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center; /* Centraliza horizontalmente os botões */
+  align-items: center; /* Alinha verticalmente os botões */
+  margin-bottom: 20px; /* Adiciona espaço entre os botões e o botão "Descobrir uma nova música!" */
+}
