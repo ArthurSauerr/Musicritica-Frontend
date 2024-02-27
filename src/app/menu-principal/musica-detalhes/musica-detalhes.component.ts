@@ -1,3 +1,4 @@
+import { DadosCompartilhadosService } from './../../shared/service/dados-compartilhados.service';
 import { Item } from './../../shared/model/Item';
 import { MenuPrincipalService } from 'src/app/shared/service/menu-principal.service';
 import { Component, OnInit } from '@angular/core';
@@ -14,11 +15,13 @@ import { SpotifySearchResponse } from 'src/app/shared/model/SpotifySearchRespons
 })
 export class MusicaDetalhesComponent implements OnInit {
 
-  constructor(private sanitizer: DomSanitizer, private route: ActivatedRoute, private menuPrincipalService: MenuPrincipalService) { }
+  constructor(private sanitizer: DomSanitizer, private route: ActivatedRoute, private menuPrincipalService: MenuPrincipalService, private dadosCompartilhadosService: DadosCompartilhadosService) { }
 
   artista: string;
 
   musica: Item;
+
+  idMusica: string;
 
   nomeMusica: string;
   nomeArtista: string;
@@ -36,9 +39,18 @@ export class MusicaDetalhesComponent implements OnInit {
   }
 
   buscarMusica() {
-    this.buscarIdMusica();
-    this.getSpotifyEmbedUrl(this.idMusicaSpotify);
+    const idMusica = this.dadosCompartilhadosService.getIdMusica();
+    if (idMusica !== null) {
+      this.idMusica = idMusica;
+      this.buscarIdMusica();
+      this.getSpotifyEmbedUrl(this.idMusica);
+      console.log("ID PORRA: " + this.idMusica);
+    } else {
+      console.log("O ID da música não foi encontrado no cache.");
+      // Trate o caso em que o ID da música não está presente no cache
+    }
   }
+
 
   getSpotifyEmbedUrl(idMusica: string | null): SafeResourceUrl {
     if (idMusica) {
