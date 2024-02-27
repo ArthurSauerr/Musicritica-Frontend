@@ -3,11 +3,13 @@
     Resultados da busca
   </p>
 </div>
-<div *ngIf="musicas.length > 0" class="flex mr-8 ml-8 flex-wrap -mx-1 mt-10">
-  <div *ngFor="let musica of musicas" class="w-full sm:w-1/2 md:w-1/3 lg:w-1/5 p-4">
+<div *ngIf="musicas.length > 0" class="flex mr-8 ml-8 flex-wrap -mx-1 mt-10 ">
+  <div *ngFor="let musica of musicas" class="w-full sm:w-1/2 md:w-1/3 lg:w-1/5 p-4 ease-in-out transform hover:scale-110 hover:brightness-75">
     <div class="relative rounded-md overflow-hidden" (click)="avancar(musica)">
-      <img [src]="musica.album.images[1].url" alt="{{ musica.name }}" class="w-full h-auto md:h-64 object-cover transition duration-300 ease-in-out transform hover:scale-110 hover:brightness-75">
-      <div class="absolute inset-0 flex items-center justify-center text-white text-xl font-semibold bg-black bg-opacity-50 opacity-0 hover:opacity-100 transition-opacity duration-300 ease-in-out">
+      <img [src]="musica.album.images[1].url" alt="{{ musica.name }}"
+        class="w-full h-auto md:h-64 object-cover transition duration-300 ease-in-out transform hover:scale-110 hover:brightness-75">
+      <div
+        class="absolute inset-0 flex items-center justify-center text-white text-xl font-semibold bg-black bg-opacity-50 opacity-0 hover:opacity-100 transition-opacity duration-300 ease-in-out">
         {{ musica.name }}
       </div>
     </div>
@@ -21,13 +23,12 @@
 <div *ngIf="topCharts.length > 0" class="flex flex-wrap -mx-1 mr-8 ml-8">
   <div *ngFor="let charts of topCharts" class="w-full sm:w-1/2 md:w-1/3 lg:w-1/5 p-4">
     <div class="relative">
-      <img  [src]="charts.album.images[1].url" alt="{{ charts.name }}" class="w-full h-auto md:h-64 object-cover transition duration-300 ease-in-out transform hover:scale-110 hover:brightness-75">
-      <div class="absolute inset-0 flex items-center justify-center text-white text-xl font-semibold bg-black bg-opacity-50 opacity-0 hover:opacity-100 transition-opacity duration-300 ease-in-out">
+      <img [src]="charts.album.images[1].url" alt="{{ charts.name }}"
+        class="w-full h-auto md:h-64 object-cover transition duration-300 ease-in-out transform hover:scale-110 hover:brightness-75">
+      <div
+        class="absolute inset-0 flex items-center justify-center text-white text-xl font-semibold bg-black bg-opacity-50 opacity-0 hover:opacity-100 transition-opacity duration-300 ease-in-out">
         {{ charts.name }}
       </div>
     </div>
   </div>
 </div>
-
-
-

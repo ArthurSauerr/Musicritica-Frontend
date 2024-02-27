@@ -4,6 +4,8 @@ import { MenuPrincipalService } from 'src/app/shared/service/menu-principal.serv
 import { Component, OnInit } from '@angular/core';
 import { TrackData } from 'src/app/shared/model/TrackData';
 import { AlbumBuscado } from 'src/app/shared/model/AlbumBuscado';
+import { SpotifySearchResponse } from 'src/app/shared/model/SpotifySearchResponse';
+import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-musica-descobrir',
@@ -16,15 +18,27 @@ export class MusicaDescobrirComponent implements OnInit {
 
   }
 
-  constructor(private spotifyService: MenuPrincipalService, private dadosCompartilhadosService: DadosCompartilhadosService) { }
+  constructor(private sanitizer: DomSanitizer, private spotifyService: MenuPrincipalService, private dadosCompartilhadosService: DadosCompartilhadosService) { }
 
   isClicked: boolean = false;
   album: AlbumDescobrir;
   idAlbum: string;
   albumBuscado: AlbumBuscado;
 
+  idMusicaSpotify: string | null = null;
+  nomeArtista: string | null = null;
+  musicaEartista: string | null = null;
+
   generoPrimario: string;
   generoSecundario: string;
+
+  getSpotifyEmbedUrl(idMusica: string | null): SafeResourceUrl {
+    if (idMusica) {
+      return this.sanitizer.bypassSecurityTrustResourceUrl(`https://open.spotify.com/embed/track/${idMusica}?utm_source=generator&theme=0`);
+    } else {
+      return '';
+    }
+  }
 
   handleClick() {
     this.isClicked = true;
@@ -56,11 +70,38 @@ export class MusicaDescobrirComponent implements OnInit {
       }
     );
   }
+
+  buscarMusica(nomeMusica: string): void {
+
+    nomeMusica = this.albumBuscado.tracks.items[0].name;
+    this.nomeArtista = this.albumBuscado.artists[0].name;
+
+     this.musicaEartista = nomeMusica + this.nomeArtista;
+
+
+    this.spotifyService.buscarMusica(this.musicaEartista).subscribe(
+      (data: SpotifySearchResponse) => {
+        console.log(data);
+        this.idMusicaSpotify = data.tracks.items[0].id;
+        console.log(this.idMusicaSpotify);
+      },
+      (error) => {
+        console.error('Ocorreu um erro ao buscar as músicas:', error);
+      }
+    );
+  }
+
   buscarAlbum(): void {
     this.spotifyService.getAlbum(this.dadosCompartilhadosService.getIdAlbumParaProcurar()).subscribe(
       (data: AlbumBuscado) => {
         console.log("album buscado: " + data);
         this.albumBuscado = data;
+
+        if (data) {
+          this.buscarMusica(data.tracks.items[0].name);
+        } else {
+          console.error('Ocorreu um erro ao buscar a musica');
+        }
 
         this.generoPrimario = "";
         this.generoSecundario = "";

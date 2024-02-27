@@ -1,10 +1,8 @@
 import { Wiki } from "./Wiki";
 
 export interface LastFmMusica {
-  id: number;
+  id: string;
   nome: string;
   url: string;
   artista: string;
-  duracao?: string;
-  wiki: Wiki;
 }
