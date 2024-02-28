@@ -15,18 +15,19 @@ import { SpotifySearchResponse } from 'src/app/shared/model/SpotifySearchRespons
 })
 export class MusicaDetalhesComponent implements OnInit {
 
-  constructor(private sanitizer: DomSanitizer, private route: ActivatedRoute,
-    private menuPrincipalService: MenuPrincipalService, private dadosCompartilhadosService: DadosCompartilhadosService) { }
+
+  constructor(private sanitizer: DomSanitizer, private route: ActivatedRoute, private menuPrincipalService: MenuPrincipalService, private dadosCompartilhadosService: DadosCompartilhadosService) { }
 
   artista: string;
   musica: Item;
+
+  idMusica: string;
+
   nomeMusica: string;
   nomeArtista: string;
   musicaEartista: string;
   idMusicaSpotify: string;
   track: SpotifySearchResponse;
-
-  idMusica: string;
 
 
   ngOnInit(): void {
@@ -43,11 +44,15 @@ export class MusicaDetalhesComponent implements OnInit {
       this.idMusica = idMusica;
       this.buscarIdMusica();
 
+
       this.getSpotifyEmbedUrl(this.musica.id);
-      
+
       console.log("ID PORRA: " + this.musica.id);
     } else {
       console.log("O ID da música não foi encontrado no cache.");
+
+      this.getSpotifyEmbedUrl(this.idMusica);
+      console.log("ID PORRA: " + this.idMusica);
     }
   }
 
