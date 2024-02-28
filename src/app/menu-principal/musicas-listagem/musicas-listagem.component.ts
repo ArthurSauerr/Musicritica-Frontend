@@ -30,6 +30,10 @@ export class MusicasListagemComponent implements OnInit {
     });
   }
 
+  idMusicaClicada(){
+
+  }
+
   getTopCharts(): void {
     this.spotifyService.getTopCharts().subscribe(
       (data: SpotifySearchResponse[]) => {
@@ -50,6 +54,8 @@ export class MusicasListagemComponent implements OnInit {
         console.log(data);
         this.musicas = data.tracks.items;
         console.log(this.musicas);
+        console.log(data.tracks.items[0].id)
+        this.dadosCompartilhadosService.setIdMusica(data.tracks.items[0].id);
       },
       (error) => {
         console.error('Ocorreu um erro ao buscar as músicas:', error);

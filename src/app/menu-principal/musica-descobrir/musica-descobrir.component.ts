@@ -23,6 +23,7 @@ export class MusicaDescobrirComponent implements OnInit {
   isClicked: boolean = false;
   album: AlbumDescobrir;
   idAlbum: string;
+
   albumBuscado: AlbumBuscado;
 
   idMusicaSpotify: string | null = null;
@@ -75,15 +76,14 @@ export class MusicaDescobrirComponent implements OnInit {
 
     nomeMusica = this.albumBuscado.tracks.items[0].name;
     this.nomeArtista = this.albumBuscado.artists[0].name;
-
-     this.musicaEartista = nomeMusica + this.nomeArtista;
-
+    this.musicaEartista = nomeMusica + this.nomeArtista;
 
     this.spotifyService.buscarMusica(this.musicaEartista).subscribe(
+
       (data: SpotifySearchResponse) => {
         console.log(data);
         this.idMusicaSpotify = data.tracks.items[0].id;
-        console.log(this.idMusicaSpotify);
+        console.log("id da primeira musica do album: " + this.albumBuscado.tracks.items[0].id);
       },
       (error) => {
         console.error('Ocorreu um erro ao buscar as músicas:', error);
@@ -95,10 +95,11 @@ export class MusicaDescobrirComponent implements OnInit {
     this.spotifyService.getAlbum(this.dadosCompartilhadosService.getIdAlbumParaProcurar()).subscribe(
       (data: AlbumBuscado) => {
         console.log("album buscado: " + data);
+
         this.albumBuscado = data;
 
         if (data) {
-          this.buscarMusica(data.tracks.items[0].name);
+          this.buscarMusica(data.tracks.items[0].id);
         } else {
           console.error('Ocorreu um erro ao buscar a musica');
         }
