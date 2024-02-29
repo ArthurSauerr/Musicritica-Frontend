@@ -12,9 +12,8 @@ export class AppComponent {
   mostrarNavbar: boolean = true;
 
   constructor(private router: Router, private dadosCompartilhadosService : DadosCompartilhadosService) {
-    // Verificar se a rota ativa é para a tela de registro
     this.router.events.subscribe((event) => {
-      if (this.router.url.includes('/registrar') || this.router.url.includes('/login')) {
+      if (this.router.url.includes('/registrar') || this.router.url.includes('/login') || this.router.url.includes('/esqueceu-senha') || this.router.url.includes('/redefinir-senha')) {
         this.mostrarNavbar = false;
       } else {
         this.mostrarNavbar = true;
