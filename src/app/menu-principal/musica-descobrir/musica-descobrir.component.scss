@@ -31,5 +31,48 @@
   margin-bottom: 20px;
 }
 
+.bg-fundo {
+  background: rgb(13,13,13);
+  background: linear-gradient(90deg, rgba(13,13,13,1) 0%, rgba(13,13,13,1) 7%, rgba(32,32,32,1) 50%, rgba(13,13,13,1) 95%);
+}
+
+.bg-card {
+  background: rgb(13,13,13);
+  background: linear-gradient(90deg, rgba(13,13,13,1) 0%, rgba(233,233,233,1) 0%, rgba(241,239,239,1) 20%, rgba(181,181,181,1) 72%);
+}
+
+.bg-body{
+  background-color: #0D0D0D;
+}
+
+.seu-div {
+  display: none; 
+}
+
+.mostrar {
+  display: block;
+}
+
+
+.animated-element {
+  opacity: 0;
+  transition: opacity 0.5s ease;
+}
+
+.animated-element.active {
+  opacity: 1;
+}
+
+
+  .box {
+    opacity: 0;
+  }
+
+
+   .animate__slow {
+    --animate-duration: 1.0s;
+  }
+
+
 
 

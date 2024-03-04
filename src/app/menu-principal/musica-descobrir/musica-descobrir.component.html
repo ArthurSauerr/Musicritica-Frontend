@@ -1,10 +1,10 @@
 <main>
-  <div class="relative pt-16 pb-32 flex content-center items-center justify-center" style="min-height: 75vh;">
+  <div class="relative pt-16 pb-32 flex content-center items-center justify-center" style="min-height: 100vh;">
     <div class="absolute top-0 w-full h-full bg-center bg-cover"
-      style='background-image: url("https://i.postimg.cc/c49WvksT/albuns-bom.jpg");'>
+      style='background-image: url("https://i.postimg.cc/c49WvksT/albuns-bom.jpg"); background-size: cover;'>
       <span id="blackOverlay" class="w-full h-full absolute opacity-75 bg-black"></span>
     </div>
-    <div class="container relative mx-auto">
+    <div class="container relative mx-auto mt-16">
       <div class="items-center flex flex-wrap">
         <div class="w-full lg:w-6/12 px-4 ml-auto mr-auto text-center">
           <div>
@@ -19,20 +19,13 @@
         </div>
       </div>
     </div>
-    <div class="top-auto bottom-0 left-0 right-0 w-full absolute pointer-events-none overflow-hidden"
-      style="height: 70px;">
-      <svg class="absolute bottom-0 overflow-hidden" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none"
-        version="1.1" viewBox="0 0 2560 100" x="0" y="0">
-        <polygon class="text-gray-200 fill-current" points="2560 0 2560 100 0 100"></polygon>
-      </svg>
-    </div>
   </div>
-  <section class="pb-20 bg-gradient-to-br  -mt-24">
+  <section class=" pb-20 bg-gradient-to-br  -mt-24">
     <div class="container mx-auto px-4">
       <div class="flex flex-wrap">
         <div class="lg:pt-12 pt-6 w-full md:w-4/12 px-4 text-center">
           <div
-            class="animate__animated animate__fadeInUp relative flex flex-col min-w-0 break-words bg-white w-full mb-8 shadow-lg rounded-lg">
+            class="box animate__slow relative flex flex-col min-w-0 break-words bg-white w-full mb-8 shadow-lg rounded-lg">
             <div class="px-4 py-5 flex-auto">
               <div
                 class="text-white p-3 text-center inline-flex items-center justify-center w-12 h-12 mb-5 shadow-lg rounded-full bg-green-300">
@@ -48,7 +41,7 @@
         </div>
         <div class="w-full md:w-4/12 px-4 text-center">
           <div
-            class="animate__animated animate__fadeInUp relative flex flex-col min-w-0 break-words bg-white w-full mb-8 shadow-lg rounded-lg">
+            class="box  animate__slow relative flex flex-col min-w-0 break-words bg-white w-full mb-8 shadow-lg rounded-lg">
             <div class="px-4 py-5 flex-auto">
               <div
                 class="text-white p-3 text-center inline-flex items-center justify-center w-12 h-12 mb-5 shadow-lg rounded-full bg-green-400">
@@ -62,7 +55,7 @@
             </div>
           </div>
         </div>
-        <div class="animate__animated animate__fadeInUp pt-6 w-full md:w-4/12 px-4 text-center">
+        <div class="box  animate__slow pt-6 w-full md:w-4/12 px-4 text-center">
           <div class="relative flex flex-col min-w-0 break-words bg-white w-full mb-8 shadow-lg rounded-lg">
             <div class="px-4 py-5 flex-auto">
               <div
@@ -77,7 +70,7 @@
           </div>
         </div>
       </div>
-      <div class="flex flex-wrap items-center mt-32">
+      <div class="box  animate__slow flex  items-center mt-32">
         <div class="w-full md:w-5/12 px-4 mr-auto ml-auto">
           <div
             class="text-gray-600 p-3 text-center inline-flex items-center justify-center w-16 h-16 mb-6 shadow-lg rounded-full bg-green-500">
@@ -87,222 +80,231 @@
             Selecione seus gêneros preferidos!
           </h3>
           <div>
-            <button (click)="selecionarGenero('brazil')"
-              class=" rounded-full relative inline-flex items-center justify-center p-0.5 mb-2 me-2 overflow-hidden text-sm font-medium text-gray-900 group bg-gradient-to-br from-teal-300 to-lime-300 group-hover:from-teal-300 group-hover:to-lime-300 dark:text-white dark:hover:text-gray-900 focus:ring-4 focus:outline-none focus:ring-lime-200 dark:focus:ring-lime-800">
-              <span class="rounded-full relative px-5 py-2.5 transition-all
-                 ease-in duration-75 bg-white dark:bg-gray-900  group-hover:bg-opacity-0">
-                Brasil
-              </span>
-            </button>
-            <button (click)="selecionarGenero('funk')"
-              class=" rounded-full relative inline-flex items-center justify-center p-0.5 mb-2 me-2 overflow-hidden text-sm font-medium text-gray-900 group bg-gradient-to-br from-teal-300 to-lime-300 group-hover:from-teal-300 group-hover:to-lime-300 dark:text-white dark:hover:text-gray-900 focus:ring-4 focus:outline-none focus:ring-lime-200 dark:focus:ring-lime-800">
-              <span class="rounded-full relative px-5 py-2.5 transition-all
-                 ease-in duration-75 bg-white dark:bg-gray-900  group-hover:bg-opacity-0">
-                 Funk
-              </span>
-            </button>
-            <button (click)="selecionarGenero('jazz')"
-              class=" rounded-full relative inline-flex items-center justify-center p-0.5 mb-2 me-2 overflow-hidden text-sm font-medium text-gray-900 group bg-gradient-to-br from-teal-300 to-lime-300 group-hover:from-teal-300 group-hover:to-lime-300 dark:text-white dark:hover:text-gray-900 focus:ring-4 focus:outline-none focus:ring-lime-200 dark:focus:ring-lime-800">
-              <span class="rounded-full relative px-5 py-2.5 transition-all
-                 ease-in duration-75 bg-white dark:bg-gray-900  group-hover:bg-opacity-0">
-                 Jazz
-              </span>
-            </button>
-            <button (click)="selecionarGenero('metal')"
-              class=" rounded-full relative inline-flex items-center justify-center p-0.5 mb-2 me-2 overflow-hidden text-sm font-medium text-gray-900 group bg-gradient-to-br from-teal-300 to-lime-300 group-hover:from-teal-300 group-hover:to-lime-300 dark:text-white dark:hover:text-gray-900 focus:ring-4 focus:outline-none focus:ring-lime-200 dark:focus:ring-lime-800">
-              <span class="rounded-full relative px-5 py-2.5 transition-all
-                 ease-in duration-75 bg-white dark:bg-gray-900  group-hover:bg-opacity-0">
-                 Metal
-              </span>
-            </button>
-            <button (click)="selecionarGenero('indie')"
-              class=" rounded-full relative inline-flex items-center justify-center p-0.5 mb-2 me-2 overflow-hidden text-sm font-medium text-gray-900 group bg-gradient-to-br from-teal-300 to-lime-300 group-hover:from-teal-300 group-hover:to-lime-300 dark:text-white dark:hover:text-gray-900 focus:ring-4 focus:outline-none focus:ring-lime-200 dark:focus:ring-lime-800">
-              <span class="rounded-full relative px-5 py-2.5 transition-all
-                 ease-in duration-75 bg-white dark:bg-gray-900  group-hover:bg-opacity-0">
-                Indie
-              </span>
-            </button>
-            <button (click)="selecionarGenero('soul')"
-              class=" rounded-full relative inline-flex items-center justify-center p-0.5 mb-2 me-2 overflow-hidden text-sm font-medium text-gray-900 group bg-gradient-to-br from-teal-300 to-lime-300 group-hover:from-teal-300 group-hover:to-lime-300 dark:text-white dark:hover:text-gray-900 focus:ring-4 focus:outline-none focus:ring-lime-200 dark:focus:ring-lime-800">
-              <span class="rounded-full relative px-5 py-2.5 transition-all
-                 ease-in duration-75 bg-white dark:bg-gray-900  group-hover:bg-opacity-0">
-                Soul
-              </span>
-            </button>
-            <button (click)="selecionarGenero('rock-n-roll')"
-              class=" rounded-full relative inline-flex items-center justify-center p-0.5 mb-2 me-2 overflow-hidden text-sm font-medium text-gray-900 group bg-gradient-to-br from-teal-300 to-lime-300 group-hover:from-teal-300 group-hover:to-lime-300 dark:text-white dark:hover:text-gray-900 focus:ring-4 focus:outline-none focus:ring-lime-200 dark:focus:ring-lime-800">
-              <span class="rounded-full relative px-5 py-2.5 transition-all
-                 ease-in duration-75 bg-white dark:bg-gray-900  group-hover:bg-opacity-0">
-                Rock
-              </span>
-            </button>
-            <button (click)="selecionarGenero('samba')"
-              class=" rounded-full relative inline-flex items-center justify-center p-0.5 mb-2 me-2 overflow-hidden text-sm font-medium text-gray-900 group bg-gradient-to-br from-teal-300 to-lime-300 group-hover:from-teal-300 group-hover:to-lime-300 dark:text-white dark:hover:text-gray-900 focus:ring-4 focus:outline-none focus:ring-lime-200 dark:focus:ring-lime-800">
-              <span class="rounded-full relative px-5 py-2.5 transition-all
-                 ease-in duration-75 bg-white dark:bg-gray-900  group-hover:bg-opacity-0">
-                Samba
-              </span>
-            </button>
-            <button (click)="selecionarGenero('brazil')"
-              class=" rounded-full relative inline-flex items-center justify-center p-0.5 mb-2 me-2 overflow-hidden text-sm font-medium text-gray-900 group bg-gradient-to-br from-teal-300 to-lime-300 group-hover:from-teal-300 group-hover:to-lime-300 dark:text-white dark:hover:text-gray-900 focus:ring-4 focus:outline-none focus:ring-lime-200 dark:focus:ring-lime-800">
-              <span class="rounded-full relative px-5 py-2.5 transition-all
-                 ease-in duration-75 bg-white dark:bg-gray-900  group-hover:bg-opacity-0">
-                Brasil
-              </span>
-            </button>
-            <button (click)="selecionarGenero('brazil')"
-              class=" rounded-full relative inline-flex items-center justify-center p-0.5 mb-2 me-2 overflow-hidden text-sm font-medium text-gray-900 group bg-gradient-to-br from-teal-300 to-lime-300 group-hover:from-teal-300 group-hover:to-lime-300 dark:text-white dark:hover:text-gray-900 focus:ring-4 focus:outline-none focus:ring-lime-200 dark:focus:ring-lime-800">
-              <span class="rounded-full relative px-5 py-2.5 transition-all
-                 ease-in duration-75 bg-white dark:bg-gray-900  group-hover:bg-opacity-0">
-                Brasil
-              </span>
-            </button>
-            <button (click)="selecionarGenero('brazil')"
-              class=" rounded-full relative inline-flex items-center justify-center p-0.5 mb-2 me-2 overflow-hidden text-sm font-medium text-gray-900 group bg-gradient-to-br from-teal-300 to-lime-300 group-hover:from-teal-300 group-hover:to-lime-300 dark:text-white dark:hover:text-gray-900 focus:ring-4 focus:outline-none focus:ring-lime-200 dark:focus:ring-lime-800">
-              <span class="rounded-full relative px-5 py-2.5 transition-all
-                 ease-in duration-75 bg-white dark:bg-gray-900  group-hover:bg-opacity-0">
-                Brasil
-              </span>
-            </button>
-            <button (click)="selecionarGenero('brazil')"
-              class=" rounded-full relative inline-flex items-center justify-center p-0.5 mb-2 me-2 overflow-hidden text-sm font-medium text-gray-900 group bg-gradient-to-br from-teal-300 to-lime-300 group-hover:from-teal-300 group-hover:to-lime-300 dark:text-white dark:hover:text-gray-900 focus:ring-4 focus:outline-none focus:ring-lime-200 dark:focus:ring-lime-800">
-              <span class="rounded-full relative px-5 py-2.5 transition-all
-                 ease-in duration-75 bg-white dark:bg-gray-900  group-hover:bg-opacity-0">
-                Brasil
-              </span>
-            </button>
-            <button (click)="selecionarGenero('brazil')"
-              class=" rounded-full relative inline-flex items-center justify-center p-0.5 mb-2 me-2 overflow-hidden text-sm font-medium text-gray-900 group bg-gradient-to-br from-teal-300 to-lime-300 group-hover:from-teal-300 group-hover:to-lime-300 dark:text-white dark:hover:text-gray-900 focus:ring-4 focus:outline-none focus:ring-lime-200 dark:focus:ring-lime-800">
-              <span class="rounded-full relative px-5 py-2.5 transition-all
-                 ease-in duration-75 bg-white dark:bg-gray-900  group-hover:bg-opacity-0">
-                Brasil
-              </span>
-            </button>
-            <button (click)="selecionarGenero('brazil')"
-              class=" rounded-full relative inline-flex items-center justify-center p-0.5 mb-2 me-2 overflow-hidden text-sm font-medium text-gray-900 group bg-gradient-to-br from-teal-300 to-lime-300 group-hover:from-teal-300 group-hover:to-lime-300 dark:text-white dark:hover:text-gray-900 focus:ring-4 focus:outline-none focus:ring-lime-200 dark:focus:ring-lime-800">
-              <span class="rounded-full relative px-5 py-2.5 transition-all
-                 ease-in duration-75 bg-white dark:bg-gray-900  group-hover:bg-opacity-0">
-                Brasil
-              </span>
-            </button>
-            <button (click)="selecionarGenero('brazil')"
-              class=" rounded-full relative inline-flex items-center justify-center p-0.5 mb-2 me-2 overflow-hidden text-sm font-medium text-gray-900 group bg-gradient-to-br from-teal-300 to-lime-300 group-hover:from-teal-300 group-hover:to-lime-300 dark:text-white dark:hover:text-gray-900 focus:ring-4 focus:outline-none focus:ring-lime-200 dark:focus:ring-lime-800">
-              <span class="rounded-full relative px-5 py-2.5 transition-all
-                 ease-in duration-75 bg-white dark:bg-gray-900  group-hover:bg-opacity-0">
-                Brasil
-              </span>
-            </button>
-            <button (click)="selecionarGenero('brazil')"
-              class=" rounded-full relative inline-flex items-center justify-center p-0.5 mb-2 me-2 overflow-hidden text-sm font-medium text-gray-900 group bg-gradient-to-br from-teal-300 to-lime-300 group-hover:from-teal-300 group-hover:to-lime-300 dark:text-white dark:hover:text-gray-900 focus:ring-4 focus:outline-none focus:ring-lime-200 dark:focus:ring-lime-800">
-              <span class="rounded-full relative px-5 py-2.5 transition-all
-                 ease-in duration-75 bg-white dark:bg-gray-900  group-hover:bg-opacity-0">
-                Brasil
-              </span>
-            </button>
-            <button (click)="selecionarGenero('brazil')"
-              class=" rounded-full relative inline-flex items-center justify-center p-0.5 mb-2 me-2 overflow-hidden text-sm font-medium text-gray-900 group bg-gradient-to-br from-teal-300 to-lime-300 group-hover:from-teal-300 group-hover:to-lime-300 dark:text-white dark:hover:text-gray-900 focus:ring-4 focus:outline-none focus:ring-lime-200 dark:focus:ring-lime-800">
-              <span class="rounded-full relative px-5 py-2.5 transition-all
-                 ease-in duration-75 bg-white dark:bg-gray-900  group-hover:bg-opacity-0">
-                Brasil
-              </span>
-            </button>
-            <button (click)="selecionarGenero('brazil')"
-              class=" rounded-full relative inline-flex items-center justify-center p-0.5 mb-2 me-2 overflow-hidden text-sm font-medium text-gray-900 group bg-gradient-to-br from-teal-300 to-lime-300 group-hover:from-teal-300 group-hover:to-lime-300 dark:text-white dark:hover:text-gray-900 focus:ring-4 focus:outline-none focus:ring-lime-200 dark:focus:ring-lime-800">
-              <span class="rounded-full relative px-5 py-2.5 transition-all
-                 ease-in duration-75 bg-white dark:bg-gray-900  group-hover:bg-opacity-0">
-                Brasil
-              </span>
-            </button>
-            <button (click)="selecionarGenero('brazil')"
-              class=" rounded-full relative inline-flex items-center justify-center p-0.5 mb-2 me-2 overflow-hidden text-sm font-medium text-gray-900 group bg-gradient-to-br from-teal-300 to-lime-300 group-hover:from-teal-300 group-hover:to-lime-300 dark:text-white dark:hover:text-gray-900 focus:ring-4 focus:outline-none focus:ring-lime-200 dark:focus:ring-lime-800">
-              <span class="rounded-full relative px-5 py-2.5 transition-all
-                 ease-in duration-75 bg-white dark:bg-gray-900  group-hover:bg-opacity-0">
-                Brasil
-              </span>
-            </button>
-            <button (click)="selecionarGenero('brazil')"
-              class=" rounded-full relative inline-flex items-center justify-center p-0.5 mb-2 me-2 overflow-hidden text-sm font-medium text-gray-900 group bg-gradient-to-br from-teal-300 to-lime-300 group-hover:from-teal-300 group-hover:to-lime-300 dark:text-white dark:hover:text-gray-900 focus:ring-4 focus:outline-none focus:ring-lime-200 dark:focus:ring-lime-800">
-              <span class="rounded-full relative px-5 py-2.5 transition-all
-                 ease-in duration-75 bg-white dark:bg-gray-900  group-hover:bg-opacity-0">
-                Brasil
-              </span>
-            </button>
-            <button (click)="selecionarGenero('brazil')"
-              class=" rounded-full relative inline-flex items-center justify-center p-0.5 mb-2 me-2 overflow-hidden text-sm font-medium text-gray-900 group bg-gradient-to-br from-teal-300 to-lime-300 group-hover:from-teal-300 group-hover:to-lime-300 dark:text-white dark:hover:text-gray-900 focus:ring-4 focus:outline-none focus:ring-lime-200 dark:focus:ring-lime-800">
-              <span class="rounded-full relative px-5 py-2.5 transition-all
-                 ease-in duration-75 bg-white dark:bg-gray-900  group-hover:bg-opacity-0">
-                Brasil
-              </span>
-            </button>
-            <button (click)="selecionarGenero('brazil')"
-              class=" rounded-full relative inline-flex items-center justify-center p-0.5 mb-2 me-2 overflow-hidden text-sm font-medium text-gray-900 group bg-gradient-to-br from-teal-300 to-lime-300 group-hover:from-teal-300 group-hover:to-lime-300 dark:text-white dark:hover:text-gray-900 focus:ring-4 focus:outline-none focus:ring-lime-200 dark:focus:ring-lime-800">
-              <span class="rounded-full relative px-5 py-2.5 transition-all
-                 ease-in duration-75 bg-white dark:bg-gray-900  group-hover:bg-opacity-0">
-                Brasil
-              </span>
-            </button>
-            <button (click)="selecionarGenero('brazil')"
-              class=" rounded-full relative inline-flex items-center justify-center p-0.5 mb-2 me-2 overflow-hidden text-sm font-medium text-gray-900 group bg-gradient-to-br from-teal-300 to-lime-300 group-hover:from-teal-300 group-hover:to-lime-300 dark:text-white dark:hover:text-gray-900 focus:ring-4 focus:outline-none focus:ring-lime-200 dark:focus:ring-lime-800">
-              <span class="rounded-full relative px-5 py-2.5 transition-all
-                 ease-in duration-75 bg-white dark:bg-gray-900  group-hover:bg-opacity-0">
-                Brasil
-              </span>
-            </button>
-            <button (click)="selecionarGenero('brazil')"
-              class=" rounded-full relative inline-flex items-center justify-center p-0.5 mb-2 me-2 overflow-hidden text-sm font-medium text-gray-900 group bg-gradient-to-br from-teal-300 to-lime-300 group-hover:from-teal-300 group-hover:to-lime-300 dark:text-white dark:hover:text-gray-900 focus:ring-4 focus:outline-none focus:ring-lime-200 dark:focus:ring-lime-800">
-              <span class="rounded-full relative px-5 py-2.5 transition-all
-                 ease-in duration-75 bg-white dark:bg-gray-900  group-hover:bg-opacity-0">
-                Brasil
-              </span>
-            </button>
 
-            <button (click)="selecionarGenero('trap')"
-              class="text-white bg-gradient-to-r from-green-500 via-green-600 to-green-600 hover:bg-green-800 focus:outline-none focus:ring-4 focus:ring-green-300 font-medium rounded-full text-sm px-5 py-2.5 text-center me-2 mb-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-400 transform hover:scale-110 transition-transform duration-300 ease-in-out">Trap</button>
-            <button (click)="selecionarGenero('bossanova')"
-              class="text-white bg-gradient-to-r from-green-500 via-green-600 to-green-600 hover:bg-green-800 focus:outline-none focus:ring-4 focus:ring-green-300 font-medium rounded-full text-sm px-5 py-2.5 text-center me-2 mb-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-400 transform hover:scale-110 transition-transform duration-300 ease-in-out">Bossa
-              Nova</button>
-            <button (click)="selecionarGenero('rock')"
-              class="text-white bg-gradient-to-r from-green-500 via-green-600 to-green-600 hover:bg-green-800 focus:outline-none focus:ring-4 focus:ring-green-300 font-medium rounded-full text-sm px-5 py-2.5 text-center me-2 mb-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-400 transform hover:scale-110 transition-transform duration-300 ease-in-out">Rock</button>
-            <button (click)="selecionarGenero('reggae')"
-              class="text-white bg-gradient-to-r from-green-500 via-green-600 to-green-600 hover:bg-green-800 focus:outline-none focus:ring-4 focus:ring-green-300 font-medium rounded-full text-sm px-5 py-2.5 text-center me-2 mb-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-400 transform hover:scale-110 transition-transform duration-300 ease-in-out">Reggae</button>
-            <button (click)="selecionarGenero('salsa')"
-              class="text-white bg-gradient-to-r from-green-500 via-green-600 to-green-600 hover:bg-green-800 focus:outline-none focus:ring-4 focus:ring-green-300 font-medium rounded-full text-sm px-5 py-2.5 text-center me-2 mb-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-400 transform hover:scale-110 transition-transform duration-300 ease-in-out">Salsa</button>
-            <button (click)="selecionarGenero('new-age')"
-              class="text-white bg-gradient-to-r from-green-500 via-green-600 to-green-600 hover:bg-green-800 focus:outline-none focus:ring-4 focus:ring-green-300 font-medium rounded-full text-sm px-5 py-2.5 text-center me-2 mb-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-400 transform hover:scale-110 transition-transform duration-300 ease-in-out">New-age</button>
-            <button (click)="selecionarGenero('hip-hop')"
-              class="text-white bg-gradient-to-r from-green-500 via-green-600 to-green-600 hover:bg-green-800 focus:outline-none focus:ring-4 focus:ring-green-300 font-medium rounded-full text-sm px-5 py-2.5 text-center me-2 mb-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-400 transform hover:scale-110 transition-transform duration-300 ease-in-out">Rap</button>
-            <button (click)="selecionarGenero('mpb')"
-              class="text-white bg-gradient-to-r from-green-500 via-green-600 to-green-600 hover:bg-green-800 focus:outline-none focus:ring-4 focus:ring-green-300 font-medium rounded-full text-sm px-5 py-2.5 text-center me-2 mb-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-400 transform hover:scale-110 transition-transform duration-300 ease-in-out">MPB</button>
-            <button (click)="selecionarGenero('classical')"
-              class="text-white bg-gradient-to-r from-green-500 via-green-600 to-green-600 hover:bg-green-800 focus:outline-none focus:ring-4 focus:ring-green-300 font-medium rounded-full text-sm px-5 py-2.5 text-center me-2 mb-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-400 transform hover:scale-110 transition-transform duration-300 ease-in-out">Clássica</button>
-            <button (click)="selecionarGenero('pop')"
-              class="text-white bg-gradient-to-r from-green-500 via-green-600 to-green-600 hover:bg-green-800 focus:outline-none focus:ring-4 focus:ring-green-300 font-medium rounded-full text-sm px-5 py-2.5 text-center me-2 mb-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-400 transform hover:scale-110 transition-transform duration-300 ease-in-out">Pop</button>
+            <div class="h-1/5">
+              <button (click)="selecionarGenero('brazil')"
+                class=" rounded-full relative inline-flex items-center justify-center p-0.5 mb-2 me-2 overflow-hidden text-sm font-medium text-gray-900 group bg-gradient-to-br from-teal-300 to-lime-300 group-hover:from-teal-300 group-hover:to-lime-300 dark:text-white dark:hover:text-gray-900 focus:ring-4 focus:outline-none focus:ring-lime-200 dark:focus:ring-lime-800">
+                <span class="rounded-full relative px-5 py-2.5 transition-all
+                       ease-in duration-75 bg-white dark:bg-gray-900  group-hover:bg-opacity-0">
+                  Brasil
+                </span>
+              </button>
+              <button (click)="selecionarGenero('funk')"
+                class=" rounded-full relative inline-flex items-center justify-center p-0.5 mb-2 me-2 overflow-hidden text-sm font-medium text-gray-900 group bg-gradient-to-br from-teal-300 to-lime-300 group-hover:from-teal-300 group-hover:to-lime-300 dark:text-white dark:hover:text-gray-900 focus:ring-4 focus:outline-none focus:ring-lime-200 dark:focus:ring-lime-800">
+                <span class="rounded-full relative px-5 py-2.5 transition-all
+                       ease-in duration-75 bg-white dark:bg-gray-900  group-hover:bg-opacity-0">
+                  Funk
+                </span>
+              </button>
+              <button (click)="selecionarGenero('jazz')"
+                class=" rounded-full relative inline-flex items-center justify-center p-0.5 mb-2 me-2 overflow-hidden text-sm font-medium text-gray-900 group bg-gradient-to-br from-teal-300 to-lime-300 group-hover:from-teal-300 group-hover:to-lime-300 dark:text-white dark:hover:text-gray-900 focus:ring-4 focus:outline-none focus:ring-lime-200 dark:focus:ring-lime-800">
+                <span class="rounded-full relative px-5 py-2.5 transition-all
+                 ease-in duration-75 bg-white dark:bg-gray-900  group-hover:bg-opacity-0">
+                  Jazz
+                </span>
+              </button>
+              <button (click)="selecionarGenero('metal')"
+                class=" rounded-full relative inline-flex items-center justify-center p-0.5 mb-2 me-2 overflow-hidden text-sm font-medium text-gray-900 group bg-gradient-to-br from-teal-300 to-lime-300 group-hover:from-teal-300 group-hover:to-lime-300 dark:text-white dark:hover:text-gray-900 focus:ring-4 focus:outline-none focus:ring-lime-200 dark:focus:ring-lime-800">
+                <span class="rounded-full relative px-5 py-2.5 transition-all
+                 ease-in duration-75 bg-white dark:bg-gray-900  group-hover:bg-opacity-0">
+                  Metal
+                </span>
+              </button>
+              <button (click)="selecionarGenero('indie')"
+                class=" rounded-full relative inline-flex items-center justify-center p-0.5 mb-2 me-2 overflow-hidden text-sm font-medium text-gray-900 group bg-gradient-to-br from-teal-300 to-lime-300 group-hover:from-teal-300 group-hover:to-lime-300 dark:text-white dark:hover:text-gray-900 focus:ring-4 focus:outline-none focus:ring-lime-200 dark:focus:ring-lime-800">
+                <span class="rounded-full relative px-5 py-2.5 transition-all
+                 ease-in duration-75 bg-white dark:bg-gray-900  group-hover:bg-opacity-0">
+                  Indie
+                </span>
+              </button>
+              <button (click)="selecionarGenero('soul')"
+                class=" rounded-full relative inline-flex items-center justify-center p-0.5 mb-2 me-2 overflow-hidden text-sm font-medium text-gray-900 group bg-gradient-to-br from-teal-300 to-lime-300 group-hover:from-teal-300 group-hover:to-lime-300 dark:text-white dark:hover:text-gray-900 focus:ring-4 focus:outline-none focus:ring-lime-200 dark:focus:ring-lime-800">
+                <span class="rounded-full relative px-5 py-2.5 transition-all
+                 ease-in duration-75 bg-white dark:bg-gray-900  group-hover:bg-opacity-0">
+                  Soul
+                </span>
+              </button>
+              <button (click)="selecionarGenero('emo')"
+                class=" rounded-full relative inline-flex items-center justify-center p-0.5 mb-2 me-2 overflow-hidden text-sm font-medium text-gray-900 group bg-gradient-to-br from-teal-300 to-lime-300 group-hover:from-teal-300 group-hover:to-lime-300 dark:text-white dark:hover:text-gray-900 focus:ring-4 focus:outline-none focus:ring-lime-200 dark:focus:ring-lime-800">
+                <span class="rounded-full relative px-5 py-2.5 transition-all
+                 ease-in duration-75 bg-white dark:bg-gray-900  group-hover:bg-opacity-0">
+                  Emo
+                </span>
+              </button>
+            </div>
+            <div class="h-1/5">
+              <button (click)="selecionarGenero('minimal-techno')"
+                class=" rounded-full relative inline-flex items-center justify-center p-0.5 mb-2 me-2 overflow-hidden text-sm font-medium text-gray-900 group bg-gradient-to-br from-teal-300 to-lime-300 group-hover:from-teal-300 group-hover:to-lime-300 dark:text-white dark:hover:text-gray-900 focus:ring-4 focus:outline-none focus:ring-lime-200 dark:focus:ring-lime-800">
+                <span class="rounded-full relative px-5 py-2.5 transition-all
+                 ease-in duration-75 bg-white dark:bg-gray-900  group-hover:bg-opacity-0">
+                  Minimal-Techno
+                </span>
+              </button>
+              <button (click)="selecionarGenero('rock-n-roll')"
+                class=" rounded-full relative inline-flex items-center justify-center p-0.5 mb-2 me-2 overflow-hidden text-sm font-medium text-gray-900 group bg-gradient-to-br from-teal-300 to-lime-300 group-hover:from-teal-300 group-hover:to-lime-300 dark:text-white dark:hover:text-gray-900 focus:ring-4 focus:outline-none focus:ring-lime-200 dark:focus:ring-lime-800">
+                <span class="rounded-full relative px-5 py-2.5 transition-all
+                 ease-in duration-75 bg-white dark:bg-gray-900  group-hover:bg-opacity-0">
+                  Rock-n-Roll
+                </span>
+              </button>
+              <button (click)="selecionarGenero('samba')"
+                class=" rounded-full relative inline-flex items-center justify-center p-0.5 mb-2 me-2 overflow-hidden text-sm font-medium text-gray-900 group bg-gradient-to-br from-teal-300 to-lime-300 group-hover:from-teal-300 group-hover:to-lime-300 dark:text-white dark:hover:text-gray-900 focus:ring-4 focus:outline-none focus:ring-lime-200 dark:focus:ring-lime-800">
+                <span class="rounded-full relative px-5 py-2.5 transition-all
+                 ease-in duration-75 bg-white dark:bg-gray-900  group-hover:bg-opacity-0">
+                  Samba
+                </span>
+              </button>
+              <button (click)="selecionarGenero('trap')"
+                class=" rounded-full relative inline-flex items-center justify-center p-0.5 mb-2 me-2 overflow-hidden text-sm font-medium text-gray-900 group bg-gradient-to-br from-teal-300 to-lime-300 group-hover:from-teal-300 group-hover:to-lime-300 dark:text-white dark:hover:text-gray-900 focus:ring-4 focus:outline-none focus:ring-lime-200 dark:focus:ring-lime-800">
+                <span class="rounded-full relative px-5 py-2.5 transition-all
+                 ease-in duration-75 bg-white dark:bg-gray-900  group-hover:bg-opacity-0">
+                  Trap
+                </span>
+              </button>
+              <button (click)="selecionarGenero('bossa-nova')"
+                class=" rounded-full relative inline-flex items-center justify-center p-0.5 mb-2 me-2 overflow-hidden text-sm font-medium text-gray-900 group bg-gradient-to-br from-teal-300 to-lime-300 group-hover:from-teal-300 group-hover:to-lime-300 dark:text-white dark:hover:text-gray-900 focus:ring-4 focus:outline-none focus:ring-lime-200 dark:focus:ring-lime-800">
+                <span class="rounded-full relative px-5 py-2.5 transition-all
+                 ease-in duration-75 bg-white dark:bg-gray-900  group-hover:bg-opacity-0">
+                  Bossa-Nova ‎
+                </span>
+              </button>
+            </div>
+            <div class="h-1/6">
+              <button (click)="selecionarGenero('salsa')"
+                class="rounded-full relative inline-flex items-center justify-center p-0.5 mb-2 me-2 overflow-hidden text-sm font-medium text-gray-900 group bg-gradient-to-br from-teal-300 to-lime-300 group-hover:from-teal-300 group-hover:to-lime-300 dark:text-white dark:hover:text-gray-900 focus:ring-4 focus:outline-none focus:ring-lime-200 dark:focus:ring-lime-800">
+                <span class="rounded-full relative px-5 py-2.5 transition-all
+                 ease-in duration-75 bg-white dark:bg-gray-900  group-hover:bg-opacity-0">
+                  Salsa
+                </span>
+              </button>
+              <button (click)="selecionarGenero('new-age')"
+                class=" rounded-full relative inline-flex items-center justify-center p-0.5 mb-2 me-2 overflow-hidden text-sm font-medium text-gray-900 group bg-gradient-to-br from-teal-300 to-lime-300 group-hover:from-teal-300 group-hover:to-lime-300 dark:text-white dark:hover:text-gray-900 focus:ring-4 focus:outline-none focus:ring-lime-200 dark:focus:ring-lime-800">
+                <span class="rounded-full relative px-5 py-2.5 transition-all
+                 ease-in duration-75 bg-white dark:bg-gray-900  group-hover:bg-opacity-0">
+                  New-Age
+                </span>
+              </button>
+              <button (click)="selecionarGenero('mpb')"
+                class=" rounded-full relative inline-flex items-center justify-center p-0.5 mb-2 me-2 overflow-hidden text-sm font-medium text-gray-900 group bg-gradient-to-br from-teal-300 to-lime-300 group-hover:from-teal-300 group-hover:to-lime-300 dark:text-white dark:hover:text-gray-900 focus:ring-4 focus:outline-none focus:ring-lime-200 dark:focus:ring-lime-800">
+                <span class="rounded-full relative px-5 py-2.5 transition-all
+                 ease-in duration-75 bg-white dark:bg-gray-900  group-hover:bg-opacity-0">
+                  MPB
+                </span>
+              </button>
+              <button (click)="selecionarGenero('classical')"
+                class=" rounded-full relative inline-flex items-center justify-center p-0.5 mb-2 me-2 overflow-hidden text-sm font-medium text-gray-900 group bg-gradient-to-br from-teal-300 to-lime-300 group-hover:from-teal-300 group-hover:to-lime-300 dark:text-white dark:hover:text-gray-900 focus:ring-4 focus:outline-none focus:ring-lime-200 dark:focus:ring-lime-800">
+                <span class="rounded-full relative px-5 py-2.5 transition-all
+                 ease-in duration-75 bg-white dark:bg-gray-900  group-hover:bg-opacity-0">
+                  Classica
+                </span>
+              </button>
+              <button (click)="selecionarGenero('pop')"
+                class=" rounded-full relative inline-flex items-center justify-center p-0.5 mb-2 me-2 overflow-hidden text-sm font-medium text-gray-900 group bg-gradient-to-br from-teal-300 to-lime-300 group-hover:from-teal-300 group-hover:to-lime-300 dark:text-white dark:hover:text-gray-900 focus:ring-4 focus:outline-none focus:ring-lime-200 dark:focus:ring-lime-800">
+                <span class="rounded-full relative px-5 py-2.5 transition-all
+                 ease-in duration-75 bg-white dark:bg-gray-900  group-hover:bg-opacity-0">
+                  ‎ Pop ‎
+                </span>
+              </button>
+              <button (click)="selecionarGenero('j-pop')"
+                class="w-28 rounded-full relative inline-flex items-center justify-center p-0.5 mb-2 me-2 overflow-hidden text-sm font-medium text-gray-900 group bg-gradient-to-br from-teal-300 to-lime-300 group-hover:from-teal-300 group-hover:to-lime-300 dark:text-white dark:hover:text-gray-900 focus:ring-4 focus:outline-none focus:ring-lime-200 dark:focus:ring-lime-800">
+                <span class="w-28 rounded-full relative px-5 py-2.5 transition-all
+                 ease-in duration-75 bg-white dark:bg-gray-900  group-hover:bg-opacity-0">
+                  J-pop
+                </span>
+              </button>
+            </div>
             <button (click)="selecionarGenero('k-pop')"
-              class="text-white bg-gradient-to-r from-green-500 via-green-600 to-green-600 hover:bg-green-800 focus:outline-none focus:ring-4 focus:ring-green-300 font-medium rounded-full text-sm px-5 py-2.5 text-center me-2 mb-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-400 transform hover:scale-110 transition-transform duration-300 ease-in-out">Kpop</button>
-            <button (click)="selecionarGenero('j-pop')"
-              class="text-white bg-gradient-to-r from-green-500 via-green-600 to-green-600 hover:bg-green-800 focus:outline-none focus:ring-4 focus:ring-green-300 font-medium rounded-full text-sm px-5 py-2.5 text-center me-2 mb-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-400 transform hover:scale-110 transition-transform duration-300 ease-in-out">J-pop</button>
-            <button (click)="selecionarGenero('electronic')"
-              class="text-white bg-gradient-to-r from-green-500 via-green-600 to-green-600 hover:bg-green-800 focus:outline-none focus:ring-4 focus:ring-green-300 font-medium rounded-full text-sm px-5 py-2.5 text-center me-2 mb-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-400 transform hover:scale-110 transition-transform duration-300 ease-in-out">Eletrônica</button>
-            <button (click)="selecionarGenero('heavy-metal')"
-              class="text-white bg-gradient-to-r from-green-500 via-green-600 to-green-600 hover:bg-green-800 focus:outline-none focus:ring-4 focus:ring-green-300 font-medium rounded-full text-sm px-5 py-2.5 text-center me-2 mb-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-400 transform hover:scale-110 transition-transform duration-300 ease-in-out">Heavy
-              Metal</button>
+              class=" rounded-full relative inline-flex items-center justify-center p-0.5 mb-2 me-2 overflow-hidden text-sm font-medium text-gray-900 group bg-gradient-to-br from-teal-300 to-lime-300 group-hover:from-teal-300 group-hover:to-lime-300 dark:text-white dark:hover:text-gray-900 focus:ring-4 focus:outline-none focus:ring-lime-200 dark:focus:ring-lime-800">
+              <span class="rounded-full relative px-5 py-2.5 transition-all
+                 ease-in duration-75 bg-white dark:bg-gray-900  group-hover:bg-opacity-0">
+                K-pop
+              </span>
+            </button>
             <button (click)="selecionarGenero('country')"
-              class="text-white bg-gradient-to-r from-green-500 via-green-600 to-green-600 hover:bg-green-800 focus:outline-none focus:ring-4 focus:ring-green-300 font-medium rounded-full text-sm px-5 py-2.5 text-center me-2 mb-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-400 transform hover:scale-110 transition-transform duration-300 ease-in-out">Country</button>
+              class=" rounded-full relative inline-flex items-center justify-center p-0.5 mb-2 me-2 overflow-hidden text-sm font-medium text-gray-900 group bg-gradient-to-br from-teal-300 to-lime-300 group-hover:from-teal-300 group-hover:to-lime-300 dark:text-white dark:hover:text-gray-900 focus:ring-4 focus:outline-none focus:ring-lime-200 dark:focus:ring-lime-800">
+              <span class="rounded-full relative px-5 py-2.5 transition-all
+                 ease-in duration-75 bg-white dark:bg-gray-900  group-hover:bg-opacity-0">
+                Country
+              </span>
+            </button>
+            <button (click)="selecionarGenero('heavy-metal')"
+              class=" rounded-full relative inline-flex items-center justify-center p-0.5 mb-2 me-2 overflow-hidden text-sm font-medium text-gray-900 group bg-gradient-to-br from-teal-300 to-lime-300 group-hover:from-teal-300 group-hover:to-lime-300 dark:text-white dark:hover:text-gray-900 focus:ring-4 focus:outline-none focus:ring-lime-200 dark:focus:ring-lime-800">
+              <span class="rounded-full relative px-5 py-2.5 transition-all
+                 ease-in duration-75 bg-white dark:bg-gray-900  group-hover:bg-opacity-0">
+                Heavy-Metal
+              </span>
+            </button>
+            <button (click)="selecionarGenero('acoustic')"
+              class=" rounded-full relative inline-flex items-center justify-center p-0.5 mb-2 me-2 overflow-hidden text-sm font-medium text-gray-900 group bg-gradient-to-br from-teal-300 to-lime-300 group-hover:from-teal-300 group-hover:to-lime-300 dark:text-white dark:hover:text-gray-900 focus:ring-4 focus:outline-none focus:ring-lime-200 dark:focus:ring-lime-800">
+              <span class="rounded-full relative px-5 py-2.5 transition-all
+                 ease-in duration-75 bg-white dark:bg-gray-900  group-hover:bg-opacity-0">
+                Acústico
+              </span>
+            </button>
+            <button (click)="selecionarGenero('hardstyle')"
+              class="w-36 rounded-full relative inline-flex items-center justify-center p-0.5 mb-2 me-2 overflow-hidden text-sm font-medium text-gray-900 group bg-gradient-to-br from-teal-300 to-lime-300 group-hover:from-teal-300 group-hover:to-lime-300 dark:text-white dark:hover:text-gray-900 focus:ring-4 focus:outline-none focus:ring-lime-200 dark:focus:ring-lime-800">
+              <span class=" w-36 rounded-full relative px-5 py-2.5 transition-all
+                 ease-in duration-75 bg-white dark:bg-gray-900  group-hover:bg-opacity-0">
+                Hardstyle
+              </span>
+            </button>
+            <button (click)="selecionarGenero('alt-rock')"
+              class=" rounded-full relative inline-flex items-center justify-center p-0.5 mb-2 me-2 overflow-hidden text-sm font-medium text-gray-900 group bg-gradient-to-br from-teal-300 to-lime-300 group-hover:from-teal-300 group-hover:to-lime-300 dark:text-white dark:hover:text-gray-900 focus:ring-4 focus:outline-none focus:ring-lime-200 dark:focus:ring-lime-800">
+              <span class="rounded-full relative px-5 py-2.5 transition-all
+                 ease-in duration-75 bg-white dark:bg-gray-900  group-hover:bg-opacity-0">
+                Rock Alternativo
+              </span>
+            </button>
+            <button (click)="selecionarGenero('blues')"
+              class=" rounded-full relative inline-flex items-center justify-center p-0.5 mb-2 me-2 overflow-hidden text-sm font-medium text-gray-900 group bg-gradient-to-br from-teal-300 to-lime-300 group-hover:from-teal-300 group-hover:to-lime-300 dark:text-white dark:hover:text-gray-900 focus:ring-4 focus:outline-none focus:ring-lime-200 dark:focus:ring-lime-800">
+              <span class="rounded-full relative px-5 py-2.5 transition-all
+                 ease-in duration-75 bg-white dark:bg-gray-900  group-hover:bg-opacity-0">
+                Blues
+              </span>
+            </button>
+            <button (click)="selecionarGenero('latino')"
+              class=" rounded-full relative inline-flex items-center justify-center p-0.5 mb-2 me-2 overflow-hidden text-sm font-medium text-gray-900 group bg-gradient-to-br from-teal-300 to-lime-300 group-hover:from-teal-300 group-hover:to-lime-300 dark:text-white dark:hover:text-gray-900 focus:ring-4 focus:outline-none focus:ring-lime-200 dark:focus:ring-lime-800">
+              <span class="rounded-full relative px-5 py-2.5 transition-all
+               ease-in duration-75 bg-white dark:bg-gray-900  group-hover:bg-opacity-0">
+                Latino
+              </span>
+            </button>
+            <button (click)="selecionarGenero('pagode')"
+              class=" rounded-full relative inline-flex items-center justify-center p-0.5 mb-2 me-2 overflow-hidden text-sm font-medium text-gray-900 group bg-gradient-to-br from-teal-300 to-lime-300 group-hover:from-teal-300 group-hover:to-lime-300 dark:text-white dark:hover:text-gray-900 focus:ring-4 focus:outline-none focus:ring-lime-200 dark:focus:ring-lime-800">
+              <span class="rounded-full relative px-5 py-2.5 transition-all
+             ease-in duration-75 bg-white dark:bg-gray-900  group-hover:bg-opacity-0">
+                Pagode
+              </span>
+            </button>
+            <button (click)="selecionarGenero('post-dubstep')"
+              class=" rounded-full relative inline-flex items-center justify-center p-0.5 mb-2 me-2 overflow-hidden text-sm font-medium text-gray-900 group bg-gradient-to-br from-teal-300 to-lime-300 group-hover:from-teal-300 group-hover:to-lime-300 dark:text-white dark:hover:text-gray-900 focus:ring-4 focus:outline-none focus:ring-lime-200 dark:focus:ring-lime-800">
+              <span class="rounded-full relative px-5 py-2.5 transition-all
+             ease-in duration-75 bg-white dark:bg-gray-900  group-hover:bg-opacity-0">
+                ‎ ‎ ‎Post-Dubstep‎ ‎ ‎
+              </span>
+            </button>
           </div>
-          <div class="flex justify-center mr-12 mt-4">
+          <div class="w-full flex justify-center mr-12 mt-6 h-14">
             <button (click)="descobriMusica()"
-              class="text-white  bg-gradient-to-r from-green-600 via-green-700 to-green-700 hover:bg-green-800 focus:outline-none focus:ring-4 focus:ring-green-300 font-medium rounded-full text-sm px-5 py-2.5 text-center me-2 mb-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-400 transform hover:scale-110 transition-transform duration-300 ease-in-out">Descobrir
+              class=" text-white  bg-gradient-to-r from-green-600 via-green-700 to-green-700 hover:bg-green-800 focus:outline-none focus:ring-4 focus:ring-green-300 font-medium rounded-full text-sm px-5 py-2.5 text-center me-2 mb-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-400 transform hover:scale-110 transition-transform duration-300 ease-in-out">Descobrir
               uma nova música!</button>
           </div>
+
         </div>
         <div class="w-full md:w-4/12 px-4 mr-auto ml-auto">
           <div class="relative flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-lg rounded-lg bg-pink-600">
-            <img alt="Album Cover" *ngIf="albumBuscado.images && albumBuscado.images[1]?.url; else imagemPadrao"
-              [src]="albumBuscado.images[1].url" class="w-full align-middle rounded-t-lg" />
-            <ng-template #imagemPadrao>
-              <img alt="Imagem Padrão" src="https://i.postimg.cc/NFvRB7Xf/topsters2-0.jpg"
-                class="w-full align-middle rounded-t-lg" />
-            </ng-template>
+
+            <div class="relative w-full h-96">
+              <!-- Aumentando a altura para 96 unidades (pode ser ajustada conforme necessário) -->
+              <img alt="Album Cover" src="https://i.postimg.cc/NFvRB7Xf/topsters2-0.jpg || imagemPadrao"
+                class="absolute top-0 left-0 w-full h-full object-cover rounded-t-lg" />
+
+              <img [src]="albumBuscado.images[0].url"
+                class="absolute top-0 left-0 w-full h-full object-cover rounded-t-lg" />
+            </div>
+
+
+
             <blockquote class="relative p-8 mb-4">
               {{ albumBuscado.name }}
               {{ albumBuscado.artists[0].name }}
@@ -312,15 +314,16 @@
             </blockquote>
           </div>
         </div>
+
       </div>
     </div>
   </section>
-  <section class="relative py-20 bg-white">
+  <section class="bg-gray-900 relative py-20">
     <div class="bottom-auto top-0 left-0 right-0 w-full absolute pointer-events-none overflow-hidden -mt-20"
       style="height: 80px;">
       <svg class="absolute bottom-0 overflow-hidden" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none"
         version="1.1" viewBox="0 0 2560 100" x="0" y="0">
-        <polygon class="text-white fill-current" points="2560 0 2560 100 0 100"></polygon>
+        <polygon class="text-gray-900 fill-current" points="2560 0 2560 100 0 100"></polygon>
       </svg>
     </div>
 
@@ -338,9 +341,9 @@
               class="text-pink-600 p-3 text-center inline-flex items-center justify-center w-16 h-16 mb-6 shadow-lg rounded-full bg-pink-300">
               <i class="fas fa-rocket text-xl"></i>
             </div>
-            <h3 class="text-3xl font-semibold">Nome da musica</h3>
-            <p class="mt-4 text-lg leading-relaxed text-gray-600">
-              Info sobre a musica
+            <h3 class="text-3xl text-white font-semibold">{{ albumBuscado.tracks.items[0].name }}</h3>
+            <p class="mt-4 text-lg leading-relaxed text-white">
+              {{ albumBuscado.tracks.items[0].name }}
             </p>
             <ul class="list-none mt-6">
               <li class="py-2">
@@ -351,8 +354,8 @@
                         class="fas fa-fingerprint"></i></span>
                   </div>
                   <div>
-                    <h4 class="text-gray-600">
-                      info 1
+                    <h4 class="text-white">
+                      Selecione seus gêneros preferidos!
                     </h4>
                   </div>
                 </div>
@@ -365,7 +368,7 @@
                         class="fab fa-html5"></i></span>
                   </div>
                   <div>
-                    <h4 class="text-gray-600">info 2</h4>
+                    <h4 class="text-white">Selecione seus gêneros preferidos!</h4>
                   </div>
                 </div>
               </li>
@@ -377,7 +380,7 @@
                         class="far fa-paper-plane"></i></span>
                   </div>
                   <div>
-                    <h4 class="text-gray-600">info 3</h4>
+                    <h4 class="text-white">Selecione seus gêneros preferidos!</h4>
                   </div>
                 </div>
               </li>
@@ -387,13 +390,4 @@
       </div>
     </div>
   </section>
-  <section class="pt-20 pb-48 bg-white">
-    <div class="container mx-auto px-4">
-      <div class="flex flex-wrap justify-center text-center mb-24">
-      </div>
-      <div class="flex flex-wrap">
-      </div>
-    </div>
-  </section>
-
 </main>

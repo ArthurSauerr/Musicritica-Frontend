@@ -21,11 +21,10 @@ export class AppComponent {
     });
   }
 
-
   musicaProcurada: string = '';
-
 
   enviarParametro(): void {
     this.dadosCompartilhadosService.setMusicaProcurada(this.musicaProcurada);
+    this.router.navigate(['/buscar']);
   }
 }

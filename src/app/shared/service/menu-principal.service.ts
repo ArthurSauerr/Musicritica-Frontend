@@ -34,4 +34,9 @@ export class MenuPrincipalService {
   getAlbum(idAlbum: string): Observable<AlbumBuscado> {
     return this.httpClient.get<AlbumBuscado>(`${this.apiUrl}/buscar/album/${idAlbum}`);
   }
+
+  getTopChartsDoBanco(): Observable<Item[]> {
+    return this.httpClient.get<Item[]>(`${this.apiUrl}/topCharts/db`);
+  }
+
 }

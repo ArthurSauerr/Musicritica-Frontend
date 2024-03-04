@@ -6,19 +6,22 @@ import { FormsModule } from '@angular/forms';
 import { MusicaDetalhesComponent } from './musica-detalhes/musica-detalhes.component';
 import { MusicaDescobrirComponent } from './musica-descobrir/musica-descobrir.component';
 import { MusicaRankingComponent } from './musica-ranking/musica-ranking.component';
-
+import { MenuBuscarMusicaComponent } from './menu-buscar-musica/menu-buscar-musica.component';
 
 @NgModule({
   declarations: [
     MusicasListagemComponent,
     MusicaDetalhesComponent,
     MusicaDescobrirComponent,
-    MusicaRankingComponent
+    MusicaRankingComponent,
+    MenuBuscarMusicaComponent,
+    
   ],
   imports: [
     CommonModule,
     MenuPrincipalRoutingModule,
-    FormsModule
+    FormsModule,
+
   ]
 })
 export class MenuPrincipalModule { }
