@@ -3,4 +3,5 @@ export interface RegistroDTO{
   email: String;
   senha: String;
   dt_cadastro: String;
+  imagem_perfil: File;
 }

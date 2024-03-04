@@ -19,11 +19,15 @@ export class UsuarioService {
     return this.httpClient.post<any>(`${this.apiUrl}/login`, loginDTO);
   }
 
-  registrar(registroDTO: RegistroDTO): Observable<any> {
-    return this.httpClient.post<any>(`${this.apiUrl}/registrar`, registroDTO);
+  registrar(formData: FormData): Observable<any> {
+    return this.httpClient.post<any>(`${this.apiUrl}/registrar`, formData);
   }
 
   esqueceuSenha(usuarioDTO: UsuarioDTO): Observable<any>{
     return this.httpClient.post<any>(`${this.apiUrl}/esqueceuSenha`, usuarioDTO)
+  }
+
+  redefinirSenha(usuarioDTO: UsuarioDTO): Observable<any>{
+    return this.httpClient.post<any>(`${this.apiUrl}/redefinirSenha/{token}`, usuarioDTO)
   }
 }

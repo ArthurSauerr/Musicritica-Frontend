@@ -13,6 +13,7 @@ export class UsuarioRegistrarComponent {
   email: string;
   senha: string;
   dt_cadastro: string;
+  imagem_perfil: File;
 
   constructor(private usuarioService: UsuarioService, private router: Router) {}
 
@@ -22,13 +23,14 @@ export class UsuarioRegistrarComponent {
   }
 
   registrar() {
-    this.usuarioService
-      .registrar({
-        nome: this.nome,
-        email: this.email,
-        senha: this.senha,
-        dt_cadastro: this.dt_cadastro,
-      })
+    const formData = new FormData();
+    formData.append('nome', this.nome);
+    formData.append('email', this.email);
+    formData.append('senha', this.senha);
+    formData.append('dt_cadastro', this.dt_cadastro);
+    formData.append('imagem_perfil', this.imagem_perfil);
+
+    this.usuarioService.registrar(formData)
       .subscribe(
         (response) => {
           this.router.navigate(['usuario/login']);
@@ -45,8 +47,8 @@ export class UsuarioRegistrarComponent {
   }
 
   onFileSelected(event: any) {
-    const file = event.target.files[0];
-    this.displayPreview(file);
+    this.imagem_perfil = event.target.files[0];
+    this.displayPreview(this.imagem_perfil);
   }
 
   displayPreview(file: File) {
@@ -82,6 +84,7 @@ export class UsuarioRegistrarComponent {
           const file = dataTransfer.files[0];
           if (file) {
               this.displayPreview(file);
+              this.imagem_perfil = file;
           }
       }
     });
