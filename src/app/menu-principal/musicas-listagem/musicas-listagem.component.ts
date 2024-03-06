@@ -10,31 +10,29 @@ import { Image } from 'src/app/shared/model/Image';
   templateUrl: './musicas-listagem.component.html',
   styleUrls: ['./musicas-listagem.component.scss']
 
-
 })
-
 
 export class MusicasListagemComponent implements OnInit {
 
   constructor(private router: Router, private spotifyService: MenuPrincipalService) { }
 
   topCharts: Item[] = [];
-
-  url1: string;
-  url2: string;
-  url3: string;
-  url4: string;
-  url5: string;
+  topChartsYoutube: Item[] = [];
 
   ngOnInit(): void {
     const storedData = sessionStorage.getItem('topCharts');
+    const storedDataYoutube = sessionStorage.getItem('topChartsYoutube');
+
     //const today = new Date();
     //const dayOfWeek = today.getDay();
 
-    if (storedData) {
+    if (storedData && storedDataYoutube) {
       this.topCharts = JSON.parse(storedData);
+      this.topChartsYoutube = JSON.parse(storedDataYoutube);
+
     } else {
       this.getTopCharts();
+      this.getTopChartsYoutube();
     }
 
 
@@ -54,11 +52,18 @@ export class MusicasListagemComponent implements OnInit {
     );
   }
 
-
-
-
-  getItemPreDefinidos(): Item[] {
-    return [];
+  getTopChartsYoutube(): void {
+    this.spotifyService.getTopChartsYoutube().subscribe(
+      (data: any[]) => {
+        console.log(data);
+        this.topChartsYoutube = data.flatMap(response => response.tracks.items);
+        console.log(this.topChartsYoutube);
+        sessionStorage.setItem('topChartsYoutube', JSON.stringify(this.topChartsYoutube));
+      },
+      (error) => {
+        console.error('Ocorreu um erro ao buscar as músicas:', error);
+      }
+    );
   }
 
   avancar(musica: Item): void {

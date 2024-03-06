@@ -15,7 +15,7 @@ import { MenuBuscarMusicaComponent } from './menu-buscar-musica/menu-buscar-musi
     MusicaDescobrirComponent,
     MusicaRankingComponent,
     MenuBuscarMusicaComponent,
-    
+
   ],
   imports: [
     CommonModule,

@@ -1,5 +1,6 @@
 import { DadosCompartilhadosService } from './../../shared/service/dados-compartilhados.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+
 
 @Component({
   selector: 'app-musica-ranking',
@@ -8,7 +9,8 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MusicaRankingComponent implements OnInit {
 
-  constructor(private dadosCompartilhadosService : DadosCompartilhadosService) {}
+
+  constructor(private dadosCompartilhadosService: DadosCompartilhadosService) { }
 
   musicId: String;
 

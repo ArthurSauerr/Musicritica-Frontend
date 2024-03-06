@@ -28,6 +28,9 @@ export class MenuPrincipalService {
   getTopCharts(): Observable<SpotifySearchResponse[]> {
     return this.httpClient.get<SpotifySearchResponse[]>(`${this.apiUrl}/topCharts`);
   }
+  getTopChartsYoutube(): Observable<SpotifySearchResponse[]> {
+    return this.httpClient.get<SpotifySearchResponse[]>(`${this.apiUrl}/topChartsYoutube`);
+  }
   getRecommendation(generoPrimario: string, generoSecundario: string): Observable<TrackData> {
     return this.httpClient.get<TrackData>(`${this.apiUrl}/descobrir/${generoPrimario}/${generoSecundario}`);
   }

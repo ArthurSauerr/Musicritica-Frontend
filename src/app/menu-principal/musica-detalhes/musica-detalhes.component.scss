@@ -11,3 +11,18 @@
   color: transparent;
 }
 
+.salvar-playlist:hover h1 {
+  font-weight: bold;
+}
+
+.salvar-playlist:hover {
+  transform: scale(1.05); /* Aumenta o tamanho da div em 5% ao passar o mouse */
+  transition: transform 0.3s ease;
+  cursor: pointer;
+}
+
+/* Adicione a fonte Inter White */
+.salvar-playlist h1 {
+  font-family: 'Inter', sans-serif;
+  color: white;
+}
