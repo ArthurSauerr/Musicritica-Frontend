@@ -15,6 +15,11 @@ export class UsuarioService {
 
   private readonly apiUrl = 'http://localhost:8080/auth';
 
+  armazenarTokenJWT(token: string){
+    localStorage.setItem('token', token);
+    console.log(token)
+  }
+
   login(loginDTO: LoginDTO): Observable<any> {
     return this.httpClient.post<any>(`${this.apiUrl}/login`, loginDTO);
   }

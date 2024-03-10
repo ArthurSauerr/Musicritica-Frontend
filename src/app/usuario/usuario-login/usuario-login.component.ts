@@ -16,9 +16,9 @@ export class UsuarioLoginComponent {
   login() {
     this.usuarioService.login({ email: this.email, senha: this.senha }).subscribe(
       (response) => {
-        // Login bem-sucedido, redirecione ou faça algo com o token JWT
+        this.usuarioService.armazenarTokenJWT(response);
         this.router.navigate(['/']);
-        console.log('Login bem-sucedido', response);
+        console.log('Login bem-sucedido');
       },
       (error) => {
         console.error('Erro no login', error);
