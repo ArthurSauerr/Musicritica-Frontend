@@ -21,7 +21,6 @@ import { MenuBuscarMusicaComponent } from './menu-buscar-musica/menu-buscar-musi
     CommonModule,
     MenuPrincipalRoutingModule,
     FormsModule,
-
   ]
 })
 export class MenuPrincipalModule { }

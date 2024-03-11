@@ -26,3 +26,12 @@
   font-family: 'Inter', sans-serif;
   color: white;
 }
+
+.fundo{
+  background-color: #0D0D0D;
+}
+
+#dropdownComment1 {
+  position: absolute;
+  z-index: 999; /* Certifique-se de que o z-index seja maior do que o dos elementos adjacentes, se necessário */
+}

@@ -1,3 +1,4 @@
+import { DadosCompartilhadosService } from './../../shared/service/dados-compartilhados.service';
 import { Router } from '@angular/router';
 import { UsuarioService } from './../../shared/service/usuario.service';
 import { Component } from '@angular/core';
@@ -17,6 +18,7 @@ export class UsuarioLoginComponent {
     this.usuarioService.login({ email: this.email, senha: this.senha }).subscribe(
       (response) => {
         this.usuarioService.armazenarTokenJWT(response);
+
         this.router.navigate(['/']);
         console.log('Login bem-sucedido');
       },

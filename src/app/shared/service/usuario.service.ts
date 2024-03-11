@@ -1,5 +1,5 @@
 import { RegistroDTO } from './../model/RegistroDTO';
-import { LoginDTO} from '../model/LoginDTO';
+import { LoginDTO } from '../model/LoginDTO';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
@@ -14,10 +14,16 @@ export class UsuarioService {
   constructor(private httpClient: HttpClient) { }
 
   private readonly apiUrl = 'http://localhost:8080/auth';
+  private readonly usuarioUrl = 'http://localhost:8080/usuario';
 
-  armazenarTokenJWT(token: string){
-    localStorage.setItem('token', token);
+  armazenarTokenJWT(token: string) {
+    const tokenObj = { token };
+    localStorage.setItem('token', JSON.stringify(tokenObj));
     console.log(token)
+  }
+
+  getToken(): string | null {
+    return localStorage.getItem('token');
   }
 
   login(loginDTO: LoginDTO): Observable<any> {
@@ -28,11 +34,15 @@ export class UsuarioService {
     return this.httpClient.post<any>(`${this.apiUrl}/registrar`, formData);
   }
 
-  esqueceuSenha(usuarioDTO: UsuarioDTO): Observable<any>{
+  esqueceuSenha(usuarioDTO: UsuarioDTO): Observable<any> {
     return this.httpClient.post<any>(`${this.apiUrl}/esqueceuSenha`, usuarioDTO)
   }
 
-  redefinirSenha(usuarioDTO: UsuarioDTO): Observable<any>{
+  redefinirSenha(usuarioDTO: UsuarioDTO): Observable<any> {
     return this.httpClient.post<any>(`${this.apiUrl}/redefinirSenha/{token}`, usuarioDTO)
+  }
+
+  buscarIdPorEmail(email: String | undefined): Observable<number> {
+    return this.httpClient.get<number>(`${this.usuarioUrl}/buscar/${email}`);
   }
 }

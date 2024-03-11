@@ -21,6 +21,7 @@
     "flowbite-datepicker": "^1.2.6",
     "gsap": "^3.12.5",
     "jquery": "^3.7.1",
+    "jwt-decode": "^4.0.0",
     "ngx-scrollreveal": "^3.0.0",
     "rxjs": "~7.8.0",
     "scrollmagic": "^2.0.8",

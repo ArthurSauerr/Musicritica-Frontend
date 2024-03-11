@@ -1,26 +1,155 @@
-<div class="h-screen flex flex-col">
+<div class="h-screen flex flex-col mt-32">
   <div class="bg-gradient-to-r custom-color text-white p-16 flex items-end justify-between">
     <div class="flex items-end">
       <img [src]="musica.album.images[1].url" alt="{{ musica.name }}"
-        class="ml-2  mt-8 mb-6 w-60 h-60 overflow-hidden mr-4 flex-shrink-0 rounded-lg shadow-[0_50px_25px_-24px_rgb(0,0,0,0.5)]">
+        class="ml-2 mt-8 mb-6 w-60 h-60 overflow-hidden mr-4 flex-shrink-0 rounded-lg shadow-[0_50px_25px_-24px_rgb(0,0,0,0.5)]">
       <div>
         <h1 class="text-6xl font-bold mb-4 musica-info">{{ musica.name }}</h1>
         <h2 class="text-2xl font-bold mb-6 musica-info">{{ musica.album.name }}</h2>
       </div>
     </div>
-    <div class="flex items-center salvar-playlist">
+    <div class="flex items-center salvar-playlist h-12">
       <img class="mr-2" width="40" height="40" src="https://img.icons8.com/ios/40/FFFFFF/plus--v1.png" alt="plus--v1" />
       <h1 class="font-semibold">Salvar na playlist</h1>
     </div>
-
-
   </div>
-  <div class="ml-14">
-    <div class=" ml-auto mr-96 px-4">
-      <iframe style="border-radius:12px" [src]="getSpotifyEmbedUrl(musica.id)" width="80%" height="200" frameborder="0"
-        allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
-        loading="lazy">
-      </iframe>
+  <div class="flex mt-32">
+    <div class="w-1/2 ml-16">
+      <div class="flex-grow mb-6">
+        <div class="py-2 px-4 mb-4 rounded-lg rounded-t-lg border border-white ">
+          <label for="comment" class="sr-only">Seu comentário</label>
+          <textarea id="comment" rows="6" [(ngModel)]="comentario"
+            class="px-0 w-full text-sm text-white border-0 focus:ring-0 focus:outline-none dark:text-white dark:placeholder-gray-400 fundo dark:bg-gray-800"
+            placeholder="Deixe seu comentário..." required></textarea>
+        </div>
+        <button type="button" (click)="enviarComentario()"
+          class="border border-white  inline-flex items-center py-2.5 px-4 text-xs font-medium text-center text-white bg-primary-700 rounded-lg focus:ring-4 focus:ring-primary-200 dark:focus:ring-primary-900 hover:bg-primary-800">
+          Post comment
+        </button>
+      </div>
     </div>
+    <div class="w-1/2">
+      <div class="ml-14 ">
+        <iframe style="border-radius:12px" [src]="spotifyUrl" width="80%" height="300" frameborder="0"
+          allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+          loading="lazy">
+        </iframe>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="mt-24 ml-16">
+  <div class="max-w-2xl">
+    <div class="flex justify-between items-center mb-6">
+      <h2 class="text-lg lg:text-2xl font-bold text-white dark:text-white">Comentários (20)</h2>
+    </div>
+    <div *ngFor="let comentario of comentariosBuscados">
+      <article class="border-t border-white p-6 text-base fundo">
+        <footer class="flex justify-between items-center mb-2">
+          <div class="flex items-center">
+            <p class="inline-flex items-center mr-3 text-sm text-white dark:text-white font-semibold"><img
+                class="mr-2 w-6 h-6 rounded-full" src="https://flowbite.com/docs/images/people/profile-picture-2.jpg"
+                alt="Michael Gough">{{comentario.usuario.nome}}</p>
+            <p class="text-sm text-white dark:text-gray-400"><time pubdate datetime="2022-02-08"
+                title="February 8th, 2022">Feb. 8, 2022</time></p>
+          </div>
+          <div>
+            <button id="dropdownComment1Button" (click)="toggleDropdown()"
+              class="inline-flex items-center p-2 text-sm font-medium text-center text-gray-500 dark:text-gray-400 bg-white rounded-lg hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-50 dark:bg-gray-900 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
+              type="button">
+              <svg class="w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor"
+                viewBox="0 0 16 3">
+                <path
+                  d="M2 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3Zm6.041 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM14 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3Z" />
+              </svg>
+              <span class="sr-only">Comment settings</span>
+            </button>
+            <div *ngIf="mostrarDropdown" id="dropdownComment1"
+              class="mt-4 w-36 bg-white rounded divide-y divide-gray-100 shadow dark:bg-gray-700 dark:divide-gray-600">
+              <ul class="py-1 text-sm text-gray-700 dark:text-gray-200"
+                aria-labelledby="dropdownMenuIconHorizontalButton">
+                <li>
+                  <a href="#"
+                    class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Edit</a>
+                </li>
+                <li>
+                  <a href="#"
+                    class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Remove</a>
+                </li>
+                <li>
+                  <a href="#"
+                    class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Report</a>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </footer>
+        <p class="text-white dark:text-gray-400">{{comentario.comentario}}</p>
+        <div class="flex items-center mt-4 space-x-4">
+          <button type="button" (click)="toggleTextarea()"
+            class="flex items-center text-sm text-white hover:underline dark:text-gray-400 font-medium">
+            <svg class="mr-1.5 w-3.5 h-3.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
+              viewBox="0 0 20 18">
+              <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="M5 5h5M5 8h2m6-3h2m-5 3h6m2-7H2a1 1 0 0 0-1 1v9a1 1 0 0 0 1 1h3v5l5-5h8a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1Z" />
+            </svg>
+            Reply
+          </button>
+        </div>
+      </article>
+    </div>
+    <article class="p-6 mb-3 ml-6 lg:ml-12 text-base border-t border-white fundo">
+      <footer class="flex justify-between items-center mb-2">
+        <div class="flex items-center">
+          <p class="inline-flex items-center mr-3 text-sm text-white dark:text-white font-semibold"><img
+              class="mr-2 w-6 h-6 rounded-full" src="https://flowbite.com/docs/images/people/profile-picture-5.jpg"
+              alt="Jese Leos">Jese Leos</p>
+          <p class="text-sm text-white dark:text-gray-400"><time pubdate datetime="2022-02-12"
+              title="February 12th, 2022">Feb. 12, 2022</time></p>
+        </div>
+        <button id="dropdownComment2Button" data-dropdown-toggle="dropdownComment2"
+          class="inline-flex items-center p-2 text-sm font-medium text-center text-gray-500 dark:text-gray-40 fundo rounded-lg hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-50 dark:bg-gray-900 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
+          type="button">
+          <svg class="w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor"
+            viewBox="0 0 16 3">
+            <path
+              d="M2 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3Zm6.041 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM14 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3Z" />
+          </svg>
+          <span class="sr-only">Comment settings</span>
+        </button>
+        <!-- Dropdown menu -->
+        <div id="dropdownComment2"
+          class="hidden z-10 w-36 bg-white rounded divide-y divide-gray-100 shadow dark:bg-gray-700 dark:divide-gray-600">
+          <ul class="py-1 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdownMenuIconHorizontalButton">
+            <li>
+              <a href="#"
+                class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Edit</a>
+            </li>
+            <li>
+              <a href="#"
+                class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Remove</a>
+            </li>
+            <li>
+              <a href="#"
+                class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Report</a>
+            </li>
+          </ul>
+        </div>
+      </footer>
+      <p class="text-white dark:text-gray-400">Much appreciated! Glad you liked it ☺️</p>
+      <div class="flex items-center mt-4 space-x-4">
+        <button type="button"
+          class="flex items-center text-sm text-white hover:underline dark:text-gray-400 font-medium">
+          <svg class="mr-1.5 w-3.5 h-3.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
+            viewBox="0 0 20 18">
+            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+              d="M5 5h5M5 8h2m6-3h2m-5 3h6m2-7H2a1 1 0 0 0-1 1v9a1 1 0 0 0 1 1h3v5l5-5h8a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1Z" />
+          </svg>
+          Reply
+        </button>
+      </div>
+    </article>
   </div>
 </div>
