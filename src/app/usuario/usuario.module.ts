@@ -7,6 +7,7 @@ import { FormsModule } from '@angular/forms';
 import { UsuarioRegistrarComponent } from './usuario-registrar/usuario-registrar.component';
 import { UsuarioEsqueceuSenhaComponent } from './usuario-esqueceu-senha/usuario-esqueceu-senha.component';
 import { UsuarioRedefinirSenhaComponent } from './usuario-redefinir-senha/usuario-redefinir-senha.component';
+import { UsuarioPerfilComponent } from './usuario-perfil/usuario-perfil.component';
 
 
 @NgModule({
@@ -14,7 +15,8 @@ import { UsuarioRedefinirSenhaComponent } from './usuario-redefinir-senha/usuari
     UsuarioLoginComponent,
     UsuarioRegistrarComponent,
     UsuarioEsqueceuSenhaComponent,
-    UsuarioRedefinirSenhaComponent
+    UsuarioRedefinirSenhaComponent,
+    UsuarioPerfilComponent
   ],
   imports: [
     CommonModule,

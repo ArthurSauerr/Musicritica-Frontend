@@ -45,4 +45,8 @@ export class UsuarioService {
   buscarIdPorEmail(email: String | undefined): Observable<number> {
     return this.httpClient.get<number>(`${this.usuarioUrl}/buscar/${email}`);
   }
+
+  buscarUsuarioPorId(id: Number): Observable<Usuario>{
+    return this.httpClient.get<Usuario>(`${this.usuarioUrl}/${id}`);
+  }
 }
