@@ -19,4 +19,7 @@ export class ComentarioServiceService {
   buscarComentarioPorIdMusica(id: String): Observable<Comentario[]> {
     return this.httpClient.get<Comentario[]>(`${this.apiUrl}/${id}`);
   }
+  buscarRespostas(id: number): Observable<Comentario[]> {
+    return this.httpClient.get<Comentario[]>(`${this.apiUrl}/respostas/${id}`);
+  }
 }

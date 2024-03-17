@@ -7,5 +7,6 @@ export class Comentario {
   comentario: string;
   musica: Musica;
   usuario: Usuario;
+  dt_publicacao: number
   comentarioPai: Comentario
 }
