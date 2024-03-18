@@ -36,6 +36,10 @@ export class AppComponent {
     });
   }
 
+  ngOnInit(): void{
+    this.verificarLogin();
+  }
+
   musicaProcurada: string = '';
 
   enviarParametro(): void {
@@ -81,6 +85,11 @@ export class AppComponent {
     } else {
       console.error('ID do usuário não está definido.');
     }
+  }
+
+  logout(){
+    this.usuarioService.deleteToken();
+    this.router.navigate(['usuario/login']);
   }
 
 }

@@ -9,12 +9,12 @@
   padding-bottom: 5px;
 }
 
-.custom-href {
+.nav-buttons {
   font-family: 'Inter', sans-serif;
   color: #64DEA1;
   position: relative;
 }
-.custom-href::before {
+.nav-buttons::before {
   content: '';
   position: absolute;
   bottom: 0;
@@ -24,15 +24,15 @@
   background-color: #64DEA1;
   transition: width 0.3s ease, left 0.3s ease;
 }
-.custom-href:hover {
+.nav-buttons:hover {
   font-weight: bold;
 }
-.custom-href:hover::before {
+.nav-buttons:hover::before {
   width: 100%;
   left: 0;
 }
 
-.custom-href2{
+.musicritica-button{
   font-family: 'Inter', sans-serif;
   color: #64DEA1;
 }

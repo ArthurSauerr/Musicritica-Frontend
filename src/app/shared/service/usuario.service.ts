@@ -26,6 +26,10 @@ export class UsuarioService {
     return localStorage.getItem('token');
   }
 
+  deleteToken(){
+    return localStorage.removeItem('token');
+  }
+
   login(loginDTO: LoginDTO): Observable<any> {
     return this.httpClient.post<any>(`${this.apiUrl}/login`, loginDTO);
   }
