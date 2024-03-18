@@ -16,6 +16,9 @@
       <input type="text" [(ngModel)]="musicaProcurada" placeholder="Buscar"
         class="custom-input text-white px-1 py-2 focus:outline-none" (keyup.enter)="enviarParametro()">
     </div>
+    <div *ngIf="usuario?.imagem_perfil">
+      <img (click)="verPerfilUsuario()" width="20" height="20" [src]="'data:image/jpeg;base64,' + usuario.imagem_perfil" alt="Imagem de Perfil">
+    </div>
   </div>
 </nav>
 

@@ -1,6 +1,16 @@
-<div *ngIf="usuario" class="flex justify-center items-center h-screen div-custom" >
+<div *ngIf="usuario" class="py-48 flex justify-center items-center h-screen div-custom" >
   <div class="text-center">
-    <p class="nomeUsuario">{{ usuario.nome }}</p>
-    <p>Cadastrado desde: {{ usuario.dt_cadastro}}</p>
+    <div *ngIf="usuario?.imagem_perfil" class="flex justify-center drop-shadow-md py-2">
+      <img width="200" height="200" [src]="'data:image/jpeg;base64,' + usuario.imagem_perfil" alt="Imagem de Perfil">
+    </div>
+    <p class="nomeUsuario drop-shadow-md">{{ usuario.nome }}</p>
+    <p class="drop-shadow-md">Cadastrado desde: {{ usuario.dt_cadastro}}</p>
+    <div class="flex gap-32 py-10 pl-8">
+      <button class="botao-perfil">Playlists</button>
+      <button class="botao-perfil">Avaliações</button>
+      <button class="botao-perfil">Descobertas</button>
+    </div>
   </div>
+
 </div>
+
