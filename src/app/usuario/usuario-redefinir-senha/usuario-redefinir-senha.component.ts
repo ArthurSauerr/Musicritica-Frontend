@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import { Router } from '@angular/router';
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 import { UsuarioService } from 'src/app/shared/service/usuario.service';
 
 @Component({
@@ -7,29 +7,36 @@ import { UsuarioService } from 'src/app/shared/service/usuario.service';
   templateUrl: './usuario-redefinir-senha.component.html',
   styleUrls: ['./usuario-redefinir-senha.component.scss']
 })
-export class UsuarioRedefinirSenhaComponent {
+export class UsuarioRedefinirSenhaComponent implements OnInit {
 
-  nome: string;
-  email: string;
+  token: string;
   senha: string;
   confirmarSenha: string;
 
-  constructor(private usuarioService : UsuarioService, private router : Router){}
+  constructor(
+    private route: ActivatedRoute,
+    private usuarioService: UsuarioService,
+    private router: Router
+  ) {}
 
-  redefinirSenha(){
-    if(this.senha == this.confirmarSenha){
-      this.usuarioService.redefinirSenha({email: this.email, nome: this.nome, senha: this.senha}).subscribe(
-        (response) => {
-          console.log(response);
-        },
-        (error) => {
-          console.log(error);
-        }
-  
-      )
-    } else{
-      console.log("Senhas não batem");
-    }
+  ngOnInit(): void {
+    const token = this.route.snapshot.paramMap.get('token');
+    this.token = token !== null ? token : ''; // Se o token for null, atribui uma string vazia
   }
 
+  redefinirSenha(): void {
+    if (this.senha === this.confirmarSenha) {
+      this.usuarioService.redefinirSenha(this.token, this.senha).subscribe(
+        (response) => {
+          console.log(response.message);
+          this.router.navigate(['usuario/login']);
+        },
+        (error) => {
+          console.error('Erro ao redefinir senha:', error);
+        }
+      );
+    } else {
+      console.log('Senhas não correspondem.');
+    }
+  }
 }

@@ -10,7 +10,7 @@ const routes: Routes = [
   {path: 'login', component: UsuarioLoginComponent},
   {path: 'registrar', component: UsuarioRegistrarComponent},
   {path: 'esqueceu-senha',component: UsuarioEsqueceuSenhaComponent},
-  {path: 'redefinir-senha', component: UsuarioRedefinirSenhaComponent},
+  {path: 'redefinir-senha/:token', component: UsuarioRedefinirSenhaComponent},
   {path: 'perfil/:id', component: UsuarioPerfilComponent},
 ];
 

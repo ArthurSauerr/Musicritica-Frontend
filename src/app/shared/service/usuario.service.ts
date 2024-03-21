@@ -41,8 +41,8 @@ export class UsuarioService {
     return this.httpClient.post<any>(`${this.usuarioUrl}/esqueceuSenha`, usuarioDTO)
   }
 
-  redefinirSenha(usuarioDTO: UsuarioDTO): Observable<any> {
-    return this.httpClient.post<any>(`${this.usuarioUrl}/redefinirSenha/{token}`, usuarioDTO)
+  redefinirSenha(token: string, novaSenha: string): Observable<any> {
+    return this.httpClient.post<any>(`${this.usuarioUrl}/redefinirSenha/${token}`, { senha: novaSenha });
   }
 
   buscarIdPorEmail(email: String | undefined): Observable<number> {
