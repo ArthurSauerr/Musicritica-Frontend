@@ -13,7 +13,6 @@ export class UsuarioService {
 
   constructor(private httpClient: HttpClient) { }
 
-  private readonly apiUrl = 'http://localhost:8080/auth';
   private readonly usuarioUrl = 'http://localhost:8080/usuario';
 
   armazenarTokenJWT(token: string) {
@@ -31,19 +30,19 @@ export class UsuarioService {
   }
 
   login(loginDTO: LoginDTO): Observable<any> {
-    return this.httpClient.post<any>(`${this.apiUrl}/login`, loginDTO);
+    return this.httpClient.post<any>(`${this.usuarioUrl}/login`, loginDTO);
   }
 
-  registrar(formData: FormData): Observable<any> {
-    return this.httpClient.post<any>(`${this.apiUrl}/registrar`, formData);
+  registrar(registroDTO: RegistroDTO): Observable<any> {
+    return this.httpClient.post<any>(`${this.usuarioUrl}/registrar`, registroDTO);
   }
 
   esqueceuSenha(usuarioDTO: UsuarioDTO): Observable<any> {
-    return this.httpClient.post<any>(`${this.apiUrl}/esqueceuSenha`, usuarioDTO)
+    return this.httpClient.post<any>(`${this.usuarioUrl}/esqueceuSenha`, usuarioDTO)
   }
 
   redefinirSenha(usuarioDTO: UsuarioDTO): Observable<any> {
-    return this.httpClient.post<any>(`${this.apiUrl}/redefinirSenha/{token}`, usuarioDTO)
+    return this.httpClient.post<any>(`${this.usuarioUrl}/redefinirSenha/{token}`, usuarioDTO)
   }
 
   buscarIdPorEmail(email: String | undefined): Observable<number> {
