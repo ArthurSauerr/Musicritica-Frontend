@@ -22,4 +22,7 @@ export class ComentarioServiceService {
   buscarRespostas(id: number): Observable<Comentario[]> {
     return this.httpClient.get<Comentario[]>(`${this.apiUrl}/respostas/${id}`);
   }
+  buscarQuantidadeComentarios(id: string): Observable<number> {
+    return this.httpClient.get<number>(`${this.apiUrl}/comentarios/${id}`);
+  }
 }

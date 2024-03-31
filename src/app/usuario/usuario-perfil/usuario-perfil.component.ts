@@ -24,7 +24,7 @@ export class UsuarioPerfilComponent {
     });
   }
 
-  
+
   buscarUsuario(idUsuario: number): void {
     this.usuarioService.buscarUsuarioPorId(idUsuario).subscribe(
       (usuario: Usuario) => {

@@ -1,4 +1,4 @@
-<div class="h-screen flex flex-col mt-32">
+<div class="h-screen flex flex-col mt-2 ">
   <div class="bg-gradient-to-r custom-color text-white p-16 flex items-end justify-between">
     <div class="flex items-end">
       <img [src]="musica.album.images[1].url" alt="{{ musica.name }}"
@@ -8,9 +8,63 @@
         <h2 class="text-2xl font-bold mb-6 musica-info">{{ musica.album.name }}</h2>
       </div>
     </div>
-    <div class="flex items-center salvar-playlist h-12">
-      <img class="mr-2" width="40" height="40" src="https://img.icons8.com/ios/40/FFFFFF/plus--v1.png" alt="plus--v1" />
-      <h1 class="font-semibold">Salvar na playlist</h1>
+    <div>
+      <div class="flex items-center salvar-playlist h-12">
+        <img (click)="toggleModal()" class="mr-2" width="40" height="40"
+          src="https://img.icons8.com/ios/40/FFFFFF/plus--v1.png" alt="plus--v1" />
+        <h1 class="font-semibold" (click)="toggleModal()">Salvar na playlist</h1>
+      </div>
+      <div *ngIf="showModal"
+        class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 backdrop-filter backdrop-blur-sm">
+        <div class="bg-gray-800 bg-opacity-40 p-8 rounded-xl shadow-lg w-96 overflow-y-auto max-h-96">
+          <div *ngIf="!showCreatePlaylistInput">
+            <div class="flex justify-center">
+              <button (click)="toggleCreatePlaylistInput()"
+                class="w-36 rounded-full relative inline-flex items-center justify-center p-0.5 overflow-hidden text-sm font-medium text-gray-900 group bg-gradient-to-br from-teal-300 to-lime-300 group-hover:from-teal-300 group-hover:to-lime-300 dark:text-white dark:hover:text-gray-900 focus:ring-4 focus:outline-none focus:ring-lime-200 dark:focus:ring-lime-800">
+                <span
+                  class="w-36 rounded-full relative px-5 py-2.5 transition-all ease-in duration-75 bg-white dark:bg-gray-900 group-hover:bg-opacity-0">
+                  Criar Playlist
+                </span>
+              </button>
+            </div>
+            <div *ngFor="let playlist of playlistsDoUsuario" class="mb-4 flex custom-input items-center">
+              <div class="p-2  flex-grow">
+                {{ playlist.nome }}
+              </div>
+              <div>
+                <label class="relative flex items-center p-3 rounded-full cursor-pointer" htmlFor="customStyle">
+                  <input type="checkbox"
+                    class="before:content[''] peer relative h-8 w-8 cursor-pointer appearance-none rounded-full border border-gray-100 bg-gray-900/10 transition-all before:absolute before:top-2/4 before:left-2/4 before:block before:h-12 before:w-12 before:-translate-y-2/4 before:-translate-x-2/4 before:rounded-full before:bg-blue-gray-500 before:opacity-0 before:transition-opacity checked:border-gray-100 checked:bg-gray-900 checked:before:bg-gray-900 hover:scale-105 hover:before:opacity-0"
+                    id="customStyle" />
+                  <span
+                    class="absolute text-white transition-opacity opacity-0 pointer-events-none top-2/4 left-2/4 -translate-y-2/4 -translate-x-2/4 peer-checked:opacity-100">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-3.5 w-3.5" viewBox="0 0 20 20" fill="currentColor"
+                      stroke="currentColor" stroke-width="1">
+                      <path fill-rule="evenodd"
+                        d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                        clip-rule="evenodd"></path>
+                    </svg>
+                  </span>
+                </label>
+              </div>
+            </div>
+          </div>
+          <h2 class="text-4xl font-bold mb-4">Sua nova playlist: </h2>
+          <h3 class="text-2xl font-bold mb-4">{{nomePlaylistNova}}</h3>
+          <div *ngIf="showCreatePlaylistInput" class="mb-4 flex items-center">
+            <input type="text" placeholder="Nome da Playlist" class="p-2 flex-grow custom-input" [(ngModel)]="nomePlaylistNova"/>
+          </div>
+          <div class="flex justify-center" >
+            <button (click)="toggleModal()"
+              class="mt-2 w-36 rounded-full relative inline-flex items-center justify-center p-0.5 overflow-hidden text-sm font-medium text-gray-900 group bg-gradient-to-br from-teal-300 to-lime-300 group-hover:from-teal-300 group-hover:to-lime-300 dark:text-white dark:hover:text-gray-900 focus:ring-4 focus:outline-none focus:ring-lime-200 dark:focus:ring-lime-800">
+              <span (click)="enviarPlaylist()"
+                class="w-36 rounded-full relative px-5 py-2.5 transition-all ease-in duration-75 bg-white dark:bg-gray-900 group-hover:bg-opacity-0">
+                Salvar
+              </span>
+            </button>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
   <div class="flex mt-32">
@@ -42,19 +96,19 @@
 <div class="mt-24 ml-16">
   <div class="max-w-2xl">
     <div class="flex justify-between items-center mb-6">
-      <h2 class="text-lg lg:text-2xl font-bold text-white dark:text-white">Comentários (20)</h2>
+      <h2 class="text-lg lg:text-2xl font-bold text-white dark:text-white">Comentários ({{totalDeComentarios}})</h2>
     </div>
     <div *ngFor="let comentario of comentariosBuscados">
       <article class="border-t border-white p-6 text-base fundo">
         <footer class="flex justify-between items-center mb-2">
           <div class="flex items-center">
             <p class="inline-flex items-center mr-3 text-sm text-white dark:text-white font-semibold">
-              <img class="mr-2 w-6 h-6 rounded-full" src="https://flowbite.com/docs/images/people/profile-picture-2.jpg"
-                alt="Michael Gough">
+              <img class="mr-2 w-6 h-6 rounded-full cursor-pointer" width="30" height="30"
+                [src]="'data:image/jpeg;base64,' + comentario.usuario.imagem_perfil" alt="Imagem de Perfil">
               {{ comentario.usuario.nome }}
             </p>
             <p class="text-sm text-white dark:text-gray-400">
-              <time pubdate datetime="2022-02-08" title="February 8th, 2022">Feb. 8, 2022</time>
+              <time>{{ comentario.dt_publicacao | date: 'dd \'de\' MMMM, y' }}</time>
             </p>
           </div>
           <div>
@@ -123,19 +177,19 @@
         </div>
         <div *ngIf="showRepliesId === comentario.id">
           <div *ngFor="let comentario of respostasBuscadas">
-            <article class="ml-16 border-t border-white p-6 text-base fundo w-11/12">
+            <article class="ml-6 border-t border-white p-6 text-base fundo w-full">
               <footer class="flex justify-between items-center mb-2">
                 <div class="flex items-center">
                   <p class="inline-flex items-center mr-3 text-sm text-white dark:text-white font-semibold">
-                    <img class="mr-2 w-6 h-6 rounded-full"
-                      src="https://flowbite.com/docs/images/people/profile-picture-2.jpg" alt="Michael Gough">
+                    <img class="mr-2 w-6 h-6 rounded-full cursor-pointer" width="30" height="30"
+                      [src]="'data:image/jpeg;base64,' + comentario.usuario.imagem_perfil" alt="Imagem de Perfil">
                     {{ comentario.usuario.nome }}
                   </p>
                   <p class="text-sm text-white dark:text-gray-400">
-                    <time pubdate datetime="2022-02-08" title="February 8th, 2022">Feb. 8, 2022</time>
+                    <time>{{ comentario.dt_publicacao | date: 'dd \'de\' MMMM, y' }}</time>
                   </p>
                   <p class="ml-2 text-sm text-white dark:text-gray-400">
-                    Resposta a {{ comentario.comentarioPai.usuario.nome }}
+                    Resposta para {{ comentario.comentarioPai.usuario.nome }}
                   </p>
                 </div>
                 <div>

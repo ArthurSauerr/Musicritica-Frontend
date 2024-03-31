@@ -7,6 +7,7 @@ import { MusicaDetalhesComponent } from './musica-detalhes/musica-detalhes.compo
 import { MusicaDescobrirComponent } from './musica-descobrir/musica-descobrir.component';
 import { MusicaRankingComponent } from './musica-ranking/musica-ranking.component';
 import { MenuBuscarMusicaComponent } from './menu-buscar-musica/menu-buscar-musica.component';
+import { DatePipe } from '@angular/common';
 
 @NgModule({
   declarations: [
@@ -21,6 +22,7 @@ import { MenuBuscarMusicaComponent } from './menu-buscar-musica/menu-buscar-musi
     CommonModule,
     MenuPrincipalRoutingModule,
     FormsModule,
+    DatePipe
   ]
 })
 export class MenuPrincipalModule { }

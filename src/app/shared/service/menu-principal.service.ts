@@ -13,18 +13,12 @@ import { AlbumBuscado } from '../model/AlbumBuscado';
 export class MenuPrincipalService {
 
   private apiUrl = 'http://localhost:8080/spotify';
-  private lastfmUrl = 'http://localhost:8080/home';
 
   constructor(private httpClient: HttpClient) { }
 
   buscarMusica(musica: string): Observable<SpotifySearchResponse> {
     return this.httpClient.get<SpotifySearchResponse>(`${this.apiUrl}/buscar/${musica}`);
   }
-
-  getInfoMusica(artista: string, musica: string): Observable<LastFmMusica> {
-    return this.httpClient.get<LastFmMusica>(`${this.lastfmUrl}/${artista}/${musica}`);
-  }
-
   getTopCharts(): Observable<SpotifySearchResponse[]> {
     return this.httpClient.get<SpotifySearchResponse[]>(`${this.apiUrl}/topCharts`);
   }
@@ -37,9 +31,7 @@ export class MenuPrincipalService {
   getAlbum(idAlbum: string): Observable<AlbumBuscado> {
     return this.httpClient.get<AlbumBuscado>(`${this.apiUrl}/buscar/album/${idAlbum}`);
   }
-
   getTopChartsDoBanco(): Observable<Item[]> {
     return this.httpClient.get<Item[]>(`${this.apiUrl}/topCharts/db`);
   }
-
 }
