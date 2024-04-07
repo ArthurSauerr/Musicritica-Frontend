@@ -15,11 +15,12 @@
         <h1 class="font-semibold" (click)="toggleModal()">Salvar na playlist</h1>
       </div>
       <div *ngIf="showModal"
-        class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 backdrop-filter backdrop-blur-sm">
-        <div class="bg-gray-800 bg-opacity-40 p-8 rounded-xl shadow-lg w-96 overflow-y-auto max-h-96">
+        class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 backdrop-filter backdrop-blur-sm"
+        (click)="fecharModal($event)">
+        <div id="modal" class="fundo-modal shadow-with-light p-8 rounded-xl shadow-lg w-96 overflow-y-auto max-h-96">
           <div *ngIf="!showCreatePlaylistInput">
             <div class="flex justify-center">
-              <button (click)="toggleCreatePlaylistInput()"
+              <button (click)="toggleCreatePlaylistInput(); $event.stopPropagation()"
                 class="w-36 rounded-full relative inline-flex items-center justify-center p-0.5 overflow-hidden text-sm font-medium text-gray-900 group bg-gradient-to-br from-teal-300 to-lime-300 group-hover:from-teal-300 group-hover:to-lime-300 dark:text-white dark:hover:text-gray-900 focus:ring-4 focus:outline-none focus:ring-lime-200 dark:focus:ring-lime-800">
                 <span
                   class="w-36 rounded-full relative px-5 py-2.5 transition-all ease-in duration-75 bg-white dark:bg-gray-900 group-hover:bg-opacity-0">
@@ -27,37 +28,47 @@
                 </span>
               </button>
             </div>
-            <div *ngFor="let playlist of playlistsDoUsuario" class="mb-4 flex custom-input items-center">
-              <div class="p-2  flex-grow">
-                {{ playlist.nome }}
-              </div>
-              <div>
-                <label class="relative flex items-center p-3 rounded-full cursor-pointer" htmlFor="customStyle">
-                  <input type="checkbox"
-                    class="before:content[''] peer relative h-8 w-8 cursor-pointer appearance-none rounded-full border border-gray-100 bg-gray-900/10 transition-all before:absolute before:top-2/4 before:left-2/4 before:block before:h-12 before:w-12 before:-translate-y-2/4 before:-translate-x-2/4 before:rounded-full before:bg-blue-gray-500 before:opacity-0 before:transition-opacity checked:border-gray-100 checked:bg-gray-900 checked:before:bg-gray-900 hover:scale-105 hover:before:opacity-0"
-                    id="customStyle" />
-                  <span
-                    class="absolute text-white transition-opacity opacity-0 pointer-events-none top-2/4 left-2/4 -translate-y-2/4 -translate-x-2/4 peer-checked:opacity-100">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-3.5 w-3.5" viewBox="0 0 20 20" fill="currentColor"
-                      stroke="currentColor" stroke-width="1">
-                      <path fill-rule="evenodd"
-                        d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
-                        clip-rule="evenodd"></path>
-                    </svg>
-                  </span>
-                </label>
+            <div>
+              <div *ngFor="let playlist of playlistsDoUsuario" class="mb-4 flex custom-input items-center">
+                <div class="p-2  flex-grow">
+                  {{ playlist.nome }}
+                </div>
+                <div>
+                  <label class="relative flex items-center p-3 rounded-full cursor-pointer" htmlFor="customStyle">
+                    <input type="checkbox" (click)="capturarIdPlaylist(playlist.id)"
+                      class="before:content[''] peer relative h-8 w-8 cursor-pointer appearance-none rounded-full custom-checkbox bg-gray-900/10 transition-all before:absolute before:top-2/4 before:left-2/4 before:block before:h-12 before:w-12 before:-translate-y-2/4 before:-translate-x-2/4 before:rounded-full before:bg-blue-gray-500 before:opacity-0 before:transition-opacity checked:border-gray-100 checked:bg-gray-900 checked:before:bg-gray-900 hover:scale-105 hover:before:opacity-0"
+                      id="customStyle" />
+                    <span
+                      class="absolute text-white transition-opacity opacity-0 pointer-events-none top-2/4 left-2/4 -translate-y-2/4 -translate-x-2/4 peer-checked:opacity-100">
+                      <svg xmlns="http://www.w3.org/2000/svg" class="h-3.5 w-3.5" viewBox="0 0 20 20"
+                        fill="currentColor" stroke="currentColor" stroke-width="1">
+                        <path fill-rule="evenodd"
+                          d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                          clip-rule="evenodd"></path>
+                      </svg>
+                    </span>
+                  </label>
+                </div>
               </div>
             </div>
           </div>
-          <h2 class="text-4xl font-bold mb-4">Sua nova playlist: </h2>
-          <h3 class="text-2xl font-bold mb-4">{{nomePlaylistNova}}</h3>
-          <div *ngIf="showCreatePlaylistInput" class="mb-4 flex items-center">
-            <input type="text" placeholder="Nome da Playlist" class="p-2 flex-grow custom-input" [(ngModel)]="nomePlaylistNova"/>
+          <div *ngIf="showCreatePlaylistInput" class="mb-4 flex-col items-center">
+            <h2 class="text-4xl musicritica-button font-bold mb-4">Sua nova playlist: </h2>
+            <h3 class="text-2xl musicritica-button font-bold mb-4">{{nomePlaylistNova}}</h3>
+            <input type="text" placeholder="Nome da Playlist" class="musicritica-button p-2 flex-grow custom-input"
+              [(ngModel)]="nomePlaylistNova" />
           </div>
-          <div class="flex justify-center" >
+          <div class="flex justify-center">
             <button (click)="toggleModal()"
               class="mt-2 w-36 rounded-full relative inline-flex items-center justify-center p-0.5 overflow-hidden text-sm font-medium text-gray-900 group bg-gradient-to-br from-teal-300 to-lime-300 group-hover:from-teal-300 group-hover:to-lime-300 dark:text-white dark:hover:text-gray-900 focus:ring-4 focus:outline-none focus:ring-lime-200 dark:focus:ring-lime-800">
               <span (click)="enviarPlaylist()"
+                class="w-36 rounded-full relative px-5 py-2.5 transition-all ease-in duration-75 bg-white dark:bg-gray-900 group-hover:bg-opacity-0">
+                Salvar
+              </span>
+            </button>
+            <button
+              class="mt-2 w-36 rounded-full relative inline-flex items-center justify-center p-0.5 overflow-hidden text-sm font-medium text-gray-900 group bg-gradient-to-br from-teal-300 to-lime-300 group-hover:from-teal-300 group-hover:to-lime-300 dark:text-white dark:hover:text-gray-900 focus:ring-4 focus:outline-none focus:ring-lime-200 dark:focus:ring-lime-800">
+              <span (click)="enviarMusicaParaPlaylist()"
                 class="w-36 rounded-full relative px-5 py-2.5 transition-all ease-in duration-75 bg-white dark:bg-gray-900 group-hover:bg-opacity-0">
                 Salvar
               </span>
@@ -70,14 +81,14 @@
   <div class="flex mt-32">
     <div class="w-1/2 ml-16">
       <div class="flex-grow mb-6">
-        <div class="py-2 px-4 mb-4 rounded-lg rounded-t-lg border border-white ">
+        <div class="py-2 px-4 mb-4 rounded-lg rounded-t-lg custom-checkbox">
           <label for="comment" class="sr-only">Seu comentário</label>
           <textarea id="comment" rows="6" [(ngModel)]="comentario"
             class="px-0 w-full text-sm text-white border-0 focus:ring-0 focus:outline-none dark:text-white dark:placeholder-gray-400 fundo dark:bg-gray-800"
             placeholder="Deixe seu comentário..." required></textarea>
         </div>
         <button type="button" (click)="enviarComentario()"
-          class="border border-white  inline-flex items-center py-2.5 px-4 text-xs font-medium text-center text-white bg-primary-700 rounded-lg focus:ring-4 focus:ring-primary-200 dark:focus:ring-primary-900 hover:bg-primary-800">
+          class="custom-checkbox inline-flex items-center py-2.5 px-4 text-xs font-medium text-center text-white bg-primary-700 rounded-lg focus:ring-4 focus:ring-primary-200 dark:focus:ring-primary-900 hover:bg-primary-800">
           Comentar
         </button>
       </div>
@@ -164,7 +175,7 @@
           </button>
         </div>
         <div class="ml-16 flex-grow mb-6 mt-6" *ngIf="mostrarTextArea[comentario.id]">
-          <div class="py-2 px-4 mb-4 rounded-lg rounded-t-lg border border-white">
+          <div class="py-2 px-4 mb-4 rounded-lg rounded-t-lg custom-checkbox">
             <label for="comment" class="sr-only">Seu comentário</label>
             <textarea id="comment" rows="6" [(ngModel)]="resposta"
               class="h-24 w-full text-sm text-white border-0 focus:ring-0 focus:outline-none dark:text-white dark:placeholder-gray-400 fundo"

@@ -6,3 +6,27 @@
     background-color: #0D0D0D;
   }
 
+  ::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background-color: rgba(100, 222, 161, 0.8 );
+    border-radius: 6px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: rgba(100, 222, 161, 0.1);
+    border-radius: 6px;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background-color: rgba(100, 222, 161, 0.5);
+  }
+
+  ::-webkit-scrollbar-track:hover {
+    background: rgba(0, 0, 0, 0.2);
+  }
+
+

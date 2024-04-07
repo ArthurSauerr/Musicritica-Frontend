@@ -16,12 +16,19 @@ export class UsuarioPerfilComponent {
 
   constructor(private usuarioService: UsuarioService, private route: ActivatedRoute, private sanitizer: DomSanitizer){}
 
+  conteudoSelecionado: string | null = null;
+
   ngOnInit(): void{
     this.usuarioService.getToken();
     this.route.params.subscribe(params => {
       const idUsuario = +params['id'];
       this.buscarUsuario(idUsuario);
     });
+  }
+
+
+  mostrarConteudo(opcao: string): void {
+    this.conteudoSelecionado = opcao;
   }
 
 

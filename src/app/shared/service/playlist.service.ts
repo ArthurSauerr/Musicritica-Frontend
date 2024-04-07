@@ -18,4 +18,8 @@ export class PlaylistService {
   salvarNovaPlaylist(novaPlaylist: Playlist): Observable<Playlist> {
     return this.httpClient.post<Playlist>(this.apiUrl, novaPlaylist);
   }
+  verificarEInserirMusicaSpotify(idSpotify: string, idMusicaSpotify: string, idPlaylist: number): Observable<any> {
+    const url = `${this.apiUrl}/verificar?idSpotify=${idSpotify}&idMusicaSpotify=${idMusicaSpotify}&idPlaylist=${idPlaylist}`;
+    return this.httpClient.post<any>(url, {});
+  }
 }

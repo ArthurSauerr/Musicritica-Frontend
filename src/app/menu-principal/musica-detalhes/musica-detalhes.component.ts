@@ -1,5 +1,5 @@
 import { UsuarioService } from 'src/app/shared/service/usuario.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, HostListener, OnInit } from '@angular/core';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { ComentarioServiceService } from 'src/app/shared/service/comentario-service.service';
 import { Item } from './../../shared/model/Item';
@@ -22,42 +22,43 @@ export class MusicaDetalhesComponent implements OnInit {
     private sanitizer: DomSanitizer,
     private comentarioService: ComentarioServiceService,
     private usuarioService: UsuarioService,
-    private datePipe: DatePipe,
     private playlistService: PlaylistService
   ) { }
 
   artista: string;
-  musica: Item;
-
-  novoComentario: Comentario = new Comentario();
-  novaPlaylist: Playlist = new Playlist();
   comentario: string = '';
   resposta: string = '';
-  musicaParaEnviar: Musica = new Musica();
-  usuarioParaEnviar: Usuario = new Usuario();
-  idComentarioPai: number;
+  comentario1: string = '';
+  emailParam: string | undefined;
+
+  mostrarTextarea: boolean = false;
+  showRepliesId: number | null = null;
+  showCreatePlaylistInput = false;
+  showModal: boolean = false;
+  playlistSelecionada: boolean = false;
+
+  novoComentario: Comentario = new Comentario();
   comentarioPaiParaEnviar: Comentario = new Comentario();
   comentarioPai: Comentario;
+  novaPlaylist: Playlist = new Playlist();
+  musicaParaEnviar: Musica = new Musica();
+  usuarioParaEnviar: Usuario = new Usuario();
+  novaMusicaSpotify: MusicaSpotify = new MusicaSpotify();
+
+  idComentarioPai: number;
   spotifyUrl: SafeResourceUrl;
+  totalDeComentarios: number;
+  nomePlaylistNova: string = "";
+  idPlaylistSelecionada: number;
+
+  musica: Item;
   comentariosBuscados: Comentario[];
   respostasBuscadas: Comentario[];
   playlistsDoUsuario: Playlist[];
   listaDeMusicasParaEnviar: MusicaSpotify[] = [];
-  emailParam: string | undefined;
-
-  novaMusicaSpotify: MusicaSpotify = new MusicaSpotify();
-
-  mostrarTextarea: boolean = false;
-  comentario1: string = '';
-  showRepliesId: number | null = null;
-
-  totalDeComentarios: number;
 
   mostrarDropdown: { [key: number]: boolean } = {};
   mostrarTextArea: { [key: number]: boolean } = {};
-
-  showCreatePlaylistInput = false;
-  nomePlaylistNova: string = "";
 
   ngOnInit(): void {
     this.musica = history.state.musica;
@@ -240,6 +241,22 @@ export class MusicaDetalhesComponent implements OnInit {
 
   }
 
+  enviarMusicaParaPlaylist(): void {
+    
+    const idSpotify: string = this.musica.id;
+    const idMusicaSpotify: string = this.musica.id;
+    const idPlaylist: number = this.idPlaylistSelecionada;
+
+    console.log("Id para verificar: " + idMusicaSpotify);
+    console.log("Id da playlist para salvar: " + idPlaylist);
+
+    this.playlistService.verificarEInserirMusicaSpotify(idSpotify, idMusicaSpotify, idPlaylist).subscribe(
+      () => {
+        console.log('Música enviada para a playlist com sucesso');
+      }, error => {
+        console.error('Erro ao salvar uma nova música na playlist:', error);
+      });
+  }
 
   buscarPlaylistsPorIdUsuario(): void {
     this.usuarioService.buscarIdPorEmail(this.emailParam).subscribe(
@@ -257,6 +274,11 @@ export class MusicaDetalhesComponent implements OnInit {
         );
       }
     );
+  }
+
+  capturarIdPlaylist(idPlaylist: number): void {
+    this.idPlaylistSelecionada = idPlaylist;
+    console.log("id da playlist clicada: " + this.idPlaylistSelecionada);
   }
 
   toggleDropdown(comentario: Comentario): void {
@@ -285,13 +307,23 @@ export class MusicaDetalhesComponent implements OnInit {
       this.mostrarTextArea[comentario.id] = false;
     });
   }
-  showModal: boolean = false;
 
   toggleModal() {
     this.showModal = !this.showModal;
     this.showCreatePlaylistInput = false
     this.buscarPlaylistsPorIdUsuario();
   }
+  fecharModal(event: MouseEvent): void {
+    const modalElement = document.querySelector('#modal');
+    if (modalElement && !modalElement.contains(event.target as Node)) {
+      this.toggleModal();
+    }
+  }
+
+  checkPlaylistSelected(event: any) {
+    this.playlistSelecionada = event.target.checked;
+  }
+
   toggleCreatePlaylistInput() {
     this.showCreatePlaylistInput = !this.showCreatePlaylistInput;
   }

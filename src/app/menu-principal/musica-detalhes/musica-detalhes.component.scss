@@ -16,12 +16,11 @@
 }
 
 .salvar-playlist:hover {
-  transform: scale(1.05); /* Aumenta o tamanho da div em 5% ao passar o mouse */
+  transform: scale(1.05);
   transition: transform 0.3s ease;
   cursor: pointer;
 }
 
-/* Adicione a fonte Inter White */
 .salvar-playlist h1 {
   font-family: 'Inter', sans-serif;
   color: white;
@@ -29,12 +28,33 @@
 
 .fundo{
   background-color: #0D0D0D;
+
 }
-.custom-input{
+.fundo-modal {
+  background-color: rgba(13, 13, 13, 0.6);
+}
+
+.shadow-with-light {
+  filter: drop-shadow(0 1px 13px rgb(100 222 161 / 0.3));
+}
+
+.custom-input {
   background: none;
   color: white;
+  border: none;
   border-bottom: 2px solid #64DEA1;
   padding-bottom: 5px;
+  width: 100%; 
+}
+
+.musicritica-button{
+  font-family: 'Inter', sans-serif;
+  color: #64DEA1;
+}
+
+.custom-checkbox{
+  background: none;
+  border: 2px solid #64DEA1;
 }
 
 #dropdownComment1 {
@@ -44,6 +64,11 @@
 input:focus {
   outline: none;
 }
+
+.inline {
+  display: inline;
+}
+
 
   ::-webkit-scrollbar {
     width: 12px;
