@@ -8,6 +8,7 @@ import { MusicaDescobrirComponent } from './musica-descobrir/musica-descobrir.co
 import { MusicaRankingComponent } from './musica-ranking/musica-ranking.component';
 import { MenuBuscarMusicaComponent } from './menu-buscar-musica/menu-buscar-musica.component';
 import { DatePipe } from '@angular/common';
+import { AdmDenunciaComponent } from './adm-denuncia/adm-denuncia.component';
 
 @NgModule({
   declarations: [
@@ -16,6 +17,7 @@ import { DatePipe } from '@angular/common';
     MusicaDescobrirComponent,
     MusicaRankingComponent,
     MenuBuscarMusicaComponent,
+    AdmDenunciaComponent,
 
   ],
   imports: [
