@@ -21,7 +21,7 @@ import { UsuarioPerfilComponent } from './usuario-perfil/usuario-perfil.componen
   imports: [
     CommonModule,
     UsuarioRoutingModule,
-    FormsModule
+    FormsModule,
   ]
 })
 export class UsuarioModule { }

@@ -13,6 +13,29 @@
   font-weight: bold;
 }
 .custom-input {
-  border-bottom: 2px solid #64DEA1;
   border-top: 2px solid #64DEA1;
+  margin-bottom: 4px;
 }
+.custom-music {
+  border-bottom: 2px solid #64DEA1;
+}
+.custom-playlist {
+  border: 2px solid #64DEA1;
+}
+
+#dropdownComment1 {
+  position: absolute;
+  z-index: 999;
+}
+input:focus {
+  outline: none;
+}
+
+.musica-info {
+  font-family: 'Poppins', sans-serif;
+  background: linear-gradient(180deg, #64DEA1, #FFFFFF);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+

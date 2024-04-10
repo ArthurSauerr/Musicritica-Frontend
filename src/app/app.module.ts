@@ -18,7 +18,6 @@ registerLocaleData(localePt);
     FormsModule,
     AppRoutingModule,
     HttpClientModule,
-
   ],
   providers: [
     DatePipe,

@@ -2,6 +2,7 @@ import { Playlist } from './../model/Playlist';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { ListaTracksSpotify } from '../model/ListaTracksSpotify';
 
 @Injectable({
   providedIn: 'root'
@@ -21,5 +22,8 @@ export class PlaylistService {
   verificarEInserirMusicaSpotify(idSpotify: string, idMusicaSpotify: string, idPlaylist: number): Observable<any> {
     const url = `${this.apiUrl}/verificar?idSpotify=${idSpotify}&idMusicaSpotify=${idMusicaSpotify}&idPlaylist=${idPlaylist}`;
     return this.httpClient.post<any>(url, {});
+  }
+  buscarTodasMusicasDaPlaylist(id: number): Observable<ListaTracksSpotify> {
+    return this.httpClient.get<ListaTracksSpotify>(`${this.apiUrl}/${id}/tracks`);
   }
 }
