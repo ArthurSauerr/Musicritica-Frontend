@@ -32,7 +32,9 @@
             "styles": [
               "src/styles.scss",
               "node_modules/primeng/resources/themes/lara-light-blue/theme.css",
-              "node_modules/primeng/resources/primeng.min.css"
+              "node_modules/primeng/resources/primeng.min.css",
+              "node_modules/ngx-owl-carousel-o/lib/styles/prebuilt-themes/owl.carousel.min.css",
+              "node_modules/ngx-owl-carousel-o/lib/styles/prebuilt-themes/owl.theme.default.min.css"        
             ],
             "scripts": []
           },
@@ -67,10 +69,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "Musicritica:build:production"
+              "buildTarget": "Musicritica:build:production"
             },
             "development": {
-              "browserTarget": "Musicritica:build:development"
+              "buildTarget": "Musicritica:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -78,7 +80,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "Musicritica:build"
+            "buildTarget": "Musicritica:build"
           }
         },
         "test": {

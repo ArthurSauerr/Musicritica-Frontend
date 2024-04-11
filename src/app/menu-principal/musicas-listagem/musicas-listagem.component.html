@@ -1,6 +1,269 @@
-<div class="mr-12 ml-12 mt-32 mb-10 custom-input">
-  <p class="custom-href text-2xl font-semibold">
-    Mais populares no Brasil
+<div style="position: relative;">
+  <div id="fixed-text" class="absolute top-0 left-0 w-full bg-transparent z-30 mt-32">
+    <div class="items-center flex flex-wrap">
+      <div class="w-full lg:w-6/12 px-4 ml-auto mr-auto text-center">
+        <div class="mt-32">
+          <h1 class="musica-info text-white font-semibold text-9xl">
+            Musicritica
+          </h1>
+          <h1 class="musica-info text-white font-semibold text-2xl">
+            Conecte-se no mundo musical.
+          </h1>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div id="carousel-container" class="relative z-20 mt-20">
+    <owl-carousel-o [options]="customOptions" class="owl-theme relative"
+      (owlCarouselInitialized)="onCarouselInitialized()">
+      <ng-container *ngFor="let musica of topCharts">
+        <ng-template carouselSlide>
+          <div class="carousel-item relative">
+            <img [src]="musica.album.images[0].url" alt="{{ musica.name }}" class="w-full blur-md">
+          </div>
+        </ng-template>
+      </ng-container>
+    </owl-carousel-o>
+  </div>
+</div>
+<div class="mt-64 flex">
+  <div class="flex-grow">
+    <div class="">
+      <div class="mr-12">
+        <h1 class="musica-info text-white font-semibold text-5xl ml-8">
+          Monte suas playlists com suas músicas preferidas.
+        </h1>
+        <div class="mt-24 ml-24">
+          <div class="custom-input mb-6 relative" *ngFor="let track of topCharts.slice(0, 3)">
+            <div class="flex items-end">
+              <img [src]="track.album.images[1].url" alt="{{ track.name }}" class="mb-6 rounded-lg max-w-36 h-36 mr-4">
+              <div class="text-left mb-6">
+                <h1 class="text-1xl font-bold mb-4 musica-info">{{ track.name }}</h1>
+                <h2 class="text-1xl font-bold musica-info">{{ track.album.name }}</h2>
+              </div>
+            </div>
+            <div class="absolute top-0 right-0">
+              <button
+                class="inline-flex items-center p-2 text-sm font-medium text-center text-gray-500 dark:text-gray-400 rounded-lg focus:ring-4 focus:outline-none dark:hover:bg-gray-200 dark:focus:ring-gray-600"
+                type="button">
+                <svg class="w-6 h-6" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor"
+                  viewBox="0 0 16 3">
+                  <path
+                    d="M2 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3Zm6.041 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM14 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3Z" />
+                </svg>
+                <span class="sr-only">Comment settings</span>
+              </button>
+              <div id="dropdownComment1"
+                class="mt-4 w-36 bg-white rounded divide-y divide-gray-100 shadow dark:bg-gray-700 dark:divide-gray-600">
+              </div>
+              <div class="mt-24 ml-32">
+                <div class="flex items-center">
+                  <svg class="w-4 h-4 text-yellow-300 ms-1" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                    fill="currentColor" viewBox="0 0 22 20">
+                    <path
+                      d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z" />
+                  </svg>
+                  <svg class="w-4 h-4 text-yellow-300 ms-1" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                    fill="currentColor" viewBox="0 0 22 20">
+                    <path
+                      d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z" />
+                  </svg>
+                  <svg class="w-4 h-4 text-yellow-300 ms-1" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                    fill="currentColor" viewBox="0 0 22 20">
+                    <path
+                      d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z" />
+                  </svg>
+                  <svg class="w-4 h-4 text-yellow-300 ms-1" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                    fill="currentColor" viewBox="0 0 22 20">
+                    <path
+                      d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z" />
+                  </svg>
+                  <svg class="w-4 h-4 ms-1 text-gray-300 dark:text-gray-500" aria-hidden="true"
+                    xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 22 20">
+                    <path
+                      d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z" />
+                  </svg>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>//
+  <div class="mt-32 flex-grow">
+    <div class="mt-32" style="min-height: 50vh; display: flex; flex-direction: column; align-items: flex-mid;">
+      <div class="mr-24">
+        <h1 class="musica-info text-white font-semibold text-6xl mb-6">
+          Avalie suas músicas preferidas.
+        </h1>
+        <section class="bg-transparent py-8 lg:py-16 antialiased">
+          <div class="max-w-2xl mx-auto px-4 rounded-xl border">
+            <article class="p-6 text-base rounded-lg bg-transparent">
+              <footer class="flex justify-between items-center mb-2">
+                <div class="flex items-center">
+                  <p class="inline-flex items-center mr-3 text-sm text-gray-900 dark:text-white font-semibold"><img
+                      class="mr-2 w-6 h-6 rounded-full"
+                      src="https://flowbite.com/docs/images/people/profile-picture-2.jpg" alt="Michael Gough">Michael
+                    Gough</p>
+                  <p class="text-sm text-gray-600 dark:text-gray-400"><time pubdate datetime="2022-02-08"
+                      title="February 8th, 2022">Feb. 8, 2022</time></p>
+                </div>
+                <button id="dropdownComment1Button" data-dropdown-toggle="dropdownComment1"
+                  class="inline-flex items-center p-2 text-sm font-medium text-center text-gray-500 dark:text-gray-400 bg-white rounded-lg hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-50 dark:bg-gray-900 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
+                  type="button">
+                  <svg class="w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor"
+                    viewBox="0 0 16 3">
+                    <path
+                      d="M2 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3Zm6.041 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM14 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3Z" />
+                  </svg>
+                  <span class="sr-only">Comment settings</span>
+                </button>
+                <div id="dropdownComment1"
+                  class="hidden z-10 w-36 bg-white rounded divide-y divide-gray-100 shadow dark:bg-gray-700 dark:divide-gray-600">
+                </div>
+              </footer>
+              <p class="text-gray-500 dark:text-gray-400">Very straight-to-point article. Really worth time reading.
+                Thank
+                you! But tools are just the
+                instruments for the UX designers. The knowledge of the design tools are as important as the
+                creation of the design strategy.</p>
+              <div class="flex items-center mt-4 space-x-4">
+                <button type="button"
+                  class="flex items-center text-sm text-gray-500 hover:underline dark:text-gray-400 font-medium">
+                  <svg class="mr-1.5 w-3.5 h-3.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
+                    viewBox="0 0 20 18">
+                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                      d="M5 5h5M5 8h2m6-3h2m-5 3h6m2-7H2a1 1 0 0 0-1 1v9a1 1 0 0 0 1 1h3v5l5-5h8a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1Z" />
+                  </svg>
+                  Reply
+                </button>
+              </div>
+            </article>
+            <article class="p-6 mb-3 ml-6 lg:ml-12 text-base rounded-lg bg-transparent">
+              <footer class="flex justify-between items-center mb-2">
+                <div class="flex items-center">
+                  <p class="inline-flex items-center mr-3 text-sm text-gray-900 dark:text-white font-semibold"><img
+                      class="mr-2 w-6 h-6 rounded-full"
+                      src="https://flowbite.com/docs/images/people/profile-picture-5.jpg" alt="Jese Leos">Jese Leos</p>
+                  <p class="text-sm text-gray-600 dark:text-gray-400"><time pubdate datetime="2022-02-12"
+                      title="February 12th, 2022">Feb. 12, 2022</time></p>
+                </div>
+                <button id="dropdownComment2Button" data-dropdown-toggle="dropdownComment2"
+                  class="inline-flex items-center p-2 text-sm font-medium text-center text-gray-500 dark:text-gray-40 bg-white rounded-lg hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-50 dark:bg-gray-900 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
+                  type="button">
+                  <svg class="w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor"
+                    viewBox="0 0 16 3">
+                    <path
+                      d="M2 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3Zm6.041 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM14 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3Z" />
+                  </svg>
+                  <span class="sr-only">Comment settings</span>
+                </button>
+                <div id="dropdownComment2"
+                  class="hidden z-10 w-36 bg-white rounded divide-y divide-gray-100 shadow dark:bg-gray-700 dark:divide-gray-600">
+                </div>
+              </footer>
+              <p class="text-gray-500 dark:text-gray-400">Much appreciated! Glad you liked it ☺️</p>
+              <div class="flex items-center mt-4 space-x-4">
+                <button type="button"
+                  class="flex items-center text-sm text-gray-500 hover:underline dark:text-gray-400 font-medium">
+                  <svg class="mr-1.5 w-3.5 h-3.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
+                    viewBox="0 0 20 18">
+                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                      d="M5 5h5M5 8h2m6-3h2m-5 3h6m2-7H2a1 1 0 0 0-1 1v9a1 1 0 0 0 1 1h3v5l5-5h8a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1Z" />
+                  </svg>
+                  Reply
+                </button>
+              </div>
+            </article>
+            <article class="p-6 mb-3 text-base border-t border-gray-200 dark:border-gray-700 bg-transparent">
+              <footer class="flex justify-between items-center mb-2">
+                <div class="flex items-center">
+                  <p class="inline-flex items-center mr-3 text-sm text-gray-900 dark:text-white font-semibold"><img
+                      class="mr-2 w-6 h-6 rounded-full"
+                      src="https://flowbite.com/docs/images/people/profile-picture-3.jpg" alt="Bonnie Green">Bonnie
+                    Green
+                  </p>
+                  <p class="text-sm text-gray-600 dark:text-gray-400"><time pubdate datetime="2022-03-12"
+                      title="March 12th, 2022">Mar. 12, 2022</time></p>
+                </div>
+                <button id="dropdownComment3Button" data-dropdown-toggle="dropdownComment3"
+                  class="inline-flex items-center p-2 text-sm font-medium text-center text-gray-500 dark:text-gray-40 bg-white rounded-lg hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-50 dark:bg-gray-900 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
+                  type="button">
+                  <svg class="w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor"
+                    viewBox="0 0 16 3">
+                    <path
+                      d="M2 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3Zm6.041 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM14 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3Z" />
+                  </svg>
+                  <span class="sr-only">Comment settings</span>
+                </button>
+                <div id="dropdownComment3"
+                  class="hidden z-10 w-36 bg-white rounded divide-y divide-gray-100 shadow dark:bg-gray-700 dark:divide-gray-600">
+                </div>
+              </footer>
+              <p class="text-gray-500 dark:text-gray-400">The article covers the essentials, challenges, myths and
+                stages
+                the UX designer should consider while creating the design strategy.</p>
+              <div class="flex items-center mt-4 space-x-4">
+                <button type="button"
+                  class="flex items-center text-sm text-gray-500 hover:underline dark:text-gray-400 font-medium">
+                  <svg class="mr-1.5 w-3.5 h-3.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
+                    viewBox="0 0 20 18">
+                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                      d="M5 5h5M5 8h2m6-3h2m-5 3h6m2-7H2a1 1 0 0 0-1 1v9a1 1 0 0 0 1 1h3v5l5-5h8a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1Z" />
+                  </svg>
+                  Reply
+                </button>
+              </div>
+            </article>
+            <article class="p-6 text-base bg-transparent border-t border-gray-200 dark:border-gray-700 ">
+              <footer class="flex justify-between items-center mb-2">
+                <div class="flex items-center">
+                  <p class="inline-flex items-center mr-3 text-sm text-gray-900 dark:text-white font-semibold"><img
+                      class="mr-2 w-6 h-6 rounded-full"
+                      src="https://flowbite.com/docs/images/people/profile-picture-4.jpg" alt="Helene Engels">Helene
+                    Engels</p>
+                  <p class="text-sm text-gray-600 dark:text-gray-400"><time pubdate datetime="2022-06-23"
+                      title="June 23rd, 2022">Jun. 23, 2022</time></p>
+                </div>
+                <button id="dropdownComment4Button" data-dropdown-toggle="dropdownComment4"
+                  class="inline-flex items-center p-2 text-sm font-medium text-center text-gray-500 dark:text-gray-40 bg-white rounded-lg hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-50 dark:bg-gray-900 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
+                  type="button">
+                  <svg class="w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor"
+                    viewBox="0 0 16 3">
+                    <path
+                      d="M2 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3Zm6.041 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM14 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3Z" />
+                  </svg>
+                </button>
+                <div id="dropdownComment4"
+                  class="hidden z-10 w-36 bg-white rounded divide-y divide-gray-100 shadow dark:bg-gray-700 dark:divide-gray-600">
+                </div>
+              </footer>
+              <p class="text-gray-500 dark:text-gray-400">Thanks for sharing this. I do came from the Backend
+                development
+                and explored some of the tools to design my Side Projects.</p>
+              <div class="flex items-center mt-4 space-x-4">
+                <button type="button"
+                  class="flex items-center text-sm text-gray-500 hover:underline dark:text-gray-400 font-medium">
+                  <svg class="mr-1.5 w-3.5 h-3.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
+                    viewBox="0 0 20 18">
+                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                      d="M5 5h5M5 8h2m6-3h2m-5 3h6m2-7H2a1 1 0 0 0-1 1v9a1 1 0 0 0 1 1h3v5l5-5h8a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1Z" />
+                  </svg>
+                  Reply
+                </button>
+              </div>
+            </article>
+          </div>
+        </section>
+      </div>
+    </div>
+  </div>
+  
+</div>
+<div class="mr-24 ml-12 mb-10 ">
+  <p class="custom-href text-4xl font-semibold mb-4">
+    Populares no Brasil
   </p>
 </div>
 <div class="wrapper mr-6 ml-12">
@@ -16,9 +279,9 @@
     </section>
   </ng-container>
 </div>
-<div class="mr-12 ml-12 mt-20 mb-10 custom-input">
-  <p class="custom-href text-2xl font-semibold">
-    Mais populares mundialmente
+<div class="mr-12 ml-12 mt-20 mb-10 ">
+  <p class="custom-href text-4xl font-semibold mb-4">
+    Populares mundialmente
   </p>
 </div>
 <div class="wrapper mr-6 ml-12">

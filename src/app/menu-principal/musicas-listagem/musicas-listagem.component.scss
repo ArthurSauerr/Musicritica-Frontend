@@ -40,10 +40,27 @@
   opacity: 0;
   transition: opacity 0.3s ease-in-out;
 }
+.custom-input {
+  background: none;
+  color: white;
+  border: none;
+  border-bottom: 2px solid #64DEA1;
+  padding-bottom: 5px;
+  width: 80%; 
+}
 
 .chart-container:hover .chart-info {
   opacity: 1;
 }
+
+.musica-info {
+  font-family: 'Poppins', sans-serif;
+  background: linear-gradient(180deg, #64DEA1, #FFFFFF);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
 
 
 $itemGrow: 1.2;
@@ -63,6 +80,12 @@ h1 {
   color: red;
   text-align: center;
 }
+.custom-bg{
+  background-color: #0D0D0D;
+}
+
+
+
 
 .wrapper {
   display: grid;

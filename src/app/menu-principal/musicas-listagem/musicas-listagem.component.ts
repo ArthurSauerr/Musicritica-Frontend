@@ -1,9 +1,10 @@
 import { SpotifySearchResponse } from './../../shared/model/SpotifySearchResponse';
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import { MenuPrincipalService } from 'src/app/shared/service/menu-principal.service';
 import { Item } from 'src/app/shared/model/Item';
 import { Router } from '@angular/router';
 import { Image } from 'src/app/shared/model/Image';
+import { OwlOptions } from 'ngx-owl-carousel-o';
 
 @Component({
   selector: 'app-musicas-listagem',
@@ -18,8 +19,32 @@ export class MusicasListagemComponent implements OnInit {
 
   topCharts: Item[] = [];
   topChartsYoutube: Item[] = [];
+  cachedImages: { [url: string]: HTMLImageElement } = {};
+
+
+  customOptions: OwlOptions = {
+    loop: true,
+    navSpeed: 700,
+    autoplay: true,
+    autoplayTimeout: 2000, 
+    autoplaySpeed: 600, 
+    
+    responsive: {
+      0: {
+        items: 1
+      },
+      400: {
+        items: 2
+      }
+    },
+    nav: false
+  };
+
+
+  
 
   ngOnInit(): void {
+    
     const storedData = sessionStorage.getItem('topCharts');
     const storedDataYoutube = sessionStorage.getItem('topChartsYoutube');
 
@@ -35,8 +60,39 @@ export class MusicasListagemComponent implements OnInit {
       this.getTopChartsYoutube();
     }
 
-
+    const cachedImages = sessionStorage.getItem('cachedImages');
+    if (cachedImages) {
+      this.cachedImages = JSON.parse(cachedImages);
+    }
   }
+
+  onCarouselInitialized(): void {
+    const owlElement = document.querySelector('.owl-carousel');
+    if (owlElement) {
+      const slides = owlElement.querySelectorAll('.owl-item');
+      slides.forEach((slide: Element) => {
+        const slideHTMLElement = slide as HTMLElement;
+        slideHTMLElement.style.marginLeft = '0';
+        slideHTMLElement.style.marginRight = '0';
+      });
+    }
+  }
+
+  cacheImages(): void {
+    const imagesToCache = document.querySelectorAll('.owl-item img');
+    imagesToCache.forEach((element: Element) => {
+      const img = element as HTMLImageElement;
+      const imgUrl = img.src;
+      if (!this.cachedImages[imgUrl]) {
+        const cachedImage = new Image();
+        cachedImage.src = imgUrl;
+        this.cachedImages[imgUrl] = cachedImage;
+      }
+    });
+    sessionStorage.setItem('cachedImages', JSON.stringify(this.cachedImages));
+  }
+  
+  
 
   getTopCharts(): void {
     this.spotifyService.getTopCharts().subscribe(

@@ -9,6 +9,9 @@ import { MusicaRankingComponent } from './musica-ranking/musica-ranking.componen
 import { MenuBuscarMusicaComponent } from './menu-buscar-musica/menu-buscar-musica.component';
 import { DatePipe } from '@angular/common';
 import { AdmDenunciaComponent } from './adm-denuncia/adm-denuncia.component';
+import { CarouselModule } from 'ngx-owl-carousel-o';
+
+
 
 @NgModule({
   declarations: [
@@ -24,7 +27,9 @@ import { AdmDenunciaComponent } from './adm-denuncia/adm-denuncia.component';
     CommonModule,
     MenuPrincipalRoutingModule,
     FormsModule,
-    DatePipe
+    DatePipe,
+    CarouselModule
+    
   ]
 })
 export class MenuPrincipalModule { }
