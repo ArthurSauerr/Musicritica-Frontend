@@ -11,6 +11,7 @@ import { Usuario } from './shared/model/Usuario';
   styleUrls: ['./app.component.scss'],
 })
 export class AppComponent {
+
   title = 'Musicritica';
   mostrarNavbar: boolean = true;
   emailParam: string | undefined;
@@ -61,6 +62,10 @@ export class AppComponent {
     }
   }
 
+  isUsuarioLogado(): boolean {
+    return !!this.usuarioService.getToken();
+  }
+
   buscarUsuarioLogado(email: string | undefined) {
     this.usuarioService
       .buscarIdPorEmail(email)
@@ -90,6 +95,17 @@ export class AppComponent {
   logout(){
     this.usuarioService.deleteToken();
     this.router.navigate(['usuario/login']);
+  }
+
+  login(){
+    this.router.navigate(['usuario/login']);
+  }
+
+  toggleDropdown(elementId: string) {
+    const dropdownMenu = document.getElementById(elementId);
+    if (dropdownMenu) {
+      dropdownMenu.classList.toggle('hidden');
+    }
   }
 
 }
