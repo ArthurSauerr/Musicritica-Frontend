@@ -5,6 +5,7 @@ import { UsuarioRegistrarComponent } from './usuario-registrar/usuario-registrar
 import { UsuarioEsqueceuSenhaComponent } from './usuario-esqueceu-senha/usuario-esqueceu-senha.component';
 import { UsuarioRedefinirSenhaComponent } from './usuario-redefinir-senha/usuario-redefinir-senha.component';
 import { UsuarioPerfilComponent } from './usuario-perfil/usuario-perfil.component';
+import { AdmDenunciaComponent } from './adm-denuncia/adm-denuncia.component';
 
 const routes: Routes = [
   {path: 'login', component: UsuarioLoginComponent},
@@ -12,6 +13,7 @@ const routes: Routes = [
   {path: 'esqueceu-senha',component: UsuarioEsqueceuSenhaComponent},
   {path: 'redefinir-senha/:token', component: UsuarioRedefinirSenhaComponent},
   {path: 'perfil/:id', component: UsuarioPerfilComponent},
+  {path: 'denuncia', component: AdmDenunciaComponent}
 ];
 
 @NgModule({

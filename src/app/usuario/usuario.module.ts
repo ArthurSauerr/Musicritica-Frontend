@@ -8,6 +8,7 @@ import { UsuarioRegistrarComponent } from './usuario-registrar/usuario-registrar
 import { UsuarioEsqueceuSenhaComponent } from './usuario-esqueceu-senha/usuario-esqueceu-senha.component';
 import { UsuarioRedefinirSenhaComponent } from './usuario-redefinir-senha/usuario-redefinir-senha.component';
 import { UsuarioPerfilComponent } from './usuario-perfil/usuario-perfil.component';
+import { AdmDenunciaComponent } from './adm-denuncia/adm-denuncia.component';
 
 
 @NgModule({
@@ -16,7 +17,8 @@ import { UsuarioPerfilComponent } from './usuario-perfil/usuario-perfil.componen
     UsuarioRegistrarComponent,
     UsuarioEsqueceuSenhaComponent,
     UsuarioRedefinirSenhaComponent,
-    UsuarioPerfilComponent
+    UsuarioPerfilComponent,
+    AdmDenunciaComponent
   ],
   imports: [
     CommonModule,
