@@ -8,10 +8,7 @@ import { MusicaDescobrirComponent } from './musica-descobrir/musica-descobrir.co
 import { MusicaRankingComponent } from './musica-ranking/musica-ranking.component';
 import { MenuBuscarMusicaComponent } from './menu-buscar-musica/menu-buscar-musica.component';
 import { DatePipe } from '@angular/common';
-import { AdmDenunciaComponent } from './adm-denuncia/adm-denuncia.component';
 import { CarouselModule } from 'ngx-owl-carousel-o';
-
-
 
 @NgModule({
   declarations: [
@@ -20,7 +17,7 @@ import { CarouselModule } from 'ngx-owl-carousel-o';
     MusicaDescobrirComponent,
     MusicaRankingComponent,
     MenuBuscarMusicaComponent,
-    AdmDenunciaComponent,
+
 
   ],
   imports: [
