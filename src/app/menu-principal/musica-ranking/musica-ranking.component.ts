@@ -20,5 +20,4 @@ export class MusicaRankingComponent implements OnInit {
     console.log('ID da música obtido:', this.musicId);
 
   }
-
 }

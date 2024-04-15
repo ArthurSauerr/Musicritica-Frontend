@@ -40,6 +40,25 @@ export class MusicasListagemComponent implements OnInit {
     nav: false
   };
 
+  customOptions2: OwlOptions = {
+    loop: true,
+    navSpeed: 700,
+    autoplay: true,
+    autoplayTimeout: 2000, 
+    autoplaySpeed: 600, 
+    
+    responsive: {
+      0: {
+        items: 1
+      },
+      400: {
+        items: 5
+      }
+    },
+    nav: false
+  };
+
+
 
   
 

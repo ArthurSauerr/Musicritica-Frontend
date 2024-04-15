@@ -33,8 +33,8 @@
         <h1 class="musica-info text-white font-semibold text-5xl ml-8">
           Monte suas playlists com suas músicas preferidas.
         </h1>
-        <div class="mt-24 ml-24">
-          <div class="custom-input mb-6 relative" *ngFor="let track of topCharts.slice(0, 3)">
+        <div class="mt-24 ml-16">
+          <div class="custom-input relative ml-20" *ngFor="let track of topCharts.slice(0, 3)">
             <div class="flex items-end">
               <img [src]="track.album.images[1].url" alt="{{ track.name }}" class="mb-6 rounded-lg max-w-36 h-36 mr-4">
               <div class="text-left mb-6">
