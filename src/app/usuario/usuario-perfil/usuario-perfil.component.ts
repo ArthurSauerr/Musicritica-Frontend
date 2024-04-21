@@ -1,5 +1,5 @@
 import { UsuarioService } from 'src/app/shared/service/usuario.service';
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Usuario } from 'src/app/shared/model/Usuario';
 import { ActivatedRoute } from '@angular/router';
 import { PlaylistService } from 'src/app/shared/service/playlist.service';
@@ -14,7 +14,7 @@ import { ListaTracksSpotify } from 'src/app/shared/model/ListaTracksSpotify';
   styleUrls: ['./usuario-perfil.component.scss'],
 
 })
-export class UsuarioPerfilComponent {
+export class UsuarioPerfilComponent implements OnInit{
 
   usuario: Usuario;
   imagemPerfil: number[];
@@ -31,6 +31,9 @@ export class UsuarioPerfilComponent {
 
   mostrarDropdown: { [key: number]: boolean } = {};
 
+  primeirasMusicasDasPlaylists: { [key: number]: string } = {};
+
+
   musicasDaPlaylist: ListaTracksSpotify = new ListaTracksSpotify();
 
   ngOnInit(): void {
@@ -39,10 +42,13 @@ export class UsuarioPerfilComponent {
       const idUsuario = +params['id'];
       this.buscarUsuario(idUsuario);
     });
+    this.buscarPlaylistsPorIdUsuario();
+
   }
 
   mostrarConteudo(opcao: string): void {
     this.conteudoSelecionado = opcao;
+
   }
 
   buscarUsuario(idUsuario: number): void {
@@ -61,6 +67,9 @@ export class UsuarioPerfilComponent {
     this.playListService.buscarPlaylistsPorIdUsuario(this.usuario.id).subscribe(
       (data: Playlist[]) => {
         this.playlistsDoUsuario = data;
+        this.playlistsDoUsuario.forEach(playlist => {
+          this.buscarTodasMusicasDaPlaylist(playlist.id); 
+        });
         console.log(data);
       },
       (error) => {
@@ -72,8 +81,13 @@ export class UsuarioPerfilComponent {
   buscarTodasMusicasDaPlaylist(id: number): void {
     this.playListService.buscarTodasMusicasDaPlaylist(id).subscribe(
       (data: ListaTracksSpotify) => {
-        console.log(data);
+        if (data.tracks && data.tracks.length > 0) {
+          const primeiraMusica = data.tracks[0]; 
+          const imageUrl = primeiraMusica.album.images.length > 0 ? primeiraMusica.album.images[0].url : ''; 
+          this.primeirasMusicasDasPlaylists[id] = imageUrl;
+        }
         this.musicasDaPlaylist = data;
+
       },
       (error) => {
         console.error('Ocorreu um erro ao buscar o as músicas do álbum:', error);
