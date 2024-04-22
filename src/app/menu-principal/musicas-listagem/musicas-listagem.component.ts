@@ -58,10 +58,6 @@ export class MusicasListagemComponent implements OnInit {
     nav: false
   };
 
-
-
-  
-
   ngOnInit(): void {
     
     const storedData = sessionStorage.getItem('topCharts');

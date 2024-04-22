@@ -7,7 +7,7 @@
     <div class="flex items-center ml-4 ">
       <a href="/descobrir" class="mr-4 nav-buttons">Descobrir</a>
       <a href="/ranking" class="mr-4 nav-buttons">Ranking</a>
-      <a href="/denuncia" class="mr-4 nav-buttons">Denúncias</a>
+      <a href="usuario/denuncia" class="mr-4 nav-buttons">Denúncias</a>
     </div>
     <div class="relative ml-auto mr-32 mb-1">
       <span class="absolute right-0 top-0 mt-2 ml-2">
@@ -27,8 +27,7 @@
       <img class="rounded-full cursor-pointer" width="30" height="30" [src]="'data:image/jpeg;base64,' + usuario.imagem_perfil" alt="Imagem de Perfil">
     </div>
 
-    <!-- DROPDOWN MENU -->
-    <div id="dropdownMenu" class="hidden absolute left-1/2 transform -translate-x-1/2 z-10 origin-top mt-2 w-48 origin-top divide-y divide-gray-100 rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none" role="menu" aria-orientation="vertical" aria-labelledby="menu-button" tabindex="-1">
+    <!-- <div id="dropdownMenu" class="hidden absolute left-1/2 transform -translate-x-1/2 z-10 origin-top mt-2 w-48 origin-top divide-y divide-gray-100 rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none" role="menu" aria-orientation="vertical" aria-labelledby="menu-button" tabindex="-1">
       <div class="py-1" role="none">
         <a class="text-gray-700 block px-4 py-2 text-sm" role="menuitem">{{usuario.nome}}</a>
         <a class="text-gray-700 block px-4 py-2 text-sm" role="menuitem">{{usuario.email}}</a>
@@ -37,20 +36,14 @@
         <button (click)="verPerfilUsuario()" class="text-gray-700 block px-4 py-2 text-sm" role="menuitem">Ver Perfil</button>
         <a href="#" class="text-gray-700 block px-4 py-2 text-sm" role="menuitem">Editar Perfil</a>
       </div>
-      <!-- Somente será mostrado caso o usuário seja adm! -->
       <div class="py-1" role="none">
-        <a href="/denuncia" class="text-gray-700 block px-4 py-2 text-sm" role="menuitem" >Denúncias</a>
+        <a href="usuario/denuncia" class="text-gray-700 block px-4 py-2 text-sm" role="menuitem" >Denúncias</a>
       </div>
       <div class="py-1" role="none">
         <button (click)="logout()" class="text-gray-700 block px-4 py-2 text-sm" role="menuitem" >Finalizar Sessão</button>
       </div>
-    </div>
-  </div>
-
-    <!-- <div class="ml-8">
-      <img class="cursor-pointer" (click)="logout()" width="21" height="21" src="https://img.icons8.com/ios-filled/50/64dea1/exit.png" alt="exit"/>
     </div> -->
-
+  </div>
   </div>
 </nav>
 
