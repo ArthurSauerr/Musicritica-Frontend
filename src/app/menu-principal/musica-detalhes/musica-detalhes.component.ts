@@ -60,6 +60,14 @@ export class MusicaDetalhesComponent implements OnInit {
   mostrarDropdown: { [key: number]: boolean } = {};
   mostrarTextArea: { [key: number]: boolean } = {};
 
+  rating: number = 0;
+  stars: number[] = [1]; 
+
+  rate(stars: number) {
+    this.rating = stars;
+  }
+
+
   ngOnInit(): void {
     this.musica = history.state.musica;
     this.artista = this.musica.album.artists[0].name;

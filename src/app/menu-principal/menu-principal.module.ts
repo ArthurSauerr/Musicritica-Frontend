@@ -9,6 +9,8 @@ import { MusicaRankingComponent } from './musica-ranking/musica-ranking.componen
 import { MenuBuscarMusicaComponent } from './menu-buscar-musica/menu-buscar-musica.component';
 import { DatePipe } from '@angular/common';
 import { CarouselModule } from 'ngx-owl-carousel-o';
+import { MatSliderModule } from '@angular/material/slider';
+import { MatIconModule } from '@angular/material/icon'; // Importe o MatIconModule
 
 @NgModule({
   declarations: [
@@ -25,8 +27,9 @@ import { CarouselModule } from 'ngx-owl-carousel-o';
     MenuPrincipalRoutingModule,
     FormsModule,
     DatePipe,
-    CarouselModule
-    
+    CarouselModule,
+    MatSliderModule,
+    MatIconModule
   ]
 })
 export class MenuPrincipalModule { }

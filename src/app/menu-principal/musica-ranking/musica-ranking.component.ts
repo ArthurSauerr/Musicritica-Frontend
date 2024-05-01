@@ -1,6 +1,4 @@
-import { DadosCompartilhadosService } from './../../shared/service/dados-compartilhados.service';
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
-
+import { Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-musica-ranking',
@@ -9,15 +7,16 @@ import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 })
 export class MusicaRankingComponent implements OnInit {
 
+  rating: number = 0;
+  stars: number[] = [1]; 
 
-  constructor(private dadosCompartilhadosService: DadosCompartilhadosService) { }
+  rate(stars: number) {
+    this.rating = stars;
+  }
 
-  musicId: String;
+  
+  constructor() { }
 
   ngOnInit(): void {
-
-    this.musicId = this.dadosCompartilhadosService.getIdAlbumParaProcurar();
-    console.log('ID da música obtido:', this.musicId);
-
   }
 }

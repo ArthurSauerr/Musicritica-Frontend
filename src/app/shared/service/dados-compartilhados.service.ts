@@ -24,8 +24,8 @@ export class DadosCompartilhadosService {
   }
 
   getIdMusica(): string | null {
-    const id = localStorage.getItem(this.idMusicaKey); // Obtendo o ID do localStorage
-    return id !== null ? id : null; // Retorna o ID se não for nulo
+    const id = localStorage.getItem(this.idMusicaKey); 
+    return id !== null ? id : null; 
   }
 
 

@@ -44,7 +44,7 @@
   border: none;
   border-bottom: 2px solid #64DEA1;
   padding-bottom: 5px;
-  width: 100%; 
+
 }
 
 .musicritica-button{
@@ -91,5 +91,18 @@ input:focus {
 
   ::-webkit-scrollbar-track:hover {
     background: rgba(0, 0, 0, 0.2);
+  }
+
+  .rating {
+    font-size: 24px;
+  }
+  
+  .star {
+    cursor: pointer;
+
+  }
+  
+  .star mat-icon {
+    color: #FFD700; 
   }
 

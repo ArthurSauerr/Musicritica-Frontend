@@ -1,9 +1,10 @@
-<div class="h-screen flex flex-col mt-2 ">
+<div class="h-screen flex flex-col mt-20">
   <div class="bg-gradient-to-r custom-color text-white p-16 flex items-end justify-between">
     <div class="flex items-end">
       <img [src]="musica.album.images[1].url" alt="{{ musica.name }}"
         class="ml-2 mt-8 mb-6 w-60 h-60 overflow-hidden mr-4 flex-shrink-0 rounded-lg shadow-[0_50px_25px_-24px_rgb(0,0,0,0.5)]">
       <div>
+      
         <h1 class="text-6xl font-bold mb-4 musica-info">{{ musica.name }}</h1>
         <h2 class="text-2xl font-bold mb-6 musica-info">{{ musica.album.name }}</h2>
       </div>
@@ -78,8 +79,19 @@
       </div>
     </div>
   </div>
+  <div class="rating ml-16 flex">
+
+    <div class="mr-2 text-2xl font-bold mb-4 musica-info">4.0 (175)</div>
+    <span *ngFor="let star of stars; let i = index" class="star" (click)="rate(i + 1)">
+      <mat-icon>{{ i < rating ? 'star' : 'star_border' }}</mat-icon>
+    </span>
+  </div>
+
+  <div class="custom-input ml-16 mr-16"></div>
   <div class="flex mt-32">
     <div class="w-1/2 ml-16">
+      <div class="text-2xl font-bold mb-4 musica-info">Deixe um comentário</div>
+
       <div class="flex-grow mb-6">
         <div class="py-2 px-4 mb-4 rounded-lg rounded-t-lg custom-checkbox">
           <label for="comment" class="sr-only">Seu comentário</label>
@@ -95,11 +107,11 @@
     </div>
     <div class="w-1/2">
       <div class="ml-14 ">
-        <iframe style="border-radius:12px" [src]="spotifyUrl" width="80%" height="300" frameborder="0"
+        <div class="text-2xl font-bold mb-4 musica-info">Ouça uma prévia!</div>
+        <iframe style="border-radius:12px" [src]="spotifyUrl" width="90%" height="200" frameborder="0"
           allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
           loading="lazy">
         </iframe>
-
       </div>
     </div>
   </div>
