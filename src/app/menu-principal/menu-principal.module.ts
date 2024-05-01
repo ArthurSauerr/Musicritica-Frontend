@@ -10,7 +10,9 @@ import { MenuBuscarMusicaComponent } from './menu-buscar-musica/menu-buscar-musi
 import { DatePipe } from '@angular/common';
 import { CarouselModule } from 'ngx-owl-carousel-o';
 import { MatSliderModule } from '@angular/material/slider';
-import { MatIconModule } from '@angular/material/icon'; // Importe o MatIconModule
+import { MatIconModule } from '@angular/material/icon'; 
+import { ChartModule } from 'primeng/chart';
+
 
 @NgModule({
   declarations: [
@@ -29,7 +31,8 @@ import { MatIconModule } from '@angular/material/icon'; // Importe o MatIconModu
     DatePipe,
     CarouselModule,
     MatSliderModule,
-    MatIconModule
+    MatIconModule,
+    ChartModule
   ]
 })
 export class MenuPrincipalModule { }

@@ -4,7 +4,7 @@
       <img [src]="musica.album.images[1].url" alt="{{ musica.name }}"
         class="ml-2 mt-8 mb-6 w-60 h-60 overflow-hidden mr-4 flex-shrink-0 rounded-lg shadow-[0_50px_25px_-24px_rgb(0,0,0,0.5)]">
       <div>
-      
+
         <h1 class="text-6xl font-bold mb-4 musica-info">{{ musica.name }}</h1>
         <h2 class="text-2xl font-bold mb-6 musica-info">{{ musica.album.name }}</h2>
       </div>
@@ -79,15 +79,12 @@
       </div>
     </div>
   </div>
-  <div class="rating ml-16 flex">
-
-    <div class="mr-2 text-2xl font-bold mb-4 musica-info">4.0 (175)</div>
+  <div class="ml-16 flex">
+    <div class="mr-2 text-1xl font-bold mb-4 musica-info">Média geral - </div>
     <span *ngFor="let star of stars; let i = index" class="star" (click)="rate(i + 1)">
       <mat-icon>{{ i < rating ? 'star' : 'star_border' }}</mat-icon>
     </span>
   </div>
-
-  <div class="custom-input ml-16 mr-16"></div>
   <div class="flex mt-32">
     <div class="w-1/2 ml-16">
       <div class="text-2xl font-bold mb-4 musica-info">Deixe um comentário</div>
@@ -113,10 +110,13 @@
           loading="lazy">
         </iframe>
       </div>
+      <div class="ml-14 mr-20 mt-2 border custom-border">
+        <p-chart type="line" [data]="data" [options]="options"></p-chart>
+      </div>
     </div>
   </div>
 </div>
-<div class="mt-24 ml-16">
+<div class="ml-16">
   <div class="max-w-2xl">
     <div class="flex justify-between items-center mb-6">
       <h2 class="text-lg lg:text-2xl font-bold text-white dark:text-white">Comentários ({{totalDeComentarios}})</h2>
@@ -283,5 +283,53 @@
           </div>
         </div>
       </article>
+    </div>
+  </div>
+  <div class="custom-input mt-32 mr-16"></div>
+  <div class="py-24 flex items-center justify-center space-x-8">
+    <div class="relative">
+      <img src="https://www.cnnbrasil.com.br/wp-content/uploads/sites/12/2024/02/ariana-grande.png?w=740&h=415&crop=1" alt="baby with headphones"
+        class="w-36 h-36 rounded-full object-cover">
+      <span class="absolute h-10 w-10 rounded-full bg-red-500 border-4 border-gray-500 top-0 right-0"></span>
+    </div>
+    <div class="relative">
+      <img src="https://m.media-amazon.com/images/I/71Te1V90YDL._UF1000,1000_QL80_.jpg" alt="baby with headphones"
+        class="w-36 h-36 rounded-full object-cover">
+      <span class="absolute h-10 w-10 rounded-full bg-red-500 border-4 border-gray-500 top-0 right-0"></span>
+    </div>
+    <div class="relative">
+      <img src="https://br.web.img2.acsta.net/pictures/18/09/12/19/42/5521101.jpg" alt="baby with headphones"
+        class="w-36 h-36 rounded-full object-cover">
+      <span class="absolute h-10 w-10 rounded-full bg-red-500 border-4 border-gray-500 top-0 right-0"></span>
+    </div>
+    <div class="relative">
+      <img src="https://www.cnnbrasil.com.br/wp-content/uploads/sites/12/2024/02/ariana-grande.png?w=740&h=415&crop=1" alt="baby with headphones"
+        class="w-36 h-36 rounded-full object-cover">
+      <span class="absolute h-10 w-10 rounded-full bg-red-500 border-4 border-gray-500 top-0 right-0"></span>
+    </div>
+    <div class="relative">
+      <img src="https://m.media-amazon.com/images/I/71Te1V90YDL._UF1000,1000_QL80_.jpg" alt="baby with headphones"
+        class="w-36 h-36 rounded-full object-cover">
+      <span class="absolute h-10 w-10 rounded-full bg-red-500 border-4 border-gray-500 top-0 right-0"></span>
+    </div>
+    <div class="relative">
+      <img src="https://br.web.img2.acsta.net/pictures/18/09/12/19/42/5521101.jpg" alt="baby with headphones"
+        class="w-36 h-36 rounded-full object-cover">
+      <span class="absolute h-10 w-10 rounded-full bg-red-500 border-4 border-gray-500 top-0 right-0"></span>
+    </div>
+    <div class="relative">
+      <img src="https://www.cnnbrasil.com.br/wp-content/uploads/sites/12/2024/02/ariana-grande.png?w=740&h=415&crop=1" alt="baby with headphones"
+        class="w-36 h-36 rounded-full object-cover">
+      <span class="absolute h-10 w-10 rounded-full bg-red-500 border-4 border-gray-500 top-0 right-0"></span>
+    </div>
+    <div class="relative">
+      <img src="https://m.media-amazon.com/images/I/71Te1V90YDL._UF1000,1000_QL80_.jpg" alt="baby with headphones"
+        class="w-36 h-36 rounded-full object-cover">
+      <span class="absolute h-10 w-10 rounded-full bg-red-500 border-4 border-gray-500 top-0 right-0"></span>
+    </div>
+    <div class="relative">
+      <img src="https://br.web.img2.acsta.net/pictures/18/09/12/19/42/5521101.jpg" alt="baby with headphones"
+        class="w-36 h-36 rounded-full object-cover">
+      <span class="absolute h-10 w-10 rounded-full bg-red-500 border-4 border-gray-500 top-0 right-0"></span>
     </div>
   </div>

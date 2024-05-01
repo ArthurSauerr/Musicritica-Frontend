@@ -60,15 +60,70 @@ export class MusicaDetalhesComponent implements OnInit {
   mostrarDropdown: { [key: number]: boolean } = {};
   mostrarTextArea: { [key: number]: boolean } = {};
 
-  rating: number = 0;
-  stars: number[] = [1]; 
+  rating: number = 2;
+  stars: number[] = [5]; 
 
   rate(stars: number) {
     this.rating = stars;
   }
 
+  data: any;
+  options: any;
 
   ngOnInit(): void {
+
+    const documentStyle = getComputedStyle(document.documentElement);
+    const textColor = documentStyle.getPropertyValue('--text-color');
+    const textColorSecondary = documentStyle.getPropertyValue('--text-color-secondary');
+    const surfaceBorder = documentStyle.getPropertyValue('--surface-border');
+
+    this.data = {
+      labels: ['Nota 1', 'Nota 2', 'Nota 3', 'Nota 5', 'Nota 5'],
+      datasets: [
+          {
+              label: 'Avaliações',
+              fill: false,
+              borderColor: documentStyle.getPropertyValue('--green-500'),
+              yAxisID: 'y1',
+              tension: 0.3,
+              data: [28, 48, 40, 19, 86, 27, 90]
+              
+          }
+      ]
+  };
+  
+  this.options = {
+      stacked: false,
+      maintainAspectRatio: false,
+      aspectRatio: 0.8,
+      plugins: {
+          legend: {
+              labels: {
+                  color: textColor
+              }
+          }
+      },
+      scales: {
+          x: {
+              ticks: {
+                  color: textColorSecondary
+              },
+            
+            },
+          y1: {
+              type: 'linear',
+              display: true,
+              position: 'right',
+              ticks: {
+                  color: textColorSecondary
+              },
+             
+          }
+      }
+  }
+
+
+
     this.musica = history.state.musica;
     this.artista = this.musica.album.artists[0].name;
     console.log('música:', this.artista);
@@ -87,7 +142,9 @@ export class MusicaDetalhesComponent implements OnInit {
       console.log("Token não encontrado.");
     }
 
-  }
+  };
+
+  
 
   buscarRespostas(id: number): void {
     if (this.showRepliesId === id) {
