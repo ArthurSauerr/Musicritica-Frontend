@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Comentario } from '../model/Comentario';
 import { Observable } from 'rxjs';
@@ -24,5 +24,9 @@ export class ComentarioServiceService {
   }
   buscarQuantidadeComentarios(id: string): Observable<number> {
     return this.httpClient.get<number>(`${this.apiUrl}/comentarios/${id}`);
+  }
+  deletarComentario(usuarioId: number, comentarioId: number): Observable<string> {
+    const url = `${this.apiUrl}/${usuarioId}/${comentarioId}`;
+    return this.httpClient.delete<string>(url);
   }
 }

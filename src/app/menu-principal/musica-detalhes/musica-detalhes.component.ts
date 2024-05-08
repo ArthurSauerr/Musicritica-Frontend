@@ -1,5 +1,5 @@
 import { UsuarioService } from 'src/app/shared/service/usuario.service';
-import { Component, HostListener, OnInit } from '@angular/core';
+import { Component, HostListener, OnInit, numberAttribute } from '@angular/core';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { ComentarioServiceService } from 'src/app/shared/service/comentario-service.service';
 import { Item } from './../../shared/model/Item';
@@ -43,6 +43,7 @@ export class MusicaDetalhesComponent implements OnInit {
   novaPlaylist: Playlist = new Playlist();
   musicaParaEnviar: Musica = new Musica();
   usuarioParaEnviar: Usuario = new Usuario();
+  usuarioLogado: Usuario = new Usuario();
   novaMusicaSpotify: MusicaSpotify = new MusicaSpotify();
 
   idComentarioPai: number;
@@ -61,7 +62,7 @@ export class MusicaDetalhesComponent implements OnInit {
   mostrarTextArea: { [key: number]: boolean } = {};
 
   rating: number = 2;
-  stars: number[] = [5]; 
+  stars: number[] = [5];
 
   rate(stars: number) {
     this.rating = stars;
@@ -80,47 +81,47 @@ export class MusicaDetalhesComponent implements OnInit {
     this.data = {
       labels: ['Nota 1', 'Nota 2', 'Nota 3', 'Nota 5', 'Nota 5'],
       datasets: [
-          {
-              label: 'Avaliações',
-              fill: false,
-              borderColor: documentStyle.getPropertyValue('--green-500'),
-              yAxisID: 'y1',
-              tension: 0.3,
-              data: [28, 48, 40, 19, 86, 27, 90]
-              
-          }
+        {
+          label: 'Avaliações',
+          fill: false,
+          borderColor: documentStyle.getPropertyValue('--green-500'),
+          yAxisID: 'y1',
+          tension: 0.3,
+          data: [28, 48, 40, 19, 86, 27, 90]
+
+        }
       ]
-  };
-  
-  this.options = {
+    };
+
+    this.options = {
       stacked: false,
       maintainAspectRatio: false,
       aspectRatio: 0.8,
       plugins: {
-          legend: {
-              labels: {
-                  color: textColor
-              }
+        legend: {
+          labels: {
+            color: textColor
           }
+        }
       },
       scales: {
-          x: {
-              ticks: {
-                  color: textColorSecondary
-              },
-            
-            },
-          y1: {
-              type: 'linear',
-              display: true,
-              position: 'right',
-              ticks: {
-                  color: textColorSecondary
-              },
-             
-          }
+        x: {
+          ticks: {
+            color: textColorSecondary
+          },
+
+        },
+        y1: {
+          type: 'linear',
+          display: true,
+          position: 'right',
+          ticks: {
+            color: textColorSecondary
+          },
+
+        }
       }
-  }
+    }
 
 
 
@@ -130,7 +131,6 @@ export class MusicaDetalhesComponent implements OnInit {
     this.spotifyUrl = this.getSpotifyEmbedUrl(this.musica.id);
     this.buscarComentarios();
     this.buscarQuantidadeComentarios();
-
     const token = this.usuarioService.getToken();
 
     if (token) {
@@ -141,10 +141,20 @@ export class MusicaDetalhesComponent implements OnInit {
     } else {
       console.log("Token não encontrado.");
     }
-
+    this.buscarIdUsuarioLogado();
   };
 
-  
+  buscarIdUsuarioLogado() {
+    this.usuarioService.buscarIdPorEmail(this.emailParam).subscribe(
+      (data: number) => {
+        this.usuarioLogado.id = data;
+        console.log("id usuario logado: " + this.usuarioLogado.id)
+      },
+      (error) => {
+        console.error('Ocorreu um erro ao buscar o ID do usuário:', error);
+      }
+    );
+  }
 
   buscarRespostas(id: number): void {
     if (this.showRepliesId === id) {
@@ -263,6 +273,24 @@ export class MusicaDetalhesComponent implements OnInit {
     }
   }
 
+  deletarComentario(comentarioId: number): void {
+    this.usuarioService.buscarIdPorEmail(this.emailParam).subscribe(
+      (data: number) => {
+        this.comentarioService.deletarComentario(data, comentarioId).subscribe(
+          (response) => {
+            console.log('Comentário deletado com sucesso');
+          },
+          (error) => {
+            console.error('Erro ao deletar comentário:', error);
+          }
+        );
+      },
+      (error) => {
+        console.error('Ocorreu um erro ao buscar o ID do usuário:', error);
+      }
+    );
+  }
+
   getSpotifyEmbedUrl(idMusica: string | null): SafeResourceUrl {
     if (idMusica) {
       return this.sanitizer.bypassSecurityTrustResourceUrl(`https://open.spotify.com/embed/track/${idMusica}?utm_source=generator&theme=0`);
@@ -307,7 +335,7 @@ export class MusicaDetalhesComponent implements OnInit {
   }
 
   enviarMusicaParaPlaylist(): void {
-    
+
     const idSpotify: string = this.musica.id;
     const idMusicaSpotify: string = this.musica.id;
     const idPlaylist: number = this.idPlaylistSelecionada;
@@ -392,4 +420,6 @@ export class MusicaDetalhesComponent implements OnInit {
   toggleCreatePlaylistInput() {
     this.showCreatePlaylistInput = !this.showCreatePlaylistInput;
   }
+
+
 }
