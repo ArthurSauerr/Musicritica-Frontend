@@ -16,7 +16,7 @@ export class UsuarioRegistrarComponent {
   constructor(private usuarioService: UsuarioService, private router: Router) {}
 
   registrar() {
-    this.usuarioService.registrar({ nome: this.nome, email: this.email, senha: this.senha, dt_cadastro: this.dt_cadastro })
+    this.usuarioService.registrar({ nome: this.nome, email: this.email, senha: this.senha })
       .subscribe(
         (response) => {
           console.log(response.message);

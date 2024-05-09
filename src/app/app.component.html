@@ -22,33 +22,35 @@
       <button (click)="login()" class="nav-buttons" >Login</button>
     </div>
 
-  <div class="relative inline-block text-left">
-    <div *ngIf="usuario?.imagem_perfil" (click)="toggleDropdown('dropdownMenu')">
+    <div class="relative inline-block text-left">
+  <div class="profile-container">
+    <div *ngIf="usuario?.imagem_perfil" class="profile-image-container" (mouseenter)="showDropdownMenu()" (mouseleave)="hideDropdownMenu()">
       <img class="rounded-full cursor-pointer" width="30" height="30" [src]="'data:image/jpeg;base64,' + usuario.imagem_perfil" alt="Imagem de Perfil">
     </div>
 
-     <div id="dropdownMenu" class="hidden absolute left-1/2 transform -translate-x-1/2 z-10 origin-top mt-2 w-48 origin-top divide-y divide-gray-100 rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none" role="menu" aria-orientation="vertical" aria-labelledby="menu-button" tabindex="-1">
-      <div class="py-1" role="none">
+    <div id="dropdownMenu" class="hidden absolute z-10 origin-top mt-2 w-44 origin-top divide-y divide-gray-100 rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none dropdown-menu-animation " (mouseenter)="showDropdownMenu()" (mouseleave)="hideDropdownMenu()">
+      <!-- <div class="py-1" role="none">
         <a class="text-gray-700 block px-4 py-2 text-sm" role="menuitem">{{usuario.nome}}</a>
         <a class="text-gray-700 block px-4 py-2 text-sm" role="menuitem">{{usuario.email}}</a>
-      </div>
+      </div> -->
       <div class="py-1" role="none">
         <button (click)="verPerfilUsuario()" class="text-gray-700 block px-4 py-2 text-sm" role="menuitem">Ver Perfil</button>
         <a href="#" class="text-gray-700 block px-4 py-2 text-sm" role="menuitem">Editar Perfil</a>
       </div>
       <div class="py-1" role="none">
-        <a href="usuario/denuncia" class="text-gray-700 block px-4 py-2 text-sm" role="menuitem" >Denúncias</a>
+        <a href="usuario/denuncia" class="text-gray-700 block px-4 py-2 text-sm" role="menuitem">Denúncias</a>
       </div>
       <div class="py-1" role="none">
-        <button (click)="logout()" class="text-gray-700 block px-4 py-2 text-sm" role="menuitem" >Finalizar Sessão</button>
+        <button (click)="logout()" class="text-gray-700 block px-4 py-2 text-sm" role="menuitem">Finalizar Sessão</button>
       </div>
-    </div> 
+    </div>
   </div>
-  </div>
+</div>
+</div>
 </nav>
 
 <router-outlet></router-outlet>
-<!-- 
+<!--
 <footer class="mt-32 bg-white rounded-lg shadow dark:bg-gray-900 m-4 custom-bg">
     <div class="w-full max-w-screen-xl mx-auto p-4 md:py-8">
         <div class="sm:flex sm:items-center sm:justify-between">

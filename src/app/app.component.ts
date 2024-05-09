@@ -77,7 +77,7 @@ export class AppComponent {
             console.log('Usuario buscado:', usuario);
           },
           (error) => {
-            console.error('Erro ao buscar usuário:', error);
+            console.error('Usuario não está logado no sistema!');
           }
         );
       });
@@ -101,11 +101,20 @@ export class AppComponent {
     this.router.navigate(['usuario/login']);
   }
 
-  toggleDropdown(elementId: string) {
-    const dropdownMenu = document.getElementById(elementId);
-    if (dropdownMenu) {
-      dropdownMenu.classList.toggle('hidden');
-    }
+showDropdownMenu() {
+  const dropdownMenu = document.getElementById('dropdownMenu');
+  if (dropdownMenu) {
+    dropdownMenu.classList.remove('hidden');
   }
+}
+
+hideDropdownMenu() {
+  setTimeout(() => {
+    const dropdownMenu = document.getElementById('dropdownMenu');
+    if (dropdownMenu && !dropdownMenu.matches(':hover')) {
+      dropdownMenu.classList.add('hidden');
+    }
+  }, 300); // Ajuste o valor conforme necessário (em milissegundos)
+}
 
 }
