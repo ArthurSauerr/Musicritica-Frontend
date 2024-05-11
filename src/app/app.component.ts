@@ -39,6 +39,7 @@ export class AppComponent {
 
   ngOnInit(): void{
     this.verificarLogin();
+    this.isUsuarioLogado();
   }
 
   musicaProcurada: string = '';
@@ -95,6 +96,7 @@ export class AppComponent {
   logout(){
     this.usuarioService.deleteToken();
     this.router.navigate(['usuario/login']);
+    console.log("Usuário deslogado!")
   }
 
   login(){
@@ -114,7 +116,7 @@ hideDropdownMenu() {
     if (dropdownMenu && !dropdownMenu.matches(':hover')) {
       dropdownMenu.classList.add('hidden');
     }
-  }, 300); // Ajuste o valor conforme necessário (em milissegundos)
+  }, 500); // Ajuste o valor conforme necessário (em milissegundos)
 }
 
 }
