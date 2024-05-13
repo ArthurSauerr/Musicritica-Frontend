@@ -7,7 +7,6 @@
     <div class="flex items-center ml-4 ">
       <a href="/descobrir" class="mr-4 nav-buttons">Descobrir</a>
       <a href="/ranking" class="mr-4 nav-buttons">Ranking</a>
-      <a href="usuario/denuncia" class="mr-4 nav-buttons">Denúncias</a>
     </div>
     <div class="relative ml-auto mr-32 mb-1">
       <span class="absolute right-0 top-0 mt-2 ml-2">
@@ -19,7 +18,7 @@
     </div>
 
     <div *ngIf="!isUsuarioLogado()">
-      <button (click)="login()" class="nav-buttons" >Login</button>
+      <button (click)="login()" class="nav-buttons">Login</button>
     </div>
 
     <div class="relative inline-block text-left">
@@ -34,14 +33,14 @@
         <a class="text-gray-700 block px-4 py-2 text-sm" role="menuitem">{{usuario.email}}</a>
       </div> -->
       <div class="py-1" role="none">
-        <button (click)="verPerfilUsuario()" class="text-gray-700 block px-4 py-2 text-sm" role="menuitem">Ver Perfil</button>
-        <a href="#" class="text-gray-700 block px-4 py-2 text-sm" role="menuitem">Editar Perfil</a>
+        <a (click)="verPerfilUsuario()" class="text-gray-700 block px-4 py-2 text-sm hover:bg-gray-100 cursor-pointer" role="menuitem">Ver Perfil</a>
+        <a href="#" class="text-gray-700 block px-4 py-2 text-sm hover:bg-gray-100" role="menuitem">Editar Perfil</a>
       </div>
       <div class="py-1" role="none">
-        <a href="usuario/denuncia" class="text-gray-700 block px-4 py-2 text-sm" role="menuitem">Denúncias</a>
+        <a href="usuario/denuncia" class="text-gray-700 block px-4 py-2 text-sm hover:bg-gray-100" role="menuitem">Denúncias</a>
       </div>
       <div class="py-1" role="none">
-        <button (click)="logout()" class="text-gray-700 block px-4 py-2 text-sm" role="menuitem">Finalizar Sessão</button>
+        <a (click)="logout()" class="text-gray-700 block px-4 py-2 text-sm hover:bg-gray-100 cursor-pointer" role="menuitem">Finalizar Sessão</a>
       </div>
     </div>
   </div>
