@@ -29,4 +29,8 @@ export class ComentarioServiceService {
     const url = `${this.apiUrl}/${usuarioId}/${comentarioId}`;
     return this.httpClient.delete<string>(url);
   }
+  atualizarComentario(usuarioId: number, comentarioId: number ,novoComentario: string): Observable<string> {
+    const url = `${this.apiUrl}/${usuarioId}/${comentarioId}`;
+    return this.httpClient.put<string>(url, novoComentario);
+  }
 }

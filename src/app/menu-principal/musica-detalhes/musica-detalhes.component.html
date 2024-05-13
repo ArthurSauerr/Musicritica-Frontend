@@ -88,7 +88,6 @@
   <div class="flex mt-32">
     <div class="w-1/2 ml-16">
       <div class="text-2xl font-bold mb-4 musica-info">Deixe um comentário</div>
-
       <div class="flex-grow mb-6">
         <div class="py-2 px-4 mb-4 rounded-lg rounded-t-lg custom-checkbox">
           <label for="comment" class="sr-only">Seu comentário</label>
@@ -115,58 +114,7 @@
       </div>
     </div>
   </div>
-  <footer>
-    <div class="custom-input mt-32 mr-16 ml-16"></div>
-    <div class="py-24 flex items-center justify-center space-x-8">
-      <div class="relative">
-        <img src="https://www.cnnbrasil.com.br/wp-content/uploads/sites/12/2024/02/ariana-grande.png?w=740&h=415&crop=1"
-          alt="baby with headphones" class="w-36 h-36 rounded-full object-cover">
-        <span class="absolute h-10 w-10 rounded-full bg-red-500 border-4 border-gray-500 top-0 right-0"></span>
-      </div>
-      <div class="relative">
-        <img src="https://m.media-amazon.com/images/I/71Te1V90YDL._UF1000,1000_QL80_.jpg" alt="baby with headphones"
-          class="w-36 h-36 rounded-full object-cover">
-        <span class="absolute h-10 w-10 rounded-full bg-red-500 border-4 border-gray-500 top-0 right-0"></span>
-      </div>
-      <div class="relative">
-        <img src="https://br.web.img2.acsta.net/pictures/18/09/12/19/42/5521101.jpg" alt="baby with headphones"
-          class="w-36 h-36 rounded-full object-cover">
-        <span class="absolute h-10 w-10 rounded-full bg-red-500 border-4 border-gray-500 top-0 right-0"></span>
-      </div>
-      <div class="relative">
-        <img src="https://www.cnnbrasil.com.br/wp-content/uploads/sites/12/2024/02/ariana-grande.png?w=740&h=415&crop=1"
-          alt="baby with headphones" class="w-36 h-36 rounded-full object-cover">
-        <span class="absolute h-10 w-10 rounded-full bg-red-500 border-4 border-gray-500 top-0 right-0"></span>
-      </div>
-      <div class="relative">
-        <img src="https://m.media-amazon.com/images/I/71Te1V90YDL._UF1000,1000_QL80_.jpg" alt="baby with headphones"
-          class="w-36 h-36 rounded-full object-cover">
-        <span class="absolute h-10 w-10 rounded-full bg-red-500 border-4 border-gray-500 top-0 right-0"></span>
-      </div>
-      <div class="relative">
-        <img src="https://br.web.img2.acsta.net/pictures/18/09/12/19/42/5521101.jpg" alt="baby with headphones"
-          class="w-36 h-36 rounded-full object-cover">
-        <span class="absolute h-10 w-10 rounded-full bg-red-500 border-4 border-gray-500 top-0 right-0"></span>
-      </div>
-      <div class="relative">
-        <img src="https://www.cnnbrasil.com.br/wp-content/uploads/sites/12/2024/02/ariana-grande.png?w=740&h=415&crop=1"
-          alt="baby with headphones" class="w-36 h-36 rounded-full object-cover">
-        <span class="absolute h-10 w-10 rounded-full bg-red-500 border-4 border-gray-500 top-0 right-0"></span>
-      </div>
-      <div class="relative">
-        <img src="https://m.media-amazon.com/images/I/71Te1V90YDL._UF1000,1000_QL80_.jpg" alt="baby with headphones"
-          class="w-36 h-36 rounded-full object-cover">
-        <span class="absolute h-10 w-10 rounded-full bg-red-500 border-4 border-gray-500 top-0 right-0"></span>
-      </div>
-      <div class="relative">
-        <img src="https://br.web.img2.acsta.net/pictures/18/09/12/19/42/5521101.jpg" alt="baby with headphones"
-          class="w-36 h-36 rounded-full object-cover">
-        <span class="absolute h-10 w-10 rounded-full bg-red-500 border-4 border-gray-500 top-0 right-0"></span>
-      </div>
-    </div>
-  </footer>
 </div>
-
 <div class="ml-16">
   <div class="max-w-2xl">
     <div class="flex justify-between items-center mb-6">
@@ -201,7 +149,7 @@
               <ul class="py-1 text-sm text-gray-700 dark:text-gray-200"
                 aria-labelledby="dropdownMenuIconHorizontalButton">
                 <li *ngIf="usuarioLogado.id == comentario.usuario.id">
-                  <a 
+                  <a (click)="openModal(comentario)"
                     class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Editar</a>
                 </li>
                 <li *ngIf="usuarioLogado.id == comentario.usuario.id">
@@ -209,10 +157,29 @@
                     class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Remover</a>
                 </li>
                 <li>
-                  <a 
-                    class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Reportar</a>
+                  <a class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Reportar</a>
                 </li>
               </ul>
+            </div>
+          </div>
+          <div *ngIf="showModalEditarComentario"
+            class="fixed inset-0 flex items-center justify-center bg-opacity-50 backdrop-filter backdrop-blur-sm">
+            <div id="modalComentario"
+              class="fundo-comentarios-modal p-8 rounded-xl shadow-lg w-96 overflow-y-auto max-h-96">
+              <div class="flex-grow mb-6">
+                <div class="py-2 px-4 mb-4 rounded-lg rounded-t-lg custom-checkbox">
+                  <label for="comment" class="sr-only">Edite seu comentário</label>
+                  <textarea [(ngModel)]="comentarioSelecionado"  id="comment" rows="6"
+                    class="px-0 w-full bg-transparent text-sm text-white border-0 focus:ring-0 focus:outline-none dark:text-white dark:placeholder-gray-400"
+                    placeholder="Edite seu comentário..." required></textarea>
+                </div>
+                <button type="button" (click)="atualizarComentario(idComentarioSelecionado); closeModal()"
+                  class="custom-checkbox inline-flex items-center py-2.5 px-4 text-xs font-medium text-center text-white bg-primary-700 rounded-lg focus:ring-4 focus:ring-primary-200 dark:focus:ring-primary-900 hover:bg-primary-800">
+                  Salvar
+                </button>
+              </div>
+              <div class="flex justify-center">
+              </div>
             </div>
           </div>
         </footer>
@@ -281,16 +248,16 @@
                     class="mt-4 w-36 bg-white rounded divide-y divide-gray-100 shadow dark:bg-gray-700 dark:divide-gray-600">
                     <ul class="py-1 text-sm text-gray-700 dark:text-gray-200"
                       aria-labelledby="dropdownMenuIconHorizontalButton">
-                      <li>
-                        <a href="#"
+                      <li *ngIf="usuarioLogado.id == comentario.usuario.id">
+                        <a
                           class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Editar</a>
                       </li>
-                      <li>
-                        <a href="#"
+                      <li *ngIf="usuarioLogado.id == comentario.usuario.id">
+                        <a (click)="deletarComentario(comentario.id)"
                           class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Remover</a>
                       </li>
                       <li>
-                        <a href="#"
+                        <a
                           class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Reportar</a>
                       </li>
                     </ul>
@@ -336,4 +303,53 @@
       </article>
     </div>
   </div>
-  
+  <!-- <footer class="mt-32">
+    <div class="custom-input  mr-16"></div>
+    <div class="py-24 flex items-center justify-center space-x-8">
+      <div class="relative">
+        <img src="https://www.cnnbrasil.com.br/wp-content/uploads/sites/12/2024/02/ariana-grande.png?w=740&h=415&crop=1"
+          alt="baby with headphones" class="w-36 h-36 rounded-full object-cover">
+        <span class="absolute h-10 w-10 rounded-full bg-red-500 border-4 border-gray-500 top-0 right-0"></span>
+      </div>
+      <div class="relative">
+        <img src="https://m.media-amazon.com/images/I/71Te1V90YDL._UF1000,1000_QL80_.jpg" alt="baby with headphones"
+          class="w-36 h-36 rounded-full object-cover">
+        <span class="absolute h-10 w-10 rounded-full bg-red-500 border-4 border-gray-500 top-0 right-0"></span>
+      </div>
+      <div class="relative">
+        <img src="https://br.web.img2.acsta.net/pictures/18/09/12/19/42/5521101.jpg" alt="baby with headphones"
+          class="w-36 h-36 rounded-full object-cover">
+        <span class="absolute h-10 w-10 rounded-full bg-red-500 border-4 border-gray-500 top-0 right-0"></span>
+      </div>
+      <div class="relative">
+        <img src="https://www.cnnbrasil.com.br/wp-content/uploads/sites/12/2024/02/ariana-grande.png?w=740&h=415&crop=1"
+          alt="baby with headphones" class="w-36 h-36 rounded-full object-cover">
+        <span class="absolute h-10 w-10 rounded-full bg-red-500 border-4 border-gray-500 top-0 right-0"></span>
+      </div>
+      <div class="relative">
+        <img src="https://m.media-amazon.com/images/I/71Te1V90YDL._UF1000,1000_QL80_.jpg" alt="baby with headphones"
+          class="w-36 h-36 rounded-full object-cover">
+        <span class="absolute h-10 w-10 rounded-full bg-red-500 border-4 border-gray-500 top-0 right-0"></span>
+      </div>
+      <div class="relative">
+        <img src="https://br.web.img2.acsta.net/pictures/18/09/12/19/42/5521101.jpg" alt="baby with headphones"
+          class="w-36 h-36 rounded-full object-cover">
+        <span class="absolute h-10 w-10 rounded-full bg-red-500 border-4 border-gray-500 top-0 right-0"></span>
+      </div>
+      <div class="relative">
+        <img src="https://www.cnnbrasil.com.br/wp-content/uploads/sites/12/2024/02/ariana-grande.png?w=740&h=415&crop=1"
+          alt="baby with headphones" class="w-36 h-36 rounded-full object-cover">
+        <span class="absolute h-10 w-10 rounded-full bg-red-500 border-4 border-gray-500 top-0 right-0"></span>
+      </div>
+      <div class="relative">
+        <img src="https://m.media-amazon.com/images/I/71Te1V90YDL._UF1000,1000_QL80_.jpg" alt="baby with headphones"
+          class="w-36 h-36 rounded-full object-cover">
+        <span class="absolute h-10 w-10 rounded-full bg-red-500 border-4 border-gray-500 top-0 right-0"></span>
+      </div>
+      <div class="relative">
+        <img src="https://br.web.img2.acsta.net/pictures/18/09/12/19/42/5521101.jpg" alt="baby with headphones"
+          class="w-36 h-36 rounded-full object-cover">
+        <span class="absolute h-10 w-10 rounded-full bg-red-500 border-4 border-gray-500 top-0 right-0"></span>
+      </div>
+    </div>
+  </footer> -->

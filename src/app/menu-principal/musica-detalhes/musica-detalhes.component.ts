@@ -1,5 +1,5 @@
 import { UsuarioService } from 'src/app/shared/service/usuario.service';
-import { Component, HostListener, OnInit, numberAttribute } from '@angular/core';
+import { Component, HostListener, OnInit, numberAttribute, ElementRef, Input } from '@angular/core';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { ComentarioServiceService } from 'src/app/shared/service/comentario-service.service';
 import { Item } from './../../shared/model/Item';
@@ -22,19 +22,22 @@ export class MusicaDetalhesComponent implements OnInit {
     private sanitizer: DomSanitizer,
     private comentarioService: ComentarioServiceService,
     private usuarioService: UsuarioService,
-    private playlistService: PlaylistService
+    private playlistService: PlaylistService,
+    private elementRef: ElementRef
   ) { }
 
   artista: string;
   comentario: string = '';
   resposta: string = '';
-  comentario1: string = '';
   emailParam: string | undefined;
 
   mostrarTextarea: boolean = false;
   showRepliesId: number | null = null;
   showCreatePlaylistInput = false;
   showModal: boolean = false;
+  showModalEditarComentario: boolean = false;
+  comentarioSelecionado: string;
+  idComentarioSelecionado: number;
   playlistSelecionada: boolean = false;
 
   novoComentario: Comentario = new Comentario();
@@ -63,6 +66,7 @@ export class MusicaDetalhesComponent implements OnInit {
 
   rating: number = 2;
   stars: number[] = [5];
+
 
   rate(stars: number) {
     this.rating = stars;
@@ -233,6 +237,31 @@ export class MusicaDetalhesComponent implements OnInit {
     this.buscarQuantidadeComentarios();
   }
 
+  atualizarComentario(comentarioId: number): void {
+    //if (this.comentario.trim() !== '') {
+    console.log("comentario: " + this.comentario);
+    this.usuarioService.buscarIdPorEmail(this.emailParam).subscribe(
+      (usuarioId: number) => {
+        this.comentarioSelecionado
+        this.comentarioService.atualizarComentario(usuarioId, comentarioId, this.comentarioSelecionado).subscribe(
+          (comentarioSalvo) => {
+            console.log('Comentário enviado com sucesso: ', comentarioSalvo);
+            this.comentario = '';
+          }, error => {
+            this.buscarComentarios();
+            console.error('Erro ao enviar o comentário:', error);
+          });
+      },
+      (error) => {
+        console.error('Ocorreu um erro ao buscar o ID do usuário:', error);
+      }
+    );
+    // } else {
+    //   console.error('Nenhum comentário digitado.');
+    // }
+    this.buscarQuantidadeComentarios();
+  }
+
   enviarResposta(): void {
     if (this.resposta.trim() !== '') {
       console.log("comentario: " + this.comentario);
@@ -275,12 +304,13 @@ export class MusicaDetalhesComponent implements OnInit {
 
   deletarComentario(comentarioId: number): void {
     this.usuarioService.buscarIdPorEmail(this.emailParam).subscribe(
-      (data: number) => {
-        this.comentarioService.deletarComentario(data, comentarioId).subscribe(
+      (usuarioId: number) => {
+        this.comentarioService.deletarComentario(usuarioId, comentarioId).subscribe(
           (response) => {
             console.log('Comentário deletado com sucesso');
           },
           (error) => {
+            this.buscarComentarios();
             console.error('Erro ao deletar comentário:', error);
           }
         );
@@ -335,7 +365,6 @@ export class MusicaDetalhesComponent implements OnInit {
   }
 
   enviarMusicaParaPlaylist(): void {
-
     const idSpotify: string = this.musica.id;
     const idMusicaSpotify: string = this.musica.id;
     const idPlaylist: number = this.idPlaylistSelecionada;
@@ -421,5 +450,14 @@ export class MusicaDetalhesComponent implements OnInit {
     this.showCreatePlaylistInput = !this.showCreatePlaylistInput;
   }
 
+  openModal(comentarioTexto: Comentario) {
+    this.comentarioSelecionado = comentarioTexto.comentario;
+    this.idComentarioSelecionado = comentarioTexto.id;
+    this.showModalEditarComentario = true;
+    this.fecharTodosDropdowns();
+  }
 
+  closeModal() {
+    this.showModalEditarComentario = false;
+  }
 }
