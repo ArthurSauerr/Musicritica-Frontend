@@ -6,6 +6,7 @@ import { LastFmMusica } from '../model/LastFmMusica';
 import { Item } from '../model/Item';
 import { TrackData } from '../model/TrackData';
 import { AlbumBuscado } from '../model/AlbumBuscado';
+import { ItemBuscado } from '../model/ItemBuscado';
 
 @Injectable({
   providedIn: 'root'
@@ -34,7 +35,7 @@ export class MenuPrincipalService {
   getTopChartsDoBanco(): Observable<Item[]> {
     return this.httpClient.get<Item[]>(`${this.apiUrl}/topCharts/db`);
   }
-  getItemsPlaylistRecomendacao() {
-    
+  getItemsPlaylistRecomendacao(genero: string): Observable<ItemBuscado[]> {
+    return this.httpClient.get<ItemBuscado[]>(`${this.apiUrl}/recomendacoes/${genero}`);
   }
 }

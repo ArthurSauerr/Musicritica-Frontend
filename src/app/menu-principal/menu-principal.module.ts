@@ -12,6 +12,7 @@ import { CarouselModule } from 'ngx-owl-carousel-o';
 import { MatSliderModule } from '@angular/material/slider';
 import { MatIconModule } from '@angular/material/icon'; 
 import { ChartModule } from 'primeng/chart';
+import { RecomendacoesComponent } from './recomendacoes/recomendacoes.component';
 
 
 @NgModule({
@@ -21,8 +22,7 @@ import { ChartModule } from 'primeng/chart';
     MusicaDescobrirComponent,
     MusicaRankingComponent,
     MenuBuscarMusicaComponent,
-
-
+    RecomendacoesComponent
   ],
   imports: [
     CommonModule,

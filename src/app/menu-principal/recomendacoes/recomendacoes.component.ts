@@ -1,23 +1,19 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { Item } from 'src/app/shared/model/Item';
 import { MenuPrincipalService } from 'src/app/shared/service/menu-principal.service';
 import { OwlOptions } from 'ngx-owl-carousel-o';
+import { ItemBuscado } from 'src/app/shared/model/ItemBuscado';
 
 @Component({
   selector: 'app-recomendacoes',
-  standalone: true,
-  imports: [],
   templateUrl: './recomendacoes.component.html',
   styleUrl: './recomendacoes.component.scss'
 })
 export class RecomendacoesComponent implements OnInit {
   constructor (private router: Router, private spotifyService: MenuPrincipalService) {}
 
-  topCharts: Item[] = [];
-  topChartsYoutube: Item[] = [];
-  cachedImages: { [url: string]: HTMLImageElement } = {};
-
+  itensRecomendados: ItemBuscado[] = [];
+  genero: string = 'mpb';
 
   customOptions: OwlOptions = {
     loop: true,
@@ -56,19 +52,15 @@ export class RecomendacoesComponent implements OnInit {
   };
 
   ngOnInit(): void {
-    
-   
+    this.getItemsPlaylistRecomendacao(this.genero);
   }
 
-  
 
-  getTopChartsYoutube(): void {
-    this.spotifyService.getTopChartsYoutube().subscribe(
-      (data: any[]) => {
-        console.log(data);
-        this.topChartsYoutube = data.flatMap(response => response.tracks.items);
-        console.log(this.topChartsYoutube);
-        sessionStorage.setItem('topChartsYoutube', JSON.stringify(this.topChartsYoutube));
+getItemsPlaylistRecomendacao(genero: string) {
+   this.spotifyService.getItemsPlaylistRecomendacao(genero).subscribe(
+      (data) => {
+        console.log(data)
+        this.itensRecomendados = data;
       },
       (error) => {
         console.error('Ocorreu um erro ao buscar as músicas:', error);
@@ -76,7 +68,8 @@ export class RecomendacoesComponent implements OnInit {
     );
   }
 
-  avancar(musica: Item): void {
-    this.router.navigate(['/detalhes'], { state: { musica: musica } });
-  }
+
+  // avancar(musica: Item): void {
+  //   this.router.navigate(['/detalhes'], { state: { musica: musica } });
+  // }
 }

@@ -68,7 +68,7 @@ export class UsuarioPerfilComponent implements OnInit{
       (data: Playlist[]) => {
         this.playlistsDoUsuario = data;
         this.playlistsDoUsuario.forEach(playlist => {
-          this.buscarTodasMusicasDaPlaylist(playlist.id); 
+          this.buscarTodasMusicasDaPlaylist(playlist.id);
         });
         console.log(data);
       },
@@ -82,8 +82,8 @@ export class UsuarioPerfilComponent implements OnInit{
     this.playListService.buscarTodasMusicasDaPlaylist(id).subscribe(
       (data: ListaTracksSpotify) => {
         if (data.tracks && data.tracks.length > 0) {
-          const primeiraMusica = data.tracks[0]; 
-          const imageUrl = primeiraMusica.album.images.length > 0 ? primeiraMusica.album.images[0].url : ''; 
+          const primeiraMusica = data.tracks[0];
+          const imageUrl = primeiraMusica.album.images.length > 0 ? primeiraMusica.album.images[0].url : '';
           this.primeirasMusicasDasPlaylists[id] = imageUrl;
         }
         this.musicasDaPlaylist = data;
