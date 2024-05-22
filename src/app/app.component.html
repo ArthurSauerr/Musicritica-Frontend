@@ -24,7 +24,7 @@
     <div class="relative inline-block text-left">
   <div class="profile-container">
     <div *ngIf="usuario?.imagem_perfil" class="profile-image-container" (mouseenter)="showDropdownMenu()" (mouseleave)="hideDropdownMenu()">
-      <img class="rounded-full cursor-pointer" width="30" height="30" [src]="'data:image/jpeg;base64,' + usuario.imagem_perfil" alt="Imagem de Perfil">
+      <img class="rounded-full object-cover w-7 h-7 cursor-pointer" width="30" height="30" [src]="'data:image/jpeg;base64,' + usuario.imagem_perfil" alt="Imagem de Perfil">
     </div>
 
     <div id="dropdownMenu" class="hidden absolute z-10 origin-top mt-2 w-44 origin-top divide-y divide-gray-100 rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none dropdown-menu-animation " (mouseenter)="showDropdownMenu()" (mouseleave)="hideDropdownMenu()">

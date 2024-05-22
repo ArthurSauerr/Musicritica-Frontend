@@ -1,17 +1,21 @@
-<div *ngIf="usuario" class="mt-40 flex justify-center items-center h-screen div-custom">
-  <div class="flex flex-col w-full max-w-screen-lg">
-    <div class="text-center">
-      <div *ngIf="usuario?.imagem_perfil" class="flex justify-center drop-shadow-md py-2">
-        <img width="200" height="200" [src]="'data:image/jpeg;base64,' + usuario.imagem_perfil" alt="Imagem de Perfil">
-      </div>
-      <p class="nomeUsuario drop-shadow-md">{{ usuario.nome }}</p>
-      <p class="text-1xl">Cadastrado desde: {{ usuario.dt_cadastro }}</p>
-      <div class="mt-6 mb-6 flex flex-col items-center">
-        <div class="flex space-x-4">
-          <button class="botao-perfil"
-            (click)="mostrarConteudo('playlists'); buscarPlaylistsPorIdUsuario()">Playlists</button>
-          <button class="botao-perfil" (click)="mostrarConteudo('avaliacoes')">Avaliações</button>
-          <button class="botao-perfil" (click)="mostrarConteudo('descobertas')">Descobertas</button>
+<div class="relative">
+  <div *ngIf="usuario?.imagem_background" class="background-image">
+    <img [src]="'data:image/jpeg;base64,' + usuario.imagem_background" alt="Imagem de Fundo">
+  </div>
+  <div *ngIf="usuario" class="flex justify-center items-center h-screen div-custom relative">
+    <div class="flex flex-col w-full max-w-screen-lg">
+      <div class="text-center">
+        <div *ngIf="usuario?.imagem_perfil" class="flex justify-center drop-shadow-md py-2 relative">
+          <img width="200" height="200" [src]="'data:image/jpeg;base64,' + usuario.imagem_perfil" alt="Imagem de Perfil" class="rounded-full object-cover w-48 h-48 z-10">
+        </div>
+        <p class="nomeUsuario drop-shadow-md">{{ usuario.nome }}</p>
+        <p class="text-1xl">Cadastrado desde: {{ usuario.dt_cadastro }}</p>
+        <div class="mt-6 mb-6 flex flex-col items-center">
+          <div class="flex space-x-4">
+            <button class="botao-perfil" (click)="mostrarConteudo('playlists'); buscarPlaylistsPorIdUsuario()">Playlists</button>
+            <button class="botao-perfil" (click)="mostrarConteudo('avaliacoes')">Avaliações</button>
+            <button class="botao-perfil" (click)="mostrarConteudo('descobertas')">Descobertas</button>
+          </div>
         </div>
       </div>
     </div>
@@ -20,7 +24,7 @@
 <div class="bg-transparent w-full max-w-screen-lg mx-auto text-center custom-input">
   <div *ngIf="conteudoSelecionado === 'playlists'" class="text-white mt-6 mb-6 overflow-hidden">
     <div *ngFor="let playlist of playlistsDoUsuario" class="mt-4 flex items-center mb-2">
-     
+
       <div class="w-full bg-gray-700 cursor-pointer p-4 rounded-lg flex hover:bg-gray-800 transition duration-300 ease-in-out"
         (click)="buscarTodasMusicasDaPlaylist(playlist.id)">
         <div class="w-20 ">
@@ -60,7 +64,7 @@
       </div>
     </div>
     <div>
-    
+
     </div>
     <div class="mt-32">
       <div class="custom-music mb-6 relative" *ngFor="let track of musicasDaPlaylist.tracks">

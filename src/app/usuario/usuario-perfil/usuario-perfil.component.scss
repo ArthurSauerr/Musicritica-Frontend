@@ -1,7 +1,34 @@
-.div-custom{
+// .relative {
+//   position: relative;
+// }
+
+.background-image {
+  position: relative;
+  top: 0; /* Ajuste conforme necessário */
+  left: 0; /* Ajuste conforme necessário */
+  width: 100%;
+  height: auto;
+  z-index: 0; /* Certifique-se de que está atrás de outros elementos */
+}
+
+.background-image img {
+  width: 100%;
+  height: 35vh; /* Ajuste a altura conforme necessário */
+  object-fit: cover; /* Mantém a proporção da imagem e cobre toda a área */
+  object-position: center; /* Centraliza a imagem */
+}
+
+.div-custom {
   color: #64DEA1;
   font-family: Inter;
   height: fit-content;
+  margin-top: -7vh;
+  position: relative; /* Certifique-se de que está acima da imagem de fundo */
+  z-index: 1; /* Certifique-se de que está acima da imagem de fundo */
+}
+
+.div-custom img{
+  filter: drop-shadow(0px 0px 15px #0d0d0d);
 }
 
 .nomeUsuario {
@@ -12,13 +39,16 @@
   font-size: larger;
   font-weight: bold;
 }
+
 .custom-input {
   border-top: 2px solid #64DEA1;
   margin-bottom: 4px;
 }
+
 .custom-music {
   border-bottom: 2px solid #64DEA1;
 }
+
 .custom-playlist {
   border: 2px solid #64DEA1;
 }
@@ -27,6 +57,7 @@
   position: absolute;
   z-index: 999;
 }
+
 input:focus {
   outline: none;
 }
@@ -38,4 +69,3 @@ input:focus {
   background-clip: text;
   color: transparent;
 }
-

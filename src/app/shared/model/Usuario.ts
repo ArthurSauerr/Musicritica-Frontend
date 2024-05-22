@@ -6,7 +6,7 @@ export class Usuario{
   email: String;
   senha: String;
   imagem_perfil: File;
-  imagem_background: String;
+  imagem_background: File;
   dt_cadastro: String;
   role: CargoUsuario;
 }
