@@ -34,4 +34,7 @@ export class MenuPrincipalService {
   getTopChartsDoBanco(): Observable<Item[]> {
     return this.httpClient.get<Item[]>(`${this.apiUrl}/topCharts/db`);
   }
+  getItemsPlaylistRecomendacao() {
+    
+  }
 }
