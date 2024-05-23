@@ -39,7 +39,7 @@
 }
 
 .custom-bg{
-  background-color: rgba(13, 13, 13, 0.5); /* Adapte a cor e a opacidade conforme necessário */
+  background-color: rgba(13, 13, 13, 0.5);
   backdrop-filter: blur(10px);
 }
 .navbar2 {
@@ -48,43 +48,11 @@
   top: 0;
 }
 
-#dropdownMenu.hidden {
-  display: none;
-}
-
-@keyframes slideDown {
-  from {
-    opacity: 0;
-    transform: translateY(-10px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-
-// .dropdown-menu {
-//   transition: opacity 0.3s ease, transform 0.3s ease;
-// }
-
-// .dropdown-menu.hidden {
-//   opacity: 0;
-//   transform: translateY(-10px);
-// }
-
-// .dropdown-menu-animation {
-//   animation: slideDown 0.3s ease;
-// }
-
 .dropdown-background{
   background-color: #0D0D0D;
-  border: none;
   border: 2px solid #64DEA1;
 }
 
 .dropdown-text{
   color: #64DEA1;
 }
-
-

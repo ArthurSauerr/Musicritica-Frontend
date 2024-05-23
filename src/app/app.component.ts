@@ -87,7 +87,6 @@ export class AppComponent {
 
   verPerfilUsuario(){
     if (this.idUsuario !== undefined && this.idUsuario !== null) {
-      // Navegar para a URL com o ID do usuário logado
       this.router.navigate(['usuario/perfil', this.idUsuario]);
     } else {
       console.error('ID do usuário não está definido.');
@@ -103,22 +102,6 @@ export class AppComponent {
   login(){
     this.router.navigate(['usuario/login']);
   }
-
-showDropdownMenu() {
-  const dropdownMenu = document.getElementById('dropdownMenu');
-  if (dropdownMenu) {
-    dropdownMenu.classList.remove('hidden');
-  }
-}
-
-hideDropdownMenu() {
-  setTimeout(() => {
-    const dropdownMenu = document.getElementById('dropdownMenu');
-    if (dropdownMenu && !dropdownMenu.matches(':hover')) {
-      dropdownMenu.classList.add('hidden');
-    }
-  }, 500);
-}
 
 toggleDropdown(state: boolean) {
   setTimeout(() => {
