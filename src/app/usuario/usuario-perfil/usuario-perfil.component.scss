@@ -13,7 +13,7 @@
 
 .background-image img {
   width: 100%;
-  height: 35vh; /* Ajuste a altura conforme necessário */
+  height: 45vh; /* Ajuste a altura conforme necessário */
   object-fit: cover; /* Mantém a proporção da imagem e cobre toda a área */
   object-position: center; /* Centraliza a imagem */
 }
@@ -22,7 +22,7 @@
   color: #64DEA1;
   font-family: Inter;
   height: fit-content;
-  margin-top: -7vh;
+  margin-top: -15vh;
   position: relative; /* Certifique-se de que está acima da imagem de fundo */
   z-index: 1; /* Certifique-se de que está acima da imagem de fundo */
 }

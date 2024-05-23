@@ -63,17 +63,25 @@
   }
 }
 
-.dropdown-menu {
-  transition: opacity 0.3s ease, transform 0.3s ease;
+// .dropdown-menu {
+//   transition: opacity 0.3s ease, transform 0.3s ease;
+// }
+
+// .dropdown-menu.hidden {
+//   opacity: 0;
+//   transform: translateY(-10px);
+// }
+
+// .dropdown-menu-animation {
+//   animation: slideDown 0.3s ease;
+// }
+
+.dropdown-background{
+  background-color: #0D0D0D
 }
 
-.dropdown-menu.hidden {
-  opacity: 0;
-  transform: translateY(-10px);
-}
-
-.dropdown-menu-animation {
-  animation: slideDown 0.3s ease;
+.dropdown-text{
+  color: #64DEA1;
 }
 
 

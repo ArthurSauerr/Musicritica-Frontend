@@ -17,6 +17,7 @@ export class AppComponent {
   emailParam: string | undefined;
   idUsuario: number;
   usuario: Usuario;
+  isDropdownOpen = false;
 
   constructor(
     private router: Router,
@@ -116,7 +117,14 @@ hideDropdownMenu() {
     if (dropdownMenu && !dropdownMenu.matches(':hover')) {
       dropdownMenu.classList.add('hidden');
     }
-  }, 500); // Ajuste o valor conforme necessário (em milissegundos)
+  }, 500);
+}
+
+toggleDropdown(state: boolean) {
+  setTimeout(() => {
+    this.isDropdownOpen = state;
+  }, 200)
+
 }
 
 }
