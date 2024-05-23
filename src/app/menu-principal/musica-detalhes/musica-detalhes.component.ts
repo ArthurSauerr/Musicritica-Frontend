@@ -199,7 +199,6 @@ export class MusicaDetalhesComponent implements OnInit {
     );
   }
 
-
   enviarComentario(): void {
     if (this.comentario.trim() !== '') {
       console.log("comentario: " + this.comentario);
