@@ -23,12 +23,12 @@
 
     <div *ngIf="usuario?.imagem_perfil" class="relative" (mouseenter)="toggleDropdown(true)" (mouseleave)="toggleDropdown(false)">
       <div class="profile-image-container">
-        <img class="rounded-full object-cover w-7 h-7 cursor-pointer" width="30" height="30" [src]="'data:image/jpeg;base64,' + usuario.imagem_perfil" alt="Imagem de Perfil">
+        <img class="rounded-full object-cover w-7 h-7 cursor-pointer" [src]="'data:image/jpeg;base64,' + usuario.imagem_perfil" alt="Imagem de Perfil">
       </div>
       <div *ngIf="isDropdownOpen" class="absolute right-0 mt-4 w-44 dropdown-background divide-y divide-gray-100 rounded-lg drop-shadow-md z-10">
         <ul class="py-2 text-sm dropdown-text">
           <li><a (click)="verPerfilUsuario()" class="cursor-pointer block px-4 py-2 hover:bg-zinc-900">Ver Perfil</a></li>
-          <li><a href="#" class="block px-4 py-2 hover:bg-zinc-900">Editar Perfil</a></li>
+          <li><a (click)="exibirEdicao()" class="block px-4 py-2 hover:bg-zinc-900">Editar Perfil</a></li>
           <li><a href="usuario/denuncia" class="block px-4 py-2 hover:bg-zinc-900">Denúncias</a></li>
           <li><a (click)="logout()" class="cursor-pointer block px-4 py-2 hover:bg-zinc-900">Finalizar Sessão</a></li>
         </ul>

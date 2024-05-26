@@ -1,9 +1,10 @@
 import { UsuarioService } from './shared/service/usuario.service';
 import { DadosCompartilhadosService } from './shared/service/dados-compartilhados.service';
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { jwtDecode } from 'jwt-decode';
 import { Usuario } from './shared/model/Usuario';
+import { UsuarioPerfilComponent } from './usuario/usuario-perfil/usuario-perfil.component';
 
 @Component({
   selector: 'app-root',
@@ -18,6 +19,7 @@ export class AppComponent {
   idUsuario: number;
   usuario: Usuario;
   isDropdownOpen = false;
+  exibirEditButtons: boolean;
 
   constructor(
     private router: Router,
@@ -41,6 +43,19 @@ export class AppComponent {
   ngOnInit(): void{
     this.verificarLogin();
     this.isUsuarioLogado();
+  }
+
+  exibirEdicao(): void {
+    const botaoEditarNome = document.getElementById('editar-nome');
+    const botaoEditarBackground = document.getElementById('editar-img-bg');
+    const botaoEditarPerfil = document.getElementById('editar-img-perfil');
+    if (botaoEditarNome && botaoEditarPerfil && botaoEditarBackground) {
+      botaoEditarNome.style.visibility = "visible";
+      botaoEditarBackground.style.visibility = "visible";
+      botaoEditarPerfil.style.visibility = "visible";
+    }
+
+    this.exibirEditButtons = true;
   }
 
   musicaProcurada: string = '';
@@ -103,11 +118,10 @@ export class AppComponent {
     this.router.navigate(['usuario/login']);
   }
 
-toggleDropdown(state: boolean) {
-  setTimeout(() => {
-    this.isDropdownOpen = state;
-  }, 200)
-
-}
+  toggleDropdown(state: boolean) {
+    setTimeout(() => {
+      this.isDropdownOpen = state;
+    }, 200)
+  }
 
 }

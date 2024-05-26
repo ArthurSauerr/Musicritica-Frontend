@@ -1,13 +1,16 @@
 <div class="relative">
-  <div *ngIf="usuario?.imagem_background" class="background-image ">
+  <div *ngIf="usuario?.imagem_background" class="background-image">
     <img [src]="'data:image/jpeg;base64,' + usuario.imagem_background" alt="Imagem de Fundo">
   </div>
   <div *ngIf="usuario" class="flex justify-center items-center h-screen div-custom relative">
     <div class="flex flex-col w-full max-w-screen-lg">
+      <button id="editar-img-bg" style="visibility: hidden;" (click)="alterarImagem('background')" >Alterar Imagem de Background</button>
+      <button id="editar-img-perfil" style="visibility: hidden;" (click)="alterarImagem('perfil')" >Alterar Imagem de Perfil</button>
       <div class="text-center">
         <div *ngIf="usuario?.imagem_perfil" class="flex justify-center drop-shadow-md py-2 relative">
           <img width="200" height="200" [src]="'data:image/jpeg;base64,' + usuario.imagem_perfil" alt="Imagem de Perfil" class="rounded-full object-cover w-48 h-48 z-10">
         </div>
+        <button id="editar-nome" style="visibility: hidden;" (click)="editarNome()">Editar Nome</button>
         <p class="nomeUsuario drop-shadow-md">{{ usuario.nome }}</p>
         <p class="text-1xl">Cadastrado desde: {{ usuario.dt_cadastro }}</p>
         <div class="mt-6 mb-6 flex flex-col items-center">
@@ -24,126 +27,51 @@
 <div class="bg-transparent w-full max-w-screen-lg mx-auto text-center custom-input">
   <div *ngIf="conteudoSelecionado === 'playlists'" class="text-white mt-6 mb-6 overflow-hidden">
     <div *ngFor="let playlist of playlistsDoUsuario" class="mt-4 flex items-center mb-2">
-
-      <div class="w-full bg-gray-700 cursor-pointer p-4 rounded-lg flex hover:bg-gray-800 transition duration-300 ease-in-out"
-        (click)="buscarTodasMusicasDaPlaylist(playlist.id)">
-        <div class="w-20 ">
+      <div class="w-full bg-gray-700 cursor-pointer p-4 rounded-lg flex hover:bg-gray-800 transition duration-300 ease-in-out" (click)="buscarTodasMusicasDaPlaylist(playlist.id)">
+        <div class="w-20">
           <img *ngIf="primeirasMusicasDasPlaylists[playlist.id]" [src]="primeirasMusicasDasPlaylists[playlist.id]" class="w-full h-auto rounded-lg drop-shadow-md" alt="Miniatura da primeira música">
         </div>
         <div class="flex-grow text-left mt-8 ml-8 text-2xl">{{ playlist.nome }}</div>
         <div>
-          <button (click)="toggleDropdown(playlist, $event)"
-            class="inline-flex items-center p-2 text-sm font-medium text-center text-gray-500 dark:text-gray-400 rounded-lg  focus:ring-4 focus:outline-none dark:hover:bg-gray-200 dark:focus:ring-gray-600"
-            type="button">
-            <svg class="w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor"
-              viewBox="0 0 16 3">
-              <path
-                d="M2 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3Zm6.041 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM14 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3Z" />
+          <button (click)="toggleDropdown(playlist, $event)" class="inline-flex items-center p-2 text-sm font-medium text-center text-gray-500 dark:text-gray-400 rounded-lg  focus:ring-4 focus:outline-none dark:hover:bg-gray-200 dark:focus:ring-gray-600" type="button">
+            <svg class="w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 16 3">
+              <path d="M2 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3Zm6.041 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM14 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3Z" />
             </svg>
             <span class="sr-only">Comment settings</span>
           </button>
-          <div *ngIf="mostrarDropdown[playlist.id]" id="dropdownComment1"
-            class="mt-4 w-36 bg-white rounded divide-y divide-gray-100 shadow dark:bg-gray-700 dark:divide-gray-600">
-            <ul class="py-1 text-sm text-gray-700 dark:text-gray-200"
-              aria-labelledby="dropdownMenuIconHorizontalButton">
+          <div *ngIf="mostrarDropdown[playlist.id]" id="dropdownComment1" class="mt-4 w-36 bg-white rounded divide-y divide-gray-100 shadow dark:bg-gray-700 dark:divide-gray-600">
+            <ul class="py-1 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdownMenuIconHorizontalButton">
               <li>
-                <a href="#"
-                  class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Edit</a>
+                <a href="#" class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Edit</a>
               </li>
               <li>
-                <a href="#"
-                  class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Remove</a>
+                <a href="#" class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Remove</a>
               </li>
               <li>
-                <a href="#"
-                  class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Report</a>
+                <a href="#" class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Report</a>
               </li>
             </ul>
           </div>
         </div>
       </div>
     </div>
-    <div>
-
-    </div>
-    <div class="mt-32">
-      <div class="custom-music mb-6 relative" *ngFor="let track of musicasDaPlaylist.tracks">
-        <div class="flex items-end">
-          <img [src]="track.album.images[1].url" alt="{{ track.name }}" class="mb-2 rounded-lg w-40 h-40 mr-4">
-          <div class="text-left mb-2">
-            <h1 class="text-3xl font-bold mb-4 musica-info">{{ track.name }}</h1>
-            <h2 class="text-1xl font-bold musica-info">{{ track.album.name }}</h2>
-          </div>
-        </div>
-        <div *ngFor="let playlist of playlistsDoUsuario" class="mt-6">
-          <div class="absolute top-0 right-0">
-            <button (click)="toggleDropdown(playlist, $event)"
-              class="inline-flex items-center p-2 text-sm font-medium text-center text-gray-500 dark:text-gray-400 rounded-lg focus:ring-4 focus:outline-none dark:hover:bg-gray-200 dark:focus:ring-gray-600"
-              type="button">
-              <svg class="w-6 h-6" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor"
-                viewBox="0 0 16 3">
-                <path
-                  d="M2 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3Zm6.041 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM14 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3Z" />
-              </svg>
-              <span class="sr-only">Comment settings</span>
-            </button>
-            <div *ngIf="mostrarDropdown[playlist.id]" id="dropdownComment1"
-              class="mt-4 w-36 bg-white rounded divide-y divide-gray-100 shadow dark:bg-gray-700 dark:divide-gray-600">
-              <ul class="py-1 text-sm text-gray-700 dark:text-gray-200"
-                aria-labelledby="dropdownMenuIconHorizontalButton">
-                <li>
-                  <a href="#"
-                    class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Edit</a>
-                </li>
-                <li>
-                  <a href="#"
-                    class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Remove</a>
-                </li>
-                <li>
-                  <a href="#"
-                    class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Report</a>
-                </li>
-              </ul>
-            </div>
-            <div class="mt-24">
-              <div class="flex items-center">
-                <svg class="w-4 h-4 text-yellow-300 ms-1" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
-                  fill="currentColor" viewBox="0 0 22 20">
-                  <path
-                    d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z" />
-                </svg>
-                <svg class="w-4 h-4 text-yellow-300 ms-1" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
-                  fill="currentColor" viewBox="0 0 22 20">
-                  <path
-                    d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z" />
-                </svg>
-                <svg class="w-4 h-4 text-yellow-300 ms-1" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
-                  fill="currentColor" viewBox="0 0 22 20">
-                  <path
-                    d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z" />
-                </svg>
-                <svg class="w-4 h-4 text-yellow-300 ms-1" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
-                  fill="currentColor" viewBox="0 0 22 20">
-                  <path
-                    d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z" />
-                </svg>
-                <svg class="w-4 h-4 ms-1 text-gray-300 dark:text-gray-500" aria-hidden="true"
-                  xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 22 20">
-                  <path
-                    d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z" />
-                </svg>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
   </div>
-
-  <div *ngIf="conteudoSelecionado === 'avaliacoes'">
-    <p class="text-white">Conteúdo das avaliações</p>
+  <div *ngIf="conteudoSelecionado === 'avaliacoes'" class="text-white mt-6 mb-6 overflow-hidden">
+    <p class="text-2xl">Minhas Avaliações</p>
   </div>
-  <div *ngIf="conteudoSelecionado === 'descobertas'">
-    <p class="text-white">Conteúdo das descobertas</p>
+  <div *ngIf="conteudoSelecionado === 'descobertas'" class="text-white mt-6 mb-6 overflow-hidden">
+    <p class="text-2xl">Minhas Descobertas</p>
+  </div>
+</div>
+
+<!-- Modal para editar nome -->
+<div *ngIf="isModalOpen" class="modal-overlay">
+  <div class="modal-content bg-black bg-opacity-50 backdrop-filter backdrop-blur-sm ">
+    <h2 class="text-xl font-bold mb-4 nomeUsuario ">Editar Nome</h2>
+    <input [(ngModel)]="novoNome" type="text" class="w-full p-2 border border-gray-300 rounded mb-4 " placeholder="Novo Nome">
+    <div class="flex justify-center">
+      <button (click)="fecharModal()" class="bg-gray-500 text-white px-4 py-2 rounded mr-2">Cancelar</button>
+      <button (click)="salvarNome()" class="bg-blue-500 text-white px-4 py-2 rounded">Salvar</button>
+    </div>
   </div>
 </div>
