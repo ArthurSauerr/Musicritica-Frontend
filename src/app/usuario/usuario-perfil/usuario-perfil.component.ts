@@ -33,8 +33,13 @@ export class UsuarioPerfilComponent implements OnInit{
 
   primeirasMusicasDasPlaylists: { [key: number]: string } = {};
 
-
   musicasDaPlaylist: ListaTracksSpotify = new ListaTracksSpotify();
+
+  exibirEditButtons: boolean = false;
+  isModalOpen: boolean;
+  novoNome: string;
+  novaImagemPerfil: File;
+  novaImagemBackground: File;
 
   ngOnInit(): void {
     this.usuarioService.getToken();
@@ -107,5 +112,75 @@ export class UsuarioPerfilComponent implements OnInit{
     this.playlistsDoUsuario.forEach(playlist => {
       this.mostrarDropdown[playlist.id] = false;
     });
+  }
+
+  editarNome(): void {
+    this.isModalOpen = true;
+  }
+
+  fecharModal(): void {
+    this.isModalOpen = false;
+  }
+
+  salvarNome(): void {
+    if (this.novoNome) {
+      this.usuarioService.atualizarUsuario(this.novoNome).subscribe(
+        response => {
+          this.usuario.nome = this.novoNome;
+          this.fecharModal();
+          console.log('Nome atualizado com sucesso');
+        },
+        error => {
+          console.error('Erro ao atualizar nome:', error);
+        }
+      );
+    } else {
+      console.error('Novo nome não fornecido');
+    }
+  }
+
+  alterarImagem(tipo: string): void {
+    const inputElement = document.createElement('input');
+    inputElement.type = 'file';
+    inputElement.accept = 'image/*';
+    inputElement.addEventListener('change', (event) => {
+      const file = (event.target as HTMLInputElement).files?.[0];
+      if (file) {
+        if (tipo === 'perfil') {
+          this.novaImagemPerfil = file;
+          this.atualizarImagemPerfil();
+        } else if (tipo === 'background') {
+          this.novaImagemBackground = file;
+          this.atualizarImagemBackground();
+        }
+      }
+    });
+    inputElement.click();
+  }
+
+  atualizarImagemPerfil(): void {
+    if(this.novaImagemPerfil){
+      this.usuarioService.atualizarUsuario(undefined, this.novaImagemPerfil, undefined).subscribe(
+        response => {
+          console.log('Imagem alterada com sucesso');
+        },
+        error => {
+          console.error('Erro ao atualizar imagem:', error);
+        }
+      );
+    }
+  }
+
+  atualizarImagemBackground(): void {
+    if(this.novaImagemBackground){
+      this.usuarioService.atualizarUsuario(undefined, undefined, this.novaImagemBackground).subscribe(
+        response => {
+          console.log('Imagem alterada com sucesso');
+        },
+        error => {
+          console.error('Erro ao atualizar imagem:', error);
+        }
+      );
+    }
   }
 }
