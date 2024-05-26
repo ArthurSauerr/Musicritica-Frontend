@@ -11,6 +11,7 @@ import { DatePipe } from '@angular/common';
 import { PlaylistService } from 'src/app/shared/service/playlist.service';
 import { Playlist } from 'src/app/shared/model/Playlist';
 import { MusicaSpotify } from 'src/app/shared/model/MusicaSpotify';
+import { AlertaServiceService } from 'src/app/shared/service/alerta-service.service';
 
 @Component({
   selector: 'app-musica-detalhes',
@@ -23,7 +24,8 @@ export class MusicaDetalhesComponent implements OnInit {
     private comentarioService: ComentarioServiceService,
     private usuarioService: UsuarioService,
     private playlistService: PlaylistService,
-    private elementRef: ElementRef
+    private elementRef: ElementRef,
+    private alertaService: AlertaServiceService
   ) { }
 
   artista: string;
@@ -74,6 +76,10 @@ export class MusicaDetalhesComponent implements OnInit {
 
   data: any;
   options: any;
+
+  // mostrarAlerta(): void {
+  //   this.alertaService.showAlert(); 
+  // }
 
   ngOnInit(): void {
 
