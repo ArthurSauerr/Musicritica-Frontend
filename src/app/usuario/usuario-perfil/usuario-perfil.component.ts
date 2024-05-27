@@ -5,6 +5,7 @@ import { ActivatedRoute } from '@angular/router';
 import { PlaylistService } from 'src/app/shared/service/playlist.service';
 import { Playlist } from 'src/app/shared/model/Playlist';
 import { ListaTracksSpotify } from 'src/app/shared/model/ListaTracksSpotify';
+import { DadosCompartilhadosService } from 'src/app/shared/service/dados-compartilhados.service';
 
 
 
@@ -22,7 +23,8 @@ export class UsuarioPerfilComponent implements OnInit{
   constructor(
     private usuarioService: UsuarioService,
     private route: ActivatedRoute,
-    private playListService: PlaylistService
+    private playListService: PlaylistService,
+    private dadosCompartilhadosService: DadosCompartilhadosService
   ) { }
 
   conteudoSelecionado: string | null = null;
@@ -41,14 +43,19 @@ export class UsuarioPerfilComponent implements OnInit{
   novaImagemPerfil: File;
   novaImagemBackground: File;
 
+  pageId: string | null;
+
   ngOnInit(): void {
     this.usuarioService.getToken();
-    this.route.params.subscribe(params => {
-      const idUsuario = +params['id'];
-      this.buscarUsuario(idUsuario);
+    this.route.paramMap.subscribe(params => {
+      this.pageId = params.get('id');
+      if (this.pageId) {
+        this.buscarUsuario(+this.pageId);
+        this.buscarPlaylistsPorIdUsuario(+this.pageId);
+        this.dadosCompartilhadosService.setPageId(this.pageId);
+      }
+      console.log("Id da pagina:", this.pageId);
     });
-    this.buscarPlaylistsPorIdUsuario();
-
   }
 
   mostrarConteudo(opcao: string): void {
@@ -68,8 +75,8 @@ export class UsuarioPerfilComponent implements OnInit{
     );
   }
 
-  buscarPlaylistsPorIdUsuario(): void {
-    this.playListService.buscarPlaylistsPorIdUsuario(this.usuario.id).subscribe(
+  buscarPlaylistsPorIdUsuario(idUsuario: number): void {
+    this.playListService.buscarPlaylistsPorIdUsuario(idUsuario).subscribe(
       (data: Playlist[]) => {
         this.playlistsDoUsuario = data;
         this.playlistsDoUsuario.forEach(playlist => {

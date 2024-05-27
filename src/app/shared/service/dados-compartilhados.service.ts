@@ -11,6 +11,13 @@ export class DadosCompartilhadosService {
   private idAlbumParaProcurar: string;
   private idMusicaKey = 'idMusicaSpotify';
 
+  private pageIdSource = new BehaviorSubject<string | null>(null);
+  pageId$ = this.pageIdSource.asObservable();
+
+  setPageId(pageId: string | null): void {
+    this.pageIdSource.next(pageId);
+  }
+
    setIdAlbumParaProcurar(id: string) {
     this.idAlbumParaProcurar = id;
   }
@@ -24,8 +31,8 @@ export class DadosCompartilhadosService {
   }
 
   getIdMusica(): string | null {
-    const id = localStorage.getItem(this.idMusicaKey); 
-    return id !== null ? id : null; 
+    const id = localStorage.getItem(this.idMusicaKey);
+    return id !== null ? id : null;
   }
 
 

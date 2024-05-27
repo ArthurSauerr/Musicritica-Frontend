@@ -21,6 +21,8 @@ export class AppComponent {
   isDropdownOpen = false;
   exibirEditButtons: boolean;
 
+  urlId: number;
+
   constructor(
     private router: Router,
     private dadosCompartilhadosService: DadosCompartilhadosService,
@@ -43,19 +45,13 @@ export class AppComponent {
   ngOnInit(): void{
     this.verificarLogin();
     this.isUsuarioLogado();
-  }
 
-  exibirEdicao(): void {
-    const botaoEditarNome = document.getElementById('editar-nome');
-    const botaoEditarBackground = document.getElementById('editar-img-bg');
-    const botaoEditarPerfil = document.getElementById('editar-img-perfil');
-    if (botaoEditarNome && botaoEditarPerfil && botaoEditarBackground) {
-      botaoEditarNome.style.visibility = "visible";
-      botaoEditarBackground.style.visibility = "visible";
-      botaoEditarPerfil.style.visibility = "visible";
-    }
-
-    this.exibirEditButtons = true;
+    this.dadosCompartilhadosService.pageId$.subscribe(pageId => {
+      console.log('ID da pagina recebido no AppComponent:', pageId);
+      if(pageId){
+        this.urlId = +pageId;
+      }
+    });
   }
 
   musicaProcurada: string = '';
@@ -105,6 +101,22 @@ export class AppComponent {
       this.router.navigate(['usuario/perfil', this.idUsuario]);
     } else {
       console.error('ID do usuário não está definido.');
+    }
+  }
+
+  exibirEdicao(): void {
+    if(this.idUsuario === +this.urlId){
+
+      const botaoEditarNome = document.getElementById('editar-nome');
+      const botaoEditarBackground = document.getElementById('editar-img-bg');
+      const botaoEditarPerfil = document.getElementById('editar-img-perfil');
+      if (botaoEditarNome && botaoEditarPerfil && botaoEditarBackground) {
+        botaoEditarNome.style.visibility = "visible";
+        botaoEditarBackground.style.visibility = "visible";
+        botaoEditarPerfil.style.visibility = "visible";
+      }
+
+      this.exibirEditButtons = true;
     }
   }
 
