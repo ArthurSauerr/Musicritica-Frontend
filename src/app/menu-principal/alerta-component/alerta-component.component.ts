@@ -8,12 +8,6 @@ import { AlertaServiceService } from 'src/app/shared/service/alerta-service.serv
 })
 export class AlertaComponentComponent {
 
-  constructor(private alertaService: AlertaServiceService) {} 
-
-  mostrarAlerta1(): void {
-    this.alertaService.showAlert1(); 
-  }
-  mostrarAlerta2(): void {
-    this.alertaService.showAlert2(); 
-  }
+  constructor() {} 
+  
 }

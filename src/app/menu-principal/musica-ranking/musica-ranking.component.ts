@@ -17,11 +17,11 @@ export class MusicaRankingComponent implements OnInit {
 
   constructor(private alertaService: AlertaServiceService) { }
 
-  showCustomAlert1(): void {
-    this.alertaService.showAlert1(); 
+  sucessoAdicionarMusicaNaPlaylist(): void {
+    this.alertaService.exibirAlerta('alert2'); 
   }
-  showCustomAlert2(): void {
-    this.alertaService.showAlert2(); 
+  erroAdicionarNaPlaylist(): void {
+    this.alertaService.exibirAlerta('alert1'); 
   }
 
   ngOnInit(): void {
