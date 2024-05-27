@@ -83,5 +83,17 @@ input:focus {
 .modal-content {
   padding: 1.5rem;
   border-radius: 0.5rem;
-  box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.1);
+  box-shadow: 0 0rem 1rem rgba(100, 222, 161, 0.3)
+}
+
+.input-modal {
+  background: none;
+  color: white;
+  border: none;
+  border-bottom: 2px solid #64DEA1;
+  padding-bottom: 5px;
+}
+
+.custom-color {
+  background: linear-gradient(to bottom,#2F6953 30%,  #0d0d0d);
 }
