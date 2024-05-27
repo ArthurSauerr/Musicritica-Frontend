@@ -77,9 +77,7 @@ export class MusicaDetalhesComponent implements OnInit {
   data: any;
   options: any;
 
-  // mostrarAlerta(): void {
-  //   this.alertaService.showAlert(); 
-  // }
+  
 
   ngOnInit(): void {
 
@@ -228,8 +226,10 @@ export class MusicaDetalhesComponent implements OnInit {
               console.log('Comentário enviado com sucesso: ', comentarioSalvo);
               this.comentario = '';
               this.buscarComentarios();
+              this.alertaService.exibirAlerta('alert3')
             }, error => {
               console.error('Erro ao enviar o comentário:', error);
+              this.alertaService.exibirAlerta('alert4')
             });
         },
         (error) => {
@@ -243,7 +243,6 @@ export class MusicaDetalhesComponent implements OnInit {
   }
 
   atualizarComentario(comentarioId: number): void {
-    //if (this.comentario.trim() !== '') {
     console.log("comentario: " + this.comentario);
     this.usuarioService.buscarIdPorEmail(this.emailParam).subscribe(
       (usuarioId: number) => {
@@ -252,18 +251,17 @@ export class MusicaDetalhesComponent implements OnInit {
           (comentarioSalvo) => {
             console.log('Comentário enviado com sucesso: ', comentarioSalvo);
             this.comentario = '';
+            this.alertaService.exibirAlerta('alert5')
           }, error => {
             this.buscarComentarios();
             console.error('Erro ao enviar o comentário:', error);
+            this.alertaService.exibirAlerta('alert6')
           });
       },
       (error) => {
         console.error('Ocorreu um erro ao buscar o ID do usuário:', error);
       }
     );
-    // } else {
-    //   console.error('Nenhum comentário digitado.');
-    // }
     this.buscarQuantidadeComentarios();
   }
 
@@ -294,8 +292,10 @@ export class MusicaDetalhesComponent implements OnInit {
               console.log('Comentário enviado com sucesso: ', comentarioSalvo);
               this.resposta = '';
               this.buscarComentarios();
+              this.alertaService.exibirAlerta('alert3')
             }, error => {
               console.error('Erro ao enviar o comentário:', error);
+              this.alertaService.exibirAlerta('alert4')
             });
         },
         (error) => {
@@ -313,10 +313,12 @@ export class MusicaDetalhesComponent implements OnInit {
         this.comentarioService.deletarComentario(usuarioId, comentarioId).subscribe(
           (response) => {
             console.log('Comentário deletado com sucesso');
+            this.alertaService.exibirAlerta('alert7')
           },
           (error) => {
             this.buscarComentarios();
             console.error('Erro ao deletar comentário:', error);
+            this.alertaService.exibirAlerta('alert8')
           }
         );
       },
@@ -357,9 +359,11 @@ export class MusicaDetalhesComponent implements OnInit {
         this.playlistService.salvarNovaPlaylist(this.novaPlaylist).subscribe(
           (playlistSalva) => {
             console.log('Playlist enviada com sucesso: ', playlistSalva);
+            this.alertaService.exibirAlerta('alert3')
             this.nomePlaylistNova = '';
           }, error => {
             console.error('Erro ao salvar uma nova playlist:', error);
+            this.alertaService.exibirAlerta('alert4')
           });
       },
       (error) => {
@@ -380,8 +384,10 @@ export class MusicaDetalhesComponent implements OnInit {
     this.playlistService.verificarEInserirMusicaSpotify(idSpotify, idMusicaSpotify, idPlaylist).subscribe(
       () => {
         console.log('Música enviada para a playlist com sucesso');
+        this.alertaService.exibirAlerta('alert1')
       }, error => {
         console.error('Erro ao salvar uma nova música na playlist:', error);
+        this.alertaService.exibirAlerta('alert2')
       });
   }
 

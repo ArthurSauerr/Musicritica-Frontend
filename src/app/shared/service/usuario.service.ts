@@ -74,5 +74,4 @@ export class UsuarioService {
     }
     return this.httpClient.put<any>(`${this.usuarioUrl}/atualizar`, formData, { headers });
   }
-
 }
