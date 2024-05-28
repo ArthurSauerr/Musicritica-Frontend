@@ -117,6 +117,15 @@ export class AppComponent {
       }
 
       this.exibirEditButtons = true;
+
+      if(this.exibirEditButtons){
+        const backgroundOverlay = document.getElementById('overlay-bg');
+        const profileOverlay = document.getElementById('overlay-profuke');
+        if(backgroundOverlay && profileOverlay){
+          backgroundOverlay.style.visibility = "visible";
+          profileOverlay.style.visibility = "visibile";
+        }
+      }
     }
   }
 

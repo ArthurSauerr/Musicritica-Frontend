@@ -1,6 +1,7 @@
 <div class="relative">
   <div *ngIf="usuario?.imagem_background" class="background-image">
     <img [src]="'data:image/jpeg;base64,' + usuario.imagem_background" alt="Imagem de Fundo">
+    <div id="overlay-bg" class="overlay" style="visibility: hidden;"></div>
   </div>
   <div *ngIf="usuario" class="flex justify-center items-center h-screen div-custom relative">
     <div class="flex flex-col w-full max-w-screen-lg">
@@ -8,7 +9,10 @@
       <button id="editar-img-perfil" style="visibility: hidden;" (click)="alterarImagem('perfil')" class="hover:font-bold">Alterar Imagem de Perfil</button>
       <div class="text-center">
         <div *ngIf="usuario?.imagem_perfil" class="flex justify-center drop-shadow-md py-2 relative">
-          <img width="200" height="200" [src]="'data:image/jpeg;base64,' + usuario.imagem_perfil" alt="Imagem de Perfil" class="rounded-full object-cover w-48 h-48 z-10">
+          <div class="relative w-48 h-48">
+            <img width="200" height="200" [src]="'data:image/jpeg;base64,' + usuario.imagem_perfil" alt="Imagem de Perfil" class="rounded-full object-cover w-full h-full">
+            <div id="overlay-profile" class="absolute inset-0 bg-black opacity-50 rounded-full" style="visibility: hidden;"></div>
+          </div>
         </div>
         <button id="editar-nome" style="visibility: hidden;" (click)="editarNome() " class="hover:font-bold">Editar Nome</button>
         <p class="nomeUsuario drop-shadow-md">{{ usuario.nome }}</p>
