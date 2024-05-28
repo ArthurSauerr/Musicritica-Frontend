@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AlertaServiceService } from 'src/app/shared/service/alerta-service.service';
 
 @Component({
   selector: 'app-musica-ranking',
@@ -14,8 +15,14 @@ export class MusicaRankingComponent implements OnInit {
     this.rating = stars;
   }
 
-  
-  constructor() { }
+  constructor(private alertaService: AlertaServiceService) { }
+
+  sucessoAdicionarMusicaNaPlaylist(): void {
+    this.alertaService.exibirAlerta('alert2'); 
+  }
+  erroAdicionarNaPlaylist(): void {
+    this.alertaService.exibirAlerta('alert1'); 
+  }
 
   ngOnInit(): void {
   }

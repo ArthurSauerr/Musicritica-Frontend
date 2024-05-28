@@ -1,18 +1,21 @@
 <div class="relative">
-  <div *ngIf="usuario?.imagem_background" class="background-image ">
+  <div *ngIf="usuario?.imagem_background" class="background-image">
     <img [src]="'data:image/jpeg;base64,' + usuario.imagem_background" alt="Imagem de Fundo">
   </div>
   <div *ngIf="usuario" class="flex justify-center items-center h-screen div-custom relative">
     <div class="flex flex-col w-full max-w-screen-lg">
+      <button id="editar-img-bg" style="visibility: hidden;" (click)="alterarImagem('background')" class="hover:font-bold">Alterar Imagem de Background</button>
+      <button id="editar-img-perfil" style="visibility: hidden;" (click)="alterarImagem('perfil')" class="hover:font-bold">Alterar Imagem de Perfil</button>
       <div class="text-center">
         <div *ngIf="usuario?.imagem_perfil" class="flex justify-center drop-shadow-md py-2 relative">
           <img width="200" height="200" [src]="'data:image/jpeg;base64,' + usuario.imagem_perfil" alt="Imagem de Perfil" class="rounded-full object-cover w-48 h-48 z-10">
         </div>
+        <button id="editar-nome" style="visibility: hidden;" (click)="editarNome() " class="hover:font-bold">Editar Nome</button>
         <p class="nomeUsuario drop-shadow-md">{{ usuario.nome }}</p>
-        <p class="text-1xl">Cadastrado desde: {{ usuario.dt_cadastro }}</p>
+        <p class="text-sm">Cadastrado desde: {{ usuario.dt_cadastro }}</p>
         <div class="mt-6 mb-6 flex flex-col items-center">
           <div class="flex space-x-4">
-            <button class="botao-perfil" (click)="mostrarConteudo('playlists'); buscarPlaylistsPorIdUsuario()">Playlists</button>
+            <button class="botao-perfil" (click)="mostrarConteudo('playlists'); buscarPlaylistsPorIdUsuario(usuario.id)">Playlists</button>
             <button class="botao-perfil" (click)="mostrarConteudo('avaliacoes')">Avaliações</button>
             <button class="botao-perfil" (click)="mostrarConteudo('descobertas')">Descobertas</button>
           </div>
@@ -145,5 +148,29 @@
   </div>
   <div *ngIf="conteudoSelecionado === 'descobertas'">
     <p class="text-white">Conteúdo das descobertas</p>
+  </div>
+</div>
+
+<!-- Modal para editar nome -->
+<div *ngIf="isModalOpen" class="modal-overlay">
+  <div class="modal-content bg-black bg-opacity-50 backdrop-filter backdrop-blur-sm ">
+    <h2 class="text-xl font-bold mb-4 nomeUsuario justify-center">Editar Nome</h2>
+    <input [(ngModel)]="novoNome" type="text" class="input-modal w-full p-2 border border-gray-300 rounded mb-4 " placeholder="Novo Nome">
+    <div class="flex justify-center gap-2">
+      <button (click)="fecharModal()"
+      class="w-36 rounded-full relative inline-flex items-center justify-center p-0.5 overflow-hidden text-sm font-medium text-gray-900 group bg-gradient-to-br from-teal-300 to-lime-300 group-hover:from-teal-300 group-hover:to-lime-300 dark:text-white dark:hover:text-gray-900 focus:ring-4 focus:outline-none focus:ring-lime-200 dark:focus:ring-lime-800">
+      <span
+        class="w-36 rounded-full relative px-5 py-2.5 transition-all ease-in duration-75 bg-white dark:bg-gray-900 group-hover:bg-opacity-0">
+        Fechar
+      </span>
+    </button>
+    <button (click)="salvarNome()"
+    class="w-36 rounded-full relative inline-flex items-center justify-center p-0.5 overflow-hidden text-sm font-medium text-gray-900 group bg-gradient-to-br from-teal-300 to-lime-300 group-hover:from-teal-300 group-hover:to-lime-300 dark:text-white dark:hover:text-gray-900 focus:ring-4 focus:outline-none focus:ring-lime-200 dark:focus:ring-lime-800">
+    <span
+      class="w-36 rounded-full relative px-5 py-2.5 transition-all ease-in duration-75 bg-white dark:bg-gray-900 group-hover:bg-opacity-0">
+      Salvar
+    </span>
+  </button>
+    </div>
   </div>
 </div>

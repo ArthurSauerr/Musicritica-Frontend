@@ -13,6 +13,7 @@ import { MatSliderModule } from '@angular/material/slider';
 import { MatIconModule } from '@angular/material/icon'; 
 import { ChartModule } from 'primeng/chart';
 import { RecomendacoesComponent } from './recomendacoes/recomendacoes.component';
+import { AlertaComponentComponent } from './alerta-component/alerta-component.component';
 
 
 @NgModule({
@@ -22,7 +23,8 @@ import { RecomendacoesComponent } from './recomendacoes/recomendacoes.component'
     MusicaDescobrirComponent,
     MusicaRankingComponent,
     MenuBuscarMusicaComponent,
-    RecomendacoesComponent
+    RecomendacoesComponent,
+    AlertaComponentComponent
   ],
   imports: [
     CommonModule,

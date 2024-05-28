@@ -18,11 +18,17 @@ export class UsuarioLoginComponent {
   login() {
     this.usuarioService.login({ email: this.email, senha: this.senha }).subscribe(
       (response) => {
-        this.usuarioService.armazenarTokenJWT(response);
+        // Verifica se a resposta contém o token JWT
+        if (response.token) {
+          // Passa apenas o token JWT para armazenamento
+          this.usuarioService.armazenarTokenJWT(response.token);
 
-        this.router.navigate(['/']);
-        console.log('Login bem-sucedido');
-        this.appComponent.verificarLogin();
+          this.router.navigate(['/']);
+          console.log('Login bem-sucedido');
+          this.appComponent.verificarLogin();
+        } else {
+          console.error('Resposta de login inválida', response);
+        }
       },
       (error) => {
         console.error('Erro no login', error);

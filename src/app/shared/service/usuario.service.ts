@@ -1,6 +1,6 @@
 import { RegistroDTO } from './../model/RegistroDTO';
 import { LoginDTO } from '../model/LoginDTO';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Usuario } from '../model/Usuario';
@@ -16,8 +16,7 @@ export class UsuarioService {
   private readonly usuarioUrl = 'http://localhost:8080/usuario';
 
   armazenarTokenJWT(token: string) {
-    const tokenObj = { token };
-    localStorage.setItem('token', JSON.stringify(tokenObj));
+    localStorage.setItem('token', token);
     console.log(token)
   }
 
@@ -51,5 +50,28 @@ export class UsuarioService {
 
   buscarUsuarioPorId(id: Number): Observable<Usuario>{
     return this.httpClient.get<Usuario>(`${this.usuarioUrl}/${id}`);
+  }
+
+  atualizarUsuario(nome?: string, imagem_perfil?: File, imagem_background?: File): Observable<any>{
+    const token = this.getToken();
+    if (!token) {
+      throw new Error('Token de autorização não encontrado');
+    }
+
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${token}`
+    });
+
+    const formData: FormData = new FormData();
+    if (nome) {
+      formData.append('nome', nome);
+    }
+    if (imagem_perfil) {
+      formData.append('imagem_perfil', imagem_perfil);
+    }
+    if (imagem_background) {
+      formData.append('imagem_background', imagem_background);
+    }
+    return this.httpClient.put<any>(`${this.usuarioUrl}/atualizar`, formData, { headers });
   }
 }
