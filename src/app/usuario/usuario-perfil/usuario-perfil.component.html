@@ -1,15 +1,15 @@
 <div class="relative">
-  <div *ngIf="usuario?.imagem_background" class="background-image">
-    <img [src]="'data:image/jpeg;base64,' + usuario.imagem_background" alt="Imagem de Fundo">
+  <div *ngIf="imagemBackground || usuario?.imagem_background" class="background-image">
+    <img [src]="imagemBackground ? imagemBackground : 'data:image/jpeg;base64,' + usuario.imagem_background" alt="Imagem de Fundo">
     <div id="overlay-bg" class="overlay" style="visibility: hidden;"></div>
   </div>
   <div *ngIf="usuario" class="flex justify-center items-center h-screen div-custom relative">
     <div class="flex flex-col w-full max-w-screen-lg">
       <button id="editar-img-bg" style="visibility: hidden;" (click)="alterarImagem('background')" class="hover:font-bold">Alterar Imagem de Background</button>
       <div class="text-center relative">
-        <div *ngIf="usuario?.imagem_perfil" class="flex justify-center drop-shadow-md py-2 relative">
+        <div *ngIf="imagemPerfil || usuario?.imagem_perfil" class="flex justify-center drop-shadow-md py-2 relative">
           <div class="relative w-48 h-48">
-            <img width="200" height="200" [src]="'data:image/jpeg;base64,' + usuario.imagem_perfil" alt="Imagem de Perfil" class="rounded-full object-cover w-full h-full">
+            <img width="200" height="200" [src]="imagemPerfil ? imagemPerfil : 'data:image/jpeg;base64,' + usuario.imagem_perfil" alt="Imagem de Perfil" class="rounded-full object-cover w-full h-full">
             <div id="overlay-profile" style="visibility: hidden;" class="absolute inset-0 bg-black opacity-70 rounded-full"></div>
             <button id="editar-img-perfil" style="visibility: hidden;" (click)="alterarImagem('perfil')" class="absolute inset-0 flex items-center justify-center hover:font-bold">
               Alterar Imagem de Perfil
