@@ -73,6 +73,10 @@ export class UsuarioPerfilComponent implements OnInit {
     );
   }
 
+  formatarData(data: String){
+    return data.replace(/-/g, '/');
+  }
+
   buscarPlaylistsPorIdUsuario(idUsuario: number): void {
     this.playListService.buscarPlaylistsPorIdUsuario(idUsuario).subscribe(
       (data: Playlist[]) => {

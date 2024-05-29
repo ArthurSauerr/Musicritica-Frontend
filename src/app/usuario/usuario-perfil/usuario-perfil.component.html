@@ -4,33 +4,36 @@
     <div id="overlay-bg" class="overlay" style="visibility: hidden;"></div>
   </div>
   <div *ngIf="usuario" class="flex justify-center items-center h-screen div-custom relative">
-    <div class="flex flex-col w-full max-w-screen-lg">
-      <button id="editar-img-bg" style="visibility: hidden;" (click)="alterarImagem('background')" class="hover:font-bold">Alterar Imagem de Background</button>
+    <div class="flex flex-col w-full max-w-screen-lg ">
+      <button id="editar-img-bg" class="flex flex-col items-center justify-center hover:font-bold transition-transform transform hover:scale-110 -mt-20 mb-12" style="visibility: hidden;" (click)="alterarImagem('background')">
+        <img class="" src="https://img.icons8.com/ios-glyphs/30/64dea1/image.png" alt="image"/>
+        <span>Alterar Imagem de Background</span>
+      </button>
       <div class="text-center relative">
         <div *ngIf="imagemPerfil || usuario?.imagem_perfil" class="flex justify-center drop-shadow-md py-2 relative">
           <div class="relative w-48 h-48">
             <img width="200" height="200" [src]="imagemPerfil ? imagemPerfil : 'data:image/jpeg;base64,' + usuario.imagem_perfil" alt="Imagem de Perfil" class="rounded-full object-cover w-full h-full">
             <div id="overlay-profile" style="visibility: hidden;" class="absolute inset-0 bg-black opacity-70 rounded-full"></div>
-            <button id="editar-img-perfil" style="visibility: hidden;" (click)="alterarImagem('perfil')" class="absolute inset-0 flex items-center justify-center hover:font-bold">
-              Alterar Imagem de Perfil
+            <button id="editar-img-perfil" style="visibility: hidden;" (click)="alterarImagem('perfil')" class="absolute inset-0 flex items-center justify-center">
+              <img class="transition-transform transform hover:scale-125" src="https://img.icons8.com/ios-glyphs/30/64dea1/pencil--v1.png" alt="pencil--v1"/>
             </button>
           </div>
         </div>
         <button id="editar-nome" style="visibility: hidden;" (click)="editarNome()" class="hover:font-bold">Editar Nome</button>
         <p class="nomeUsuario drop-shadow-md">{{ usuario.nome }}</p>
-        <p class="text-sm">Cadastrado desde: {{ usuario.dt_cadastro }}</p>
+        <p class="text-sm">Cadastrado desde: {{ formatarData(usuario.dt_cadastro) }}</p>
         <div class="mt-6 mb-6 flex flex-col items-center">
           <div class="flex space-x-4">
-            <button class="botao-perfil" (click)="mostrarConteudo('playlists'); buscarPlaylistsPorIdUsuario(usuario.id)">Playlists</button>
-            <button class="botao-perfil" (click)="mostrarConteudo('avaliacoes')">Avaliações</button>
-            <button class="botao-perfil" (click)="mostrarConteudo('descobertas')">Descobertas</button>
+            <button id="playlists-btn" class="botao-perfil hover:font-bold" (click)="mostrarConteudo('playlists'); buscarPlaylistsPorIdUsuario(usuario.id)">Playlists</button>
+            <button id="avaliacoes-btn" class="botao-perfil hover:font-bold" (click)="mostrarConteudo('avaliacoes')">Avaliações</button>
+            <button id="descobertas-btn" class="botao-perfil hover:font-bold" (click)="mostrarConteudo('descobertas')">Descobertas</button>
           </div>
         </div>
       </div>
     </div>
   </div>
 </div>
-<div class="bg-transparent w-full max-w-screen-lg mx-auto text-center custom-input">
+<div id="div-musicas" class="bg-transparent w-full max-w-screen-lg mx-auto text-center custom-input">
   <div *ngIf="conteudoSelecionado === 'playlists'" class="text-white mt-6 mb-6 overflow-hidden">
     <div *ngFor="let playlist of playlistsDoUsuario" class="mt-4 flex items-center mb-2">
 
