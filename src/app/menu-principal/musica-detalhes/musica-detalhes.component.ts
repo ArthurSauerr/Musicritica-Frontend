@@ -313,10 +313,10 @@ export class MusicaDetalhesComponent implements OnInit {
         this.comentarioService.deletarComentario(usuarioId, comentarioId).subscribe(
           (response) => {
             console.log('Comentário deletado com sucesso');
+            this.buscarComentarios();
             this.alertaService.exibirAlerta('alert7')
           },
           (error) => {
-            this.buscarComentarios();
             console.error('Erro ao deletar comentário:', error);
             this.alertaService.exibirAlerta('alert8')
           }

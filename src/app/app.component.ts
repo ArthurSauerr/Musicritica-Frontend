@@ -1,7 +1,9 @@
 import { UsuarioService } from './shared/service/usuario.service';
 import { DadosCompartilhadosService } from './shared/service/dados-compartilhados.service';
 import { Component, ViewChild } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, NavigationEnd } from '@angular/router';
+import { filter } from 'rxjs/operators';
+
 import { jwtDecode } from 'jwt-decode';
 import { Usuario } from './shared/model/Usuario';
 import { UsuarioPerfilComponent } from './usuario/usuario-perfil/usuario-perfil.component';
@@ -14,7 +16,9 @@ import { UsuarioPerfilComponent } from './usuario/usuario-perfil/usuario-perfil.
 export class AppComponent {
 
   title = 'Musicritica';
-  mostrarNavbar: boolean = true;
+  mostrarDiv: boolean = true;
+  mostrarFooter: boolean = true;
+
   emailParam: string | undefined;
   idUsuario: number;
   usuario: Usuario;
@@ -35,9 +39,18 @@ export class AppComponent {
         this.router.url.includes('/esqueceu-senha') ||
         this.router.url.includes('/redefinir-senha')
       ) {
-        this.mostrarNavbar = false;
+        this.mostrarDiv = false;
       } else {
-        this.mostrarNavbar = true;
+        this.mostrarDiv = true;
+      }
+    });
+    this.router.events.subscribe((event) => {
+      if (
+        this.router.url.includes('/perfil')
+      ) {
+        this.mostrarFooter = false;
+      } else {
+        this.mostrarFooter = true;
       }
     });
   }

@@ -2,6 +2,7 @@
   border-radius: 15px;
 }
 
+
 .bg-custom-green {
   background-image: radial-gradient(circle, #2F6953, #26332D); /* Substitua as cores conforme desejado */
   border-top-left-radius: 0;
@@ -18,21 +19,23 @@
   font-size: 38px; // Tamanho da fonte do título
   text-shadow: 1px 2px 5px #0D0D0D;
 }
+.alert-container {
+  height: 10px; 
+}
 
 .form-input {
   font-family: 'Inter', sans-serif;
   background: none;
-  border-bottom: 2px solid #ffffff; // Adiciona uma borda na parte inferior
-  margin-bottom: 40px; // Espaçamento entre os inputs
-  padding: 5px; // Espaçamento interno
+  border-bottom: 2px solid #ffffff; 
+  margin-bottom: 40px;
+  padding: 5px; 
   color: #ffffff;
-  position: relative; // Tornar a posição relativa para que o ícone possa ser posicionado com base nela
+  position: relative; 
 
-  // Adicionar espaço à esquerda do texto para acomodar o ícone
-  padding-left: 35px; // Ajuste conforme necessário
+  padding-left: 35px; 
 
   &:focus {
-    outline: none; // Remove o contorno ao focar
+    outline: none; 
   }
 }
 
@@ -92,5 +95,4 @@
 .custom-border-color{
   border-color: #64DEA1;
 }
-
 

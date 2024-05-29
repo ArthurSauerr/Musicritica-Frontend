@@ -1,35 +1,51 @@
-<form (ngSubmit)="registrar()" #registerForm="ngForm">
+<form (ngSubmit)="registrar()" #form="ngForm">
   <div class="py-16">
     <div class="flex shadow-lg overflow-hidden mx-auto max-w-sm lg:max-w-4xl bg-custom">
-        <div class="hidden lg:block lg:w-1/2 bg-cover"
-            style="background-image:url('https://i.imgur.com/jvfa77Z.png')">
+      <div class="hidden lg:block lg:w-1/2 bg-cover" style="background-image:url('https://i.imgur.com/jvfa77Z.png')"></div>
+      <div class="w-full p-8 lg:w-1/2 bg-custom-green flex flex-col justify-center items-center">
+        <h2 class="text-2xl text-center custom-h2">CADASTRO</h2>
+        
+        <div class="relative mb-4">
+          <span class="absolute left-0 top-0 mt-2 ml-2">
+            <img width="21" height="21" src="https://img.icons8.com/ios-glyphs/30/FFFFFF/person-male.png" alt="person-male"/>
+          </span>
+          <input class="form-input pl-12" type="text" name="nome" [(ngModel)]="nome" placeholder="Nome" required
+          [ngClass]="{'border-red-500': form.submitted && !nome}">
+          <div class="alert-container">
+            <div *ngIf="form.submitted && !nome" class="text-red-500 text-sm">Campo obrigatório</div>
+          </div>
         </div>
-        <div class="w-full p-8 lg:w-1/2 bg-custom-green flex flex-col justify-center items-center">
-            <h2 class="text-2xl text-center custom-h2">CADASTRO</h2>
-            <div class="relative">
-              <span class="absolute left-0 top-0 mt-2 ml-2">
-                <img width="21" height="21" src="https://img.icons8.com/ios-glyphs/30/FFFFFF/person-male.png" alt="person-male"/>
-              </span>
-              <input class="form-input pl-12" type="text" name="nome" [(ngModel)]="nome" placeholder="Nome" required>
-            </div>
-            <div class="relative">
-              <span class="absolute left-0 top-0 mt-2 ml-2">
-                <img width="18" height="18" src="https://img.icons8.com/ios-filled/50/FFFFFF/mail.png" alt="mail"/>
-              </span>
-              <input class="form-input" type="email" name="email" [(ngModel)]="email" placeholder="Email" required>
+        
+        <div class="relative mb-4">
+          <span class="absolute left-0 top-0 mt-2 ml-2">
+            <img width="18" height="18" src="https://img.icons8.com/ios-filled/50/FFFFFF/mail.png" alt="mail"/>
+          </span>
+          <input class="form-input pl-12" type="email" name="email" [(ngModel)]="email" placeholder="Email" required
+          [ngClass]="{'border-red-500': form.submitted && !email}">
+          <div class="alert-container">
+            <div *ngIf="form.submitted && !email" class="text-red-500 text-sm">Campo obrigatório</div>
           </div>
-          <div class="relative">
-            <span class="absolute left-0 top-0 mt-2 ml-2">
-              <img width="20" height="20" src="https://img.icons8.com/ios-filled/50/FFFFFF/password.png" alt="password"/>
-            </span>
-            <input class="form-input" type="password" name="senha" [(ngModel)]="senha" placeholder="Senha" required>
-          </div>
-          <div class="flex items-center mt-4">
-            <span class="text-white mr-2 custom-text">Já possui uma conta?</span>
-            <button class="text-white underline custom-button" type="button" (click)="fazerLogin()">Faça login</button>
-          </div>
-          <button class="form-button text-center mt-4" type="submit" [disabled]="registerForm.invalid">CADASTRAR</button>
         </div>
+        
+        <div class="relative mb-4">
+          <span class="absolute left-0 top-0 mt-2 ml-2">
+            <img width="20" height="20" src="https://img.icons8.com/ios-filled/50/FFFFFF/password.png" alt="password"/>
+          </span>
+          <input class="form-input pl-12" type="password" name="senha" [(ngModel)]="senha" placeholder="Senha" required
+          [ngClass]="{'border-red-500': form.submitted && !senha}">
+          <div class="alert-container">
+            <div *ngIf="form.submitted && !senha" class="text-red-500 text-sm">Campo obrigatório</div>
+          </div>
+        </div>
+        
+        <div class="flex items-center mt-4">
+          <span class="text-white mr-2 custom-text">Já possui uma conta?</span>
+          <button class="text-white underline custom-button" type="button" (click)="fazerLogin()">Faça login</button>
+        </div>
+        
+        <button class="form-button text-center mt-4" type="submit">CADASTRAR</button>
+      </div>
     </div>
   </div>
 </form>
+
