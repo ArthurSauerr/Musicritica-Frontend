@@ -4,11 +4,9 @@
 
 .background-image {
   position: relative;
-  top: 0; /* Ajuste conforme necessário */
-  left: 0; /* Ajuste conforme necessário */
   width: 100%;
   height: auto;
-  z-index: 0; /* Certifique-se de que está atrás de outros elementos */
+  z-index: 0;
 }
 
 .background-image img {
@@ -16,6 +14,15 @@
   height: 45vh; /* Ajuste a altura conforme necessário */
   object-fit: cover; /* Mantém a proporção da imagem e cobre toda a área */
   object-position: center; /* Centraliza a imagem */
+}
+
+.background-image .overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.6); /* Ajuste a opacidade conforme necessário */
 }
 
 .div-custom {
