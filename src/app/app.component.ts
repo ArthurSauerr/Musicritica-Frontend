@@ -105,25 +105,25 @@ export class AppComponent {
   }
 
   exibirEdicao(): void {
-    this.exibirEditButtons = !this.exibirEditButtons; // Alterna o estado
+    this.exibirEditButtons = !this.exibirEditButtons;
 
-    if (this.idUsuario === +this.urlId) {
-      const botaoEditarNome = document.getElementById('editar-nome');
-      const botaoEditarBackground = document.getElementById('editar-img-bg');
-      const botaoEditarPerfil = document.getElementById('editar-img-perfil');
+    if (this.idUsuario === +this.urlId){
+      const modoEdicaoIds = ['editar-nome', 'editar-img-bg', 'editar-img-perfil', 'overlay-bg', 'overlay-profile'];
+      const modoEdicaoEsconder = ['div-musicas', 'playlists-btn', 'avaliacoes-btn', 'descobertas-btn'];
 
-      if (botaoEditarNome && botaoEditarPerfil && botaoEditarBackground) {
-        botaoEditarNome.style.visibility = this.exibirEditButtons ? "visible" : "hidden";
-        botaoEditarBackground.style.visibility = this.exibirEditButtons ? "visible" : "hidden";
-        botaoEditarPerfil.style.visibility = this.exibirEditButtons ? "visible" : "hidden";
-      }
+      modoEdicaoIds.forEach(id => {
+        const element = document.getElementById(id);
+        if(element){
+          element.style.visibility = this.exibirEditButtons ? "visible" : "hidden";
+        }
+      });
 
-      const backgroundOverlay = document.getElementById('overlay-bg');
-      const profileOverlay = document.getElementById("overlay-profile");
-      if (backgroundOverlay && profileOverlay) {
-        backgroundOverlay.style.visibility = this.exibirEditButtons ? "visible" : "hidden";
-        profileOverlay.style.visibility = this.exibirEditButtons ? "visible" : "hidden";
-      }
+      modoEdicaoEsconder.forEach(id => {
+        const element = document.getElementById(id);
+        if(element){
+          element.style.visibility = this.exibirEditButtons ? "hidden" : "visible";
+        }
+      })
     }
   }
 

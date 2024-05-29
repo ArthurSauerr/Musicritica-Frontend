@@ -11,9 +11,9 @@
 
 .background-image img {
   width: 100%;
-  height: 45vh; /* Ajuste a altura conforme necessário */
-  object-fit: cover; /* Mantém a proporção da imagem e cobre toda a área */
-  object-position: center; /* Centraliza a imagem */
+  height: 45vh;
+  object-fit: cover;
+  object-position: center;
 }
 
 .background-image .overlay {
@@ -22,7 +22,7 @@
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.6); /* Ajuste a opacidade conforme necessário */
+  background-color: rgba(0, 0, 0, 0.6);
 }
 
 .div-custom {
@@ -30,8 +30,8 @@
   font-family: Inter;
   height: fit-content;
   margin-top: -15vh;
-  position: relative; /* Certifique-se de que está acima da imagem de fundo */
-  z-index: 1; /* Certifique-se de que está acima da imagem de fundo */
+  position: relative;
+  z-index: 1;
 }
 
 .div-custom img{
@@ -84,7 +84,7 @@ input:focus {
   align-items: center;
   justify-content: center;
   background-color: rgba(0, 0, 0, 0.5);
-  z-index: 1000; /* Certifique-se de que o modal está acima de todos os outros elementos */
+  z-index: 1000; 
 }
 
 .modal-content {
