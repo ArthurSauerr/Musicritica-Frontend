@@ -6,24 +6,18 @@ import { AlertaServiceService } from 'src/app/shared/service/alerta-service.serv
   templateUrl: './musica-ranking.component.html',
   styleUrls: ['./musica-ranking.component.scss']
 })
-export class MusicaRankingComponent implements OnInit {
+export class MusicaRankingComponent  {
 
-  rating: number = 0;
-  stars: number[] = [1]; 
+  nome: string = '';
+  email: string = '';
+  senha: string = '';
 
-  rate(stars: number) {
-    this.rating = stars;
-  }
-
-  constructor(private alertaService: AlertaServiceService) { }
-
-  sucessoAdicionarMusicaNaPlaylist(): void {
-    this.alertaService.exibirAlerta('alert2'); 
-  }
-  erroAdicionarNaPlaylist(): void {
-    this.alertaService.exibirAlerta('alert1'); 
-  }
-
-  ngOnInit(): void {
+  onSubmit() {
+    if (this.nome && this.email && this.senha) {
+      alert('Cadastro realizado com sucesso!');
+    } else {
+      // Aqui a lógica é apenas para marcar o formulário como submetido para exibir os erros
+      // O `ngClass` e a validação do formulário no template cuidam de exibir os alertas necessários
+    }
   }
 }
