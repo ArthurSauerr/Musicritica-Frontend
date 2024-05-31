@@ -7,7 +7,13 @@
   width: 100%;
   height: auto;
   z-index: 0;
+  margin: 0 auto; 
 }
+
+.text-sm {
+  font-size: 0.75rem; 
+}
+
 
 .background-image img {
   width: 100%;
@@ -50,6 +56,8 @@
 .custom-input {
   border-top: 2px solid #64DEA1;
   margin-bottom: 4px;
+  width: 50%;
+  margin: 0 auto; 
 }
 
 .custom-music {

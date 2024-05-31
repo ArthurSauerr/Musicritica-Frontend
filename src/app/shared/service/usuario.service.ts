@@ -28,6 +28,10 @@ export class UsuarioService {
     return localStorage.removeItem('token');
   }
 
+  buscarUsuarioPeloNome(nome: string): Observable<Usuario[]>{
+    return this.httpClient.get<Usuario[]>(`${this.usuarioUrl}/buscar/nome/${nome}`);
+  }
+
   login(loginDTO: LoginDTO): Observable<any> {
     return this.httpClient.post<any>(`${this.usuarioUrl}/login`, loginDTO);
   }
