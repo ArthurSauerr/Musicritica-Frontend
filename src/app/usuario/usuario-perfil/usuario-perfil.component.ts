@@ -6,26 +6,25 @@ import { PlaylistService } from 'src/app/shared/service/playlist.service';
 import { Playlist } from 'src/app/shared/model/Playlist';
 import { ListaTracksSpotify } from 'src/app/shared/model/ListaTracksSpotify';
 import { DadosCompartilhadosService } from 'src/app/shared/service/dados-compartilhados.service';
-
-
+import { ChangeDetectorRef } from '@angular/core';
 
 @Component({
   selector: 'app-usuario-perfil',
   templateUrl: './usuario-perfil.component.html',
   styleUrls: ['./usuario-perfil.component.scss'],
-
 })
-export class UsuarioPerfilComponent implements OnInit{
-
+export class UsuarioPerfilComponent implements OnInit {
   usuario: Usuario;
-  imagemPerfil: number[];
+  imagemPerfil: string | ArrayBuffer | null;
+  imagemBackground: string | ArrayBuffer | null;
 
   constructor(
     private usuarioService: UsuarioService,
     private route: ActivatedRoute,
     private playListService: PlaylistService,
-    private dadosCompartilhadosService: DadosCompartilhadosService
-  ) { }
+    private dadosCompartilhadosService: DadosCompartilhadosService,
+    private cdr: ChangeDetectorRef
+  ) {}
 
   conteudoSelecionado: string | null = null;
   novaPlaylist: Playlist = new Playlist();
@@ -47,39 +46,42 @@ export class UsuarioPerfilComponent implements OnInit{
 
   ngOnInit(): void {
     this.usuarioService.getToken();
-    this.route.paramMap.subscribe(params => {
+    this.route.paramMap.subscribe((params) => {
       this.pageId = params.get('id');
       if (this.pageId) {
         this.buscarUsuario(+this.pageId);
         this.buscarPlaylistsPorIdUsuario(+this.pageId);
         this.dadosCompartilhadosService.setPageId(this.pageId);
       }
-      console.log("Id da pagina:", this.pageId);
+      console.log('Id da pagina:', this.pageId);
     });
   }
 
   mostrarConteudo(opcao: string): void {
     this.conteudoSelecionado = opcao;
-
   }
 
   buscarUsuario(idUsuario: number): void {
     this.usuarioService.buscarUsuarioPorId(idUsuario).subscribe(
       (usuario: Usuario) => {
         this.usuario = usuario;
-        console.log("Usuario buscado:", usuario);
+        console.log('Usuario buscado:', usuario);
       },
       (error) => {
-        console.error("Erro ao buscar usuário:", error);
+        console.error('Erro ao buscar usuário:', error);
       }
     );
+  }
+
+  formatarData(data: String){
+    return data.replace(/-/g, '/');
   }
 
   buscarPlaylistsPorIdUsuario(idUsuario: number): void {
     this.playListService.buscarPlaylistsPorIdUsuario(idUsuario).subscribe(
       (data: Playlist[]) => {
         this.playlistsDoUsuario = data;
-        this.playlistsDoUsuario.forEach(playlist => {
+        this.playlistsDoUsuario.forEach((playlist) => {
           this.buscarTodasMusicasDaPlaylist(playlist.id);
         });
         console.log(data);
@@ -95,11 +97,13 @@ export class UsuarioPerfilComponent implements OnInit{
       (data: ListaTracksSpotify) => {
         if (data.tracks && data.tracks.length > 0) {
           const primeiraMusica = data.tracks[0];
-          const imageUrl = primeiraMusica.album.images.length > 0 ? primeiraMusica.album.images[0].url : '';
+          const imageUrl =
+            primeiraMusica.album.images.length > 0
+              ? primeiraMusica.album.images[0].url
+              : '';
           this.primeirasMusicasDasPlaylists[id] = imageUrl;
         }
         this.musicasDaPlaylist = data;
-
       },
       (error) => {
         console.error('Ocorreu um erro ao buscar o as músicas do álbum:', error);
@@ -116,7 +120,7 @@ export class UsuarioPerfilComponent implements OnInit{
   }
 
   fecharTodosDropdowns(): void {
-    this.playlistsDoUsuario.forEach(playlist => {
+    this.playlistsDoUsuario.forEach((playlist) => {
       this.mostrarDropdown[playlist.id] = false;
     });
   }
@@ -132,12 +136,12 @@ export class UsuarioPerfilComponent implements OnInit{
   salvarNome(): void {
     if (this.novoNome) {
       this.usuarioService.atualizarUsuario(this.novoNome).subscribe(
-        response => {
+        (response) => {
           this.usuario.nome = this.novoNome;
           this.fecharModal();
           console.log('Nome atualizado com sucesso');
         },
-        error => {
+        (error) => {
           console.error('Erro ao atualizar nome:', error);
         }
       );
@@ -155,39 +159,58 @@ export class UsuarioPerfilComponent implements OnInit{
       if (file) {
         if (tipo === 'perfil') {
           this.novaImagemPerfil = file;
-          this.atualizarImagemPerfil();
+          this.previsualizarImagem('perfil', file);
         } else if (tipo === 'background') {
           this.novaImagemBackground = file;
-          this.atualizarImagemBackground();
+          this.previsualizarImagem('background', file);
         }
       }
     });
     inputElement.click();
   }
 
+  previsualizarImagem(tipo: string, file: File): void {
+    const reader = new FileReader();
+    reader.onload = (e: any) => {
+      if (tipo === 'perfil') {
+        this.imagemPerfil = e.target.result;
+        this.atualizarImagemPerfil();
+      } else if (tipo === 'background') {
+        this.imagemBackground = e.target.result;
+        this.atualizarImagemBackground();
+      }
+      this.cdr.detectChanges();
+    };
+    reader.readAsDataURL(file);
+  }
+
   atualizarImagemPerfil(): void {
-    if(this.novaImagemPerfil){
-      this.usuarioService.atualizarUsuario(undefined, this.novaImagemPerfil, undefined).subscribe(
-        response => {
-          console.log('Imagem alterada com sucesso');
-        },
-        error => {
-          console.error('Erro ao atualizar imagem:', error);
-        }
-      );
+    if (this.novaImagemPerfil) {
+      this.usuarioService
+        .atualizarUsuario(undefined, this.novaImagemPerfil, undefined)
+        .subscribe(
+          (response) => {
+            console.log('Imagem alterada com sucesso');
+          },
+          (error) => {
+            console.error('Erro ao atualizar imagem:', error);
+          }
+        );
     }
   }
 
   atualizarImagemBackground(): void {
-    if(this.novaImagemBackground){
-      this.usuarioService.atualizarUsuario(undefined, undefined, this.novaImagemBackground).subscribe(
-        response => {
-          console.log('Imagem alterada com sucesso');
-        },
-        error => {
-          console.error('Erro ao atualizar imagem:', error);
-        }
-      );
+    if (this.novaImagemBackground) {
+      this.usuarioService
+        .atualizarUsuario(undefined, undefined, this.novaImagemBackground)
+        .subscribe(
+          (response) => {
+            console.log('Imagem alterada com sucesso');
+          },
+          (error) => {
+            console.error('Erro ao atualizar imagem:', error);
+          }
+        );
     }
   }
 }

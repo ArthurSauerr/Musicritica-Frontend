@@ -23,7 +23,7 @@ export class AppComponent {
   idUsuario: number;
   usuario: Usuario;
   isDropdownOpen = false;
-  exibirEditButtons: boolean;
+  exibirEditButtons: boolean = false;
 
   urlId: number;
 
@@ -118,18 +118,25 @@ export class AppComponent {
   }
 
   exibirEdicao(): void {
-    if(this.idUsuario === +this.urlId){
+    this.exibirEditButtons = !this.exibirEditButtons;
 
-      const botaoEditarNome = document.getElementById('editar-nome');
-      const botaoEditarBackground = document.getElementById('editar-img-bg');
-      const botaoEditarPerfil = document.getElementById('editar-img-perfil');
-      if (botaoEditarNome && botaoEditarPerfil && botaoEditarBackground) {
-        botaoEditarNome.style.visibility = "visible";
-        botaoEditarBackground.style.visibility = "visible";
-        botaoEditarPerfil.style.visibility = "visible";
-      }
+    if (this.idUsuario === +this.urlId){
+      const modoEdicaoIds = ['editar-nome', 'editar-img-bg', 'editar-img-perfil', 'overlay-bg', 'overlay-profile'];
+      const modoEdicaoEsconder = ['div-musicas', 'playlists-btn', 'avaliacoes-btn', 'descobertas-btn'];
 
-      this.exibirEditButtons = true;
+      modoEdicaoIds.forEach(id => {
+        const element = document.getElementById(id);
+        if(element){
+          element.style.visibility = this.exibirEditButtons ? "visible" : "hidden";
+        }
+      });
+
+      modoEdicaoEsconder.forEach(id => {
+        const element = document.getElementById(id);
+        if(element){
+          element.style.visibility = this.exibirEditButtons ? "hidden" : "visible";
+        }
+      })
     }
   }
 
