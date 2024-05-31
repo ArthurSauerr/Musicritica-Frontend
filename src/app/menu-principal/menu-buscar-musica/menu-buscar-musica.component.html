@@ -3,6 +3,21 @@
     Resultados da busca
   </p>
 </div>
+<div class="ml-12 mr-12 flex items-center justify-left space-x-8">
+  <div *ngIf="usuarios.length > 0" class="flex flex-wrap space-x-8">
+    <div *ngFor="let usuario of usuarios" class="flex items-center justify-center space-x-8">
+      <div class="relative group">
+        <img [src]="'data:image/jpeg;base64,' + usuario.imagem_perfil" alt="{{ usuario.nome }}"
+          class="w-24 h-24 rounded-full object-cover">
+        <span class="absolute h-8 w-8 rounded-full bg-red-500 border-4 border-gray-500 top-0 right-0"></span>
+        <div
+          class="absolute inset-0 flex items-center justify-center bg-black bg-opacity-50 rounded-full opacity-0 group-hover:opacity-100 transition-opacity">
+          <span class="text-white text-sm">{{ usuario.nome }}</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 <div *ngIf="musicas.length > 0" class="flex mr-8 ml-8 flex-wrap -mx-1 mt-10">
   <div *ngFor="let musica of musicas" class="w-full sm:w-1/2 md:w-1/3 lg:w-1/5 p-4 chart-container">
     <div class="relative rounded-md overflow-hidden" (click)="avancar(musica)">

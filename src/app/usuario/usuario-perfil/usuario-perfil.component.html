@@ -1,32 +1,44 @@
-<div class="relative">
+<div class="relative mt-24">
   <div *ngIf="imagemBackground || usuario?.imagem_background" class="background-image">
-    <img [src]="imagemBackground ? imagemBackground : 'data:image/jpeg;base64,' + usuario.imagem_background" alt="Imagem de Fundo">
+    <img [src]="imagemBackground ? imagemBackground : 'data:image/jpeg;base64,' + usuario.imagem_background"
+      alt="Imagem de Fundo">
     <div id="overlay-bg" class="overlay" style="visibility: hidden;"></div>
   </div>
   <div *ngIf="usuario" class="flex justify-center items-center h-screen div-custom relative">
     <div class="flex flex-col w-full max-w-screen-lg ">
-      <button id="editar-img-bg" class="flex flex-col items-center justify-center hover:font-bold transition-transform transform hover:scale-110 -mt-20 mb-12" style="visibility: hidden;" (click)="alterarImagem('background')">
-        <img class="" src="https://img.icons8.com/ios-glyphs/30/64dea1/image.png" alt="image"/>
+      <button id="editar-img-bg"
+        class="flex flex-col items-center justify-center hover:font-bold transition-transform transform hover:scale-110 -mt-20 mb-12"
+        style="visibility: hidden;" (click)="alterarImagem('background')">
+        <img class="" src="https://img.icons8.com/ios-glyphs/30/64dea1/image.png" alt="image" />
         <span>Alterar Imagem de Background</span>
       </button>
       <div class="text-center relative">
         <div *ngIf="imagemPerfil || usuario?.imagem_perfil" class="flex justify-center drop-shadow-md py-2 relative">
           <div class="relative w-48 h-48">
-            <img width="200" height="200" [src]="imagemPerfil ? imagemPerfil : 'data:image/jpeg;base64,' + usuario.imagem_perfil" alt="Imagem de Perfil" class="rounded-full object-cover w-full h-full">
-            <div id="overlay-profile" style="visibility: hidden;" class="absolute inset-0 bg-black opacity-70 rounded-full"></div>
-            <button id="editar-img-perfil" style="visibility: hidden;" (click)="alterarImagem('perfil')" class="absolute inset-0 flex items-center justify-center">
-              <img class="transition-transform transform hover:scale-125" src="https://img.icons8.com/ios-glyphs/30/64dea1/pencil--v1.png" alt="pencil--v1"/>
+            <img width="200" height="200"
+              [src]="imagemPerfil ? imagemPerfil : 'data:image/jpeg;base64,' + usuario.imagem_perfil"
+              alt="Imagem de Perfil" class="rounded-full object-cover w-full h-full">
+            <div id="overlay-profile" style="visibility: hidden;"
+              class="absolute inset-0 bg-black opacity-70 rounded-full"></div>
+            <button id="editar-img-perfil" style="visibility: hidden;" (click)="alterarImagem('perfil')"
+              class="absolute inset-0 flex items-center justify-center">
+              <img class="transition-transform transform hover:scale-125"
+                src="https://img.icons8.com/ios-glyphs/30/64dea1/pencil--v1.png" alt="pencil--v1" />
             </button>
           </div>
         </div>
-        <button id="editar-nome" style="visibility: hidden;" (click)="editarNome()" class="hover:font-bold">Editar Nome</button>
+        <button id="editar-nome" style="visibility: hidden;" (click)="editarNome()" class="hover:font-bold">Editar
+          Nome</button>
         <p class="nomeUsuario drop-shadow-md">{{ usuario.nome }}</p>
-        <p class="text-sm">Cadastrado desde: {{ formatarData(usuario.dt_cadastro) }}</p>
+        <p class="text-sm">Entrou em {{ formatarData(usuario.dt_cadastro) }}</p>
         <div class="mt-6 mb-6 flex flex-col items-center">
           <div class="flex space-x-4">
-            <button id="playlists-btn" class="botao-perfil hover:font-bold" (click)="mostrarConteudo('playlists'); buscarPlaylistsPorIdUsuario(usuario.id)">Playlists</button>
-            <button id="avaliacoes-btn" class="botao-perfil hover:font-bold" (click)="mostrarConteudo('avaliacoes')">Avaliações</button>
-            <button id="descobertas-btn" class="botao-perfil hover:font-bold" (click)="mostrarConteudo('descobertas')">Descobertas</button>
+            <button id="playlists-btn" class="botao-perfil hover:font-bold"
+              (click)="mostrarConteudo('playlists'); buscarPlaylistsPorIdUsuario(usuario.id)">Playlists</button>
+            <button id="avaliacoes-btn" class="botao-perfil hover:font-bold"
+              (click)="mostrarConteudo('avaliacoes')">Avaliações</button>
+            <button id="descobertas-btn" class="botao-perfil hover:font-bold"
+              (click)="mostrarConteudo('descobertas')">Descobertas</button>
           </div>
         </div>
       </div>
@@ -37,10 +49,12 @@
   <div *ngIf="conteudoSelecionado === 'playlists'" class="text-white mt-6 mb-6 overflow-hidden">
     <div *ngFor="let playlist of playlistsDoUsuario" class="mt-4 flex items-center mb-2">
 
-      <div class="w-full bg-gray-700 cursor-pointer p-4 rounded-lg flex hover:bg-gray-800 transition duration-300 ease-in-out"
+      <div
+        class="w-full bg-gray-700 cursor-pointer p-4 rounded-lg flex hover:bg-gray-800 transition duration-300 ease-in-out"
         (click)="buscarTodasMusicasDaPlaylist(playlist.id)">
         <div class="w-20 ">
-          <img *ngIf="primeirasMusicasDasPlaylists[playlist.id]" [src]="primeirasMusicasDasPlaylists[playlist.id]" class="w-full h-auto rounded-lg drop-shadow-md" alt="Miniatura da primeira música">
+          <img *ngIf="primeirasMusicasDasPlaylists[playlist.id]" [src]="primeirasMusicasDasPlaylists[playlist.id]"
+            class="w-full h-auto rounded-lg drop-shadow-md" alt="Miniatura da primeira música">
         </div>
         <div class="flex-grow text-left mt-8 ml-8 text-2xl">{{ playlist.nome }}</div>
         <div>
@@ -164,22 +178,23 @@
 <div *ngIf="isModalOpen" class="modal-overlay">
   <div class="modal-content bg-black bg-opacity-50 backdrop-filter backdrop-blur-sm ">
     <h2 class="text-xl font-bold mb-4 nomeUsuario justify-center">Editar Nome</h2>
-    <input [(ngModel)]="novoNome" type="text" class="input-modal w-full p-2 border border-gray-300 rounded mb-4 " placeholder="Novo Nome">
+    <input [(ngModel)]="novoNome" type="text" class="input-modal w-full p-2 border border-gray-300 rounded mb-4 "
+      placeholder="Novo Nome">
     <div class="flex justify-center gap-2">
       <button (click)="fecharModal()"
-      class="w-36 rounded-full relative inline-flex items-center justify-center p-0.5 overflow-hidden text-sm font-medium text-gray-900 group bg-gradient-to-br from-teal-300 to-lime-300 group-hover:from-teal-300 group-hover:to-lime-300 dark:text-white dark:hover:text-gray-900 focus:ring-4 focus:outline-none focus:ring-lime-200 dark:focus:ring-lime-800">
-      <span
-        class="w-36 rounded-full relative px-5 py-2.5 transition-all ease-in duration-75 bg-white dark:bg-gray-900 group-hover:bg-opacity-0">
-        Fechar
-      </span>
-    </button>
-    <button (click)="salvarNome()"
-    class="w-36 rounded-full relative inline-flex items-center justify-center p-0.5 overflow-hidden text-sm font-medium text-gray-900 group bg-gradient-to-br from-teal-300 to-lime-300 group-hover:from-teal-300 group-hover:to-lime-300 dark:text-white dark:hover:text-gray-900 focus:ring-4 focus:outline-none focus:ring-lime-200 dark:focus:ring-lime-800">
-    <span
-      class="w-36 rounded-full relative px-5 py-2.5 transition-all ease-in duration-75 bg-white dark:bg-gray-900 group-hover:bg-opacity-0">
-      Salvar
-    </span>
-  </button>
+        class="w-36 rounded-full relative inline-flex items-center justify-center p-0.5 overflow-hidden text-sm font-medium text-gray-900 group bg-gradient-to-br from-teal-300 to-lime-300 group-hover:from-teal-300 group-hover:to-lime-300 dark:text-white dark:hover:text-gray-900 focus:ring-4 focus:outline-none focus:ring-lime-200 dark:focus:ring-lime-800">
+        <span
+          class="w-36 rounded-full relative px-5 py-2.5 transition-all ease-in duration-75 bg-white dark:bg-gray-900 group-hover:bg-opacity-0">
+          Fechar
+        </span>
+      </button>
+      <button (click)="salvarNome()"
+        class="w-36 rounded-full relative inline-flex items-center justify-center p-0.5 overflow-hidden text-sm font-medium text-gray-900 group bg-gradient-to-br from-teal-300 to-lime-300 group-hover:from-teal-300 group-hover:to-lime-300 dark:text-white dark:hover:text-gray-900 focus:ring-4 focus:outline-none focus:ring-lime-200 dark:focus:ring-lime-800">
+        <span
+          class="w-36 rounded-full relative px-5 py-2.5 transition-all ease-in duration-75 bg-white dark:bg-gray-900 group-hover:bg-opacity-0">
+          Salvar
+        </span>
+      </button>
     </div>
   </div>
 </div>

@@ -4,6 +4,8 @@ import { MenuPrincipalService } from './../../shared/service/menu-principal.serv
 import { Component, OnInit } from '@angular/core';
 import { Item } from 'src/app/shared/model/Item';
 import { SpotifySearchResponse } from 'src/app/shared/model/SpotifySearchResponse';
+import { UsuarioService } from 'src/app/shared/service/usuario.service';
+import { Usuario } from 'src/app/shared/model/Usuario';
 
 @Component({
   selector: 'app-menu-buscar-musica',
@@ -12,22 +14,30 @@ import { SpotifySearchResponse } from 'src/app/shared/model/SpotifySearchRespons
 })
 export class MenuBuscarMusicaComponent implements OnInit {
 
-  constructor(private router: Router, private menuPrincipalService: MenuPrincipalService, private dadosCompartilhadosService: DadosCompartilhadosService) { }
+  constructor(
+    private router: Router,
+    private menuPrincipalService: MenuPrincipalService,
+    private dadosCompartilhadosService: DadosCompartilhadosService,
+    private usuarioService: UsuarioService
+  ) { }
 
-  musicaProcurada: string = '';
+  parametroDePesquisa: string = '';
+
   musicas: Item[] = [];
+  usuarios: Usuario[] = [];
 
   ngOnInit(): void {
     this.dadosCompartilhadosService.musicaProcurada.subscribe(musicaProcurada => {
       if (musicaProcurada) {
-        this.musicaProcurada = musicaProcurada;
+        this.parametroDePesquisa = musicaProcurada;
         this.buscarMusica();
+        this.buscarUsuarios();
       }
     });
   }
 
   buscarMusica(): void {
-    this.menuPrincipalService.buscarMusica(this.musicaProcurada).subscribe(
+    this.menuPrincipalService.buscarMusica(this.parametroDePesquisa).subscribe(
       (data: SpotifySearchResponse) => {
         console.log(data);
         this.musicas = data.tracks.items;
@@ -40,9 +50,19 @@ export class MenuBuscarMusicaComponent implements OnInit {
       }
     );
   }
+  buscarUsuarios(): void {
+    this.usuarioService.buscarUsuarioPeloNome(this.parametroDePesquisa).subscribe(
+      (data: Usuario[]) => {
+        console.log(data);
+        this.usuarios = data;
+      },
+      (error) => {
+        console.error('Ocorreu um erro ao buscar usuários:', error);
+      }
+    );
+}
 
   avancar(musica: Item): void {
     this.router.navigate(['/detalhes'], { state: { musica: musica } });
   }
-
 }
