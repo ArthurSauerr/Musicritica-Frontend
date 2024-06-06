@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { Comentario } from 'src/app/shared/model/Comentario';
+import { Denuncia } from 'src/app/shared/model/Denuncia';
 
 @Component({
   selector: 'app-adm-denuncia',
@@ -6,5 +8,12 @@ import { Component } from '@angular/core';
   styleUrls: ['./adm-denuncia.component.scss']
 })
 export class AdmDenunciaComponent {
+
+  public denuncias: Array<Denuncia> = new Array;
+  usuarioReportado: String
+  comentario: Comentario
+  data: String
+denuncia: any;
+
 
 }
