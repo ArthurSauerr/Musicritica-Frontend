@@ -31,23 +31,6 @@ export class MusicaDescobrirComponent implements OnInit {
 
   ngOnInit(): void {
 
-    $(document).ready(function(){
-      $(window).scroll(function() {
-          $('.box').each(function() {
-              var offset = $(this).offset();
-              if (offset) {
-                  var position: number = offset.top;
-                  var scrollPosition: any = $(window).scrollTop();
-                  var windowHeight: any = $(window).height();
-
-                  if (position < scrollPosition + windowHeight) {
-                      $(this).addClass('animate__animated animate__fadeInUp');
-                      $(this).css('opacity', '1');
-                  }
-              }
-          });
-      });
-  });
   }
 
   getSpotifyEmbedUrl(idMusica: string | null): SafeResourceUrl {
@@ -57,21 +40,6 @@ export class MusicaDescobrirComponent implements OnInit {
       return '';
     }
   }
-
-  @ViewChild('animatedElement') animatedElement: ElementRef;
-  isVisible: boolean = false;
-
-  @HostListener('window:scroll', ['$event'])
-  checkScroll(): void {
-    const scrollPosition = window.pageYOffset;
-    const elementPosition = this.animatedElement.nativeElement.offsetTop;
-    const windowHeight = window.innerHeight;
-
-    if (scrollPosition + windowHeight > elementPosition) {
-      this.renderer.addClass(this.animatedElement.nativeElement, 'active');
-    }
-  }
-
 
   selecionarGenero(genero: string): void {
     if (!this.generoPrimario) {

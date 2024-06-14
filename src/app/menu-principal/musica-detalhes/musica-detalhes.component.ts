@@ -37,6 +37,7 @@ export class MusicaDetalhesComponent implements OnInit {
   showRepliesId: number | null = null;
   showCreatePlaylistInput = false;
   showModal: boolean = false;
+  showModalAvaliacao: boolean = false;
   showModalEditarComentario: boolean = false;
   comentarioSelecionado: string;
   idComentarioSelecionado: number;
@@ -66,7 +67,7 @@ export class MusicaDetalhesComponent implements OnInit {
   mostrarDropdown: { [key: number]: boolean } = {};
   mostrarTextArea: { [key: number]: boolean } = {};
 
-  rating: number = 2;
+  rating: number = 0;
   stars: number[] = [5];
 
 
@@ -76,8 +77,6 @@ export class MusicaDetalhesComponent implements OnInit {
 
   data: any;
   options: any;
-
-  
 
   ngOnInit(): void {
 
@@ -226,7 +225,7 @@ export class MusicaDetalhesComponent implements OnInit {
               console.log('Comentário enviado com sucesso: ', comentarioSalvo);
               this.comentario = '';
               this.buscarComentarios();
-              this.alertaService.exibirAlerta('alert3')
+              this.alertaService.exibirAlerta('alert31')
             }, error => {
               console.error('Erro ao enviar o comentário:', error);
               this.alertaService.exibirAlerta('alert4')
@@ -292,7 +291,7 @@ export class MusicaDetalhesComponent implements OnInit {
               console.log('Comentário enviado com sucesso: ', comentarioSalvo);
               this.resposta = '';
               this.buscarComentarios();
-              this.alertaService.exibirAlerta('alert3')
+              this.alertaService.exibirAlerta('alert31')
             }, error => {
               console.error('Erro ao enviar o comentário:', error);
               this.alertaService.exibirAlerta('alert4')
@@ -337,40 +336,43 @@ export class MusicaDetalhesComponent implements OnInit {
   }
 
   enviarPlaylist(): void {
-    this.usuarioService.buscarIdPorEmail(this.emailParam).subscribe(
-      (data: number) => {
+    if (this.idPlaylistSelecionada > 0) {
+      this.enviarMusicaParaPlaylist();
+    } else {
+      this.usuarioService.buscarIdPorEmail(this.emailParam).subscribe(
+        (data: number) => {
 
-        this.usuarioParaEnviar.id = data;
-        this.novaPlaylist.usuario = this.usuarioParaEnviar;
+          this.usuarioParaEnviar.id = data;
+          this.novaPlaylist.usuario = this.usuarioParaEnviar;
 
-        const idMusica = this.musica.id;
-        this.novaMusicaSpotify.id_spotify = idMusica;
-        const nomePlaylist = this.nomePlaylistNova;
-        this.listaDeMusicasParaEnviar.push(this.novaMusicaSpotify)
+          const idMusica = this.musica.id;
+          this.novaMusicaSpotify.id_spotify = idMusica;
+          const nomePlaylist = this.nomePlaylistNova;
+          this.listaDeMusicasParaEnviar.push(this.novaMusicaSpotify)
 
-        console.log("Lista de músicas: " + this.listaDeMusicasParaEnviar);
-        console.log("nome da playlist: " + nomePlaylist);
-        console.log("usuario da playlist: " + this.usuarioParaEnviar.id);
+          console.log("Lista de músicas: " + this.listaDeMusicasParaEnviar);
+          console.log("nome da playlist: " + nomePlaylist);
+          console.log("usuario da playlist: " + this.usuarioParaEnviar.id);
 
-        this.novaPlaylist.nome = this.nomePlaylistNova;
+          this.novaPlaylist.nome = this.nomePlaylistNova;
 
-        this.novaPlaylist.musicaSpotifyList = this.listaDeMusicasParaEnviar;
+          this.novaPlaylist.musicaSpotifyList = this.listaDeMusicasParaEnviar;
 
-        this.playlistService.salvarNovaPlaylist(this.novaPlaylist).subscribe(
-          (playlistSalva) => {
-            console.log('Playlist enviada com sucesso: ', playlistSalva);
-            this.alertaService.exibirAlerta('alert3')
-            this.nomePlaylistNova = '';
-          }, error => {
-            console.error('Erro ao salvar uma nova playlist:', error);
-            this.alertaService.exibirAlerta('alert4')
-          });
-      },
-      (error) => {
-        console.error('Ocorreu um erro ao buscar o usuário pelo ID:', error);
-      }
-    );
-
+          this.playlistService.salvarNovaPlaylist(this.novaPlaylist).subscribe(
+            (playlistSalva) => {
+              console.log('Playlist enviada com sucesso: ', playlistSalva);
+              this.alertaService.exibirAlerta('alert3')
+              this.nomePlaylistNova = '';
+            }, error => {
+              console.error('Erro ao salvar uma nova playlist:', error);
+              this.alertaService.exibirAlerta('alert4')
+            });
+        },
+        (error) => {
+          console.error('Ocorreu um erro ao buscar o usuário pelo ID:', error);
+        }
+      );
+    }
   }
 
   enviarMusicaParaPlaylist(): void {
@@ -389,6 +391,8 @@ export class MusicaDetalhesComponent implements OnInit {
         console.error('Erro ao salvar uma nova música na playlist:', error);
         this.alertaService.exibirAlerta('alert2')
       });
+
+
   }
 
   buscarPlaylistsPorIdUsuario(): void {
@@ -446,12 +450,26 @@ export class MusicaDetalhesComponent implements OnInit {
     this.showCreatePlaylistInput = false
     this.buscarPlaylistsPorIdUsuario();
   }
+
+  toggleModalAvaliacao() {
+    this.showModalAvaliacao = !this.showModalAvaliacao;
+  }
+
   fecharModal(event: MouseEvent): void {
     const modalElement = document.querySelector('#modal');
     if (modalElement && !modalElement.contains(event.target as Node)) {
       this.toggleModal();
     }
   }
+
+  fecharModalAvaliacao(event: MouseEvent): void {
+    const modalElement = document.querySelector('#modalAvaliacaoMusica');
+    if (modalElement && !modalElement.contains(event.target as Node)) {
+      this.toggleModalAvaliacao();
+    }
+  }
+
+  
 
   checkPlaylistSelected(event: any) {
     this.playlistSelecionada = event.target.checked;

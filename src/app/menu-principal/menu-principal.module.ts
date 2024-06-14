@@ -5,7 +5,6 @@ import { MusicasListagemComponent } from './musicas-listagem/musicas-listagem.co
 import { FormsModule } from '@angular/forms';
 import { MusicaDetalhesComponent } from './musica-detalhes/musica-detalhes.component';
 import { MusicaDescobrirComponent } from './musica-descobrir/musica-descobrir.component';
-import { MusicaRankingComponent } from './musica-ranking/musica-ranking.component';
 import { MenuBuscarMusicaComponent } from './menu-buscar-musica/menu-buscar-musica.component';
 import { DatePipe } from '@angular/common';
 import { CarouselModule } from 'ngx-owl-carousel-o';
@@ -21,7 +20,6 @@ import { AlertaComponentComponent } from './alerta-component/alerta-component.co
     MusicasListagemComponent,
     MusicaDetalhesComponent,
     MusicaDescobrirComponent,
-    MusicaRankingComponent,
     MenuBuscarMusicaComponent,
     RecomendacoesComponent,
     AlertaComponentComponent
