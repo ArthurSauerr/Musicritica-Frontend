@@ -60,7 +60,11 @@ export class MenuBuscarMusicaComponent implements OnInit {
         console.error('Ocorreu um erro ao buscar usuários:', error);
       }
     );
-}
+  }
+
+  verPerfilUsuario(id: number) {
+    this.router.navigate(['/usuario/perfil/', id])
+  }
 
   avancar(musica: Item): void {
     this.router.navigate(['/detalhes'], { state: { musica: musica } });
