@@ -12,6 +12,8 @@ import { PlaylistService } from 'src/app/shared/service/playlist.service';
 import { Playlist } from 'src/app/shared/model/Playlist';
 import { MusicaSpotify } from 'src/app/shared/model/MusicaSpotify';
 import { AlertaServiceService } from 'src/app/shared/service/alerta-service.service';
+import { AvaliacaoService } from 'src/app/shared/service/avaliacao.service';
+import { Avaliacao } from 'src/app/shared/model/Avaliacao';
 
 @Component({
   selector: 'app-musica-detalhes',
@@ -25,7 +27,8 @@ export class MusicaDetalhesComponent implements OnInit {
     private usuarioService: UsuarioService,
     private playlistService: PlaylistService,
     private elementRef: ElementRef,
-    private alertaService: AlertaServiceService
+    private alertaService: AlertaServiceService,
+    private avaliacaoService: AvaliacaoService
   ) { }
 
   artista: string;
@@ -51,6 +54,8 @@ export class MusicaDetalhesComponent implements OnInit {
   usuarioParaEnviar: Usuario = new Usuario();
   usuarioLogado: Usuario = new Usuario();
   novaMusicaSpotify: MusicaSpotify = new MusicaSpotify();
+  novaAvaliacao: Avaliacao = new Avaliacao();
+  musicaSpotifyParaAvaliacao: MusicaSpotify = new MusicaSpotify();
 
   idComentarioPai: number;
   spotifyUrl: SafeResourceUrl;
@@ -200,6 +205,42 @@ export class MusicaDetalhesComponent implements OnInit {
         console.error('Ocorreu um erro ao buscar as músicas:', error);
       }
     );
+  }
+
+  enviarAvaliacao() {
+    const id_spotify = this.musica.id
+
+    console.log("id " + id_spotify);
+    this.usuarioService.buscarIdPorEmail(this.emailParam).subscribe(
+      (idUsuarioAutenticado: number) => {
+
+        this.usuarioParaEnviar.id = idUsuarioAutenticado;
+
+        this.avaliacaoService.verificarExistenciaDaMusicaPorIdSpotify(id_spotify).subscribe(
+          (musicaExistente) => {
+            this.musicaSpotifyParaAvaliacao.id = musicaExistente.id;
+            this.musicaSpotifyParaAvaliacao.id_spotify = this.musica.id;
+            
+            this.novaAvaliacao.musica = this.musicaSpotifyParaAvaliacao;
+            this.novaAvaliacao.usuario = this.usuarioParaEnviar;
+            this.novaAvaliacao.nota = this.rating;
+
+            console.log("avaliacao completa: " + this.novaAvaliacao)
+
+            this.avaliacaoService.salvar(this.novaAvaliacao).subscribe(
+              (avaliacaoEnviada) => {
+                console.log("avalição enviada: " + avaliacaoEnviada)
+              }, error => {
+                console.error('Erro ao enviar o comentário:', error);
+                //this.alertaService.exibirAlerta('alert4')
+              });
+
+          }, error => {
+            console.error('Essa música não existe na base de dados:', error);
+          });
+      }, error => {
+        console.error('Usuário não encontrad:', error);
+      });
   }
 
   enviarComentario(): void {
@@ -469,7 +510,7 @@ export class MusicaDetalhesComponent implements OnInit {
     }
   }
 
-  
+
 
   checkPlaylistSelected(event: any) {
     this.playlistSelecionada = event.target.checked;

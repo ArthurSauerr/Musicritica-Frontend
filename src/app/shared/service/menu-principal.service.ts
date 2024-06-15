@@ -2,7 +2,6 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { SpotifySearchResponse } from '../model/SpotifySearchResponse';
-import { LastFmMusica } from '../model/LastFmMusica';
 import { Item } from '../model/Item';
 import { TrackData } from '../model/TrackData';
 import { AlbumBuscado } from '../model/AlbumBuscado';
