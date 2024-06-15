@@ -266,7 +266,7 @@
       Populares no Brasil
     </p>
   </div>
-  <div class="wrapper mr-6 ml-20">
+  <div class="wrapper mr-6 ml-20 cursor-pointer">
     <ng-container *ngFor="let setor of [1, 2, 3]">
       <section id="setor{{setor}}">
         <a [href]="'#setor' + (setor === 1 ? 3 : setor - 1)" class="mt-6 arrow__btn ">‹</a>
@@ -284,7 +284,7 @@
       Populares mundialmente
     </p>
   </div>
-  <div class="wrapper mr-6 ml-20">
+  <div class="wrapper mr-6 ml-20 cursor-pointer">
     <ng-container *ngFor="let section of [1, 2, 3]">
       <section id="section{{section}}">
         <a [href]="'#section' + (section === 1 ? 3 : section - 1)" class="mt-6 arrow__btn ">‹</a>
