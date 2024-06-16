@@ -8,6 +8,7 @@ import { AlbumBuscado } from 'src/app/shared/model/AlbumBuscado';
 import { SpotifySearchResponse } from 'src/app/shared/model/SpotifySearchResponse';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import * as $ from 'jquery'
+import { PlaylistService } from 'src/app/shared/service/playlist.service';
 
 @Component({
   selector: 'app-musica-descobrir',
@@ -16,7 +17,7 @@ import * as $ from 'jquery'
 })
 export class MusicaDescobrirComponent implements OnInit {
 
-  constructor(private renderer: Renderer2, private sanitizer: DomSanitizer, private spotifyService: MenuPrincipalService, private dadosCompartilhadosService: DadosCompartilhadosService) { }
+  constructor(private renderer: Renderer2, private sanitizer: DomSanitizer, private spotifyService: MenuPrincipalService, private dadosCompartilhadosService: DadosCompartilhadosService, private playlistService: PlaylistService) { }
 
   isClicked: boolean = false;
   album: AlbumDescobrir;
@@ -80,6 +81,7 @@ export class MusicaDescobrirComponent implements OnInit {
         console.log(data);
         this.idMusicaSpotify = data.tracks.items[0].id;
         console.log("id da primeira musica do album: " + this.albumBuscado.tracks.items[0].id);
+        this.enviarMusicaParaDescobertas(this.idMusicaSpotify, this.idMusicaSpotify);
       },
       (error) => {
         console.error('Ocorreu um erro ao buscar as músicas:', error);
@@ -108,6 +110,19 @@ export class MusicaDescobrirComponent implements OnInit {
         console.error('Ocorreu um erro ao buscar o álbum:', error);
       }
     );
+  }
+
+  enviarMusicaParaDescobertas(idSpotify: string, idMusicaSpotify: string): void {
+    console.log("Id para verificar: " + idMusicaSpotify);
+
+    this.playlistService.salvarDescobertas(2, idSpotify, idMusicaSpotify).subscribe(
+      () => {
+        console.log('Música enviada para descobertas com sucesso');
+        //this.alertaService.exibirAlerta('alert1')
+      }, error => {
+        console.error('Erro ao salvar uma nova música nas descobertas:', error);
+        //this.alertaService.exibirAlerta('alert2')
+      });
   }
 }
 

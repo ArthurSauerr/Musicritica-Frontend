@@ -29,6 +29,7 @@ export class UsuarioPerfilComponent implements OnInit {
   conteudoSelecionado: string | null = null;
   novaPlaylist: Playlist = new Playlist();
   playlistsDoUsuario: Playlist[];
+  playlistDescobertas: Playlist[];
 
   mostrarDropdown: { [key: number]: boolean } = {};
 
@@ -51,6 +52,7 @@ export class UsuarioPerfilComponent implements OnInit {
       if (this.pageId) {
         this.buscarUsuario(+this.pageId);
         this.buscarPlaylistsPorIdUsuario(+this.pageId);
+        this.buscarPlaylistDescobertas(+this.pageId)
         this.dadosCompartilhadosService.setPageId(this.pageId);
       }
       console.log('Id da pagina:', this.pageId);
@@ -92,6 +94,21 @@ export class UsuarioPerfilComponent implements OnInit {
     );
   }
 
+  buscarPlaylistDescobertas(idUsuario: number): void {
+    this.playListService.buscarPlaylistDescobertasPorIdUsuario(idUsuario).subscribe(
+      (data: Playlist[]) => {
+        this.playlistDescobertas = data;
+        this.playlistDescobertas.forEach((playlist) => {
+          this.buscarTodasMusicasDaPlaylistDescobertas(idUsuario);
+        });
+        console.log(data);
+      },
+      (error) => {
+        console.error('Ocorreu um erro ao buscar as musicas de descobertas:', error);
+      }
+    )
+  }
+
   buscarTodasMusicasDaPlaylist(id: number): void {
     this.playListService.buscarTodasMusicasDaPlaylist(id).subscribe(
       (data: ListaTracksSpotify) => {
@@ -102,6 +119,25 @@ export class UsuarioPerfilComponent implements OnInit {
               ? primeiraMusica.album.images[0].url
               : '';
           this.primeirasMusicasDasPlaylists[id] = imageUrl;
+        }
+        this.musicasDaPlaylist = data;
+      },
+      (error) => {
+        console.error('Ocorreu um erro ao buscar o as músicas do álbum:', error);
+      }
+    );
+  }
+
+  buscarTodasMusicasDaPlaylistDescobertas(usuarioId: number): void {
+    this.playListService.buscarTodasMusicasDaPlaylistDescobertas(usuarioId).subscribe(
+      (data: ListaTracksSpotify) => {
+        if (data.tracks && data.tracks.length > 0) {
+          const primeiraMusica = data.tracks[0];
+          const imageUrl =
+            primeiraMusica.album.images.length > 0
+              ? primeiraMusica.album.images[0].url
+              : '';
+          //this.primeirasMusicasDasPlaylists[id] = imageUrl;
         }
         this.musicasDaPlaylist = data;
       },
