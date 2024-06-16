@@ -22,6 +22,7 @@ export class AvaliacaoService {
     console.log("URL enviada: " + url);
     return this.http.get<MusicaSpotify>(url);
   }
-  
-  
+  buscarAvaliacaoPorIdComentario(idComentario: number): Observable<Avaliacao> {
+    return this.http.get<Avaliacao>(`${this.apiUrl}/comentario/${idComentario}`);
+  }
 }

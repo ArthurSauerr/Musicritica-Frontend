@@ -35,6 +35,7 @@ export class MusicaDetalhesComponent implements OnInit {
   comentario: string = '';
   resposta: string = '';
   emailParam: string | undefined;
+  notasPorComentario: Map<number, number> = new Map<number, number>();
 
   mostrarTextarea: boolean = false;
   showRepliesId: number | null = null;
@@ -156,6 +157,14 @@ export class MusicaDetalhesComponent implements OnInit {
     this.buscarIdUsuarioLogado();
   };
 
+  // No seu componente Angular
+getStarsArray(numStars: number | undefined): number[] {
+  if (numStars === undefined) {
+    return [];
+  }
+  return Array(numStars).fill(0).map((x, i) => i);
+}
+
   buscarIdUsuarioLogado() {
     this.usuarioService.buscarIdPorEmail(this.emailParam).subscribe(
       (data: number) => {
@@ -189,9 +198,23 @@ export class MusicaDetalhesComponent implements OnInit {
     this.comentarioService.buscarComentarioPorIdMusica(this.musica.id).subscribe(
       (data: Comentario[]) => {
         this.comentariosBuscados = data;
+        for (let index = 0; index < data.length; index++) {
+          this.buscarAvaliacoesPorIdComentario(data[index].id);
+        }
       },
       (error) => {
-        console.error('Ocorreu um erro ao buscar as músicas:', error);
+        console.error('Ocorreu um erro ao buscar os comentários:', error);
+      }
+    );
+  }
+  
+  buscarAvaliacoesPorIdComentario(idComentario: number) {
+    this.avaliacaoService.buscarAvaliacaoPorIdComentario(idComentario).subscribe(
+      (avaliacaoEncontrada) => {
+        this.notasPorComentario.set(idComentario, avaliacaoEncontrada.nota);
+      },
+      (error) => {
+        console.error('Erro ao buscar a avaliação:', error);
       }
     );
   }
@@ -220,7 +243,7 @@ export class MusicaDetalhesComponent implements OnInit {
           (musicaExistente) => {
             this.musicaSpotifyParaAvaliacao.id = musicaExistente.id;
             this.musicaSpotifyParaAvaliacao.id_spotify = this.musica.id;
-            
+
             this.novaAvaliacao.musica = this.musicaSpotifyParaAvaliacao;
             this.novaAvaliacao.usuario = this.usuarioParaEnviar;
             this.novaAvaliacao.nota = this.rating;
@@ -229,17 +252,20 @@ export class MusicaDetalhesComponent implements OnInit {
 
             this.avaliacaoService.salvar(this.novaAvaliacao).subscribe(
               (avaliacaoEnviada) => {
+                this.alertaService.exibirAlerta('alert10')
                 console.log("avalição enviada: " + avaliacaoEnviada)
               }, error => {
                 console.error('Erro ao enviar o comentário:', error);
-                //this.alertaService.exibirAlerta('alert4')
+                this.alertaService.exibirAlerta('alert11')
               });
 
           }, error => {
             console.error('Essa música não existe na base de dados:', error);
+            this.alertaService.exibirAlerta('alert11')
           });
       }, error => {
         console.error('Usuário não encontrad:', error);
+        this.alertaService.exibirAlerta('alert11')
       });
   }
 

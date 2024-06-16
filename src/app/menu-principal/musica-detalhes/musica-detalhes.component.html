@@ -78,8 +78,10 @@
 
         <div id="modalAvaliacaoMusica"
           class="fundo-modal shadow-with-light p-8 rounded-xl shadow-lg w-96 overflow-y-auto max-h-96">
-          <div class="flex justify-center mb-4">
-            <div class="flex space-x-1 star">
+          <div class="ml-14 justify-center mb-4">
+            <h2 class="text-2xl musicritica-button font-bold mb-4">Avalie esta música</h2>
+
+            <div class="ml-6 space-x-2 star">
               <button *ngFor="let star of [1, 2, 3, 4, 5]" type="button" (click)="rate(star)"
                 class="text-gray-400 hover:text-gray-600 focus:outline-none">
                 <mat-icon class="text-2xl">{{ star <= rating ? 'star' : 'star_border' }}</mat-icon>
@@ -87,7 +89,7 @@
             </div>
           </div>
           <div class="flex justify-center">
-            <button (click)="enviarAvaliacao()"
+            <button (click)="enviarAvaliacao(); toggleModalAvaliacao()"
               class="mt-2 w-36 rounded-full relative inline-flex items-center justify-center p-0.5 overflow-hidden text-sm font-medium text-gray-900 group bg-gradient-to-br from-teal-300 to-lime-300 group-hover:from-teal-300 group-hover:to-lime-300 dark:text-white dark:hover:text-gray-900 focus:ring-4 focus:outline-none focus:ring-lime-200 dark:focus:ring-lime-800">
               <span
                 class="w-36 rounded-full relative px-5 py-2.5 transition-all ease-in duration-75 bg-white dark:bg-gray-900 group-hover:bg-opacity-0">
@@ -104,11 +106,12 @@
     <span *ngFor="let star of stars; let i = index" class="star" (click)="rate(i + 1)">
       <mat-icon>{{ 1 < 2 ? 'star' : 'star_border' }}</mat-icon>
     </span>
-    <div class="star flex salvar-playlist">
-      <mat-icon>{{ 1 < 2 ? 'star' : 'star_border' }}</mat-icon>
+    <div class="ml-auto "></div>
+    <div class="star flex salvar-playlist mr-16">
           <h1 class="font-semibold" (click)="toggleModalAvaliacao()">Avaliar música</h1>
     </div>
   </div>
+
   <div class="flex mt-32">
     <div class="w-1/2 ml-16">
       <div class="text-2xl font-bold mb-4 musica-info">Deixe um comentário</div>
@@ -156,6 +159,12 @@
             <p class="text-sm text-white dark:text-gray-400">
               <time>{{ comentario.dt_publicacao | date: 'dd \'de\' MMMM, y' }}</time>
             </p>
+          </div>
+          <div class="ml-auto"></div>
+          <div class="text-white ml-8 star mr-4">
+            <span *ngFor="let star of getStarsArray(notasPorComentario.get(comentario.id))">
+              <mat-icon class="text-2xl">star</mat-icon>
+            </span>
           </div>
           <div>
             <button (click)="toggleDropdown(comentario)"
