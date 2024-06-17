@@ -14,30 +14,6 @@
   border-top: 2px solid #64DEA1;
 }
 
-.nav-buttons {
-  font-family: 'Inter', sans-serif;
-  color: #64DEA1;
-  position: relative;
-}
-
-.nav-buttons::before {
-  content: '';
-  position: absolute;
-  bottom: 0;
-  left: 50%;
-  width: 0;
-  height: 2px;
-  background-color: #64DEA1;
-  transition: width 0.3s ease, left 0.3s ease;
-}
-.nav-buttons:hover {
-  font-weight: bold;
-}
-.nav-buttons:hover::before {
-  width: 100%;
-  left: 0;
-}
-
 .musicritica-button{
   font-family: 'Inter', sans-serif;
   color: #64DEA1;
