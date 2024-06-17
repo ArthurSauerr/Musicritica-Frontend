@@ -7,6 +7,7 @@ import { Playlist } from 'src/app/shared/model/Playlist';
 import { ListaTracksSpotify } from 'src/app/shared/model/ListaTracksSpotify';
 import { DadosCompartilhadosService } from 'src/app/shared/service/dados-compartilhados.service';
 import { ChangeDetectorRef } from '@angular/core';
+import { AlertaServiceService } from 'src/app/shared/service/alerta-service.service';
 
 @Component({
   selector: 'app-usuario-perfil',
@@ -23,7 +24,8 @@ export class UsuarioPerfilComponent implements OnInit {
     private route: ActivatedRoute,
     private playListService: PlaylistService,
     private dadosCompartilhadosService: DadosCompartilhadosService,
-    private cdr: ChangeDetectorRef
+    private cdr: ChangeDetectorRef,
+    private alertaService: AlertaServiceService
   ) {}
 
   conteudoSelecionado: string | null = null;
@@ -36,6 +38,7 @@ export class UsuarioPerfilComponent implements OnInit {
   primeirasMusicasDasPlaylists: { [key: number]: string } = {};
 
   musicasDaPlaylist: ListaTracksSpotify = new ListaTracksSpotify();
+  musicasDaPlaylistDescobertas: ListaTracksSpotify = new ListaTracksSpotify();
 
   exibirEditButtons: boolean = false;
   isModalOpen: boolean;
@@ -137,7 +140,7 @@ export class UsuarioPerfilComponent implements OnInit {
               : '';
           //this.primeirasMusicasDasPlaylists[id] = imageUrl;
         }
-        this.musicasDaPlaylist = data;
+        this.musicasDaPlaylistDescobertas = data;
       },
       (error) => {
         console.error('Ocorreu um erro ao buscar o as músicas do álbum:', error);
@@ -173,13 +176,16 @@ export class UsuarioPerfilComponent implements OnInit {
         (response) => {
           this.usuario.nome = this.novoNome;
           this.fecharModal();
+          this.alertaService.exibirAlerta('alert12');
           console.log('Nome atualizado com sucesso');
         },
         (error) => {
+          this.alertaService.exibirAlerta('alert13');
           console.error('Erro ao atualizar nome:', error);
         }
       );
     } else {
+      this.alertaService.exibirAlerta('alert13');
       console.error('Novo nome não fornecido');
     }
   }
