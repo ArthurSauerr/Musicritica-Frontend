@@ -32,19 +32,19 @@
         <p class="nomeUsuario drop-shadow-md">{{ usuario.nome }}</p>
         <p class="text-sm">Entrou em {{ formatarData(usuario.dt_cadastro) }}</p>
         <div class="flex justify-center mt-6">
-          <p class="cursor-pointer m-6 group relative w-max">
+          <p class="cursor-pointer m-6 group relative w-max" (click)="mostrarConteudo('playlists')" id="playlists-btn">
             <span class="group-hover:font-bold block" style="width: 100px; text-align: center;">Playlists</span>
             <span class="absolute -bottom-1 left-1/2 w-0 transition-all h-0.5 bg-[#64DEA1] group-hover:w-3/6"></span>
             <span class="absolute -bottom-1 right-1/2 w-0 transition-all h-0.5 bg-[#64DEA1] group-hover:w-3/6"></span>
           </p>
 
-          <p class="cursor-pointer m-6 group relative w-max">
+          <p class="cursor-pointer m-6 group relative w-max" (click)="mostrarConteudo('avaliacoes')" id="avaliacoes-btn">
             <span class="group-hover:font-bold block" style="width: 100px; text-align: center;">Avaliações</span>
             <span class="absolute -bottom-1 left-1/2 w-0 transition-all h-0.5 bg-[#64DEA1] group-hover:w-3/6"></span>
             <span class="absolute -bottom-1 right-1/2 w-0 transition-all h-0.5 bg-[#64DEA1] group-hover:w-3/6"></span>
           </p>
 
-          <p class="cursor-pointer m-6 group relative w-max">
+          <p class="cursor-pointer m-6 group relative w-max" (click)="mostrarConteudo('descobertas')" id="descobertas-btn">
             <span class="group-hover:font-bold block" style="width: 100px; text-align: center;">Descobertas</span>
             <span class="absolute -bottom-1 left-1/2 w-0 transition-all h-0.5 bg-[#64DEA1] group-hover:w-3/6"></span>
             <span class="absolute -bottom-1 right-1/2 w-0 transition-all h-0.5 bg-[#64DEA1] group-hover:w-3/6"></span>
