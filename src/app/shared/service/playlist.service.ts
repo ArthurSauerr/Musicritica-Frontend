@@ -31,20 +31,20 @@ export class PlaylistService {
     return this.httpClient.get<ListaTracksSpotify>(`${this.apiUrl}/${id}/tracks`);
   }
 
+  //cade o metodo do controller
   salvarDescobertas(usuarioId: number, idSpotify: string, idMusicaSpotify: string): Observable<any> {
     const params = new HttpParams()
       .set('idSpotify', idSpotify)
       .set('idMusicaSpotify', idMusicaSpotify)
-      .set('idPlaylist', usuarioId.toString());
 
-    return this.httpClient.post<any>(`${this.apiUrl}/verificar`, null, { params });
+    return this.httpClient.post<any>(`${this.apiUrl}/descobertas/salvar/${usuarioId}`, null, { params });
   }
   buscarTodasMusicasDaPlaylistDescobertas(usuarioId: number): Observable<ListaTracksSpotify> {
     return this.httpClient.get<ListaTracksSpotify>(`${this.apiUrl}/${usuarioId}/tracks-descobertas`);
   }
 
-  buscarPlaylistDescobertasPorIdUsuario(id: number): Observable<Playlist[]> {
-    return this.httpClient.get<Playlist[]>(`${this.apiUrl}/descobertas/${id}`);
+  buscarPlaylistDescobertasPorIdUsuario(id: number): Observable<Playlist> {
+    return this.httpClient.get<Playlist>(`${this.apiUrl}/descobertas/${id}`);
   }
 
 }

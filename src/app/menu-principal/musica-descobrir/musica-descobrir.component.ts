@@ -2,13 +2,16 @@
 import { DadosCompartilhadosService } from './../../shared/service/dados-compartilhados.service';
 import { AlbumDescobrir } from './../../shared/model/AlbumDescobrir';
 import { MenuPrincipalService } from 'src/app/shared/service/menu-principal.service';
-import { Component, OnInit, HostListener, Renderer2, ViewChild, ElementRef  } from '@angular/core';
+import { Component, OnInit, HostListener, Renderer2, ViewChild, ElementRef } from '@angular/core';
 import { TrackData } from 'src/app/shared/model/TrackData';
 import { AlbumBuscado } from 'src/app/shared/model/AlbumBuscado';
 import { SpotifySearchResponse } from 'src/app/shared/model/SpotifySearchResponse';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import * as $ from 'jquery'
 import { PlaylistService } from 'src/app/shared/service/playlist.service';
+import { UsuarioService } from 'src/app/shared/service/usuario.service';
+import { jwtDecode } from 'jwt-decode';
+import { Usuario } from 'src/app/shared/model/Usuario';
 
 @Component({
   selector: 'app-musica-descobrir',
@@ -17,7 +20,7 @@ import { PlaylistService } from 'src/app/shared/service/playlist.service';
 })
 export class MusicaDescobrirComponent implements OnInit {
 
-  constructor(private renderer: Renderer2, private sanitizer: DomSanitizer, private spotifyService: MenuPrincipalService, private dadosCompartilhadosService: DadosCompartilhadosService, private playlistService: PlaylistService) { }
+  constructor(private usuarioService: UsuarioService, private renderer: Renderer2, private sanitizer: DomSanitizer, private spotifyService: MenuPrincipalService, private dadosCompartilhadosService: DadosCompartilhadosService, private playlistService: PlaylistService) { }
 
   isClicked: boolean = false;
   album: AlbumDescobrir;
@@ -29,10 +32,37 @@ export class MusicaDescobrirComponent implements OnInit {
   musicaEartista: string | null = null;
   generoPrimario: string;
   generoSecundario: string;
+  emailParam: string | undefined;
+  usuarioLogado: Usuario = new Usuario();
 
   ngOnInit(): void {
 
+    const token = this.usuarioService.getToken();
+
+    if (token) {
+      const decodedToken = jwtDecode(token);
+      const email = decodedToken.sub;
+      this.emailParam = email;
+      console.log("email do usuario: " + email);
+    } else {
+      console.log("Token não encontrado.");
+    }
+    this.buscarIdUsuarioLogado();
+
   }
+
+  buscarIdUsuarioLogado() {
+    this.usuarioService.buscarIdPorEmail(this.emailParam).subscribe(
+      (data: number) => {
+        this.usuarioLogado.id = data;
+        console.log("id usuario logado: " + this.usuarioLogado.id)
+      },
+      (error) => {
+        console.error('Ocorreu um erro ao buscar o ID do usuário:', error);
+      }
+    );
+  }
+
 
   getSpotifyEmbedUrl(idMusica: string | null): SafeResourceUrl {
     if (idMusica) {
@@ -81,6 +111,8 @@ export class MusicaDescobrirComponent implements OnInit {
         console.log(data);
         this.idMusicaSpotify = data.tracks.items[0].id;
         console.log("id da primeira musica do album: " + this.albumBuscado.tracks.items[0].id);
+        
+   
         this.enviarMusicaParaDescobertas(this.idMusicaSpotify, this.idMusicaSpotify);
       },
       (error) => {
@@ -115,13 +147,21 @@ export class MusicaDescobrirComponent implements OnInit {
   enviarMusicaParaDescobertas(idSpotify: string, idMusicaSpotify: string): void {
     console.log("Id para verificar: " + idMusicaSpotify);
 
-    this.playlistService.salvarDescobertas(2, idSpotify, idMusicaSpotify).subscribe(
-      () => {
-        console.log('Música enviada para descobertas com sucesso');
-        //this.alertaService.exibirAlerta('alert1')
+    this.usuarioService.buscarIdPorEmail(this.emailParam).subscribe(
+      (idUsuarioAutenticado: number) => {
+
+        console.log("info das musicas descobertas: " + idUsuarioAutenticado, idSpotify, idMusicaSpotify);
+
+        this.playlistService.salvarDescobertas(idUsuarioAutenticado, idSpotify, idMusicaSpotify).subscribe(
+          () => {
+            console.log('Música enviada para descobertas com sucesso');
+            //this.alertaService.exibirAlerta('alert1')
+          }, error => {
+            console.error('Erro ao salvar uma nova música nas descobertas:', error);
+            //this.alertaService.exibirAlerta('alert2')
+          });
       }, error => {
-        console.error('Erro ao salvar uma nova música nas descobertas:', error);
-        //this.alertaService.exibirAlerta('alert2')
+        console.error('Usuário não encontrad:', error);
       });
   }
 }
