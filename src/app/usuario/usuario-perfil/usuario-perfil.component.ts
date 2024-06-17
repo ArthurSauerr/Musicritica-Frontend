@@ -29,7 +29,7 @@ export class UsuarioPerfilComponent implements OnInit {
   conteudoSelecionado: string | null = null;
   novaPlaylist: Playlist = new Playlist();
   playlistsDoUsuario: Playlist[];
-  playlistDescobertas: Playlist[];
+  playlistDescobertas = new Playlist();
 
   mostrarDropdown: { [key: number]: boolean } = {};
 
@@ -96,11 +96,9 @@ export class UsuarioPerfilComponent implements OnInit {
 
   buscarPlaylistDescobertas(idUsuario: number): void {
     this.playListService.buscarPlaylistDescobertasPorIdUsuario(idUsuario).subscribe(
-      (data: Playlist[]) => {
+      (data: Playlist) => {
         this.playlistDescobertas = data;
-        this.playlistDescobertas.forEach((playlist) => {
-          this.buscarTodasMusicasDaPlaylistDescobertas(idUsuario);
-        });
+        this.buscarTodasMusicasDaPlaylistDescobertas(idUsuario);
         console.log(data);
       },
       (error) => {
