@@ -28,7 +28,8 @@ export class MusicaDetalhesComponent implements OnInit {
     private playlistService: PlaylistService,
     private elementRef: ElementRef,
     private alertaService: AlertaServiceService,
-    private avaliacaoService: AvaliacaoService
+    private avaliacaoService: AvaliacaoService,
+   // private denunciaService: DenunciaService //TODO usuarioService
   ) { }
 
   artista: string;
@@ -307,6 +308,11 @@ getStarsArray(numStars: number | undefined): number[] {
     }
     this.buscarQuantidadeComentarios();
   }
+
+  enviarReport(comentarioId: number): void {
+    // TODO denunciaService para realizar o metodo
+  }
+
 
   atualizarComentario(comentarioId: number): void {
     console.log("comentario: " + this.comentario);
