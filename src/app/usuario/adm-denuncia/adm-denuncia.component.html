@@ -46,8 +46,10 @@
             <table class="w-full">
               <thead>
                 <tr class="text-xs font-semibold tracking-wide text-left text-gray-500 uppercase border-b dark:border-gray-700 bg-gray-50 dark:text-gray-400 dark:bg-gray-800">
-                  <th class="px-4 py-3">Usuário</th>
+                  <th class="px-4 py-3">Usuário Reportado</th>
+                  <th class="px-4 py-3">Descrição</th>
                   <th class="px-4 py-3">Comentário</th>
+                  <th class="px-4 py-3">status</th>
                   <th class="px-4 py-3">Data</th>
                 </tr>
               </thead>
@@ -57,6 +59,10 @@
                     <div class="flex items-center text-sm">
                       <div class="relative hidden w-8 h-8 mr-3 rounded-full md:block">
                         <p class="text-grey-900 whitespace-no-wrap">{{ denuncia.usuarioReportado }}</p>
+                        <p class="text-grey-900 whitespace-no-wrap"> {{ denuncia.descricao }} </p>
+                        <p class="text-grey-900 whitespace-no-wrap"> {{ denuncia.comentario }} </p>
+                        <p class="text-grey-900 whitespace-no-wrap"> {{ denuncia.status }} </p>
+                        <p class="text-grey-900 whitespace-no-wrap"> {{ denuncia.dt_denuncia }} </p>
                         </div>
                       </div>
                   </td>
