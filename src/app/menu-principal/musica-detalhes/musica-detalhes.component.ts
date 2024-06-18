@@ -15,6 +15,8 @@ import { AlertaServiceService } from 'src/app/shared/service/alerta-service.serv
 import { AvaliacaoService } from 'src/app/shared/service/avaliacao.service';
 import { Avaliacao } from 'src/app/shared/model/Avaliacao';
 import { MapeamentoNotas } from 'src/app/shared/model/MapeamentoNotas';
+import { Denuncia } from 'src/app/shared/model/Denuncia';
+import { DenunciaServiceService } from 'src/app/shared/service/denuncia-service.service';
 
 @Component({
   selector: 'app-musica-detalhes',
@@ -25,6 +27,7 @@ export class MusicaDetalhesComponent implements OnInit {
   constructor(
     private sanitizer: DomSanitizer,
     private comentarioService: ComentarioServiceService,
+    private denunciaService: DenunciaServiceService,
     private usuarioService: UsuarioService,
     private playlistService: PlaylistService,
     private elementRef: ElementRef,
@@ -46,11 +49,13 @@ export class MusicaDetalhesComponent implements OnInit {
   showModal: boolean = false;
   showModalAvaliacao: boolean = false;
   showModalEditarComentario: boolean = false;
+  showModalEnviarDenuncia: boolean = false;
   comentarioSelecionado: string;
   idComentarioSelecionado: number;
   playlistSelecionada: boolean = false;
 
   novoComentario: Comentario = new Comentario();
+  novaDenuncia: Denuncia = new Denuncia();
   comentarioPaiParaEnviar: Comentario = new Comentario();
   comentarioPai: Comentario;
   novaPlaylist: Playlist = new Playlist();
@@ -342,8 +347,23 @@ export class MusicaDetalhesComponent implements OnInit {
     }
   }
 
-  enviarReport(comentarioId: number): void {
-    // TODO denunciaService para realizar o metodo
+  enviarReport(comentarioReportado: Comentario): void {
+    this.novaDenuncia.comentario = comentarioReportado;
+    this.novaDenuncia.descricao = comentarioReportado.comentario;
+    this.novaDenuncia.dt_denuncia = Date.now();
+    this.novaDenuncia.status = true;
+    this.novaDenuncia.usuario = this.usuarioLogado;
+    this.novaDenuncia.usuarioReportado = comentarioReportado.usuario;
+
+    this.denunciaService.enviarReport(this.novaDenuncia).subscribe(
+      response => {
+        console.log('Denúncia enviada com sucesso!', response);
+      },
+      error => {
+        console.error('Erro ao enviar a denúncia:', error);
+      }
+    );
+
   }
 
 
@@ -592,6 +612,13 @@ export class MusicaDetalhesComponent implements OnInit {
     this.comentarioSelecionado = comentarioTexto.comentario;
     this.idComentarioSelecionado = comentarioTexto.id;
     this.showModalEditarComentario = true;
+    this.fecharTodosDropdowns();
+  }
+
+  openModalDenuncia(comentarioTexto: Comentario) {
+    this.comentarioSelecionado = comentarioTexto.comentario;
+    this.idComentarioSelecionado = comentarioTexto.id;
+    this.showModalEnviarDenuncia = true;
     this.fecharTodosDropdowns();
   }
 
