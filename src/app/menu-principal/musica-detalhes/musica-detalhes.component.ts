@@ -14,6 +14,7 @@ import { MusicaSpotify } from 'src/app/shared/model/MusicaSpotify';
 import { AlertaServiceService } from 'src/app/shared/service/alerta-service.service';
 import { AvaliacaoService } from 'src/app/shared/service/avaliacao.service';
 import { Avaliacao } from 'src/app/shared/model/Avaliacao';
+import { MapeamentoNotas } from 'src/app/shared/model/MapeamentoNotas';
 
 @Component({
   selector: 'app-musica-detalhes',
@@ -37,6 +38,7 @@ export class MusicaDetalhesComponent implements OnInit {
   resposta: string = '';
   emailParam: string | undefined;
   notasPorComentario: Map<number, number> = new Map<number, number>();
+  media: number;
 
   mostrarTextarea: boolean = false;
   showRepliesId: number | null = null;
@@ -70,13 +72,13 @@ export class MusicaDetalhesComponent implements OnInit {
   respostasBuscadas: Comentario[];
   playlistsDoUsuario: Playlist[];
   listaDeMusicasParaEnviar: MusicaSpotify[] = [];
+  listaDeNotasEQuantidade: MapeamentoNotas[] = [];
 
   mostrarDropdown: { [key: number]: boolean } = {};
   mostrarTextArea: { [key: number]: boolean } = {};
 
   rating: number = 0;
   stars: number[] = [5];
-
 
   rate(stars: number) {
     this.rating = stars;
@@ -93,7 +95,7 @@ export class MusicaDetalhesComponent implements OnInit {
     const surfaceBorder = documentStyle.getPropertyValue('--surface-border');
 
     this.data = {
-      labels: ['Nota 1', 'Nota 2', 'Nota 3', 'Nota 5', 'Nota 5'],
+      labels: [],
       datasets: [
         {
           label: 'Avaliações',
@@ -101,7 +103,7 @@ export class MusicaDetalhesComponent implements OnInit {
           borderColor: documentStyle.getPropertyValue('--green-500'),
           yAxisID: 'y1',
           tension: 0.3,
-          data: [28, 48, 40, 19, 86, 27, 90]
+          data: []
 
         }
       ]
@@ -156,15 +158,16 @@ export class MusicaDetalhesComponent implements OnInit {
       console.log("Token não encontrado.");
     }
     this.buscarIdUsuarioLogado();
-  };
-
-  // No seu componente Angular
-getStarsArray(numStars: number | undefined): number[] {
-  if (numStars === undefined) {
-    return [];
+    this.buscarMediaPorIdMusica();
+    this.buscarQuantidadePorNota();
   }
-  return Array(numStars).fill(0).map((x, i) => i);
-}
+
+  getStarsArray(numStars: number | undefined): number[] {
+    if (numStars === undefined) {
+      return [];
+    }
+    return Array(numStars).fill(0).map((x, i) => i);
+  }
 
   buscarIdUsuarioLogado() {
     this.usuarioService.buscarIdPorEmail(this.emailParam).subscribe(
@@ -176,6 +179,36 @@ getStarsArray(numStars: number | undefined): number[] {
         console.error('Ocorreu um erro ao buscar o ID do usuário:', error);
       }
     );
+  }
+
+  buscarMediaPorIdMusica(): void {
+    this.avaliacaoService.buscarMediaPorIdMusica(this.musica.id).subscribe(
+      (data: number) => {
+        this.media = data;
+      },
+      (error) => {
+        console.error('Ocorreu um erro ao buscar a média da música:', error);
+      }
+    );
+  }
+
+  buscarQuantidadePorNota(): void {
+    this.avaliacaoService.buscarQuantidadePorNota(this.musica.id).subscribe(
+      (data: MapeamentoNotas[]) => {
+        this.listaDeNotasEQuantidade = data;
+        this.updateChart();
+      },
+      (error) => {
+        console.error('Ocorreu um erro ao buscar a média da música:', error);
+      }
+    );
+  }
+
+  updateChart(): void {
+    if (this.listaDeNotasEQuantidade.length > 0) {
+      this.data.labels = this.listaDeNotasEQuantidade.map(item => `Nota ${item.nota}`);
+      this.data.datasets[0].data = this.listaDeNotasEQuantidade.map(item => item.quantidade);
+    }
   }
 
   buscarRespostas(id: number): void {
@@ -208,7 +241,7 @@ getStarsArray(numStars: number | undefined): number[] {
       }
     );
   }
-  
+
   buscarAvaliacoesPorIdComentario(idComentario: number) {
     this.avaliacaoService.buscarAvaliacaoPorIdComentario(idComentario).subscribe(
       (avaliacaoEncontrada) => {
@@ -293,6 +326,7 @@ getStarsArray(numStars: number | undefined): number[] {
               console.log('Comentário enviado com sucesso: ', comentarioSalvo);
               this.comentario = '';
               this.buscarComentarios();
+              this.buscarQuantidadeComentarios();
               this.alertaService.exibirAlerta('alert31')
             }, error => {
               console.error('Erro ao enviar o comentário:', error);
@@ -306,7 +340,6 @@ getStarsArray(numStars: number | undefined): number[] {
     } else {
       console.error('Nenhum comentário digitado.');
     }
-    this.buscarQuantidadeComentarios();
   }
 
   enviarReport(comentarioId: number): void {
@@ -364,6 +397,7 @@ getStarsArray(numStars: number | undefined): number[] {
               console.log('Comentário enviado com sucesso: ', comentarioSalvo);
               this.resposta = '';
               this.buscarComentarios();
+              this.buscarQuantidadeComentarios();
               this.alertaService.exibirAlerta('alert31')
             }, error => {
               console.error('Erro ao enviar o comentário:', error);
@@ -386,6 +420,7 @@ getStarsArray(numStars: number | undefined): number[] {
           (response) => {
             console.log('Comentário deletado com sucesso');
             this.buscarComentarios();
+            this.buscarQuantidadeComentarios();
             this.alertaService.exibirAlerta('alert7')
           },
           (error) => {
@@ -517,6 +552,9 @@ getStarsArray(numStars: number | undefined): number[] {
       this.mostrarTextArea[comentario.id] = false;
     });
   }
+  toggleCommentReply(comentarioId: number): void {
+    this.mostrarTextArea[comentarioId] = false;
+  }
 
   toggleModal() {
     this.showModal = !this.showModal;
@@ -541,8 +579,6 @@ getStarsArray(numStars: number | undefined): number[] {
       this.toggleModalAvaliacao();
     }
   }
-
-
 
   checkPlaylistSelected(event: any) {
     this.playlistSelecionada = event.target.checked;

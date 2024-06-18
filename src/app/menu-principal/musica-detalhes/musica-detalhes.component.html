@@ -102,12 +102,12 @@
     </div>
   </div>
   <div class="ml-16 flex">
-    <div class="mr-2 text-1xl font-bold mb-4 musica-info">Média geral - </div>
+    <div class="mr-2 text-1xl font-bold mb-4 musica-info">Média geral - {{media}}</div>
     <span *ngFor="let star of stars; let i = index" class="star" (click)="rate(i + 1)">
-      <mat-icon>{{ 1 < 2 ? 'star' : 'star_border' }}</mat-icon>
+      <mat-icon>{{ media < 2 ? 'star' : 'star_border' }}</mat-icon>
     </span>
     <div class="ml-auto "></div>
-    <div class="star flex salvar-playlist mr-16">
+    <div class="star flex salvar-playlist mr-16" (click)="buscarQuantidadePorNota()" >
           <h1 class="font-semibold" (click)="toggleModalAvaliacao()">Avaliar música</h1>
     </div>
   </div>
@@ -148,7 +148,7 @@
       <h2 class="text-lg lg:text-2xl font-bold text-white dark:text-white">Comentários ({{totalDeComentarios}})</h2>
     </div>
     <div *ngFor="let comentario of comentariosBuscados">
-      <article class="border-t border-white p-6 text-base fundo">
+      <article class="border-t border-white p-6 text-base fundo ">
         <footer class="flex justify-between items-center mb-2">
           <div class="flex items-center">
             <p class="inline-flex items-center mr-3 text-sm text-white dark:text-white font-semibold">
@@ -241,11 +241,11 @@
         <div class="ml-16 flex-grow mb-6 mt-6" *ngIf="mostrarTextArea[comentario.id]">
           <div class="py-2 px-4 mb-4 rounded-lg rounded-t-lg custom-checkbox">
             <label for="comment" class="sr-only">Seu comentário</label>
-            <textarea id="comment" rows="6" [(ngModel)]="resposta"
+            <textarea id="commentReply" rows="6" [(ngModel)]="resposta"
               class="h-24 w-full text-sm text-white border-0 focus:ring-0 focus:outline-none dark:text-white dark:placeholder-gray-400 fundo"
               placeholder="Deixe seu comentário..." required></textarea>
           </div>
-          <button type="button" (click)="enviarResposta()"
+          <button type="button" (click)="enviarResposta(); toggleReply(comentario) "
             class="border border-white  inline-flex items-center py-2.5 px-4 text-xs font-medium text-center text-white bg-primary-700 rounded-lg focus:ring-4 focus:ring-primary-200 dark:focus:ring-primary-900 hover:bg-primary-800">
             Responder
           </button>
@@ -264,7 +264,7 @@
                     <time>{{ comentario.dt_publicacao | date: 'dd \'de\' MMMM, y' }}</time>
                   </p>
                   <p class="ml-2 text-sm text-white dark:text-gray-400">
-                    Resposta para {{ comentario.comentarioPai.usuario.nome }}
+                    Resposta para {{ comentario.comentarioPai.usuario.nome }} 
                   </p>
                 </div>
                 <div>
@@ -326,7 +326,7 @@
                     class="h-24 w-full text-sm text-white border-0 focus:ring-0 focus:outline-none dark:text-white dark:placeholder-gray-400 fundo"
                     placeholder="Deixe seu comentário..." required></textarea>
                 </div>
-                <button type="button" (click)="enviarResposta()"
+                <button type="button" (click)="enviarResposta(); toggleReply(comentario)"
                   class="border border-white  inline-flex items-center py-2.5 px-4 text-xs font-medium text-center text-white bg-primary-700 rounded-lg focus:ring-4 focus:ring-primary-200 dark:focus:ring-primary-900 hover:bg-primary-800">
                   Responder
                 </button>
