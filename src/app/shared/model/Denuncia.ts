@@ -8,6 +8,6 @@ export class Denuncia{
     usuario: Usuario;
     comentario: Comentario;
     status: boolean;
-    dt_denuncia: String;
-    
+    dt_denuncia: number;
+
   }
