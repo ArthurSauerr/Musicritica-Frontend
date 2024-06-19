@@ -26,6 +26,9 @@ export class MenuBuscarMusicaComponent implements OnInit {
   musicas: Item[] = [];
   usuarios: Usuario[] = [];
 
+  limit: number = 10;
+  offset: number = 0;
+
   ngOnInit(): void {
     this.dadosCompartilhadosService.musicaProcurada.subscribe(musicaProcurada => {
       if (musicaProcurada) {
@@ -34,6 +37,12 @@ export class MenuBuscarMusicaComponent implements OnInit {
         this.buscarUsuarios();
       }
     });
+  }
+
+  
+  addOfsset(){
+    this.offset += 10;
+    this.buscarUsuarios();
   }
 
   buscarMusica(): void {
@@ -51,7 +60,7 @@ export class MenuBuscarMusicaComponent implements OnInit {
     );
   }
   buscarUsuarios(): void {
-    this.usuarioService.buscarUsuarioPeloNome(this.parametroDePesquisa).subscribe(
+    this.usuarioService.buscarUsuarioPeloNome(this.parametroDePesquisa, this.limit, this.offset).subscribe(
       (data: Usuario[]) => {
         console.log(data);
         this.usuarios = data;
