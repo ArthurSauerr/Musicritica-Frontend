@@ -3,10 +3,10 @@ import { Usuario } from "./Usuario";
 
 export class Denuncia{
     id:number;
-    descricao: String;
+    descricao: string;
     usuarioReportado: Usuario;
     usuario: Usuario;
-    comentario: Comentario;
+    comentario: string;
     status: boolean;
     dt_denuncia: number;
 
