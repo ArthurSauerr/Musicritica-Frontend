@@ -45,6 +45,7 @@ export class UsuarioPerfilComponent implements OnInit {
   exibirEditButtons: boolean = false;
   isModalOpen: boolean;
   isModalPlaylistOpen: boolean;
+  isModalPlaylistExcluirOpen: boolean;
   novoNome: string;
   novaImagemPerfil: File;
   novaImagemBackground: File;
@@ -67,7 +68,6 @@ export class UsuarioPerfilComponent implements OnInit {
       }
       console.log('Id da pagina:', this.pageId);
     });
-    this.alertaService.exibirAlerta('alert15');
   }
 
   mostrarConteudo(opcao: string): void {
@@ -190,14 +190,21 @@ export class UsuarioPerfilComponent implements OnInit {
   fecharModal(): void {
     this.isModalOpen = false;
     this.isModalPlaylistOpen = false;
+    this.isModalPlaylistExcluirOpen = false;
     this.novoNomePlaylist = '';
   }
 
-  editarNomePlaylist(playlist: Playlist, event: Event) {
-    event.stopPropagation();  // Evita que o evento de clique no dropdown feche o dropdown imediatamente
+  editarNomePlaylistModal(playlist: Playlist, event: Event) {
+    event.stopPropagation();
     this.playlistSelecionada = playlist;
     this.novoNomePlaylist = playlist.nome;
     this.isModalPlaylistOpen = true;
+  }
+
+  excluirPlaylistModal(playlist: Playlist, event: Event) {
+    event.stopPropagation();
+    this.playlistSelecionada = playlist;
+    this.isModalPlaylistExcluirOpen = true;
   }
 
   salvarNome(): void {
@@ -206,16 +213,16 @@ export class UsuarioPerfilComponent implements OnInit {
         (response) => {
           this.usuario.nome = this.novoNome;
           this.fecharModal();
-          this.alertaService.exibirAlerta('alert12');
+          this.alertaService.exibirAlerta('alert17');
           console.log('Nome atualizado com sucesso');
         },
         (error) => {
-          this.alertaService.exibirAlerta('alert13');
+          this.alertaService.exibirAlerta('alert18');
           console.error('Erro ao atualizar nome:', error);
         }
       );
     } else {
-      this.alertaService.exibirAlerta('alert13');
+      this.alertaService.exibirAlerta('alert18');
       console.error('Novo nome não fornecido');
     }
   }
@@ -227,13 +234,35 @@ export class UsuarioPerfilComponent implements OnInit {
         (response) => {
           this.fecharModal();
           console.log('Nome da playlist atualizado com sucesso');
+          this.alertaService.exibirAlerta('alert17');
         },
         (error) => {
+          this.alertaService.exibirAlerta('alert18');
           console.error('Erro ao atualizar nome da playlist:', error);
         }
       );
     } else {
+      this.alertaService.exibirAlerta('alert18');
       console.error('Playlist ou propriedade nome está indefinida');
+    }
+  }
+
+  excluirPlaylist(): void {
+    if(this.playlistSelecionada) {
+      this.playListService.excluirPlaylist(this.playlistSelecionada.id).subscribe(
+        (response) => {
+          this.fecharModal();
+          this.alertaService.exibirAlerta('playlistExcluirSucesso');
+          console.log('Playlist excluida com sucesso');
+        },
+        (error) => {
+          this.alertaService.exibirAlerta('playlistExcluirErro');
+          console.error('Erro ao excluir playlist:', error);
+        }
+      );
+    } else {
+      this.alertaService.exibirAlerta('playlistExcluirErro');
+      console.error('Playlist está indefinida');
     }
   }
 

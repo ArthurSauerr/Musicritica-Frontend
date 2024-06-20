@@ -1,4 +1,4 @@
-
+<app-alerta-usuario></app-alerta-usuario>
 <div class="relative mt-24">
   <div *ngIf="imagemBackground || usuario?.imagem_background" class="background-image">
     <img [src]="imagemBackground ? imagemBackground : 'data:image/jpeg;base64,' + usuario.imagem_background"
@@ -82,15 +82,15 @@
           </button>
           <div *ngIf="mostrarDropdown[playlist.id]" id="dropdownComment1"
             class="mt-4 w-24 rounded divide-y divide-gray-100 shadow bg-gray-700 divide-gray-600">
-            <ul class="py-1 text-sm text-gray-700 text-gray-200"
+            <ul class="py-1 text-sm text-white"
               aria-labelledby="dropdownMenuIconHorizontalButton">
               <li>
-                <a (click)="editarNomePlaylist(playlist, $event)"
-                  class="block py-2 px-4 hover:bg-gray-100 hover:bg-gray-600 hover:text-white">Editar</a>
+                <a (click)="editarNomePlaylistModal(playlist, $event)"
+                  class="block py-2 px-4 hover:bg-gray-100 hover:bg-gray-600">Editar</a>
               </li>
               <li>
-                <a href="#"
-                  class="block py-2 px-4 hover:bg-gray-100 hover:bg-red-500 hover:text-white">Excluir</a>
+                <a (click)="excluirPlaylistModal(playlist, $event)"
+                  class="block py-2 px-4 hover:bg-gray-100 hover:bg-red-500">Excluir</a>
               </li>
             </ul>
           </div>
@@ -291,6 +291,32 @@
         <span
           class="w-36 rounded-full relative px-5 py-2.5 transition-all ease-in duration-75 bg-white dark:bg-gray-900 group-hover:bg-opacity-0">
           Salvar
+        </span>
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- Modal para excluir playlist -->
+<div *ngIf="isModalPlaylistExcluirOpen" class="modal-overlay">
+  <div class="modal-content bg-black bg-opacity-70 backdrop-filter backdrop-blur-sm ">
+    <h2 class="text-xl font-bold mb-4 nomeUsuario justify-center">Tem certeza que deseja excluir essa playlist?</h2>
+    <div class="flex justify-center">
+      <h3 class="text-md font-medium mb-4 justify-center alerta">Essa ação não pode ser desfeita!</h3>
+    </div>
+    <div class="flex justify-center gap-2">
+      <button (click)="fecharModal()"
+        class="w-36 rounded-full relative inline-flex items-center justify-center p-0.5 overflow-hidden text-sm font-medium text-gray-900 group bg-gradient-to-br from-teal-300 to-lime-300 group-hover:from-teal-300 group-hover:to-lime-300 dark:text-white dark:hover:text-gray-900 focus:ring-4 focus:outline-none focus:ring-lime-200 dark:focus:ring-lime-800">
+        <span
+          class="w-36 rounded-full relative px-5 py-2.5 transition-all ease-in duration-75 bg-white dark:bg-gray-900 group-hover:bg-opacity-0">
+          Cancelar
+        </span>
+      </button>
+      <button (click)="excluirPlaylist()"
+        class="w-36 rounded-full relative inline-flex items-center justify-center p-0.5 overflow-hidden text-sm font-medium text-gray-900 group bg-gradient-to-br from-red-400 to-red-800 group-hover:from-red-400 group-hover:to-red-400 dark:text-white dark:hover:text-gray-900 focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800">
+        <span
+          class="w-36 rounded-full relative px-5 py-2.5 transition-all ease-in duration-75 bg-white dark:bg-gray-900 group-hover:bg-opacity-0">
+          Excluir
         </span>
       </button>
     </div>
