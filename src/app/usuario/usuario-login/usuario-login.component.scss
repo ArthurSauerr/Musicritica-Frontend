@@ -11,6 +11,11 @@
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.8);
 }
 
+.text-sm {
+  font-size: 0.75rem; 
+}
+
+
 .bg-custom-green h2{
   font-family: 'Poppins', sans-serif;
   font-weight: 700;
@@ -18,6 +23,28 @@
   margin-bottom: 50px; // Espaçamento abaixo do título
   font-size: 38px; // Tamanho da fonte do título
   text-shadow: 1px 2px 5px #0D0D0D;
+}
+
+.background-image {
+  background-image: url('https://i.postimg.cc/c49WvksT/albuns-bom.jpg');
+  position: relative;
+}
+
+.background-image::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5); /* Fundo preto com opacidade */
+  backdrop-filter: blur(8px); /* Efeito de desfoque */
+  z-index: 1;
+}
+
+.background-image > .rounded-xl {
+  position: relative;
+  z-index: 2;
 }
 
 .form-input {

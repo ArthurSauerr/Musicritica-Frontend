@@ -26,7 +26,7 @@ export class UsuarioPerfilComponent implements OnInit {
     private playListService: PlaylistService,
     private dadosCompartilhadosService: DadosCompartilhadosService,
     private cdr: ChangeDetectorRef,
-    private alertaService: AlertaServiceService
+    private alertaService: AlertaServiceService,
   ) {}
 
   conteudoSelecionado: string | null = null;
@@ -67,6 +67,7 @@ export class UsuarioPerfilComponent implements OnInit {
       }
       console.log('Id da pagina:', this.pageId);
     });
+    this.alertaService.exibirAlerta('alert15');
   }
 
   mostrarConteudo(opcao: string): void {
