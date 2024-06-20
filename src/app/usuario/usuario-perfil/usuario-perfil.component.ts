@@ -18,6 +18,7 @@ export class UsuarioPerfilComponent implements OnInit {
   usuario: Usuario;
   imagemPerfil: string | ArrayBuffer | null;
   imagemBackground: string | ArrayBuffer | null;
+  playlist: Playlist;
 
   constructor(
     private usuarioService: UsuarioService,
@@ -34,6 +35,7 @@ export class UsuarioPerfilComponent implements OnInit {
   playlistDescobertas = new Playlist();
 
   mostrarDropdown: { [key: number]: boolean } = {};
+  mostrarDropdownMusicas: { [key: number]: boolean } = {};
 
   primeirasMusicasDasPlaylists: { [key: number]: string } = {};
 
@@ -42,11 +44,16 @@ export class UsuarioPerfilComponent implements OnInit {
 
   exibirEditButtons: boolean = false;
   isModalOpen: boolean;
+  isModalPlaylistOpen: boolean;
   novoNome: string;
   novaImagemPerfil: File;
   novaImagemBackground: File;
 
   pageId: string | null;
+
+  novoNomePlaylist: string;
+
+  playlistSelecionada: Playlist | null = null;
 
   ngOnInit(): void {
     this.usuarioService.getToken();
@@ -55,7 +62,7 @@ export class UsuarioPerfilComponent implements OnInit {
       if (this.pageId) {
         this.buscarUsuario(+this.pageId);
         this.buscarPlaylistsPorIdUsuario(+this.pageId);
-        this.buscarPlaylistDescobertas(+this.pageId)
+        this.buscarPlaylistDescobertas(+this.pageId);
         this.dadosCompartilhadosService.setPageId(this.pageId);
       }
       console.log('Id da pagina:', this.pageId);
@@ -78,7 +85,7 @@ export class UsuarioPerfilComponent implements OnInit {
     );
   }
 
-  formatarData(data: String){
+  formatarData(data: String) {
     return data.replace(/-/g, '/');
   }
 
@@ -98,16 +105,21 @@ export class UsuarioPerfilComponent implements OnInit {
   }
 
   buscarPlaylistDescobertas(idUsuario: number): void {
-    this.playListService.buscarPlaylistDescobertasPorIdUsuario(idUsuario).subscribe(
-      (data: Playlist) => {
-        this.playlistDescobertas = data;
-        this.buscarTodasMusicasDaPlaylistDescobertas(idUsuario);
-        console.log(data);
-      },
-      (error) => {
-        console.error('Ocorreu um erro ao buscar as musicas de descobertas:', error);
-      }
-    )
+    this.playListService
+      .buscarPlaylistDescobertasPorIdUsuario(idUsuario)
+      .subscribe(
+        (data: Playlist) => {
+          this.playlistDescobertas = data;
+          this.buscarTodasMusicasDaPlaylistDescobertas(idUsuario);
+          console.log(data);
+        },
+        (error) => {
+          console.error(
+            'Ocorreu um erro ao buscar as musicas de descobertas:',
+            error
+          );
+        }
+      );
   }
 
   buscarTodasMusicasDaPlaylist(id: number): void {
@@ -124,28 +136,36 @@ export class UsuarioPerfilComponent implements OnInit {
         this.musicasDaPlaylist = data;
       },
       (error) => {
-        console.error('Ocorreu um erro ao buscar o as músicas do álbum:', error);
+        console.error(
+          'Ocorreu um erro ao buscar o as músicas do álbum:',
+          error
+        );
       }
     );
   }
 
   buscarTodasMusicasDaPlaylistDescobertas(usuarioId: number): void {
-    this.playListService.buscarTodasMusicasDaPlaylistDescobertas(usuarioId).subscribe(
-      (data: ListaTracksSpotify) => {
-        if (data.tracks && data.tracks.length > 0) {
-          const primeiraMusica = data.tracks[0];
-          const imageUrl =
-            primeiraMusica.album.images.length > 0
-              ? primeiraMusica.album.images[0].url
-              : '';
-          //this.primeirasMusicasDasPlaylists[id] = imageUrl;
+    this.playListService
+      .buscarTodasMusicasDaPlaylistDescobertas(usuarioId)
+      .subscribe(
+        (data: ListaTracksSpotify) => {
+          if (data.tracks && data.tracks.length > 0) {
+            const primeiraMusica = data.tracks[0];
+            const imageUrl =
+              primeiraMusica.album.images.length > 0
+                ? primeiraMusica.album.images[0].url
+                : '';
+            //this.primeirasMusicasDasPlaylists[id] = imageUrl;
+          }
+          this.musicasDaPlaylistDescobertas = data;
+        },
+        (error) => {
+          console.error(
+            'Ocorreu um erro ao buscar o as músicas do álbum:',
+            error
+          );
         }
-        this.musicasDaPlaylistDescobertas = data;
-      },
-      (error) => {
-        console.error('Ocorreu um erro ao buscar o as músicas do álbum:', error);
-      }
-    );
+      );
   }
 
   toggleDropdown(playlist: Playlist, event: Event): void {
@@ -168,6 +188,15 @@ export class UsuarioPerfilComponent implements OnInit {
 
   fecharModal(): void {
     this.isModalOpen = false;
+    this.isModalPlaylistOpen = false;
+    this.novoNomePlaylist = '';
+  }
+
+  editarNomePlaylist(playlist: Playlist, event: Event) {
+    event.stopPropagation();  // Evita que o evento de clique no dropdown feche o dropdown imediatamente
+    this.playlistSelecionada = playlist;
+    this.novoNomePlaylist = playlist.nome;
+    this.isModalPlaylistOpen = true;
   }
 
   salvarNome(): void {
@@ -187,6 +216,23 @@ export class UsuarioPerfilComponent implements OnInit {
     } else {
       this.alertaService.exibirAlerta('alert13');
       console.error('Novo nome não fornecido');
+    }
+  }
+
+  salvarNomePlaylist(): void {
+    if (this.playlistSelecionada) {
+      this.playlistSelecionada.nome = this.novoNomePlaylist;
+      this.playListService.atualizarPlaylist(this.playlistSelecionada).subscribe(
+        (response) => {
+          this.fecharModal();
+          console.log('Nome da playlist atualizado com sucesso');
+        },
+        (error) => {
+          console.error('Erro ao atualizar nome da playlist:', error);
+        }
+      );
+    } else {
+      console.error('Playlist ou propriedade nome está indefinida');
     }
   }
 
