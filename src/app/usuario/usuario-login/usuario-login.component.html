@@ -1,29 +1,41 @@
-<div class="bg-custom-gray flex justify-center items-center h-screen">
-  <div class="bg-custom-green flex flex-col justify-center items-center p-12 rounded-xl mt-24 mb-24">
-    <h2 class="text-white mb-4">LOGIN</h2>
-    <form class="flex flex-col" (ngSubmit)="login()">
-      <div class="relative">
-        <span class="absolute left-0 top-0 mt-2 ml-2">
-          <img width="18" height="18" src="https://img.icons8.com/ios-filled/50/FFFFFF/mail.png" alt="mail"/>
-        </span>
-        <input class="form-input pl-12" type="email" name="email" [(ngModel)]="email" placeholder="Email" required>
+<div class="flex h-screen w-full items-center justify-center bg-gray-900 bg-cover bg-no-repeat relative background-image">
+  <div class="rounded-xl w-1/3 bg-gray-800 bg-opacity-50 px-16 py-10 shadow-lg backdrop-blur-md max-sm:px-8 relative z-10">
+    <div class="text-white ">
+      <div class="mb-8 flex flex-col items-center ">
+        <img src="https://i.ibb.co/BwSz8Tr/logo-removebg-preview.png" width="150" alt="" />
+        <h1 class="mb-2 text-2xl">Musicritica</h1>
+        <span class="text-gray-300">Login</span>
       </div>
-      <div class="relative">
-        <span class="absolute left-0 top-0 mt-2 ml-2">
-          <img width="20" height="20" src="https://img.icons8.com/ios-filled/50/FFFFFF/password.png" alt="password"/>
-        </span>
-        <input class="form-input pl-12" type="password" name="senha" [(ngModel)]="senha" placeholder="Senha" required>
-      </div>
-      <div class="flex items-center justify-center items-center">
-        <button class="text-white underline custom-button" type="button" (click)="esqueceuSenha()">Esqueci minha senha</button>
-      </div>
-      <div class="flex items-center mt-4">
-        <p class="text-white mr-2 custom-text">Não tem uma conta?</p>
-        <button class="text-white underline custom-button" type="button" (click)="criarConta()">Crie uma agora</button>
-      </div>
-      <div class="flex items-center justify-center">
-        <button class="form-button mt-4" type="submit">ENTRAR</button>
-      </div>
-    </form>
+      <form action="#" (ngSubmit)="login()">
+        <div class="relative mb-4 ml-28">
+          <span class="absolute left-0 top-0 mt-2 ml-2">
+            <img width="21" height="21" src="https://img.icons8.com/ios-glyphs/30/FFFFFF/person-male.png"
+              alt="person-male" />
+          </span>
+          <input
+            class="rounded-3xl border-none bg-gray-400 bg-opacity-50 px-6 py-2 text-center text-inherit placeholder-slate-200 shadow-lg outline-none backdrop-blur-md"
+            placeholder="Nome" type="text" name="nome" [(ngModel)]="email">
+        </div>
+        <div class="relative mb-4 ml-28">
+          <span class="absolute left-0 top-0 mt-2 ml-2">
+            <img width="20" height="20" src="https://img.icons8.com/ios-filled/50/FFFFFF/password.png" alt="password" />
+          </span>
+          <input
+            class="rounded-3xl border-none bg-gray-400 bg-opacity-50 px-6 py-2 text-center text-inherit placeholder-slate-200 shadow-lg outline-none backdrop-blur-md"
+            placeholder="Senha" type="password" name="senha" [(ngModel)]="senha">
+        </div>
+        <div class="flex mt-4 ml-28">
+          <p class="ml-4 text-sm text-white mr-2 ">Não tem uma conta?</p>
+          <button class="text-sm text-white underline " type="button" (click)="criarConta()">Cadastrar-se</button>
+        </div>
+        <div class=" flex justify-center text-lg text-black">
+          <button class="form-button text-center mb-2" type="submit">ENTRAR</button>
+        </div>
+        <div class="flex items-center justify-center">
+          <button class="text-sm mt-4 text-white underline " type="button" (click)="esqueceuSenha()">Esqueci minha
+            senha</button>
+        </div>
+      </form>
+    </div>
   </div>
 </div>

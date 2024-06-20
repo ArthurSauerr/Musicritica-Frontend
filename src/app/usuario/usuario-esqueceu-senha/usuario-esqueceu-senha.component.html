@@ -1,17 +1,26 @@
-<div class="bg-custom-gray flex justify-center items-center h-screen">
-  <div class="bg-custom-green flex flex-col justify-center items-center p-12 rounded-xl mt-24 mb-24">
-    <h2 class="text-white mb-4">RECUPERAR SENHA</h2>
-    <form class="flex flex-col" (ngSubmit)="esqueceuSenha()">
-      <div class="relative">
-        <span class="absolute left-0 top-0 mt-2 ml-2">
-          <img id="img" width="18" height="18" src="https://img.icons8.com/ios-filled/50/FFFFFF/mail.png" alt="mail"/>
-        </span>
-        <input class="form-input pl-12" type="email" id="input-email" name="email" [(ngModel)]="email" placeholder="Email" required>
+<app-alerta-usuario></app-alerta-usuario>
+
+<div class="flex h-screen w-full items-center justify-center bg-gray-900 bg-cover bg-no-repeat relative background-image">
+  <div class="rounded-xl w-1/3 bg-gray-800 bg-opacity-50 px-16 py-10 shadow-lg backdrop-blur-md max-sm:px-8 relative z-10">
+    <div class="text-white ">
+      <div class="mb-8 flex flex-col items-center ">
+        <img src="https://i.ibb.co/BwSz8Tr/logo-removebg-preview.png" width="150" alt="" />
+        <h1 class="mb-2 mt-4 text-2xl">Redefinir senha</h1>
+        <span class="text-gray-300">Insira seu E-mail de cadastro</span>
       </div>
-      <div class="flex items-center mt-4 justify-center">
-        <button class="text-white underline custom-button" id="button-voltar" type="button" (click)="voltar()">Voltar</button>
-      </div>
-      <button class="form-button mt-4" id="button-enviar" type="submit">ENVIAR</button>
-    </form>
+      <form class="flex flex-col" (ngSubmit)="esqueceuSenha()">
+        <div class="relative ml-28">
+          <span class="absolute left-0 top-0 mt-2 ml-2">
+            <img id="img" width="18" height="18" src="https://img.icons8.com/ios-filled/50/FFFFFF/mail.png" alt="mail"/>
+          </span>
+          <input class="rounded-3xl border-none bg-gray-400 bg-opacity-50 px-6 py-2 text-center text-inherit placeholder-slate-200 shadow-lg outline-none backdrop-blur-md"
+          placeholder="E-mail" type="text" name="nome" [(ngModel)]="email">
+        </div>
+        <div class="flex items-center mt-4 justify-center">
+          <button class="text-white underline custom-button" id="button-voltar" type="button" (click)="voltar()">Voltar</button>
+        </div>
+        <button class="form-button mt-4" id="button-enviar" type="submit">ENVIAR</button>
+      </form>
+    </div>
   </div>
 </div>

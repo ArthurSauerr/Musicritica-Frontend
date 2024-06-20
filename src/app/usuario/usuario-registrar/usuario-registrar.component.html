@@ -1,51 +1,69 @@
-<form (ngSubmit)="registrar()" #form="ngForm">
-  <div class="py-16">
-    <div class="flex shadow-lg overflow-hidden mx-auto max-w-sm lg:max-w-4xl bg-custom">
-      <div class="hidden lg:block lg:w-1/2 bg-cover" style="background-image:url('https://i.imgur.com/jvfa77Z.png')"></div>
-      <div class="w-full p-8 lg:w-1/2 bg-custom-green flex flex-col justify-center items-center">
-        <h2 class="text-2xl text-center custom-h2">CADASTRO</h2>
-        
-        <div class="relative mb-4">
-          <span class="absolute left-0 top-0 mt-2 ml-2">
-            <img width="21" height="21" src="https://img.icons8.com/ios-glyphs/30/FFFFFF/person-male.png" alt="person-male"/>
-          </span>
-          <input class="form-input pl-12" type="text" name="nome" [(ngModel)]="nome" placeholder="Nome" required
-          [ngClass]="{'border-red-500': form.submitted && !nome}">
-          <div class="alert-container">
-            <div *ngIf="form.submitted && !nome" class="text-red-500 text-sm">Campo obrigatório</div>
+<div
+  class="flex h-screen w-full items-center justify-center bg-gray-900 bg-cover bg-no-repeat relative background-image">
+  <div class="relative z-10 w-1/3">
+    <div class="text-white">
+      <form (ngSubmit)="registrar()" #form="ngForm">
+        <div class="py-16">
+          <div class="flex shadow-lg overflow-hidden mx-auto max-w-sm lg:max-w-4xl bg-custom">
+            <div class="hidden lg:block  bg-cover" style="background-image:url('https://i.imgur.com/jvfa77Z.png')">
+            </div>
+            <div
+              class="w-full p-8  bg-gray-800 bg-opacity-50 px-16 py-10 shadow-lg backdrop-blur-md max-sm:px-8 relative z-10 flex flex-col justify-center items-center">
+              <div class="mb-8 flex flex-col items-center">
+                <img src="https://i.ibb.co/BwSz8Tr/logo-removebg-preview.png" width="150" alt="" />
+                <h1 class="text-white mb-2 text-2xl">Musicritica</h1>
+                <span class="text-gray-300">Cadastro</span>
+              </div>
+              <div class="relative mb-4">
+                <span class="absolute left-0 top-0 mt-2 ml-2">
+                  <img width="21" height="21" src="https://img.icons8.com/ios-glyphs/30/FFFFFF/person-male.png"
+                    alt="person-male" />
+                </span>
+                <input
+                  class="rounded-3xl border-none bg-gray-400 bg-opacity-50 px-6 py-2 text-center text-inherit placeholder-slate-200 shadow-lg outline-none backdrop-blur-md"
+                  placeholder="Nome" type="text" name="nome" [(ngModel)]="nome" required
+                  [ngClass]="{'border-red-500': form.submitted && !nome}">
+                <div class="alert-container">
+                  <div *ngIf="form.submitted && !nome" class="text-red-500 text-sm">Campo obrigatório</div>
+                </div>
+              </div>
+              <div class="relative mb-4">
+                <span class="absolute left-0 top-0 mt-2 ml-2">
+                  <img width="18" height="18" src="https://img.icons8.com/ios-filled/50/FFFFFF/mail.png" alt="mail" />
+                </span>
+                <input
+                  class="rounded-3xl border-none bg-gray-400 bg-opacity-50 px-6 py-2 text-center text-inherit placeholder-slate-200 shadow-lg outline-none backdrop-blur-md"
+                  placeholder="E-mail" type="email" name="email" [(ngModel)]="email" required
+                  [ngClass]="{'border-red-500': form.submitted && !email}">
+                <div class="alert-container">
+                  <div *ngIf="form.submitted && !email" class="text-red-500 text-sm">Campo obrigatório</div>
+                </div>
+              </div>
+
+              <div class="relative mb-4">
+                <span class="absolute left-0 top-0 mt-2 ml-2">
+                  <img width="20" height="20" src="https://img.icons8.com/ios-filled/50/FFFFFF/password.png"
+                    alt="password" />
+                </span>
+                <input
+                  class="rounded-3xl border-none bg-gray-400 bg-opacity-50 px-6 py-2 text-center text-inherit placeholder-slate-200 shadow-lg outline-none backdrop-blur-md"
+                  placeholder="Senha" type="password" name="senha" [(ngModel)]="senha" required
+                  [ngClass]="{'border-red-500': form.submitted && !senha}">
+                <div class="alert-container">
+                  <div *ngIf="form.submitted && !senha" class="text-red-500 text-sm">Campo obrigatório</div>
+                </div>
+              </div>
+
+              <div class="flex items-center mt-4">
+                <span class="text-sm text-white mr-2">Já possui uma conta?</span>
+                <button class="text-sm text-white underline" type="button" (click)="fazerLogin()">Faça
+                  login</button>
+              </div>
+              <button class="form-button text-center mt-4" type="submit">CADASTRAR</button>
+            </div>
           </div>
         </div>
-        
-        <div class="relative mb-4">
-          <span class="absolute left-0 top-0 mt-2 ml-2">
-            <img width="18" height="18" src="https://img.icons8.com/ios-filled/50/FFFFFF/mail.png" alt="mail"/>
-          </span>
-          <input class="form-input pl-12" type="email" name="email" [(ngModel)]="email" placeholder="Email" required
-          [ngClass]="{'border-red-500': form.submitted && !email}">
-          <div class="alert-container">
-            <div *ngIf="form.submitted && !email" class="text-red-500 text-sm">Campo obrigatório</div>
-          </div>
-        </div>
-        
-        <div class="relative mb-4">
-          <span class="absolute left-0 top-0 mt-2 ml-2">
-            <img width="20" height="20" src="https://img.icons8.com/ios-filled/50/FFFFFF/password.png" alt="password"/>
-          </span>
-          <input class="form-input pl-12" type="password" name="senha" [(ngModel)]="senha" placeholder="Senha" required
-          [ngClass]="{'border-red-500': form.submitted && !senha}">
-          <div class="alert-container">
-            <div *ngIf="form.submitted && !senha" class="text-red-500 text-sm">Campo obrigatório</div>
-          </div>
-        </div>
-        
-        <div class="flex items-center mt-4">
-          <span class="text-white mr-2 custom-text">Já possui uma conta?</span>
-          <button class="text-white underline custom-button" type="button" (click)="fazerLogin()">Faça login</button>
-        </div>
-        
-        <button class="form-button text-center mt-4" type="submit">CADASTRAR</button>
-      </div>
+      </form>
     </div>
   </div>
-</form>
-
+</div>

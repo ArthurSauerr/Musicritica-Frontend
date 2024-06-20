@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { UsuarioService } from 'src/app/shared/service/usuario.service';
+import { AlertaComponentComponent } from 'src/app/menu-principal/alerta-component/alerta-component.component';
+import { AlertaServiceService } from 'src/app/shared/service/alerta-service.service';
 
 @Component({
   selector: 'app-usuario-redefinir-senha',
@@ -16,12 +18,13 @@ export class UsuarioRedefinirSenhaComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private usuarioService: UsuarioService,
-    private router: Router
+    private router: Router,
+    private alertaService: AlertaServiceService
   ) {}
 
   ngOnInit(): void {
     const token = this.route.snapshot.paramMap.get('token');
-    this.token = token !== null ? token : ''; // Se o token for null, atribui uma string vazia
+    this.token = token !== null ? token : ''; 
   }
 
   redefinirSenha(): void {

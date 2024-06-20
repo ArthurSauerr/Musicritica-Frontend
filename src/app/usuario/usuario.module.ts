@@ -9,7 +9,7 @@ import { UsuarioEsqueceuSenhaComponent } from './usuario-esqueceu-senha/usuario-
 import { UsuarioRedefinirSenhaComponent } from './usuario-redefinir-senha/usuario-redefinir-senha.component';
 import { UsuarioPerfilComponent } from './usuario-perfil/usuario-perfil.component';
 import { AdmDenunciaComponent } from './adm-denuncia/adm-denuncia.component';
-
+import { AlertaUsuarioComponent } from './alerta-usuario/alerta-usuario.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +18,8 @@ import { AdmDenunciaComponent } from './adm-denuncia/adm-denuncia.component';
     UsuarioEsqueceuSenhaComponent,
     UsuarioRedefinirSenhaComponent,
     UsuarioPerfilComponent,
-    AdmDenunciaComponent
+    AdmDenunciaComponent,
+    AlertaUsuarioComponent
   ],
   imports: [
     CommonModule,

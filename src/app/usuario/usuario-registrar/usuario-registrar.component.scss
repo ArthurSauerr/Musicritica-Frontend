@@ -23,6 +23,33 @@
   height: 10px; 
 }
 
+.text-sm {
+  font-size: 0.75rem; 
+}
+
+.background-image {
+  background-image: url('https://i.postimg.cc/c49WvksT/albuns-bom.jpg');
+  position: relative;
+}
+
+.background-image::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5); /* Fundo preto com opacidade */
+  backdrop-filter: blur(8px); /* Efeito de desfoque */
+  z-index: 1;
+}
+
+.background-image > .rounded-xl {
+  position: relative;
+  z-index: 2;
+}
+
+
 .form-input {
   font-family: 'Inter', sans-serif;
   background: none;
