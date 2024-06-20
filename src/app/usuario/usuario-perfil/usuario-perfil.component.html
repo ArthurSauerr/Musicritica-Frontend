@@ -54,6 +54,8 @@
     </div>
   </div>
 </div>
+
+<!-- -------------PLAYLISTS------------- -->
 <div id="div-musicas" class="bg-transparent w-full max-w-screen-lg mx-auto text-center custom-input">
   <div *ngIf="conteudoSelecionado === 'playlists'" class="text-white mt-6 mb-6 overflow-hidden">
     <div *ngFor="let playlist of playlistsDoUsuario" class="mt-4 flex items-center mb-2">
@@ -78,28 +80,21 @@
             <span class="sr-only">Comment settings</span>
           </button>
           <div *ngIf="mostrarDropdown[playlist.id]" id="dropdownComment1"
-            class="mt-4 w-36 bg-white rounded divide-y divide-gray-100 shadow dark:bg-gray-700 dark:divide-gray-600">
-            <ul class="py-1 text-sm text-gray-700 dark:text-gray-200"
+            class="mt-4 w-24 rounded divide-y divide-gray-100 shadow bg-gray-700 divide-gray-600">
+            <ul class="py-1 text-sm text-gray-700 text-gray-200"
               aria-labelledby="dropdownMenuIconHorizontalButton">
               <li>
-                <a href="#"
-                  class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Edit</a>
+                <a (click)="editarNomePlaylist(playlist, $event)"
+                  class="block py-2 px-4 hover:bg-gray-100 hover:bg-gray-600 hover:text-white">Editar</a>
               </li>
               <li>
                 <a href="#"
-                  class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Remove</a>
-              </li>
-              <li>
-                <a href="#"
-                  class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Report</a>
+                  class="block py-2 px-4 hover:bg-gray-100 hover:bg-red-500 hover:text-white">Excluir</a>
               </li>
             </ul>
           </div>
         </div>
       </div>
-    </div>
-    <div>
-
     </div>
     <div class="mt-32">
       <div class="custom-music mb-6 relative" *ngFor="let track of musicasDaPlaylist.tracks">
@@ -122,21 +117,17 @@
               </svg>
               <span class="sr-only">Comment settings</span>
             </button>
-            <div *ngIf="mostrarDropdown[playlist.id]" id="dropdownComment1"
+            <div *ngIf="mostrarDropdownMusicas[playlist.id]" id="dropdownComment1"
               class="mt-4 w-36 bg-white rounded divide-y divide-gray-100 shadow dark:bg-gray-700 dark:divide-gray-600">
               <ul class="py-1 text-sm text-gray-700 dark:text-gray-200"
                 aria-labelledby="dropdownMenuIconHorizontalButton">
                 <li>
-                  <a href="#"
+                  <a
                     class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Edit</a>
                 </li>
                 <li>
                   <a href="#"
                     class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Remove</a>
-                </li>
-                <li>
-                  <a href="#"
-                    class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Report</a>
                 </li>
               </ul>
             </div>
@@ -255,7 +246,7 @@
   </div>
 </div>
 
-<!-- Modal para editar nome -->
+<!-- Modal para editar nome do usuário-->
 <div *ngIf="isModalOpen" class="modal-overlay">
   <div class="modal-content bg-black bg-opacity-50 backdrop-filter backdrop-blur-sm ">
     <h2 class="text-xl font-bold mb-4 nomeUsuario justify-center">Editar Nome</h2>
@@ -270,6 +261,31 @@
         </span>
       </button>
       <button (click)="salvarNome()"
+        class="w-36 rounded-full relative inline-flex items-center justify-center p-0.5 overflow-hidden text-sm font-medium text-gray-900 group bg-gradient-to-br from-teal-300 to-lime-300 group-hover:from-teal-300 group-hover:to-lime-300 dark:text-white dark:hover:text-gray-900 focus:ring-4 focus:outline-none focus:ring-lime-200 dark:focus:ring-lime-800">
+        <span
+          class="w-36 rounded-full relative px-5 py-2.5 transition-all ease-in duration-75 bg-white dark:bg-gray-900 group-hover:bg-opacity-0">
+          Salvar
+        </span>
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- Modal para editar nome da playlist-->
+<div *ngIf="isModalPlaylistOpen" class="modal-overlay">
+  <div class="modal-content bg-black bg-opacity-50 backdrop-filter backdrop-blur-sm ">
+    <h2 class="text-xl font-bold mb-4 nomeUsuario justify-center">Editar Nome da Playlist</h2>
+    <input [(ngModel)]="novoNomePlaylist" type="text" class="input-modal w-full p-2 border border-gray-300 rounded mb-4 "
+      placeholder="Novo Nome">
+    <div class="flex justify-center gap-2">
+      <button (click)="fecharModal()"
+        class="w-36 rounded-full relative inline-flex items-center justify-center p-0.5 overflow-hidden text-sm font-medium text-gray-900 group bg-gradient-to-br from-teal-300 to-lime-300 group-hover:from-teal-300 group-hover:to-lime-300 dark:text-white dark:hover:text-gray-900 focus:ring-4 focus:outline-none focus:ring-lime-200 dark:focus:ring-lime-800">
+        <span
+          class="w-36 rounded-full relative px-5 py-2.5 transition-all ease-in duration-75 bg-white dark:bg-gray-900 group-hover:bg-opacity-0">
+          Fechar
+        </span>
+      </button>
+      <button (click)="salvarNomePlaylist()"
         class="w-36 rounded-full relative inline-flex items-center justify-center p-0.5 overflow-hidden text-sm font-medium text-gray-900 group bg-gradient-to-br from-teal-300 to-lime-300 group-hover:from-teal-300 group-hover:to-lime-300 dark:text-white dark:hover:text-gray-900 focus:ring-4 focus:outline-none focus:ring-lime-200 dark:focus:ring-lime-800">
         <span
           class="w-36 rounded-full relative px-5 py-2.5 transition-all ease-in duration-75 bg-white dark:bg-gray-900 group-hover:bg-opacity-0">

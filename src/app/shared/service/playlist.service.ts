@@ -1,5 +1,5 @@
 import { Playlist } from './../model/Playlist';
-import { HttpClient, HttpParams } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { ListaTracksSpotify } from '../model/ListaTracksSpotify';
@@ -13,6 +13,10 @@ export class PlaylistService {
   private apiUrl = 'http://localhost:8080/playlist';
 
   constructor(private httpClient: HttpClient) { }
+
+  getToken(): string | null {
+    return localStorage.getItem('token');
+  }
 
   buscarPlaylistsPorIdUsuario(id: number): Observable<Playlist[]> {
     return this.httpClient.get<Playlist[]>(`${this.apiUrl}/todas/${id}`);
@@ -47,4 +51,15 @@ export class PlaylistService {
     return this.httpClient.get<Playlist>(`${this.apiUrl}/descobertas/${id}`);
   }
 
+  atualizarPlaylist(playlist: Playlist): Observable<Playlist> {
+    const token = this.getToken();
+    if(!token){
+      throw new Error('Token de autorização não encontrado');
+    }
+
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${token}`
+    });
+    return this.httpClient.put<Playlist>(`${this.apiUrl}/atualizar`, playlist, { headers });
+  }
 }
