@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { Avaliacao } from '../model/Avaliacao';
 import { MusicaSpotify } from '../model/MusicaSpotify';
 import { MapeamentoNotas } from '../model/MapeamentoNotas';
+import { ListaTracksSpotify } from '../model/ListaTracksSpotify';
 
 @Injectable({
   providedIn: 'root'
@@ -31,5 +32,11 @@ export class AvaliacaoService {
   }
   buscarQuantidadePorNota(id_spotify: string): Observable<MapeamentoNotas[]> {
     return this.http.get<MapeamentoNotas[]>(`${this.apiUrl}/notas/${id_spotify}`);
+  }
+  buscarAvaliacoesPorIdUsuario(id_usuario: number): Observable<Avaliacao[]> {
+    return this.http.get<Avaliacao[]>(`${this.apiUrl}/avaliacoes/${id_usuario}`);
+  }
+  buscarMusicasUsuario(id_usuario: number): Observable<ListaTracksSpotify> {
+    return this.http.get<ListaTracksSpotify>(`${this.apiUrl}/musicas/usuario/${id_usuario}`);
   }
 }
