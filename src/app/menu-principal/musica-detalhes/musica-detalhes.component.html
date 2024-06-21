@@ -12,11 +12,7 @@
       </div>
     </div>
     <div>
-      <div class="flex items-center salvar-playlist h-12">
-        <img (click)="toggleModal()" class="mr-2" width="40" height="40"
-          src="https://img.icons8.com/ios/40/FFFFFF/plus--v1.png" alt="plus--v1" />
-        <h1 class="font-semibold" (click)="toggleModal()">Salvar na playlist</h1>
-      </div>
+
       <div *ngIf="showModal"
         class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 backdrop-filter backdrop-blur-sm"
         (click)="fecharModal($event)">
@@ -102,17 +98,27 @@
     </div>
   </div>
   <div class="ml-16 flex">
-    <div class="mr-2 text-1xl font-bold mb-4 musica-info">Média geral - {{media}}</div>
+    <div class="mr-2 text-2xl font-bold mb-4 musica-info">Média geral - {{media}}</div>
     <span *ngFor="let star of stars; let i = index" class="star" (click)="rate(i + 1)">
       <mat-icon>{{ media < 2 ? 'star' : 'star_border' }}</mat-icon>
     </span>
     <div class="ml-auto "></div>
-    <div class="star flex salvar-playlist mr-16" (click)="buscarQuantidadePorNota()" >
-          <h1 class="font-semibold" (click)="toggleModalAvaliacao()">Avaliar música</h1>
+    <div>
+      <div class="flex items-center salvar-playlist mr-16">
+        <img (click)="toggleModal()" class="mr-2" width="28" height="28"
+          src="https://img.icons8.com/ios/40/FFFFFF/plus--v1.png" alt="plus--v1" />
+        <div class="text-1xl font-bold musica-info" (click)="toggleModal()">Salvar na playlist</div>
+      </div>
+      <div class="mt-4 star flex salvar-playlist " (click)="buscarQuantidadePorNota()">
+        <img (click)="toggleModal()" class="mr-2" width="28" height="28"
+        src="https://img.icons8.com/ios/50/FFFFFF/rating.png" alt="plus--v1" />
+        <div class="text-1xl font-bold musica-info" (click)="toggleModalAvaliacao()">Avaliar música</div>
+        
+      </div>
     </div>
   </div>
 
-  <div class="flex mt-32">
+  <div class="flex mt-16">
     <div class="w-1/2 ml-16">
       <div class="text-2xl font-bold mb-4 musica-info">Deixe um comentário</div>
       <div class="flex-grow mb-6">
@@ -123,7 +129,7 @@
             placeholder="Deixe seu comentário..." required></textarea>
         </div>
         <button type="button" (click)="enviarComentario()"
-          class="custom-checkbox inline-flex items-center py-2.5 px-4 text-xs font-medium text-center text-white bg-primary-700 rounded-lg focus:ring-4 focus:ring-primary-200 dark:focus:ring-primary-900 hover:bg-primary-800">
+          class="custom-checkbox inline-flex items-center py-2.5 px-4 text-xs font-medium text-center verde-texto bg-primary-700 rounded-lg focus:ring-4 focus:ring-primary-200 dark:focus:ring-primary-900 hover:bg-primary-800">
           Comentar
         </button>
       </div>
@@ -145,10 +151,10 @@
 <div class="ml-16">
   <div class="max-w-2xl">
     <div class="flex justify-between items-center mb-6">
-      <h2 class="text-lg lg:text-2xl font-bold text-white dark:text-white">Comentários ({{totalDeComentarios}})</h2>
+      <h2 class="text-lg lg:text-2xl font-bold text-white verde-texto">Comentários ({{totalDeComentarios}})</h2>
     </div>
     <div *ngFor="let comentario of comentariosBuscados">
-      <article class="border-t border-white p-6 text-base fundo ">
+      <article class="border-t borda-top-verde p-6 text-base fundo ">
         <footer class="flex justify-between items-center mb-2">
           <div class="flex items-center">
             <p class="inline-flex items-center mr-3 text-sm text-white dark:text-white font-semibold">
@@ -191,7 +197,7 @@
                 </li>
                 <li *ngIf="usuarioLogado.id != comentario.usuario.id">
                   <a (click)="openModal(comentario)"
-                  class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Reportar</a>
+                    class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Reportar</a>
                 </li>
               </ul>
             </div>
@@ -237,7 +243,7 @@
             </div>
           </div>
         </footer>
-        <p class="text-white dark:text-gray-400">{{ comentario.comentario }}</p>
+        <p class="text-white dark:text-gray-400 ">{{ comentario.comentario }}</p>
         <div class="flex items-center mt-4 space-x-4">
           <button type="button" (click)="toggleReply(comentario)"
             class="mt-2 mb-4 flex items-center text-sm text-white hover:underline dark:text-gray-400 font-medium">
@@ -255,7 +261,7 @@
               <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                 d="M5 5h5M5 8h2m6-3h2m-5 3h6m2-7H2a1 1 0 0 0-1 1v9a1 1 0 0 0 1 1h3v5l5-5h8a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1Z" />
             </svg>
-            Ver respostas
+            Ver respostas ({{comentario.totalDeComentariosAssociados}})
           </button>
         </div>
         <div class="ml-16 flex-grow mb-6 mt-6" *ngIf="mostrarTextArea[comentario.id]">
@@ -266,13 +272,13 @@
               placeholder="Deixe seu comentário..." required></textarea>
           </div>
           <button type="button" (click)="enviarResposta(); toggleReply(comentario) "
-            class="border border-white  inline-flex items-center py-2.5 px-4 text-xs font-medium text-center text-white bg-primary-700 rounded-lg focus:ring-4 focus:ring-primary-200 dark:focus:ring-primary-900 hover:bg-primary-800">
+            class="custom-checkbox  verde-texto inline-flex items-center py-2.5 px-4 text-xs font-medium text-center text-white bg-primary-700 rounded-lg focus:ring-4 focus:ring-primary-200 dark:focus:ring-primary-900 hover:bg-primary-800">
             Responder
           </button>
         </div>
         <div *ngIf="showRepliesId === comentario.id">
           <div *ngFor="let comentario of respostasBuscadas">
-            <article class="ml-6 border-t border-white p-6 text-base fundo w-full">
+            <article class="ml-6 p-6 text-base fundo w-full borda-top-verde">
               <footer class="flex justify-between items-center mb-2">
                 <div class="flex items-center">
                   <p class="inline-flex items-center mr-3 text-sm text-white dark:text-white font-semibold">
@@ -329,7 +335,7 @@
                   </svg>
                   Responder
                 </button>
-                <button type="button" (click)="buscarRespostas(comentario.id)"
+                <!-- <button type="button" (click)="buscarRespostas(comentario.id)"
                   class="mt-2 mb-4 flex items-center text-sm text-white hover:underline dark:text-gray-400 font-medium">
                   <svg class="mr-1.5 w-3.5 h-3.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
                     viewBox="0 0 20 18">
@@ -337,17 +343,17 @@
                       d="M5 5h5M5 8h2m6-3h2m-5 3h6m2-7H2a1 1 0 0 0-1 1v9a1 1 0 0 0 1 1h3v5l5-5h8a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1Z" />
                   </svg>
                   Ver respostas
-                </button>
+                </button> -->
               </div>
               <div class="ml-16 flex-grow mb-6 mt-6" *ngIf="mostrarTextArea[comentario.id]">
-                <div class="py-2 px-4 mb-4 rounded-lg rounded-t-lg border border-white">
+                <div class="py-2 px-4 mb-4 rounded-lg rounded-t-lg custom-checkbox">
                   <label for="comment" class="sr-only">Seu comentário</label>
                   <textarea id="comment" rows="6" [(ngModel)]="resposta"
                     class="h-24 w-full text-sm text-white border-0 focus:ring-0 focus:outline-none dark:text-white dark:placeholder-gray-400 fundo"
                     placeholder="Deixe seu comentário..." required></textarea>
                 </div>
                 <button type="button" (click)="enviarResposta(); toggleReply(comentario)"
-                  class="border border-white  inline-flex items-center py-2.5 px-4 text-xs font-medium text-center text-white bg-primary-700 rounded-lg focus:ring-4 focus:ring-primary-200 dark:focus:ring-primary-900 hover:bg-primary-800">
+                  class="custom-checkbox verde-texto inline-flex items-center py-2.5 px-4 text-xs font-medium text-center text-white bg-primary-700 rounded-lg focus:ring-4 focus:ring-primary-200 dark:focus:ring-primary-900 hover:bg-primary-800">
                   Responder
                 </button>
               </div>
@@ -356,55 +362,4 @@
         </div>
       </article>
     </div>
-
   </div>
-  <!-- <footer class="mt-32">
-    <div class="custom-input  mr-16"></div>
-    <div class="py-24 flex items-center justify-center space-x-8">
-      <div class="relative">
-        <img src="https://www.cnnbrasil.com.br/wp-content/uploads/sites/12/2024/02/ariana-grande.png?w=740&h=415&crop=1"
-          alt="baby with headphones" class="w-36 h-36 rounded-full object-cover">
-        <span class="absolute h-10 w-10 rounded-full bg-red-500 border-4 border-gray-500 top-0 right-0"></span>
-      </div>
-      <div class="relative">
-        <img src="https://m.media-amazon.com/images/I/71Te1V90YDL._UF1000,1000_QL80_.jpg" alt="baby with headphones"
-          class="w-36 h-36 rounded-full object-cover">
-        <span class="absolute h-10 w-10 rounded-full bg-red-500 border-4 border-gray-500 top-0 right-0"></span>
-      </div>
-      <div class="relative">
-        <img src="https://br.web.img2.acsta.net/pictures/18/09/12/19/42/5521101.jpg" alt="baby with headphones"
-          class="w-36 h-36 rounded-full object-cover">
-        <span class="absolute h-10 w-10 rounded-full bg-red-500 border-4 border-gray-500 top-0 right-0"></span>
-      </div>
-      <div class="relative">
-        <img src="https://www.cnnbrasil.com.br/wp-content/uploads/sites/12/2024/02/ariana-grande.png?w=740&h=415&crop=1"
-          alt="baby with headphones" class="w-36 h-36 rounded-full object-cover">
-        <span class="absolute h-10 w-10 rounded-full bg-red-500 border-4 border-gray-500 top-0 right-0"></span>
-      </div>
-      <div class="relative">
-        <img src="https://m.media-amazon.com/images/I/71Te1V90YDL._UF1000,1000_QL80_.jpg" alt="baby with headphones"
-          class="w-36 h-36 rounded-full object-cover">
-        <span class="absolute h-10 w-10 rounded-full bg-red-500 border-4 border-gray-500 top-0 right-0"></span>
-      </div>
-      <div class="relative">
-        <img src="https://br.web.img2.acsta.net/pictures/18/09/12/19/42/5521101.jpg" alt="baby with headphones"
-          class="w-36 h-36 rounded-full object-cover">
-        <span class="absolute h-10 w-10 rounded-full bg-red-500 border-4 border-gray-500 top-0 right-0"></span>
-      </div>
-      <div class="relative">
-        <img src="https://www.cnnbrasil.com.br/wp-content/uploads/sites/12/2024/02/ariana-grande.png?w=740&h=415&crop=1"
-          alt="baby with headphones" class="w-36 h-36 rounded-full object-cover">
-        <span class="absolute h-10 w-10 rounded-full bg-red-500 border-4 border-gray-500 top-0 right-0"></span>
-      </div>
-      <div class="relative">
-        <img src="https://m.media-amazon.com/images/I/71Te1V90YDL._UF1000,1000_QL80_.jpg" alt="baby with headphones"
-          class="w-36 h-36 rounded-full object-cover">
-        <span class="absolute h-10 w-10 rounded-full bg-red-500 border-4 border-gray-500 top-0 right-0"></span>
-      </div>
-      <div class="relative">
-        <img src="https://br.web.img2.acsta.net/pictures/18/09/12/19/42/5521101.jpg" alt="baby with headphones"
-          class="w-36 h-36 rounded-full object-cover">
-        <span class="absolute h-10 w-10 rounded-full bg-red-500 border-4 border-gray-500 top-0 right-0"></span>
-      </div>
-    </div>
-  </footer> -->

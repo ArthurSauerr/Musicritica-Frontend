@@ -132,4 +132,30 @@ h1 {
   }
 }
 
+@keyframes slide-in-from-right {
+  from {
+    transform: translateX(100%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+
+@keyframes slide-out-to-left {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-100%);
+  }
+}
+
+.carousel-item {
+  animation: slide-in-from-right 0.5s ease;
+}
+
+.carousel-item.exiting {
+  animation: slide-out-to-left 0.5s ease;
+}
+
 
