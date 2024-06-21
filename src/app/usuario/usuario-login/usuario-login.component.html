@@ -6,17 +6,17 @@
         <h1 class="mb-2 text-2xl">Musicritica</h1>
         <span class="text-gray-300">Login</span>
       </div>
-      <form action="#" (ngSubmit)="login()">
-        <div class="relative mb-4 ml-28">
+      <form action="#" (ngSubmit)="login()" class="flex flex-col items-center">
+        <div class="relative mb-4 ">
           <span class="absolute left-0 top-0 mt-2 ml-2">
-            <img width="21" height="21" src="https://img.icons8.com/ios-glyphs/30/FFFFFF/person-male.png"
+            <img width="21" height="21" src="https://img.icons8.com/ios-filled/50/FFFFFF/mail.png"
               alt="person-male" />
           </span>
           <input
             class="rounded-3xl border-none bg-gray-400 bg-opacity-50 px-6 py-2 text-center text-inherit placeholder-slate-200 shadow-lg outline-none backdrop-blur-md"
-            placeholder="Nome" type="text" name="nome" [(ngModel)]="email">
+            placeholder="E-mail" type="text" name="email" [(ngModel)]="email">
         </div>
-        <div class="relative mb-4 ml-28">
+        <div class="relative mb-4">
           <span class="absolute left-0 top-0 mt-2 ml-2">
             <img width="20" height="20" src="https://img.icons8.com/ios-filled/50/FFFFFF/password.png" alt="password" />
           </span>
@@ -24,7 +24,7 @@
             class="rounded-3xl border-none bg-gray-400 bg-opacity-50 px-6 py-2 text-center text-inherit placeholder-slate-200 shadow-lg outline-none backdrop-blur-md"
             placeholder="Senha" type="password" name="senha" [(ngModel)]="senha">
         </div>
-        <div class="flex mt-4 ml-28">
+        <div class="flex mt-4">
           <p class="ml-4 text-sm text-white mr-2 ">Não tem uma conta?</p>
           <button class="text-sm text-white underline " type="button" (click)="criarConta()">Cadastrar-se</button>
         </div>
