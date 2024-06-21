@@ -359,22 +359,34 @@ export class MusicaDetalhesComponent implements OnInit {
     }
   }
 
-  enviarReport(comentarioReportado: Comentario): void {
-    this.novaDenuncia.comentario = comentarioReportado;
-    this.novaDenuncia.descricao = comentarioReportado.comentario;
-    this.novaDenuncia.dt_denuncia = Date.now();
-    this.novaDenuncia.status = true;
-    this.novaDenuncia.usuario = this.usuarioLogado;
-    this.novaDenuncia.usuarioReportado = comentarioReportado.usuario;
+  enviarReport(idComentario: number): void {
+    console.log("comentario: " + this.comentario);
+    this.usuarioService.buscarIdPorEmail(this.emailParam).subscribe(
+        (data: number) => {
 
-    this.denunciaService.enviarReport(this.novaDenuncia).subscribe(
-      response => {
-        console.log('Denúncia enviada com sucesso!', response);
-      },
-      error => {
-        console.error('Erro ao enviar a denúncia:', error);
-      }
-    );
+          this.usuarioParaEnviar.id = data;
+
+          this.novaDenuncia.comentario = this.comentarioSelecionado;
+          this.novaDenuncia.descricao = this.novaDenuncia.descricao;
+          this.novaDenuncia.dt_denuncia = Date.now();
+          this.novaDenuncia.status = true;
+          this.novaDenuncia.usuario = this.usuarioLogado;
+          this.novaDenuncia.usuarioReportado = this.usuarioParaEnviar;
+
+          this.denunciaService.enviarReport(this.novaDenuncia).subscribe(
+            response => {
+              console.log('Comentário enviado com sucesso: ', this.novaDenuncia);
+              this.alertaService.exibirAlerta('alert31')
+            }, error => {
+              console.error('Erro ao enviar o comentário:', error);
+              this.alertaService.exibirAlerta('alert4')
+            });
+        },
+        (error) => {
+          console.error('Ocorreu um erro ao buscar o ID do usuário:', error);
+        }
+      );
+
 
   }
 
@@ -634,7 +646,6 @@ export class MusicaDetalhesComponent implements OnInit {
   }
 
   openModalDenuncia(comentarioTexto: Comentario) {
-    this.comentarioSelecionado = comentarioTexto.comentario;
     this.idComentarioSelecionado = comentarioTexto.id;
     this.showModalEnviarDenuncia = true;
     this.fecharTodosDropdowns();
