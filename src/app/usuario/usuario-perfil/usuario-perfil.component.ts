@@ -8,6 +8,8 @@ import { ListaTracksSpotify } from 'src/app/shared/model/ListaTracksSpotify';
 import { DadosCompartilhadosService } from 'src/app/shared/service/dados-compartilhados.service';
 import { ChangeDetectorRef } from '@angular/core';
 import { AlertaServiceService } from 'src/app/shared/service/alerta-service.service';
+import { AvaliacaoService } from 'src/app/shared/service/avaliacao.service';
+import { Avaliacao } from 'src/app/shared/model/Avaliacao';
 
 @Component({
   selector: 'app-usuario-perfil',
@@ -27,11 +29,14 @@ export class UsuarioPerfilComponent implements OnInit {
     private dadosCompartilhadosService: DadosCompartilhadosService,
     private cdr: ChangeDetectorRef,
     private alertaService: AlertaServiceService,
+    private avaliacaoService: AvaliacaoService
   ) {}
 
   conteudoSelecionado: string | null = null;
   novaPlaylist: Playlist = new Playlist();
   playlistsDoUsuario: Playlist[];
+  avaliacoes: Avaliacao[];
+  musicasAvaliadas =  new ListaTracksSpotify();
   playlistDescobertas = new Playlist();
 
   mostrarDropdown: { [key: number]: boolean } = {};
@@ -41,6 +46,8 @@ export class UsuarioPerfilComponent implements OnInit {
 
   musicasDaPlaylist: ListaTracksSpotify = new ListaTracksSpotify();
   musicasDaPlaylistDescobertas: ListaTracksSpotify = new ListaTracksSpotify();
+  musicasDasAvaliacoes: ListaTracksSpotify = new ListaTracksSpotify();
+
 
   exibirEditButtons: boolean = false;
   isModalOpen: boolean;
@@ -61,9 +68,13 @@ export class UsuarioPerfilComponent implements OnInit {
     this.route.paramMap.subscribe((params) => {
       this.pageId = params.get('id');
       if (this.pageId) {
+
         this.buscarUsuario(+this.pageId);
         this.buscarPlaylistsPorIdUsuario(+this.pageId);
         this.buscarPlaylistDescobertas(+this.pageId);
+        this.buscarAvaliacoesPorIdUsuario(+this.pageId);
+        this.buscarMusicasUsuario(+this.pageId);
+
         this.dadosCompartilhadosService.setPageId(this.pageId);
       }
       console.log('Id da pagina:', this.pageId);
@@ -113,6 +124,35 @@ export class UsuarioPerfilComponent implements OnInit {
           this.playlistDescobertas = data;
           this.buscarTodasMusicasDaPlaylistDescobertas(idUsuario);
           console.log(data);
+        },
+        (error) => {
+          console.error(
+            'Ocorreu um erro ao buscar as musicas de descobertas:',
+            error
+          );
+        }
+      );
+  }
+
+  buscarAvaliacoesPorIdUsuario(idUsuario: number): void {
+    this.avaliacaoService.buscarAvaliacoesPorIdUsuario(idUsuario).subscribe(
+        (data: Avaliacao[]) => {
+          this.avaliacoes = data;
+        },
+        (error) => {
+          console.error(
+            'Ocorreu um erro ao buscar as musicas de descobertas:',
+            error
+          );
+        }
+      );
+  }
+
+  buscarMusicasUsuario(idUsuario: number): void {
+    this.avaliacaoService.buscarMusicasUsuario(idUsuario).subscribe(
+        (data: ListaTracksSpotify) => {
+          this.musicasAvaliadas = data;
+          console.log("musicas avaliadas: " + this.musicasAvaliadas)
         },
         (error) => {
           console.error(

@@ -60,11 +60,10 @@
 <div id="div-musicas" class="bg-transparent w-full max-w-screen-lg mx-auto text-center custom-input">
   <div *ngIf="conteudoSelecionado === 'playlists'" class="text-white mt-6 mb-6 overflow-hidden">
     <div *ngFor="let playlist of playlistsDoUsuario" class="mt-4 flex items-center mb-2">
+      <div class="w-full bg-gray-700 bg-opacity-50 cursor-pointer p-4 rounded-lg flex hover:bg-opacity-30 hover:backdrop-blur-md transition duration-300 ease-in-out"
 
-      <div
-        class="w-full bg-gray-700 cursor-pointer p-4 rounded-lg flex hover:bg-gray-800 transition duration-300 ease-in-out"
         (click)="buscarTodasMusicasDaPlaylist(playlist.id)">
-        <div class="w-20 ">
+        <div class="w-20">
           <img *ngIf="primeirasMusicasDasPlaylists[playlist.id]" [src]="primeirasMusicasDasPlaylists[playlist.id]"
             class="w-full h-auto rounded-lg drop-shadow-md" alt="Miniatura da primeira música">
         </div>
@@ -132,7 +131,7 @@
                 </li>
               </ul>
             </div>
-            <div class="mt-24">
+            <!-- <div class="mt-24">
               <div class="flex items-center">
                 <svg class="w-4 h-4 text-yellow-300 ms-1" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
                   fill="currentColor" viewBox="0 0 22 20">
@@ -160,23 +159,31 @@
                     d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z" />
                 </svg>
               </div>
-            </div>
+            </div> -->
           </div>
         </div>
       </div>
     </div>
   </div>
 
-  <div *ngIf="conteudoSelecionado === 'avaliacoes'">
-    <p class="text-white">Conteúdo das avaliações</p>
+  <div *ngIf="conteudoSelecionado === 'avaliacoes'" class="mt-4">
+   <div *ngFor="let musica of musicasAvaliadas.tracks" class="custom-music mb-6 relative">
+    <div class="flex items-end">
+      <img [src]="musica.album.images[1].url" alt="{{ musica.name }}" class="mb-6 rounded-lg w-40 h-40 mr-4">
+      <div class="text-left mb-6">
+        <h1 class="text-3xl font-bold mb-4 musica-info">{{ musica.name }}</h1>
+        <h2 class="text-1xl font-bold musica-info">{{ musica.album.name }}</h2>
+      </div>
+    </div>   
+  </div>
   </div>
   <div *ngIf="conteudoSelecionado === 'descobertas'" class="text-white mt-6 mb-6 overflow-hidden">
 
     <div>
       <div class="custom-music mb-6 relative" *ngFor="let track of musicasDaPlaylistDescobertas.tracks">
         <div class="flex items-end">
-          <img [src]="track.album.images[1].url" alt="{{ track.name }}" class="mb-2 rounded-lg w-40 h-40 mr-4">
-          <div class="text-left mb-2">
+          <img [src]="track.album.images[1].url" alt="{{ track.name }}" class="mb-6 rounded-lg w-40 h-40 mr-4">
+          <div class="text-left mb-6">
             <h1 class="text-3xl font-bold mb-4 musica-info">{{ track.name }}</h1>
             <h2 class="text-1xl font-bold musica-info">{{ track.album.name }}</h2>
           </div>
@@ -211,7 +218,7 @@
                 </li>
               </ul>
             </div>
-            <div class="mt-24">
+            <!-- <div class="mt-24">
               <div class="flex items-center">
                 <svg class="w-4 h-4 text-yellow-300 ms-1" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
                   fill="currentColor" viewBox="0 0 22 20">
@@ -239,7 +246,7 @@
                     d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z" />
                 </svg>
               </div>
-            </div>
+            </div> -->
           </div>
         </div>
       </div>
