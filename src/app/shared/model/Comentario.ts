@@ -9,4 +9,5 @@ export class Comentario {
   usuario: Usuario;
   dt_publicacao: number
   comentarioPai: Comentario
+  totalDeComentariosAssociados?: number;
 }
