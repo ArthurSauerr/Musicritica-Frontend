@@ -97,7 +97,7 @@
       </div>
     </div>
     <div class="mt-32">
-      <div class="custom-music mb-6 relative" *ngFor="let track of musicasDaPlaylist.tracks">
+      <div class="custom-music mb-6 relative" *ngFor="let track of musicasDaPlaylist.tracks; let i = index">
         <div class="flex items-end">
           <img [src]="track.album.images[1].url" alt="{{ track.name }}" class="mb-2 rounded-lg w-40 h-40 mr-4">
           <div class="text-left mb-2">
@@ -105,9 +105,13 @@
             <h2 class="text-1xl font-bold musica-info">{{ track.album.name }}</h2>
           </div>
         </div>
+        <div *ngIf="playlistsDoUsuario[0].musicaSpotifyList[i]">
+          <!-- Exibe o id correspondente da música -->
+          <p>{{ playlistsDoUsuario[0].musicaSpotifyList[i].id }}</p>
+        </div>
         <div *ngFor="let playlist of playlistsDoUsuario" class="mt-6">
           <div class="absolute top-0 right-0">
-            <button (click)="toggleDropdown(playlist, $event)"
+            <button (click)="toggleDropdownMusica(playlist, $event)"
               class="inline-flex items-center p-2 text-sm font-medium text-center text-gray-500 dark:text-gray-400 rounded-lg focus:ring-4 focus:outline-none dark:hover:bg-gray-200 dark:focus:ring-gray-600"
               type="button">
               <svg class="w-6 h-6" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor"
@@ -122,12 +126,8 @@
               <ul class="py-1 text-sm text-gray-700 dark:text-gray-200"
                 aria-labelledby="dropdownMenuIconHorizontalButton">
                 <li>
-                  <a
-                    class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Edit</a>
-                </li>
-                <li>
-                  <a href="#"
-                    class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Remove</a>
+                  <a (click)="excluirMusicaPlaylist()"
+                    class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Excluir</a>
                 </li>
               </ul>
             </div>

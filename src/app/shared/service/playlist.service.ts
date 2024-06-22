@@ -76,4 +76,17 @@ export class PlaylistService {
     return this.httpClient.delete<Playlist>(`${this.apiUrl}/excluir/${playlistId}`, { headers });
   }
 
+  excluirMusicaPlaylist(playlistId: number, idMusicaSpotify: number): Observable<Playlist> {
+    const token = this.getToken();
+    if (!token) {
+      throw new Error('Token de autorização não encontrado');
+    }
+
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${token}`
+    });
+
+    return this.httpClient.delete<Playlist>(`${this.apiUrl}/excluir/musica/${playlistId}/${idMusicaSpotify}`, { headers });
+  }
+
 }
