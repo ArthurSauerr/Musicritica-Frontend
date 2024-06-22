@@ -177,6 +177,18 @@ export class UsuarioPerfilComponent implements OnInit {
     this.mostrarDropdown[playlist.id] = !this.mostrarDropdown[playlist.id];
   }
 
+  toggleDropdownMusica(playlist: Playlist,  event: Event): void {
+    event.stopPropagation();
+    if (!this.mostrarDropdownMusicas[playlist.id]) {
+      this.fecharTodosDropdowns();
+    }
+    this.mostrarDropdownMusicas[playlist.id] = !this.mostrarDropdownMusicas[playlist.id];
+  }
+
+  excluirMusicaPlaylist() {
+
+  }
+
   fecharTodosDropdowns(): void {
     this.playlistsDoUsuario.forEach((playlist) => {
       this.mostrarDropdown[playlist.id] = false;
