@@ -1,24 +1,10 @@
 <div x-data="setup()" class="dark">
-  <div class="min-h-screen flex flex-col flex-auto flex-shrink-0 antialiased bg-white dark:bg-gray-700 text-black dark:text-white">
+  <div class="min-h-screen flex flex-col flex-auto flex-shrink-0 antialiased bg-custom-gray text-black dark:text-white">
     <div class="h-full ml-14 mt-14 mb-10 md:ml-64">
       <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 p-4 gap-4">
-        
-        <div class="bg-blue-500 dark:bg-gray-800 shadow-lg rounded-md flex items-center justify-between p-3 border-b-4 border-blue-600 dark:border-gray-600 text-white font-medium group">
-          <div class="text-right">
-            <div date-rangepicker class="flex items-center">
-              <div class="relative max-w-sm">
-                <div class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
-                  <svg class="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
-                    <path d="M20 4a2 2 0 0 0-2-2h-2V1a1 1 0 0 0-2 0v1h-3V1a1 1 0 0 0-2 0v1H6V1a1 1 0 0 0-2 0v1H2a2 2 0 0 0-2 2v2h20V4ZM0 18a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8H0v10Zm5-8h10a1 1 0 0 1 0 2H5a1 1 0 0 1 0-2Z"/>
-                  </svg>
-                </div>
-                <input datepicker datepicker-autohide type="text" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Select date">
-              </div>
-            </div>
-          </div>
-        </div>
 
-        <div class="bg-blue-500 dark:bg-gray-800 shadow-lg rounded-md flex items-center justify-between p-3 border-b-4 border-blue-600 dark:border-gray-600 text-white font-medium group">
+        <!-- Componente de filtro (exemplo) -->
+        <div class="mt-16 dark:bg-gray-800 shadow-lg rounded-md flex items-center justify-between p-3 border-b-4 border-blue-600 dark:border-gray-600 text-white font-medium group">
           <p>Usuário</p>
           <div class="text-right">
             <form>
@@ -35,11 +21,9 @@
           </div>
         </div>
 
-        <button class="bg-black rounded-full flex items-center justify-center p-0.5 mb-2 me-2 dark:text-white dark:hover:text-gray-900 dark:focus:ring-lime-800">
-          <span>Buscar</span>
-        </button>
       </div>
 
+      <!-- Tabela de denúncias -->
       <div class="w-full p-4">
         <div class="w-full overflow-hidden rounded-lg shadow-xs">
           <div class="w-full overflow-x-auto">
@@ -47,103 +31,20 @@
               <thead>
                 <tr class="text-xs font-semibold tracking-wide text-left text-gray-500 uppercase border-b dark:border-gray-700 bg-gray-50 dark:text-gray-400 dark:bg-gray-800">
                   <th class="px-4 py-3">Usuário Reportado</th>
-                  <th class="px-4 py-3">Descrição</th>
+                  <th class="px-4 py-3">Usuário</th>
                   <th class="px-4 py-3">Comentário</th>
-                  <th class="px-4 py-3">status</th>
+                  <th class="px-4 py-3">Status</th>
                   <th class="px-4 py-3">Data</th>
                 </tr>
               </thead>
               <tbody>
+                <!-- Iteração sobre as denúncias -->
                 <tr *ngFor="let denuncia of denuncias">
-                  <td class="px-4 py-3"> 
-                    <div class="flex items-center text-sm">
-                      <div class="relative hidden w-8 h-8 mr-3 rounded-full md:block">
-                        <p class="text-grey-900 whitespace-no-wrap">{{ denuncia.usuarioReportado }}</p>
-                        <p class="text-grey-900 whitespace-no-wrap"> {{ denuncia.descricao }} </p>
-                        <p class="text-grey-900 whitespace-no-wrap"> {{ denuncia.comentario }} </p>
-                        <p class="text-grey-900 whitespace-no-wrap"> {{ denuncia.status }} </p>
-                        <p class="text-grey-900 whitespace-no-wrap"> {{ denuncia.dt_denuncia }} </p>
-                        </div>
-                      </div>
-                  </td>
-
-              
-              
-                <td class="px-4 py-3">
-                  <div class="flex items-center text-sm">
-                    <div class="relative hidden w-8 h-8 mr-3 rounded-full md:block">
-                      <p class="font-semibold"> {{ denuncia.comentario }}</p>
-                    </div>
-                    <div>
-                      <p class="font-semibold">Jolina Angelie</p>
-                      <p class="text-xs text-gray-600 dark:text-gray-400">Unemployed</p>
-                    </div>
-                  </div>
-                </td>
-                <td class="px-4 py-3 text-sm">$369.75</td>
-                <td class="px-4 py-3 text-xs">
-                  <span class="px-2 py-1 font-semibold leading-tight text-yellow-700 bg-yellow-100 rounded-full"> Pending </span>
-                </td>
-                <td class="px-4 py-3 text-sm">23-03-2021</td>
-              
-              
-                <td class="px-4 py-3">
-                  <div class="flex items-center text-sm">
-                    <div class="relative hidden w-8 h-8 mr-3 rounded-full md:block">
-                      <img class="object-cover w-full h-full rounded-full" src="https://images.unsplash.com/photo-1502720705749-871143f0e671?ixlib=rb-0.3.5&amp;q=80&amp;fm=jpg&amp;crop=entropy&amp;cs=tinysrgb&amp;w=200&amp;fit=max&amp;s=b8377ca9f985d80264279f277f3a67f5" alt="" loading="lazy" />
-                      <div class="absolute inset-0 rounded-full shadow-inner" aria-hidden="true"></div>
-                    </div>
-                    <div>
-                      <p class="font-semibold">Dave Li</p>
-                      <p class="text-xs text-gray-600 dark:text-gray-400">Influencer</p>
-                    </div>
-                  </div>
-                </td>
-                <td class="px-4 py-3 text-sm">$775.45</td>
-                <td class="px-4 py-3 text-xs">
-                  <span class="px-2 py-1 font-semibold leading-tight text-gray-700 bg-gray-100 rounded-full dark:text-gray-100 dark:bg-gray-700"> Expired </span>
-                </td>
-                <td class="px-4 py-3 text-sm">09-02-2021</td>
-             
-              <tr class="bg-gray-50 dark:bg-gray-800 hover:bg-gray-100 dark:hover:bg-gray-900 text-gray-700 dark:text-gray-400">
-                <td class="px-4 py-3">
-                  <div class="flex items-center text-sm">
-                    <div class="relative hidden w-8 h-8 mr-3 rounded-full md:block">
-                      <img class="object-cover w-full h-full rounded-full" src="https://images.unsplash.com/photo-1551006917-3b4c078c47c9?ixlib=rb-1.2.1&amp;q=80&amp;fm=jpg&amp;crop=entropy&amp;cs=tinysrgb&amp;w=200&amp;fit=max&amp;ixid=eyJhcHBfaWQiOjE3Nzg0fQ" alt="" loading="lazy" />
-                      <div class="absolute inset-0 rounded-full shadow-inner" aria-hidden="true"></div>
-                    </div>
-                    <div>
-                      <p class="font-semibold">Rulia Joberts</p>
-                      <p class="text-xs text-gray-600 dark:text-gray-400">Actress</p>
-                    </div>
-                  </div>
-                </td>
-                <td class="px-4 py-3 text-sm">$1276.75</td>
-                <td class="px-4 py-3 text-xs">
-                  <span class="px-2 py-1 font-semibold leading-tight text-green-700 bg-green-100 rounded-full dark:bg-green-700 dark:text-green-100"> Approved </span>
-                </td>
-                <td class="px-4 py-3 text-sm">17-04-2021</td>
-              
-              
-                <td class="px-4 py-3">
-                  <div class="flex items-center text-sm">
-                    <div class="relative hidden w-8 h-8 mr-3 rounded-full md:block">
-                      <img class="object-cover w-full h-full rounded-full" src="https://images.unsplash.com/photo-1566411520896-01e7ca4726af?ixlib=rb-1.2.1&amp;q=80&amp;fm=jpg&amp;crop=entropy&amp;cs=tinysrgb&amp;w=200&amp;fit=max&amp;ixid=eyJhcHBfaWQiOjE3Nzg0fQ" alt="" loading="lazy" />
-                      <div class="absolute inset-0 rounded-full shadow-inner" aria-hidden="true"></div>
-                    </div>
-                    <div>
-                      <p class="font-semibold">Hitney Wouston</p>
-                      <p class="text-xs text-gray-600 dark:text-gray-400">Singer</p>
-                    </div>
-                  </div>
-                </td>
-                <td class="px-4 py-3 text-sm">$863.45</td>
-                <td class="px-4 py-3 text-xs">
-                  <span class="px-2 py-1 font-semibold leading-tight text-red-700 bg-red-100 rounded-full dark:text-red-100 dark:bg-red-700"> Denied </span>
-                </td>
-                <td class="px-4 py-3 text-sm">11-01-2021</td>
-              
-
+                  <td class="px-4 py-3">{{ denuncia.usuarioReportado.nome }}</td>
+                  <td class="px-4 py-3">{{ denuncia.usuario.nome }}</td>
+                  <td class="px-4 py-3">{{ denuncia.comentario.comentario }}</td>
+                  <td class="px-4 py-3">{{ denuncia.status }}</td>
+                  <td class="px-4 py-3">{{ denuncia.dt_denuncia }}</td>
                 </tr>
               </tbody>
             </table>

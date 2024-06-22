@@ -111,9 +111,9 @@
       </div>
       <div class="mt-4 star flex salvar-playlist " (click)="buscarQuantidadePorNota()">
         <img (click)="toggleModal()" class="mr-2" width="28" height="28"
-        src="https://img.icons8.com/ios/50/FFFFFF/rating.png" alt="plus--v1" />
+          src="https://img.icons8.com/ios/50/FFFFFF/rating.png" alt="plus--v1" />
         <div class="text-1xl font-bold musica-info" (click)="toggleModalAvaliacao()">Avaliar música</div>
-        
+
       </div>
     </div>
   </div>
@@ -195,30 +195,26 @@
                   <a (click)="deletarComentario(comentario.id)"
                     class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Remover</a>
                 </li>
-                <li *ngIf="usuarioLogado.id != comentario.usuario.id">
+                <li *ngIf="usuarioLogado.id != comentario.usuario.id" >
+                  <a (click)="openModalDenuncia(comentario)"
+                    class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Reportar</a>
                 </li>
               </ul>
             </div>
           </div>
           <div *ngIf="showModalEnviarDenuncia"
-            class="fixed inset-0 flex items-center justify-center bg-opacity-50 backdrop-filter backdrop-blur-sm">
-            <div id="modalComentario"
-              class="fundo-comentarios-modal p-8 rounded-xl shadow-lg w-96 overflow-y-auto max-h-96">
-              <div class="flex-grow mb-6">
-                <div class="py-2 px-4 mb-4 rounded-lg rounded-t-lg custom-checkbox">
-                  <label for="comment" class="sr-only">Faça sua denúncia</label>
-                  <textarea [(ngModel)]="comentarioSelecionado" id="comment" rows="6"
-                    class="px-0 w-full bg-transparent text-sm text-white border-0 focus:ring-0 focus:outline-none dark:text-white dark:placeholder-gray-400"
-                    placeholder="Envie sua denúncia..." required></textarea>
-                </div>
-                <button type="button" (click)="enviarReport(idComentarioSelecionado); closeModal()"
-                  class="custom-checkbox inline-flex items-center py-2.5 px-4 text-xs font-medium text-center text-white bg-primary-700 rounded-lg focus:ring-4 focus:ring-primary-200 dark:focus:ring-primary-900 hover:bg-primary-800">
-                  Enviar
-                </button>
-              </div>
-              <div class="flex justify-center">
-              </div>
+          class="fixed inset-0 flex items-center justify-center bg-opacity-50 backdrop-filter backdrop-blur-sm">
+          <div id="modalComentario"
+            class="fundo-comentarios-modal p-8 rounded-xl shadow-lg w-96 overflow-y-auto max-h-96">
+            <div class="flex-grow mb-6">
+              <button type="button" (click)="enviarReport(idComentarioSelecionado); closeModalDenuncia()"
+                class="custom-checkbox inline-flex items-center py-2.5 px-4 text-xs font-medium text-center text-white bg-primary-700 rounded-lg focus:ring-4 focus:ring-primary-200 dark:focus:ring-primary-900 hover:bg-primary-800">
+                Confirmar Denúncia
+              </button>
             </div>
+            <div class="flex justify-center">
+            </div>
+          </div>
           </div>
           <div *ngIf="showModalEditarComentario"
             class="fixed inset-0 flex items-center justify-center bg-opacity-50 backdrop-filter backdrop-blur-sm">
