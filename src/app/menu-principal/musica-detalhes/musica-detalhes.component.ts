@@ -292,7 +292,18 @@ export class MusicaDetalhesComponent implements OnInit {
 
         this.avaliacaoService.verificarExistenciaDaMusicaPorIdSpotify(id_spotify).subscribe(
           (musicaExistente) => {
-            this.musicaSpotifyParaAvaliacao.id = musicaExistente.id;
+
+            if (musicaExistente == null) {
+             this.novaMusicaSpotify.id_spotify = id_spotify;
+
+             this.avaliacaoService.salvarMusicaSpotify(this.novaMusicaSpotify).subscribe(
+              (musicaSpotifySalva) => {
+                this.musicaSpotifyParaAvaliacao.id = musicaSpotifySalva.id;
+              });
+            }else{
+              this.musicaSpotifyParaAvaliacao.id = musicaExistente.id;
+            }
+
             this.musicaSpotifyParaAvaliacao.id_spotify = this.musica.id;
 
             this.novaAvaliacao.musica = this.musicaSpotifyParaAvaliacao;
