@@ -386,7 +386,10 @@ export class MusicaDetalhesComponent implements OnInit {
           console.error('Ocorreu um erro ao buscar o ID do usuário:', error);
         }
       );
+
+
   }
+
 
   atualizarComentario(comentarioId: number): void {
     console.log("comentario: " + this.comentario);
@@ -398,8 +401,8 @@ export class MusicaDetalhesComponent implements OnInit {
             console.log('Comentário enviado com sucesso: ', comentarioSalvo);
             this.comentario = '';
             this.alertaService.exibirAlerta('alert5')
-            this.buscarComentarios();
           }, error => {
+            this.buscarComentarios();
             console.error('Erro ao enviar o comentário:', error);
             this.alertaService.exibirAlerta('alert6')
           });
