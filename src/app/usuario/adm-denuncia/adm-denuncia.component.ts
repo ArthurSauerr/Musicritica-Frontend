@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import { Comentario } from 'src/app/shared/model/Comentario';
+import { Component, OnInit } from '@angular/core';
+import { DenunciaService } from './../../shared/service/denuncia-service.service';
 import { Denuncia } from 'src/app/shared/model/Denuncia';
 
 @Component({
@@ -7,13 +7,26 @@ import { Denuncia } from 'src/app/shared/model/Denuncia';
   templateUrl: './adm-denuncia.component.html',
   styleUrls: ['./adm-denuncia.component.scss']
 })
-export class AdmDenunciaComponent {
+export class AdmDenunciaComponent implements OnInit {
+  public denuncias: Denuncia[] = [];
 
-  public denuncias: Array<Denuncia> = new Array;
-  usuarioReportado: String
-  comentario: Comentario
-  data: String
-denuncia: any;
+  constructor(private denunciaService: DenunciaService) {}
+
+  ngOnInit(): void {
+    this.listarTodos();
+  }
+
+  listarTodos(): void {
+    this.denunciaService.listarDenuncias().subscribe(
+      (data: Denuncia[]) => {
+        this.denuncias = data;
+      },
+      (error: any) => {
+        console.error('Erro ao carregar denúncias:', error);
+        // Tratar o erro conforme necessário, exibir mensagem de erro, etc.
+      }
+    );
+  }
 
 
 }

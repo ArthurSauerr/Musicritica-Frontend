@@ -6,16 +6,26 @@ import { Observable } from 'rxjs';
 @Injectable({
   providedIn: 'root'
 })
-export class DenunciaServiceService {
+export class DenunciaService {
 
   constructor(private httpClient: HttpClient) { }
 
 
-  private denunciaUrl = 'http://localhost:8080/usuario/denuncia';
+  private denunciaUrl = 'http://localhost:8080/denuncia';
 
 
 
-  enviarReport(denuncia: Denuncia): Observable<Denuncia> {
-    return this.httpClient.post<Denuncia>(this.denunciaUrl, Denuncia);
+  enviarReport(idComentarioSelecionado: number, idUsuarioAutenticado: number): Observable<any> {
+    const url = `${this.denunciaUrl}/${idUsuarioAutenticado}/${idComentarioSelecionado}`;
+    return this.httpClient.post<any>(url, {});
   }
+
+
+  listarDenuncias(): Observable<Array<Denuncia>> {
+
+    return this.httpClient.get<Array<Denuncia>>(`${this.denunciaUrl}/listarTodos`);
+
+  }
+
+
 }

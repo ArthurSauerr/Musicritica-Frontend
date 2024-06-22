@@ -3,10 +3,9 @@ import { Usuario } from "./Usuario";
 
 export class Denuncia{
     id:number;
-    descricao: string;
     usuarioReportado: Usuario;
     usuario: Usuario;
-    comentario: string;
+    comentario: Comentario;
     status: boolean;
     dt_denuncia: number;
 

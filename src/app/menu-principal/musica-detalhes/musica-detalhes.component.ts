@@ -16,7 +16,7 @@ import { AvaliacaoService } from 'src/app/shared/service/avaliacao.service';
 import { Avaliacao } from 'src/app/shared/model/Avaliacao';
 import { MapeamentoNotas } from 'src/app/shared/model/MapeamentoNotas';
 import { Denuncia } from 'src/app/shared/model/Denuncia';
-import { DenunciaServiceService } from 'src/app/shared/service/denuncia-service.service';
+import { DenunciaService } from 'src/app/shared/service/denuncia-service.service';
 
 @Component({
   selector: 'app-musica-detalhes',
@@ -27,7 +27,7 @@ export class MusicaDetalhesComponent implements OnInit {
   constructor(
     private sanitizer: DomSanitizer,
     private comentarioService: ComentarioServiceService,
-    private denunciaService: DenunciaServiceService,
+    private denunciaService: DenunciaService,
     private usuarioService: UsuarioService,
     private playlistService: PlaylistService,
     private elementRef: ElementRef,
@@ -370,35 +370,28 @@ export class MusicaDetalhesComponent implements OnInit {
     }
   }
 
-  enviarReport(idComentario: number): void {
-    console.log("comentario: " + this.comentario);
+  enviarReport(idComentarioSelecionado: number): void {
+    console.log("id do comentario: " + idComentarioSelecionado);
     this.usuarioService.buscarIdPorEmail(this.emailParam).subscribe(
-        (data: number) => {
+      (idUsuarioAutenticado: number) => {
+        this.usuarioParaEnviar.id = idUsuarioAutenticado;
 
-          this.usuarioParaEnviar.id = data;
-
-          this.novaDenuncia.comentario = this.comentarioSelecionado;
-          this.novaDenuncia.descricao = this.novaDenuncia.descricao;
-          this.novaDenuncia.dt_denuncia = Date.now();
-          this.novaDenuncia.status = true;
-          this.novaDenuncia.usuario = this.usuarioLogado;
-          this.novaDenuncia.usuarioReportado = this.usuarioParaEnviar;
-
-          this.denunciaService.enviarReport(this.novaDenuncia).subscribe(
-            response => {
-              console.log('Comentário enviado com sucesso: ', this.novaDenuncia);
-              this.alertaService.exibirAlerta('alert31')
-            }, error => {
-              console.error('Erro ao enviar o comentário:', error);
-              this.alertaService.exibirAlerta('alert4')
-            });
-        },
-        (error) => {
-          console.error('Ocorreu um erro ao buscar o ID do usuário:', error);
-        }
-      );
-
-
+        this.denunciaService.enviarReport(idComentarioSelecionado, idUsuarioAutenticado).subscribe(
+          (response: any) => {
+            console.log('Denúncia enviada com sucesso', response);
+            this.closeModal;
+          },
+          (error: any) => {
+            console.error('Erro ao enviar report:', error);
+            this.alertaService.exibirAlerta('alert11');
+          }
+        );
+      },
+      (error: any) => {
+        console.error('Comentário não encontrado:', error);
+        this.alertaService.exibirAlerta('alert11');
+      }
+    );
   }
 
 
@@ -506,22 +499,22 @@ export class MusicaDetalhesComponent implements OnInit {
     } else {
       this.usuarioService.buscarIdPorEmail(this.emailParam).subscribe(
         (data: number) => {
-  
+
           this.usuarioParaEnviar.id = data;
           this.novaPlaylist.usuario = this.usuarioParaEnviar;
-  
+
           const idMusica = this.musica.id;
           this.novaMusicaSpotify.id_spotify = idMusica;
           const nomePlaylist = this.nomePlaylistNova;
           this.listaDeMusicasParaEnviar.push(this.novaMusicaSpotify);
-  
+
           console.log("Lista de músicas: " + this.listaDeMusicasParaEnviar);
           console.log("nome da playlist: " + nomePlaylist);
           console.log("usuario da playlist: " + this.usuarioParaEnviar.id);
-  
+
           this.novaPlaylist.nome = this.nomePlaylistNova;
           this.novaPlaylist.musicaSpotifyList = this.listaDeMusicasParaEnviar;
-  
+
           if (nomePlaylist && nomePlaylist.trim() !== '') {
             this.playlistService.salvarNovaPlaylist(this.novaPlaylist).subscribe(
               (playlistSalva) => {
@@ -542,7 +535,7 @@ export class MusicaDetalhesComponent implements OnInit {
       );
     }
   }
-  
+
 
   enviarMusicaParaPlaylist(): void {
     const idSpotify: string = this.musica.id;
@@ -664,5 +657,9 @@ export class MusicaDetalhesComponent implements OnInit {
 
   closeModal() {
     this.showModalEditarComentario = false;
+  }
+
+  closeModalDenuncia() {
+    this.showModalEnviarDenuncia = false;
   }
 }
