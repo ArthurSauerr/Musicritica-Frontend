@@ -54,6 +54,7 @@ export class UsuarioPerfilComponent implements OnInit {
   isModalOpen: boolean;
   isModalPlaylistOpen: boolean;
   isModalPlaylistExcluirOpen: boolean;
+  isModalMusicaExcluirOpen: boolean;
   novoNome: string;
   novaImagemPerfil: File;
   novaImagemBackground: File;
@@ -63,6 +64,8 @@ export class UsuarioPerfilComponent implements OnInit {
   novoNomePlaylist: string;
 
   playlistSelecionada: Playlist | null = null;
+  idPlaylistSelecionada: number;
+  trackIdSelecionada: string;
 
   ngOnInit(): void {
     this.usuarioService.getToken();
@@ -176,6 +179,7 @@ export class UsuarioPerfilComponent implements OnInit {
           this.primeirasMusicasDasPlaylists[id] = imageUrl;
         }
         this.musicasDaPlaylist = data;
+        this.idPlaylistSelecionada = id;
       },
       (error) => {
         console.error(
@@ -225,20 +229,6 @@ export class UsuarioPerfilComponent implements OnInit {
     // Abrir o dropdown da música clicada
     this.mostrarDropdownMusicas[index] = true;
   }
-  
-  excluirMusicaPlaylist(idPlaylist: number, id_spotify: string) {
-    console.log("Id da playlist: " + idPlaylist + "id da musica: " + id_spotify)
-  
-    this.playListService.excluirMusicaPlaylist(idPlaylist, id_spotify).subscribe({
-      next: (response) => {
-        console.log(response);
-        // Adicione a lógica para remover a música da lista localmente, se necessário
-      },
-      error: (error) => {
-        console.error('Erro ao excluir música:', error);
-      }
-    });
-  }
 
   fecharTodosDropdowns(): void {
     this.playlistsDoUsuario.forEach((playlist) => {
@@ -254,6 +244,7 @@ export class UsuarioPerfilComponent implements OnInit {
     this.isModalOpen = false;
     this.isModalPlaylistOpen = false;
     this.isModalPlaylistExcluirOpen = false;
+    this.isModalMusicaExcluirOpen = false;
     this.novoNomePlaylist = '';
   }
 
@@ -268,6 +259,28 @@ export class UsuarioPerfilComponent implements OnInit {
     event.stopPropagation();
     this.playlistSelecionada = playlist;
     this.isModalPlaylistExcluirOpen = true;
+  }
+
+  excluirMusicaModal(trackId: string, event: Event) {
+    event.stopPropagation();
+    this.trackIdSelecionada = trackId;
+    this.isModalMusicaExcluirOpen = true;
+  }
+
+  excluirMusicaPlaylist() {
+    let idPlaylist: number = this.idPlaylistSelecionada;
+    let id_spotify: string = this.trackIdSelecionada;
+    console.log("Id da playlist: " + idPlaylist + "id da musica: " + id_spotify)
+
+    this.playListService.excluirMusicaPlaylist(idPlaylist, id_spotify).subscribe({
+      next: (response) => {
+        console.log(response);
+        // Adicione a lógica para remover a música da lista localmente, se necessário
+      },
+      error: (error) => {
+        console.error('Erro ao excluir música:', error);
+      }
+    });
   }
 
   salvarNome(): void {
