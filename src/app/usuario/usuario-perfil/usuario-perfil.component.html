@@ -39,13 +39,15 @@
             <span class="absolute -bottom-1 right-1/2 w-0 transition-all h-0.5 bg-[#64DEA1] group-hover:w-3/6"></span>
           </p>
 
-          <p class="cursor-pointer m-6 group relative w-max" (click)="mostrarConteudo('avaliacoes')" id="avaliacoes-btn">
+          <p class="cursor-pointer m-6 group relative w-max" (click)="mostrarConteudo('avaliacoes')"
+            id="avaliacoes-btn">
             <span class="group-hover:font-bold block" style="width: 100px; text-align: center;">Avaliações</span>
             <span class="absolute -bottom-1 left-1/2 w-0 transition-all h-0.5 bg-[#64DEA1] group-hover:w-3/6"></span>
             <span class="absolute -bottom-1 right-1/2 w-0 transition-all h-0.5 bg-[#64DEA1] group-hover:w-3/6"></span>
           </p>
 
-          <p class="cursor-pointer m-6 group relative w-max" (click)="mostrarConteudo('descobertas')" id="descobertas-btn">
+          <p class="cursor-pointer m-6 group relative w-max" (click)="mostrarConteudo('descobertas')"
+            id="descobertas-btn">
             <span class="group-hover:font-bold block" style="width: 100px; text-align: center;">Descobertas</span>
             <span class="absolute -bottom-1 left-1/2 w-0 transition-all h-0.5 bg-[#64DEA1] group-hover:w-3/6"></span>
             <span class="absolute -bottom-1 right-1/2 w-0 transition-all h-0.5 bg-[#64DEA1] group-hover:w-3/6"></span>
@@ -60,8 +62,8 @@
 <div id="div-musicas" class="bg-transparent w-full max-w-screen-lg mx-auto text-center custom-input">
   <div *ngIf="conteudoSelecionado === 'playlists'" class="text-white mt-6 mb-6 overflow-hidden">
     <div *ngFor="let playlist of playlistsDoUsuario" class="mt-4 flex items-center mb-2">
-      <div class="w-full bg-gray-700 bg-opacity-50 cursor-pointer p-4 rounded-lg flex hover:bg-opacity-30 hover:backdrop-blur-md transition duration-300 ease-in-out"
-
+      <div
+        class="w-full bg-gray-700 bg-opacity-50 cursor-pointer p-4 rounded-lg flex hover:bg-opacity-30 hover:backdrop-blur-md transition duration-300 ease-in-out"
         (click)="buscarTodasMusicasDaPlaylist(playlist.id)">
         <div class="w-20">
           <img *ngIf="primeirasMusicasDasPlaylists[playlist.id]" [src]="primeirasMusicasDasPlaylists[playlist.id]"
@@ -81,8 +83,7 @@
           </button>
           <div *ngIf="mostrarDropdown[playlist.id]" id="dropdownComment1"
             class="mt-4 w-24 rounded divide-y divide-gray-100 shadow bg-gray-700 divide-gray-600">
-            <ul class="py-1 text-sm text-white"
-              aria-labelledby="dropdownMenuIconHorizontalButton">
+            <ul class="py-1 text-sm text-white" aria-labelledby="dropdownMenuIconHorizontalButton">
               <li>
                 <a (click)="editarNomePlaylistModal(playlist, $event)"
                   class="block py-2 px-4 hover:bg-gray-100 hover:bg-gray-600">Editar</a>
@@ -105,61 +106,23 @@
             <h2 class="text-1xl font-bold musica-info">{{ track.album.name }}</h2>
           </div>
         </div>
-        <div *ngIf="playlistsDoUsuario[0].musicaSpotifyList[i]">
-          <!-- Exibe o id correspondente da música -->
-          <p>{{ playlistsDoUsuario[0].musicaSpotifyList[i].id }}</p>
-        </div>
-        <div *ngFor="let playlist of playlistsDoUsuario" class="mt-6">
-          <div class="absolute top-0 right-0">
-            <button (click)="toggleDropdownMusica(playlist, $event)"
-              class="inline-flex items-center p-2 text-sm font-medium text-center text-gray-500 dark:text-gray-400 rounded-lg focus:ring-4 focus:outline-none dark:hover:bg-gray-200 dark:focus:ring-gray-600"
-              type="button">
-              <svg class="w-6 h-6" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor"
-                viewBox="0 0 16 3">
-                <path
-                  d="M2 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3Zm6.041 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM14 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3Z" />
-              </svg>
-              <span class="sr-only">Comment settings</span>
-            </button>
-            <div *ngIf="mostrarDropdownMusicas[playlist.id]" id="dropdownComment1"
-              class="mt-4 w-36 bg-white rounded divide-y divide-gray-100 shadow dark:bg-gray-700 dark:divide-gray-600">
-              <ul class="py-1 text-sm text-gray-700 dark:text-gray-200"
-                aria-labelledby="dropdownMenuIconHorizontalButton">
-                <li>
-                  <a (click)="excluirMusicaPlaylist()"
-                    class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Excluir</a>
-                </li>
-              </ul>
-            </div>
-            <!-- <div class="mt-24">
-              <div class="flex items-center">
-                <svg class="w-4 h-4 text-yellow-300 ms-1" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
-                  fill="currentColor" viewBox="0 0 22 20">
-                  <path
-                    d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z" />
-                </svg>
-                <svg class="w-4 h-4 text-yellow-300 ms-1" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
-                  fill="currentColor" viewBox="0 0 22 20">
-                  <path
-                    d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z" />
-                </svg>
-                <svg class="w-4 h-4 text-yellow-300 ms-1" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
-                  fill="currentColor" viewBox="0 0 22 20">
-                  <path
-                    d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z" />
-                </svg>
-                <svg class="w-4 h-4 text-yellow-300 ms-1" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
-                  fill="currentColor" viewBox="0 0 22 20">
-                  <path
-                    d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z" />
-                </svg>
-                <svg class="w-4 h-4 ms-1 text-gray-300 dark:text-gray-500" aria-hidden="true"
-                  xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 22 20">
-                  <path
-                    d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z" />
-                </svg>
-              </div>
-            </div> -->
+        <div class="absolute top-0 right-0">
+          <button (click)="toggleDropdownMusica(i, $event)"
+            class="inline-flex items-center p-2 text-sm font-medium text-center text-gray-500 dark:text-gray-400 rounded-lg focus:ring-4 focus:outline-none dark:hover:bg-gray-200 dark:focus:ring-gray-600"
+            type="button">
+            <svg class="w-6 h-6" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 16 3">
+              <path d="M2 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3Zm6.041 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM14 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3Z" />
+            </svg>
+            <span class="sr-only">Comment settings</span>
+          </button>
+          <div *ngIf="mostrarDropdownMusicas[i]" id="dropdownComment{{i}}"
+            class="mt-4 w-36 bg-white rounded divide-y divide-gray-100 shadow dark:bg-gray-700 dark:divide-gray-600">
+            <ul class="py-1 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdownMenuIconHorizontalButton">
+              <li *ngFor="let playlist of playlistsDoUsuario">
+                <a (click)="excluirMusicaPlaylist(playlist.id, track.id)"
+                  class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white ">Excluir</a>
+              </li>
+            </ul>
           </div>
         </div>
       </div>
@@ -167,15 +130,15 @@
   </div>
 
   <div *ngIf="conteudoSelecionado === 'avaliacoes'" class="mt-4">
-   <div *ngFor="let musica of musicasAvaliadas.tracks" class="custom-music mb-6 relative">
-    <div class="flex items-end">
-      <img [src]="musica.album.images[1].url" alt="{{ musica.name }}" class="mb-6 rounded-lg w-40 h-40 mr-4">
-      <div class="text-left mb-6">
-        <h1 class="text-3xl font-bold mb-4 musica-info">{{ musica.name }}</h1>
-        <h2 class="text-1xl font-bold musica-info">{{ musica.album.name }}</h2>
+    <div *ngFor="let musica of musicasAvaliadas.tracks" class="custom-music mb-6 relative">
+      <div class="flex items-end">
+        <img [src]="musica.album.images[1].url" alt="{{ musica.name }}" class="mb-6 rounded-lg w-40 h-40 mr-4">
+        <div class="text-left mb-6">
+          <h1 class="text-3xl font-bold mb-4 musica-info">{{ musica.name }}</h1>
+          <h2 class="text-1xl font-bold musica-info">{{ musica.album.name }}</h2>
+        </div>
       </div>
-    </div>   
-  </div>
+    </div>
   </div>
   <div *ngIf="conteudoSelecionado === 'descobertas'" class="text-white mt-6 mb-6 overflow-hidden">
 
@@ -283,8 +246,8 @@
 <div *ngIf="isModalPlaylistOpen" class="modal-overlay">
   <div class="modal-content bg-black bg-opacity-50 backdrop-filter backdrop-blur-sm ">
     <h2 class="text-xl font-bold mb-4 nomeUsuario justify-center">Editar Nome da Playlist</h2>
-    <input [(ngModel)]="novoNomePlaylist" type="text" class="input-modal w-full p-2 border border-gray-300 rounded mb-4 "
-      placeholder="Novo Nome">
+    <input [(ngModel)]="novoNomePlaylist" type="text"
+      class="input-modal w-full p-2 border border-gray-300 rounded mb-4 " placeholder="Novo Nome">
     <div class="flex justify-center gap-2">
       <button (click)="fecharModal()"
         class="w-36 rounded-full relative inline-flex items-center justify-center p-0.5 overflow-hidden text-sm font-medium text-gray-900 group bg-gradient-to-br from-teal-300 to-lime-300 group-hover:from-teal-300 group-hover:to-lime-300 dark:text-white dark:hover:text-gray-900 focus:ring-4 focus:outline-none focus:ring-lime-200 dark:focus:ring-lime-800">

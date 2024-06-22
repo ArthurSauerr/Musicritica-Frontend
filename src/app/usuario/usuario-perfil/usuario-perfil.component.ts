@@ -29,7 +29,7 @@ export class UsuarioPerfilComponent implements OnInit {
     private dadosCompartilhadosService: DadosCompartilhadosService,
     private cdr: ChangeDetectorRef,
     private alertaService: AlertaServiceService,
-    private avaliacaoService: AvaliacaoService
+    private avaliacaoService: AvaliacaoService,
   ) {}
 
   conteudoSelecionado: string | null = null;
@@ -41,6 +41,7 @@ export class UsuarioPerfilComponent implements OnInit {
 
   mostrarDropdown: { [key: number]: boolean } = {};
   mostrarDropdownMusicas: { [key: number]: boolean } = {};
+
 
   primeirasMusicasDasPlaylists: { [key: number]: string } = {};
 
@@ -217,16 +218,26 @@ export class UsuarioPerfilComponent implements OnInit {
     this.mostrarDropdown[playlist.id] = !this.mostrarDropdown[playlist.id];
   }
 
-  toggleDropdownMusica(playlist: Playlist,  event: Event): void {
+  toggleDropdownMusica(index: number, event: Event): void {
     event.stopPropagation();
-    if (!this.mostrarDropdownMusicas[playlist.id]) {
-      this.fecharTodosDropdowns();
-    }
-    this.mostrarDropdownMusicas[playlist.id] = !this.mostrarDropdownMusicas[playlist.id];
+    // Fechar todos os dropdowns antes de abrir o atual
+    this.mostrarDropdownMusicas = {};
+    // Abrir o dropdown da música clicada
+    this.mostrarDropdownMusicas[index] = true;
   }
-
-  excluirMusicaPlaylist() {
-
+  
+  excluirMusicaPlaylist(idPlaylist: number, id_spotify: string) {
+    console.log("Id da playlist: " + idPlaylist + "id da musica: " + id_spotify)
+  
+    this.playListService.excluirMusicaPlaylist(idPlaylist, id_spotify).subscribe({
+      next: (response) => {
+        console.log(response);
+        // Adicione a lógica para remover a música da lista localmente, se necessário
+      },
+      error: (error) => {
+        console.error('Erro ao excluir música:', error);
+      }
+    });
   }
 
   fecharTodosDropdowns(): void {
