@@ -31,8 +31,8 @@ export class UsuarioRedefinirSenhaComponent implements OnInit {
     if (this.senha === this.confirmarSenha) {
       this.usuarioService.redefinirSenha(this.token, this.senha).subscribe(
         (response) => {
-          console.log(response.message);
           this.router.navigate(['usuario/login']);
+          console.log(response.message);
         },
         (error) => {
           console.error('Erro ao redefinir senha:', error);
