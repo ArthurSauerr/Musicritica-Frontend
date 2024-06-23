@@ -28,4 +28,8 @@ export class DenunciaService {
   }
 
 
+  buscarDenunciaPorNome(nome: String): Observable<Denuncia[]> {
+    return this.httpClient.get<Denuncia[]>(`${this.denunciaUrl}/buscar/${nome}`);
+  }
+
 }
