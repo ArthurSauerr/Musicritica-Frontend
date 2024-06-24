@@ -17,6 +17,10 @@ export class AdmDenunciaComponent implements OnInit {
   public startDate: string = '';
   public endDate: string = '';
 
+  showModalDenuncia: boolean = false;
+  comentarioSelecionado: String;
+
+
   constructor(
     private denunciaService: DenunciaService,
     private usuarioService: UsuarioService,
@@ -24,6 +28,18 @@ export class AdmDenunciaComponent implements OnInit {
 
   ngOnInit(): void {
     this.listarTodos();
+  }
+
+  buscarDenuncias(event: Event): void {
+    event.preventDefault();
+
+    if (this.searchTerm.trim() !== '') {
+      this.buscarDenunciaPorNome(event);
+    } else if (this.startDate !== '' && this.endDate !== '') {
+      this.buscarDenunciaPorData(event);
+    } else {
+      this.listarTodos();
+    }
   }
 
   listarTodos(): void {
@@ -73,15 +89,51 @@ export class AdmDenunciaComponent implements OnInit {
       newValue += value.substring(0, 2);
     }
     if (value.length >= 3) {
-      newValue += '/' + value.substring(2, 4);
+      newValue += '-' + value.substring(2, 4);
     }
     if (value.length >= 5) {
-      newValue += '/' + value.substring(4, 8);
+      newValue += '-' + value.substring(4, 8);
     }
 
     input.value = newValue;
   }
 
+
+
+  buscarDenunciaPorData(event: Event): void {
+    event.preventDefault();
+    const dataInicio = this.startDate ? this.formatDate(this.startDate) : '';
+    const dataFim = this.endDate ? this.formatDate(this.endDate) : '';
+
+    this.denunciaService.buscarDenunciaPorData(dataInicio, dataFim).subscribe(
+      (data: Denuncia[]) => {
+        this.denuncias = data;
+      },
+      (error: any) => {
+        console.error('Erro ao buscar denúncias por data:', error);
+        console.error(dataInicio + dataFim);
+        // Tratar o erro conforme necessário, exibir mensagem de erro, etc.
+      }
+    );
+  }
+
+  formatDate(date: string): string {
+    const parts = date.split('/');
+    if (parts.length === 3) {
+      return `${parts[2]}-${parts[1]}-${parts[0]}`;
+    }
+    return date;
+  }
+
+  openModal(comentario: String) {
+    this.comentarioSelecionado = comentario;
+    this.showModalDenuncia = true;
+  }
+
+
+  closeModalDenuncia() {
+    this.showModalDenuncia = false;
+  }
 }
 
 

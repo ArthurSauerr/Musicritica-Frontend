@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Denuncia } from '../model/Denuncia';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
 @Injectable({
@@ -30,6 +30,10 @@ export class DenunciaService {
 
   buscarDenunciaPorNome(nome: String): Observable<Denuncia[]> {
     return this.httpClient.get<Denuncia[]>(`${this.denunciaUrl}/buscar/${nome}`);
+  }
+
+  buscarDenunciaPorData(dataInicio: string, dataFim: string): Observable<Denuncia[]> {
+    return this.httpClient.get<Denuncia[]>(`${this.denunciaUrl}/buscarPorData/${dataInicio}/${dataFim}`);
   }
 
 }
