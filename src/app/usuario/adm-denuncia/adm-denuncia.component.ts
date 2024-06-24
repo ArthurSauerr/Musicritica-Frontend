@@ -14,10 +14,12 @@ import { of } from 'rxjs';
 export class AdmDenunciaComponent implements OnInit {
   public denuncias: Denuncia[] = [];
   public searchTerm: string = '';
+  public startDate: string = '';
+  public endDate: string = '';
 
   constructor(
     private denunciaService: DenunciaService,
-    private usuarioService: UsuarioService
+    private usuarioService: UsuarioService,
   ) {}
 
   ngOnInit(): void {
@@ -62,6 +64,23 @@ export class AdmDenunciaComponent implements OnInit {
     return text;
   }
 
+  applyDateMask(event: Event): void {
+    let input = event.target as HTMLInputElement;
+    let value = input.value.replace(/\D/g, '');
+    let newValue = '';
+
+    if (value.length > 0) {
+      newValue += value.substring(0, 2);
+    }
+    if (value.length >= 3) {
+      newValue += '/' + value.substring(2, 4);
+    }
+    if (value.length >= 5) {
+      newValue += '/' + value.substring(4, 8);
+    }
+
+    input.value = newValue;
+  }
 
 }
 
