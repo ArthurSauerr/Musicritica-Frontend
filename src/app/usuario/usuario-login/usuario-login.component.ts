@@ -14,6 +14,8 @@ export class UsuarioLoginComponent {
   email: string;
   senha: string;
 
+  mostrarSenha: boolean = false;
+
   constructor(
     private usuarioService: UsuarioService,
     private router: Router,
@@ -50,5 +52,9 @@ export class UsuarioLoginComponent {
 
   esqueceuSenha() {
     this.router.navigate(['usuario/esqueceu-senha']);
+  }
+
+  toggleMostrarSenha() {
+    this.mostrarSenha = !this.mostrarSenha;
   }
 }

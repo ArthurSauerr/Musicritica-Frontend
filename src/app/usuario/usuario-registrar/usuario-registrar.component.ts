@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { UsuarioService } from 'src/app/shared/service/usuario.service';
 import { Router } from '@angular/router';
-import { NgForm } from '@angular/forms';
+import { AlertaServiceService } from 'src/app/shared/service/alerta-service.service';
 
 @Component({
   selector: 'app-usuario-registrar',
@@ -14,7 +14,11 @@ export class UsuarioRegistrarComponent {
   senha: string = '';
   dt_cadastro: string;
 
-  constructor(private usuarioService: UsuarioService, private router: Router) { }
+  constructor(
+    private usuarioService: UsuarioService,
+    private router: Router,
+    private alertaService: AlertaServiceService
+  ) { }
 
   registrar() {
     if (this.nome && this.email && this.senha) {
@@ -25,6 +29,7 @@ export class UsuarioRegistrarComponent {
             this.router.navigate(['usuario/login']);
           },
           (error) => {
+            this.alertaService.exibirAlerta('alertaCadastro');
             console.error('Erro no registro', error);
           }
         );
