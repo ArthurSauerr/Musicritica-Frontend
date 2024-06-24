@@ -27,6 +27,8 @@ export class AppComponent {
 
   urlId: number;
 
+  isAdmin: boolean;
+
   constructor(
     private router: Router,
     private dadosCompartilhadosService: DadosCompartilhadosService,
@@ -58,6 +60,7 @@ export class AppComponent {
   ngOnInit(): void{
     this.verificarLogin();
     this.isUsuarioLogado();
+    this.isAdmin = false;
 
     this.dadosCompartilhadosService.pageId$.subscribe(pageId => {
       console.log('ID da pagina recebido no AppComponent:', pageId);
@@ -100,7 +103,11 @@ export class AppComponent {
           (usuario: Usuario) => {
             this.usuario = usuario;
             this.idUsuario = this.usuario.id;
+            this.dadosCompartilhadosService.setIdUsuario(this.idUsuario)
             console.log('Usuario buscado:', usuario);
+            if(usuario.role === "ADMIN"){
+              this.isAdmin = true;
+            }
           },
           (error) => {
             console.error('Usuario não está logado no sistema!');
@@ -144,6 +151,7 @@ export class AppComponent {
     this.usuarioService.deleteToken();
     this.router.navigate(['usuario/login']);
     console.log("Usuário deslogado!")
+    this.toggleDropdown(false);
   }
 
   login(){

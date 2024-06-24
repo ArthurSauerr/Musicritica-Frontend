@@ -10,9 +10,18 @@ export class DadosCompartilhadosService {
 
   private idAlbumParaProcurar: string;
   private idMusicaKey = 'idMusicaSpotify';
+  private idUsuario: number;
 
   private pageIdSource = new BehaviorSubject<string | null>(null);
   pageId$ = this.pageIdSource.asObservable();
+
+  setIdUsuario(idUsuario: number) {
+    this.idUsuario = idUsuario;
+  }
+
+  getIdUsuario(): number {
+    return this.idUsuario;
+  }
 
   setPageId(pageId: string | null): void {
     this.pageIdSource.next(pageId);

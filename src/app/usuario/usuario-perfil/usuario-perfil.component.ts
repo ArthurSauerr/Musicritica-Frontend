@@ -85,6 +85,27 @@ export class UsuarioPerfilComponent implements OnInit {
     });
   }
 
+  ngAfterViewInit() {
+    this.esconderBotoes();
+  }
+
+  esconderBotoes() {
+    const idUsuario = this.dadosCompartilhadosService.getIdUsuario();
+    if (this.pageId && idUsuario) {
+      if (idUsuario != +this.pageId) {
+        const botoesPlaylistId = ['dropdown-playlist', 'excluir-musica'];
+
+        botoesPlaylistId.forEach(id => {
+          const element = document.getElementById(id);
+          if(element){
+            element.style.visibility = 'hidden';
+          }
+        })
+
+      }
+    }
+  }
+
   mostrarConteudo(opcao: string): void {
     this.conteudoSelecionado = opcao;
   }
@@ -349,13 +370,20 @@ export class UsuarioPerfilComponent implements OnInit {
     inputElement.addEventListener('change', (event) => {
       const file = (event.target as HTMLInputElement).files?.[0];
       if (file) {
-        if (tipo === 'perfil') {
-          this.novaImagemPerfil = file;
-          this.previsualizarImagem('perfil', file);
-        } else if (tipo === 'background') {
-          this.novaImagemBackground = file;
-          this.previsualizarImagem('background', file);
+        const validTypes = ['image/png', 'image/jpg', 'image/jpeg'];
+        if(validTypes.includes(file.type)){
+          if (tipo === 'perfil') {
+            this.novaImagemPerfil = file;
+            this.previsualizarImagem('perfil', file);
+          } else if (tipo === 'background') {
+            this.novaImagemBackground = file;
+            this.previsualizarImagem('background', file);
+          }
+        } else {
+          this.alertaService.exibirAlerta('alertaImgErro');
         }
+      } else {
+        this.alertaService.exibirAlerta('alertaImgErro2');
       }
     });
     inputElement.click();
@@ -382,9 +410,11 @@ export class UsuarioPerfilComponent implements OnInit {
         .atualizarUsuario(undefined, this.novaImagemPerfil, undefined)
         .subscribe(
           (response) => {
+            this.alertaService.exibirAlerta('alertaImg');
             console.log('Imagem alterada com sucesso');
           },
           (error) => {
+            this.alertaService.exibirAlerta('alertaImgErro2');
             console.error('Erro ao atualizar imagem:', error);
           }
         );
