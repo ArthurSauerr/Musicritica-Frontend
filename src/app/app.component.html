@@ -26,9 +26,11 @@
         class="custom-input text-white px-1 py-2 focus:outline-none" (keyup.enter)="enviarParametro()">
     </div>
 
-    <div *ngIf="!isUsuarioLogado()">
-      <button (click)="login()" class="nav-buttons">Login</button>
-    </div>
+    <a class="cursor-pointer group relative w-max" *ngIf="!isUsuarioLogado()">
+      <span class="group-hover:font-bold block text-[#64DEA1]" style="width: 50px; text-align: center;" (click)="login()" >Login</span>
+      <span class="absolute -bottom-1 left-1/2 w-0 transition-all h-0.5 bg-[#64DEA1] group-hover:w-3/6"></span>
+      <span class="absolute -bottom-1 right-1/2 w-0 transition-all h-0.5 bg-[#64DEA1] group-hover:w-3/6"></span>
+    </a>
 
     <div *ngIf="usuario?.imagem_perfil" class="relative" (mouseenter)="toggleDropdown(true)"
       (mouseleave)="toggleDropdown(false)">
@@ -49,8 +51,8 @@
               <img width="20" height="15" class="mr-2" src="https://img.icons8.com/ios/50/64dea1/settings--v1.png" alt="settings--v1"/>
               Editar Perfil</a>
           </li>
-          <li>
-            <a href="usuario/denuncia" class="flex block px-4 py-2 hover:bg-zinc-900">
+          <li *ngIf="isAdmin">
+            <a href="usuario/denuncia" id="denuncia-dropdown" class="flex block px-4 py-2 hover:bg-zinc-900">
               <img width="18" height="18" class="mr-2" src="https://img.icons8.com/windows/32/64dea1/user-settings.png" alt="user-settings"/>Denúncias</a>
           </li>
           <li>
