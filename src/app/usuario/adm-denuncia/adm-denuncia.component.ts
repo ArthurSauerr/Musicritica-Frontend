@@ -1,5 +1,5 @@
 import { Usuario } from './../../shared/model/Usuario';
-import { Component, OnInit } from '@angular/core';
+import { Component, HostListener, OnInit } from '@angular/core';
 import { DenunciaService } from './../../shared/service/denuncia-service.service';
 import { Denuncia } from 'src/app/shared/model/Denuncia';
 import { UsuarioService } from 'src/app/shared/service/usuario.service';
@@ -13,12 +13,14 @@ import { of } from 'rxjs';
 })
 export class AdmDenunciaComponent implements OnInit {
   public denuncias: Denuncia[] = [];
+  public denuncia: Denuncia;
   public searchTerm: string = '';
   public startDate: string = '';
   public endDate: string = '';
 
   showModalDenuncia: boolean = false;
   comentarioSelecionado: String;
+
 
 
   constructor(
@@ -73,12 +75,13 @@ export class AdmDenunciaComponent implements OnInit {
     );
   }
 
-  truncateText(text: string, limit: number): string {
-    if (text.length > limit) {
-      return text.substring(0, limit) + '...';
+  truncateText(text: string, maxLength: number): { truncatedText: string, isTruncated: boolean } {
+    if (text.length > maxLength) {
+        return { truncatedText: text.substring(0, maxLength), isTruncated: true };
     }
-    return text;
-  }
+    return { truncatedText: text, isTruncated: false };
+}
+
 
   applyDateMask(event: Event): void {
     let input = event.target as HTMLInputElement;
@@ -134,6 +137,18 @@ export class AdmDenunciaComponent implements OnInit {
   closeModalDenuncia() {
     this.showModalDenuncia = false;
   }
+
+  fecharDenuncia(denuncia: any) {
+    // Lógica para fechar a denúncia
+    console.log('Fechar Denúncia:', denuncia);
+  }
+
+  deletarComentario(denuncia: any) {
+    // Lógica para deletar o comentário
+    console.log('Deletar Comentário:', denuncia);
+  }
+
+
 }
 
 
