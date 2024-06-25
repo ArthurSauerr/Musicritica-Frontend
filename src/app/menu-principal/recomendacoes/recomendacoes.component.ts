@@ -4,11 +4,34 @@ import { MenuPrincipalService } from 'src/app/shared/service/menu-principal.serv
 import { OwlOptions } from 'ngx-owl-carousel-o';
 import { ItemBuscado } from 'src/app/shared/model/ItemBuscado';
 import { interval } from 'rxjs';
+import { trigger, state, style, transition, animate } from '@angular/animations';
+import { Item } from 'src/app/shared/model/Item';
 
 @Component({
   selector: 'app-recomendacoes',
   templateUrl: './recomendacoes.component.html',
-  styleUrls: ['./recomendacoes.component.scss']
+  styleUrls: ['./recomendacoes.component.scss'],
+  animations: [
+    trigger('carouselAnimation', [
+      state('enter', style({
+        opacity: 1,
+        transform: 'translateX(0%)'
+      })),
+      transition(':enter', [
+        style({
+          opacity: 0,
+          transform: 'translateX(100%)'
+        }),
+        animate('0.3s ease-out')
+      ]),
+      transition(':leave', [
+        animate('0.3s ease-out', style({
+          opacity: 0,
+          transform: 'translateX(-100%)'
+        }))
+      ])
+    ])
+  ]
 })
 export class RecomendacoesComponent implements OnInit, OnDestroy {
   constructor(private router: Router, private spotifyService: MenuPrincipalService) { }
@@ -17,12 +40,20 @@ export class RecomendacoesComponent implements OnInit, OnDestroy {
   itensRecomendadosGenero2: ItemBuscado[] = [];
   itensRecomendadosGenero3: ItemBuscado[] = [];
 
-  genero1: string = 'mpb';
-  genero2: string = 'sertanejo';
-  genero3: string = 'pagode';
+  genero1: string = '';
+  genero2: string = '';
+  genero3: string = '';
 
   private intervalId: any;
   private readonly duration = 24 * 60 * 60;
+
+  currentIndexPlaylist1 = 0;
+  currentIndexPlaylist2 = 0;
+  currentIndexPlaylist3 = 0;
+
+  currentSection1 = 1;
+  currentSection2 = 1;
+  currentSection3 = 1;
 
   generosBrasileiros: string[] = [
     "bossanova",
@@ -70,7 +101,67 @@ export class RecomendacoesComponent implements OnInit, OnDestroy {
     nav: false
   };
 
+  moveCarousel(type: string, direction: number): void {
+    const step = 5;
+
+    if (type === 'currentIndexPlaylist1') {
+      this.currentIndexPlaylist1 = this.calculateNewIndex(this.currentIndexPlaylist1, direction, this.itensRecomendadosGenero1.length, step);
+    } else if (type === 'currentIndexPlaylist2') {
+      this.currentIndexPlaylist2 = this.calculateNewIndex(this.currentIndexPlaylist2, direction, this.itensRecomendadosGenero2.length, step);
+    } else if (type === 'currentIndexPlaylist3') {
+      this.currentIndexPlaylist3 = this.calculateNewIndex(this.currentIndexPlaylist3, direction, this.itensRecomendadosGenero3.length, step);
+    }
+
+    this.updateCurrentSection();
+  }
+
+
+  private calculateNewIndex(currentIndex: number, direction: number, length: number, step: number): number {
+    let newIndex = currentIndex + (direction * step);
+
+    if (newIndex < 0) {
+      newIndex = length - Math.abs(newIndex);
+    } else {
+      newIndex = newIndex % length;
+    }
+
+    return newIndex;
+  }
+
+
+  updateCurrentSection(): void {
+    if (this.currentIndexPlaylist1 < 5) {
+      this.currentSection1 = 1;
+    } else if (this.currentIndexPlaylist1 >= 5 && this.currentIndexPlaylist1 < 10) {
+      this.currentSection1 = 2;
+    }
+    if (this.currentIndexPlaylist2 < 5) {
+      this.currentSection2 = 1;
+    } else if (this.currentIndexPlaylist2 >= 5 && this.currentIndexPlaylist2 < 10) {
+      this.currentSection2 = 2;
+    }
+    if (this.currentIndexPlaylist3 < 5) {
+      this.currentSection3 = 1;
+    } else if (this.currentIndexPlaylist3 >= 5 && this.currentIndexPlaylist3 < 10) {
+      this.currentSection3 = 2;
+    }
+  }
+
+
+  animationStarted(event: any): void {
+    console.log('Animação iniciada:', event);
+  }
+
+  animationDone(event: any): void {
+    console.log('Animação concluída:', event);
+  }
+
+
   ngOnInit(): void {
+
+    this.carregarGenerosDoLocalStorage();
+
+    console.log(this.genero1, this.genero2, this.genero3)
 
     this.startCountdownFromLastTimestamp();
 
@@ -79,8 +170,9 @@ export class RecomendacoesComponent implements OnInit, OnDestroy {
     } else {
       this.atualizarRecomendacoes();
     }
-    
+
     //10000
+    //86400000
     interval(86400000).subscribe(() => {
       this.atualizarRecomendacoes();
     });
@@ -154,6 +246,8 @@ export class RecomendacoesComponent implements OnInit, OnDestroy {
     this.genero2 = genero2;
     this.genero3 = genero3;
 
+    this.salvarGenerosNoLocalStorage();
+
     console.log("Genero 1: " + this.genero1);
     console.log("Genero 2: " + this.genero2);
     console.log("Genero 3: " + this.genero3);
@@ -161,6 +255,26 @@ export class RecomendacoesComponent implements OnInit, OnDestroy {
     this.getItemsPlaylistRecomendacao1(this.genero1);
     this.getItemsPlaylistRecomendacao2(this.genero2);
     this.getItemsPlaylistRecomendacao3(this.genero3);
+  }
+
+  salvarGenerosNoLocalStorage(): void {
+    localStorage.setItem('genero1', this.genero1);
+    localStorage.setItem('genero2', this.genero2);
+    localStorage.setItem('genero3', this.genero3);
+  }
+
+  carregarGenerosDoLocalStorage(): void {
+    const genero1 = localStorage.getItem('genero1');
+    const genero2 = localStorage.getItem('genero2');
+    const genero3 = localStorage.getItem('genero3');
+
+    if (genero1 && genero2 && genero3) {
+      this.genero1 = genero1;
+      this.genero2 = genero2;
+      this.genero3 = genero3;
+    } else {
+      this.atualizarRecomendacoes();
+    }
   }
 
   sortearGeneros(array: string[]): [string, string, string] {
@@ -239,7 +353,7 @@ export class RecomendacoesComponent implements OnInit, OnDestroy {
     return false;
   }
 
-  // avancar(musica: Item): void {
-  //   this.router.navigate(['/detalhes'], { state: { musica: musica } });
-  // }
+  avancar(musica: ItemBuscado): void {
+    this.router.navigate(['/detalhes'], { state: { musica: musica } });
+  }
 }

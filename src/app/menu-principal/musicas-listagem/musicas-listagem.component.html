@@ -268,7 +268,7 @@
   </div>
   <div class="wrapper mr-6 ml-20 cursor-pointer">
     <ng-container *ngFor="let setor of [1, 2]">
-      <section class="carousel-section">
+      <section>
         <a class="mt-6 arrow__btn" (click)="moveCarousel('topChartsYoutube', -1)">‹</a>
         <div class="item" *ngFor="let chart of topChartsYoutube.slice(currentIndexTopChartsYoutube, currentIndexTopChartsYoutube + 5)">
           <div class="carousel-item" (click)="avancar(chart)">
@@ -289,13 +289,11 @@
   <div class="wrapper mr-6 ml-20 cursor-pointer">
     <ng-container *ngFor="let section of [1, 2]">
       <section id="section{{section}}">
-        <!-- <a class="mt-6 arrow__btn" (click)="moveCarousel('topCharts', -1)">‹</a> -->
         <div class="item" *ngFor="let chart of topCharts.slice(currentIndexTopCharts, currentIndexTopCharts + 5)">
           <div (click)="avancar(chart)">
             <img class="h-65 rounded-lg" [src]="chart.album.images[1].url" alt="Describe Image">
           </div>
         </div>
-        <!-- <a class="mt-6 arrow__btn" (click)="moveCarousel('topCharts', 1)">›</a> -->
       </section>
     </ng-container>
   </div>
