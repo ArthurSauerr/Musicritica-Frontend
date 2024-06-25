@@ -188,7 +188,6 @@ export class MusicasListagemComponent implements OnInit {
     console.log('Animação iniciada:', event);
   }
 
-  // Método para capturar o fim da animação
   animationDone(event: any): void {
     console.log('Animação concluída:', event);
   }
