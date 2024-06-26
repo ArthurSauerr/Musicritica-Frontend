@@ -78,4 +78,8 @@ export class UsuarioService {
     }
     return this.httpClient.put<any>(`${this.usuarioUrl}/atualizar`, formData, { headers });
   }
+
+  getUsuariosDoMes(): Observable<Usuario[]> {
+    return this.httpClient.get<Usuario[]>(`${this.usuarioUrl}/buscarUsuarioDoMes`);
+  }
 }
