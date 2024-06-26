@@ -5,6 +5,9 @@ import { Denuncia } from 'src/app/shared/model/Denuncia';
 import { UsuarioService } from 'src/app/shared/service/usuario.service';
 import { switchMap, catchError } from 'rxjs/operators';
 import { of } from 'rxjs';
+import { Comentario } from 'src/app/shared/model/Comentario';
+import { ComentarioServiceService } from 'src/app/shared/service/comentario-service.service';
+import * as XLSX from 'xlsx';
 
 @Component({
   selector: 'app-adm-denuncia',
@@ -17,6 +20,7 @@ export class AdmDenunciaComponent implements OnInit {
   public searchTerm: string = '';
   public startDate: string = '';
   public endDate: string = '';
+  public usuarios: Usuario[] = [];
 
   showModalDenuncia: boolean = false;
   comentarioSelecionado: String;
@@ -26,6 +30,7 @@ export class AdmDenunciaComponent implements OnInit {
   constructor(
     private denunciaService: DenunciaService,
     private usuarioService: UsuarioService,
+    private comentarioService: ComentarioServiceService
   ) {}
 
   ngOnInit(): void {
@@ -138,17 +143,57 @@ export class AdmDenunciaComponent implements OnInit {
     this.showModalDenuncia = false;
   }
 
-  fecharDenuncia(denuncia: any) {
-    // Lógica para fechar a denúncia
-    console.log('Fechar Denúncia:', denuncia);
+  fecharDenuncia(denuncia: Denuncia) {
+    console.log(denuncia);
+    this.denunciaService.fecharDenuncia(denuncia.id).subscribe(response => {
+      console.log('Denúncia ID:', denuncia.id);
+      this.listarTodos();
+      }, error => {
+      console.error('Erro ao fechar a denúncia:', error);
+    });
   }
 
-  deletarComentario(denuncia: any) {
-    // Lógica para deletar o comentário
-    console.log('Deletar Comentário:', denuncia);
+  deletarComentario(comentario: Comentario, usuario: Usuario) {
+    console.log(comentario);
+    this.comentarioService.deletarComentario(usuario.id, comentario.id ).subscribe(response => {
+      console.log('Comentário deletado:', response);
+      this.listarTodos();
+      
+    }, error => {
+      console.error('Erro ao deletar o comentário:', error);
+    });
   }
 
+  gerarRelatorioDenuncias() {
+    const ws: XLSX.WorkSheet = XLSX.utils.json_to_sheet(this.denuncias.map(denuncia => ({
+      'Usuário Denunciado': denuncia.usuarioReportado.nome,
+      'Denunciado por': denuncia.usuario.nome,
+      'Comentário': denuncia.comentario.comentario,
+      'Status': denuncia.status,
+      'Data': denuncia.dt_denuncia
+    })));
+    const wb: XLSX.WorkBook = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(wb, ws, 'Denúncias');
+    XLSX.writeFile(wb, 'relatorio_denuncias.xlsx');
+  }
+  
 
+  gerarRelatorioUsuarios() {
+    const usuariosDoMes = this.usuarios.filter(usuario => {
+      
+      
+     
+    });
+
+    const ws: XLSX.WorkSheet = XLSX.utils.json_to_sheet(usuariosDoMes.map(usuario => ({
+      'Nome': usuario.nome,
+      'Email': usuario.email,
+      
+    })));
+    const wb: XLSX.WorkBook = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(wb, ws, 'Usuários do Mês');
+    XLSX.writeFile(wb, 'relatorio_usuarios_mes.xlsx');
+  }
 }
 
 

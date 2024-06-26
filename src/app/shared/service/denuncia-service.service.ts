@@ -19,21 +19,18 @@ export class DenunciaService {
     const url = `${this.denunciaUrl}/${idUsuarioAutenticado}/${idComentarioSelecionado}`;
     return this.httpClient.post<any>(url, {});
   }
-
-
   listarDenuncias(): Observable<Array<Denuncia>> {
-
     return this.httpClient.get<Array<Denuncia>>(`${this.denunciaUrl}/listarTodos`);
 
   }
-
-
   buscarDenunciaPorNome(nome: String): Observable<Denuncia[]> {
     return this.httpClient.get<Denuncia[]>(`${this.denunciaUrl}/buscar/${nome}`);
   }
-
   buscarDenunciaPorData(dataInicio: string, dataFim: string): Observable<Denuncia[]> {
     return this.httpClient.get<Denuncia[]>(`${this.denunciaUrl}/buscarPorData/${dataInicio}/${dataFim}`);
+  }
+  fecharDenuncia(denunciaId: number): Observable<any> {
+    return this.httpClient.put(`${this.denunciaUrl}/fechar/${denunciaId}`, {});
   }
 
 }

@@ -49,11 +49,10 @@
                 <th class="px-4 py-3">Comentário</th>
                 <th class="px-4 py-3">Status</th>
                 <th class="px-4 py-3">Data</th>
-                <th class="px-4 py-3">Ações</th> <!-- Nova coluna para o dropdown -->
+                <th class="px-4 py-3">Ações</th>
               </tr>
             </thead>
             <tbody>
-              <!-- Iteração sobre as denúncias -->
               <tr *ngFor="let denuncia of denuncias">
                 <td class="px-4 py-3">{{ denuncia.usuarioReportado.nome }}</td>
                 <td class="px-4 py-3">{{ denuncia.usuario.nome }}</td>
@@ -69,7 +68,7 @@
                   <button (click)="fecharDenuncia(denuncia)" class="bg-blue-600 hover:bg-blue-700 text-white font-bold rounded px-2 py-1 mr-2">
                     Fechar 
                   </button>
-                  <button (click)="deletarComentario(denuncia)" class="bg-red-600 hover:bg-red-700 text-white font-bold rounded px-2 py-1">
+                  <button (click)="deletarComentario(denuncia.comentario, denuncia.comentario.usuario)" class="bg-red-600 hover:bg-red-700 text-white font-bold rounded px-2 py-1">
                     Deletar 
                   </button>
                 </td>                
@@ -78,7 +77,7 @@
           </table>
         </div>
       </div>
-    </div>  
+    </div>
     <div *ngIf="showModalDenuncia"
             class="fixed inset-0 flex items-center justify-center bg-opacity-50 backdrop-filter backdrop-blur-sm">
             <div id="modalComentario"
@@ -97,6 +96,15 @@
               <div class="flex justify-center">
               </div>
             </div>
+          </div>
+
+          <div class="w-full p-4 flex justify-end space-x-4">
+            <button (click)="gerarRelatorioDenuncias()" class="bg-green-600 hover:bg-green-700 text-white font-bold rounded p-2">
+              Gerar Relatório de Denúncias
+            </button>
+            <button (click)="gerarRelatorioUsuarios()" class="bg-green-600 hover:bg-green-700 text-white font-bold rounded p-2">
+              Gerar Relatório de Usuários do Mês
+            </button>
           </div>
   </div>
 </div>
