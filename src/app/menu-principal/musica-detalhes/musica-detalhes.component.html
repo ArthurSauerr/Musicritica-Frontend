@@ -142,8 +142,13 @@
           loading="lazy">
         </iframe>
       </div>
-      <div class="ml-14 mr-20 mt-2 border custom-border">
-        <p-chart type="line" [data]="data" [options]="options"></p-chart>
+      <div>
+        <div class="ml-12 mt-12">
+          <h2 class="text-lg lg:text-2xl font-bold text-white verde-texto">Gráfico de avaliações</h2>
+        </div>
+        <div class="ml-14 mr-20 mt-6 border custom-border">
+          <p-chart type="line" [data]="data" [options]="options"></p-chart>
+        </div>
       </div>
     </div>
   </div>
@@ -195,7 +200,7 @@
                   <a (click)="deletarComentario(comentario.id)"
                     class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Remover</a>
                 </li>
-                <li *ngIf="usuarioLogado.id != comentario.usuario.id" >
+                <li *ngIf="usuarioLogado.id != comentario.usuario.id">
                   <a (click)="openModalDenuncia(comentario)"
                     class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Reportar</a>
                 </li>
@@ -203,18 +208,18 @@
             </div>
           </div>
           <div *ngIf="showModalEnviarDenuncia"
-          class="fixed inset-0 flex items-center justify-center bg-opacity-50 backdrop-filter backdrop-blur-sm">
-          <div id="modalComentario"
-            class="fundo-comentarios-modal p-8 rounded-xl shadow-lg w-96 overflow-y-auto max-h-96">
-            <div class="flex-grow mb-6">
-              <button type="button" (click)="enviarReport(idComentarioSelecionado); closeModalDenuncia()"
-                class="custom-checkbox inline-flex items-center py-2.5 px-4 text-xs font-medium text-center text-white bg-primary-700 rounded-lg focus:ring-4 focus:ring-primary-200 dark:focus:ring-primary-900 hover:bg-primary-800">
-                Confirmar Denúncia
-              </button>
+            class="fixed inset-0 flex items-center justify-center bg-opacity-50 backdrop-filter backdrop-blur-sm">
+            <div id="modalComentario"
+              class="fundo-comentarios-modal p-8 rounded-xl shadow-lg w-96 overflow-y-auto max-h-96">
+              <div class="flex-grow mb-6">
+                <button type="button" (click)="enviarReport(idComentarioSelecionado); closeModalDenuncia()"
+                  class="custom-checkbox inline-flex items-center py-2.5 px-4 text-xs font-medium text-center text-white bg-primary-700 rounded-lg focus:ring-4 focus:ring-primary-200 dark:focus:ring-primary-900 hover:bg-primary-800">
+                  Confirmar Denúncia
+                </button>
+              </div>
+              <div class="flex justify-center">
+              </div>
             </div>
-            <div class="flex justify-center">
-            </div>
-          </div>
           </div>
           <div *ngIf="showModalEditarComentario"
             class="fixed inset-0 flex items-center justify-center bg-opacity-50 backdrop-filter backdrop-blur-sm">

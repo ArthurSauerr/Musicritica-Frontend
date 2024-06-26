@@ -33,7 +33,7 @@ export class MusicaDetalhesComponent implements OnInit {
     private elementRef: ElementRef,
     private alertaService: AlertaServiceService,
     private avaliacaoService: AvaliacaoService,
-   // private denunciaService: DenunciaService //TODO usuarioService
+    // private denunciaService: DenunciaService //TODO usuarioService
   ) { }
 
   artista: string;
@@ -282,6 +282,11 @@ export class MusicaDetalhesComponent implements OnInit {
   }
 
   enviarAvaliacao() {
+
+    if (this.usuarioService.getToken() == null) {
+      this.alertaService.exibirAlerta("alert16");
+    }
+
     const id_spotify = this.musica.id
 
     console.log("id " + id_spotify);
@@ -294,13 +299,13 @@ export class MusicaDetalhesComponent implements OnInit {
           (musicaExistente) => {
 
             if (musicaExistente == null) {
-             this.novaMusicaSpotify.id_spotify = id_spotify;
+              this.novaMusicaSpotify.id_spotify = id_spotify;
 
-             this.avaliacaoService.salvarMusicaSpotify(this.novaMusicaSpotify).subscribe(
-              (musicaSpotifySalva) => {
-                this.musicaSpotifyParaAvaliacao.id = musicaSpotifySalva.id;
-              });
-            }else{
+              this.avaliacaoService.salvarMusicaSpotify(this.novaMusicaSpotify).subscribe(
+                (musicaSpotifySalva) => {
+                  this.musicaSpotifyParaAvaliacao.id = musicaSpotifySalva.id;
+                });
+            } else {
               this.musicaSpotifyParaAvaliacao.id = musicaExistente.id;
             }
 
@@ -327,11 +332,15 @@ export class MusicaDetalhesComponent implements OnInit {
           });
       }, error => {
         console.error('Usuário não encontrad:', error);
-        this.alertaService.exibirAlerta('alert11')
       });
   }
 
   enviarComentario(): void {
+
+    if (this.usuarioService.getToken() == null) {
+      this.alertaService.exibirAlerta("alert16");
+    }
+
     if (this.comentario.trim() !== '') {
       console.log("comentario: " + this.comentario);
 
@@ -371,6 +380,11 @@ export class MusicaDetalhesComponent implements OnInit {
   }
 
   enviarReport(idComentarioSelecionado: number): void {
+
+    if (this.usuarioService.getToken() == null) {
+      this.alertaService.exibirAlerta("alert16");
+    }
+
     console.log("id do comentario: " + idComentarioSelecionado);
     this.usuarioService.buscarIdPorEmail(this.emailParam).subscribe(
       (idUsuarioAutenticado: number) => {
@@ -383,13 +397,11 @@ export class MusicaDetalhesComponent implements OnInit {
           },
           (error: any) => {
             console.error('Erro ao enviar report:', error);
-            this.alertaService.exibirAlerta('alert11');
           }
         );
       },
       (error: any) => {
         console.error('Comentário não encontrado:', error);
-        this.alertaService.exibirAlerta('alert11');
       }
     );
   }
@@ -419,6 +431,11 @@ export class MusicaDetalhesComponent implements OnInit {
   }
 
   enviarResposta(): void {
+
+    if (this.usuarioService.getToken() == null) {
+      this.alertaService.exibirAlerta('alert16')
+    }
+
     if (this.resposta.trim() !== '') {
       console.log("comentario: " + this.comentario);
 
@@ -494,6 +511,11 @@ export class MusicaDetalhesComponent implements OnInit {
   }
 
   enviarPlaylist(): void {
+
+    if (this.usuarioService.getToken() == null) {
+      this.alertaService.exibirAlerta("alert16");
+    }
+
     if (this.idPlaylistSelecionada > 0) {
       this.enviarMusicaParaPlaylist();
     } else {
@@ -538,6 +560,11 @@ export class MusicaDetalhesComponent implements OnInit {
 
 
   enviarMusicaParaPlaylist(): void {
+
+    if (this.usuarioService.getToken() == null) {
+      this.alertaService.exibirAlerta("alert16");
+    }
+
     const idSpotify: string = this.musica.id;
     const idMusicaSpotify: string = this.musica.id;
     const idPlaylist: number = this.idPlaylistSelecionada;
