@@ -34,6 +34,7 @@
     "scrollreveal": "^4.0.9",
     "slick-carousel": "^1.8.1",
     "tslib": "^2.3.0",
+    "xlsx": "^0.18.5",
     "zone.js": "~0.14.4"
   },
   "devDependencies": {
