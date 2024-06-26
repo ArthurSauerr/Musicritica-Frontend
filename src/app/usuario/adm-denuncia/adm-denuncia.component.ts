@@ -158,7 +158,7 @@ export class AdmDenunciaComponent implements OnInit {
     this.comentarioService.deletarComentario(usuario.id, comentario.id ).subscribe(response => {
       console.log('Comentário deletado:', response);
       this.listarTodos();
-      
+
     }, error => {
       console.error('Erro ao deletar o comentário:', error);
     });
@@ -176,24 +176,28 @@ export class AdmDenunciaComponent implements OnInit {
     XLSX.utils.book_append_sheet(wb, ws, 'Denúncias');
     XLSX.writeFile(wb, 'relatorio_denuncias.xlsx');
   }
-  
+
 
   gerarRelatorioUsuarios() {
-    const usuariosDoMes = this.usuarios.filter(usuario => {
-      
-      
-     
-    });
-
-    const ws: XLSX.WorkSheet = XLSX.utils.json_to_sheet(usuariosDoMes.map(usuario => ({
-      'Nome': usuario.nome,
-      'Email': usuario.email,
-      
-    })));
-    const wb: XLSX.WorkBook = XLSX.utils.book_new();
-    XLSX.utils.book_append_sheet(wb, ws, 'Usuários do Mês');
-    XLSX.writeFile(wb, 'relatorio_usuarios_mes.xlsx');
+    this.usuarioService.getUsuariosDoMes().subscribe(
+      usuarios => {
+        const ws: XLSX.WorkSheet = XLSX.utils.json_to_sheet(usuarios.map(usuario => ({
+          'Nome': usuario.nome,
+          'Email': usuario.email,
+          'Data de Criação': usuario.dt_cadastro
+        })));
+        const wb: XLSX.WorkBook = XLSX.utils.book_new();
+        XLSX.utils.book_append_sheet(wb, ws, 'Usuários do Mês');
+        XLSX.writeFile(wb, 'relatorio_usuarios_mes.xlsx');
+      },
+      error => {
+        console.error('Erro ao buscar usuários:', error);
+      }
+    );
   }
+
+
+  
 }
 
 
