@@ -128,7 +128,7 @@ export class AppComponent {
     this.exibirEditButtons = !this.exibirEditButtons;
 
     if (this.idUsuario === +this.urlId){
-      const modoEdicaoIds = ['editar-nome', 'editar-img-bg', 'editar-img-perfil', 'overlay-bg', 'overlay-profile'];
+      const modoEdicaoIds = ['editar-nome', 'editar-img-bg', 'editar-img-perfil', 'overlay-bg', 'overlay-profile', 'excluir-perfil'];
       const modoEdicaoEsconder = ['div-musicas', 'playlists-btn', 'avaliacoes-btn', 'descobertas-btn'];
 
       modoEdicaoIds.forEach(id => {

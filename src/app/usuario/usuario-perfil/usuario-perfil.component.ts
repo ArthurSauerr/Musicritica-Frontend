@@ -10,6 +10,7 @@ import { ChangeDetectorRef } from '@angular/core';
 import { AlertaServiceService } from 'src/app/shared/service/alerta-service.service';
 import { AvaliacaoService } from 'src/app/shared/service/avaliacao.service';
 import { Avaliacao } from 'src/app/shared/model/Avaliacao';
+import { Router, NavigationEnd } from '@angular/router';
 
 @Component({
   selector: 'app-usuario-perfil',
@@ -25,6 +26,7 @@ export class UsuarioPerfilComponent implements OnInit {
   constructor(
     private usuarioService: UsuarioService,
     private route: ActivatedRoute,
+    private router: Router,
     private playListService: PlaylistService,
     private dadosCompartilhadosService: DadosCompartilhadosService,
     private cdr: ChangeDetectorRef,
@@ -55,6 +57,7 @@ export class UsuarioPerfilComponent implements OnInit {
   isModalPlaylistOpen: boolean;
   isModalPlaylistExcluirOpen: boolean;
   isModalMusicaExcluirOpen: boolean;
+  isModalPerfilExcluirOpen: boolean;
   novoNome: string;
   novaImagemPerfil: File;
   novaImagemBackground: File;
@@ -266,6 +269,7 @@ export class UsuarioPerfilComponent implements OnInit {
     this.isModalPlaylistOpen = false;
     this.isModalPlaylistExcluirOpen = false;
     this.isModalMusicaExcluirOpen = false;
+    this.isModalPerfilExcluirOpen = false;
     this.novoNomePlaylist = '';
   }
 
@@ -286,6 +290,12 @@ export class UsuarioPerfilComponent implements OnInit {
     event.stopPropagation();
     this.trackIdSelecionada = trackId;
     this.isModalMusicaExcluirOpen = true;
+  }
+
+  excluirPerfilModal(usuario: Usuario, event: Event) {
+    event.stopPropagation();
+    usuario = this.usuario;
+    this.isModalPerfilExcluirOpen = true;
   }
 
   excluirMusicaPlaylist() {
@@ -433,6 +443,18 @@ export class UsuarioPerfilComponent implements OnInit {
             console.error('Erro ao atualizar imagem:', error);
           }
         );
+    }
+  }
+
+  excluirPerfil() {
+    if(this.usuario){
+      this.usuarioService.excluirUsuario(this.usuario.id).subscribe(
+        (response => {
+          console.log('Usuario excluido com sucesso');
+          this.usuarioService.deleteToken();
+          this.router.navigate(['']);
+        })
+      )
     }
   }
 }
