@@ -2,6 +2,8 @@ import { Injectable } from '@angular/core';
 import { Denuncia } from '../model/Denuncia';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { Musica } from '../model/Musica';
+import { MusicaSpotify } from '../model/MusicaSpotify';
 
 @Injectable({
   providedIn: 'root'
@@ -32,5 +34,7 @@ export class DenunciaService {
   fecharDenuncia(denunciaId: number): Observable<any> {
     return this.httpClient.put(`${this.denunciaUrl}/fechar/${denunciaId}`, {});
   }
-
+  buscarMusicaComMedia4(): Observable<MusicaSpotify[]> {
+    return this.httpClient.get<MusicaSpotify[]>(`${this.denunciaUrl}/buscarPorMedia4`);
+  }
 }
