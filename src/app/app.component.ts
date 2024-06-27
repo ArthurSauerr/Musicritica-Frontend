@@ -149,6 +149,7 @@ export class AppComponent {
 
   logout(){
     this.usuarioService.deleteToken();
+    this.isAdmin = false;
     this.router.navigate(['usuario/login']);
     console.log("Usuário deslogado!")
     this.toggleDropdown(false);
