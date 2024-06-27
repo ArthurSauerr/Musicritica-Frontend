@@ -33,6 +33,12 @@
           Nome</button>
         <p class="nomeUsuario drop-shadow-md">{{ usuario.nome }}</p>
         <p class="text-sm">Entrou em {{ formatarData(usuario.dt_cadastro) }}</p>
+        <button id="excluir-perfil" style="visibility: hidden;" (click)="excluirPerfilModal(usuario, $event)" class="w-36 rounded-full relative inline-flex items-center justify-center p-0.5 overflow-hidden text-sm font-medium text-gray-900 group bg-gradient-to-br from-red-400 to-red-800 group-hover:from-red-400 group-hover:to-red-400 dark:text-white dark:hover:text-gray-900 focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800">
+          <span
+          class="w-36 rounded-full relative px-5 py-2.5 transition-all ease-in duration-75 bg-white dark:bg-gray-900 group-hover:bg-opacity-0">
+          Excluir Perfil
+        </span>
+        </button>
         <div class="flex justify-center mt-6">
           <p class="cursor-pointer m-6 group relative w-max" (click)="mostrarConteudo('playlists')"
             (click)="esconderBotoes()" id="playlists-btn">
@@ -312,3 +318,5 @@
     </div>
   </div>
 </div>
+</div>
+
