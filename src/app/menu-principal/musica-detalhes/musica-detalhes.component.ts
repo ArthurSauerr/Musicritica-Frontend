@@ -101,24 +101,23 @@ export class MusicaDetalhesComponent implements OnInit {
     const surfaceBorder = documentStyle.getPropertyValue('--surface-border');
 
     this.data = {
-      labels: [],
+      labels: ['Nota 1', 'Nota 2', 'Nota 3', 'Nota 4', 'Nota 5'], 
       datasets: [
         {
-          label: 'Avaliações',
-          fill: false,
+          label: 'Atualizar gráfico',
+          fill: true,
           borderColor: documentStyle.getPropertyValue('--green-500'),
           yAxisID: 'y1',
           tension: 0.3,
-          data: []
-
+          data: [0, 0, 0, 0, 0]
         }
       ]
     };
 
     this.options = {
-      stacked: false,
+      stacked: true,
       maintainAspectRatio: false,
-      aspectRatio: 0.8,
+      aspectRatio: 0.9,
       plugins: {
         legend: {
           labels: {
@@ -135,7 +134,7 @@ export class MusicaDetalhesComponent implements OnInit {
         },
         y1: {
           type: 'linear',
-          display: true,
+          
           position: 'right',
           ticks: {
             color: textColorSecondary
@@ -200,14 +199,15 @@ export class MusicaDetalhesComponent implements OnInit {
     this.avaliacaoService.buscarQuantidadePorNota(this.musica.id).subscribe(
       (data: MapeamentoNotas[]) => {
         this.listaDeNotasEQuantidade = data;
-        this.updateChart();
+        this.updateChart(); // Atualiza o gráfico após buscar os dados
       },
       (error) => {
         console.error('Ocorreu um erro ao buscar a média da música:', error);
       }
     );
   }
-
+  
+  // Função para atualizar o gráfico
   updateChart(): void {
     if (this.listaDeNotasEQuantidade.length > 0) {
       this.data.labels = this.listaDeNotasEQuantidade.map(item => `Nota ${item.nota}`);
@@ -319,6 +319,7 @@ export class MusicaDetalhesComponent implements OnInit {
 
             this.avaliacaoService.salvar(this.novaAvaliacao).subscribe(
               (avaliacaoEnviada) => {
+                this.buscarQuantidadePorNota();
                 this.alertaService.exibirAlerta('alert10')
                 console.log("avalição enviada: " + avaliacaoEnviada)
               }, error => {
