@@ -40,7 +40,8 @@
         </span>
         </button>
         <div class="flex justify-center mt-6">
-          <p class="cursor-pointer m-6 group relative w-max" (click)="mostrarConteudo('playlists')" (click)="esconderBotoes()" id="playlists-btn">
+          <p class="cursor-pointer m-6 group relative w-max" (click)="mostrarConteudo('playlists')"
+            (click)="esconderBotoes()" id="playlists-btn">
             <span class="group-hover:font-bold block" style="width: 100px; text-align: center;">Playlists</span>
             <span class="absolute -bottom-1 left-1/2 w-0 transition-all h-0.5 bg-[#64DEA1] group-hover:w-3/6"></span>
             <span class="absolute -bottom-1 right-1/2 w-0 transition-all h-0.5 bg-[#64DEA1] group-hover:w-3/6"></span>
@@ -76,9 +77,9 @@
           <img *ngIf="primeirasMusicasDasPlaylists[playlist.id]" [src]="primeirasMusicasDasPlaylists[playlist.id]"
             class="w-full h-auto rounded-lg drop-shadow-md" alt="Miniatura da primeira música">
         </div>
-        <div class="flex-grow text-left mt-8 ml-8 text-2xl">{{ playlist.nome }}</div>
+        <div class="flex-grow text-left mt-8 ml-8 text-2xl font-bold musicritica-button">{{ playlist.nome }}</div>
         <div class="relative">
-          <button (click)="toggleDropdown(playlist, $event)"  id="dropdown-playlist" style="visibility: visible;"
+          <button (click)="toggleDropdown(playlist, $event)" id="dropdown-playlist" style="visibility: visible;"
             class="dropdown-playlist inline-flex items-center p-2 text-sm font-medium text-center text-gray-500 dark:text-gray-400 rounded-lg focus:ring-4 focus:outline-none dark:hover:bg-gray-200 dark:focus:ring-gray-600"
             type="button">
             <svg class="w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor"
@@ -317,29 +318,5 @@
     </div>
   </div>
 </div>
-
-<!-- Modal para excluir perfil -->
-<div *ngIf="isModalPerfilExcluirOpen" class="modal-overlay">
-  <div class="modal-content-excluir bg-black bg-opacity-70 backdrop-filter backdrop-blur-sm ">
-    <h2 class="text-xl font-bold mb-4 nomeUsuario justify-center">Tem certeza que excluir sua conta?</h2>
-    <div class="flex justify-center">
-      <h3 class="text-md font-medium mb-4 justify-center alerta">Essa ação não pode ser desfeita!</h3>
-    </div>
-    <div class="flex justify-center gap-2">
-      <button (click)="fecharModal()"
-        class="w-36 rounded-full relative inline-flex items-center justify-center p-0.5 overflow-hidden text-sm font-medium text-gray-900 group bg-gradient-to-br from-teal-300 to-lime-300 group-hover:from-teal-300 group-hover:to-lime-300 dark:text-white dark:hover:text-gray-900 focus:ring-4 focus:outline-none focus:ring-lime-200 dark:focus:ring-lime-800">
-        <span
-          class="w-36 rounded-full relative px-5 py-2.5 transition-all ease-in duration-75 bg-white dark:bg-gray-900 group-hover:bg-opacity-0">
-          Cancelar
-        </span>
-      </button>
-      <button (click)="excluirPerfil()"
-        class="w-36 rounded-full relative inline-flex items-center justify-center p-0.5 overflow-hidden text-sm font-medium text-gray-900 group bg-gradient-to-br from-red-400 to-red-800 group-hover:from-red-400 group-hover:to-red-400 dark:text-white dark:hover:text-gray-900 focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800">
-        <span
-          class="w-36 rounded-full relative px-5 py-2.5 transition-all ease-in duration-75 bg-white dark:bg-gray-900 group-hover:bg-opacity-0">
-          Excluir
-        </span>
-      </button>
-    </div>
-  </div>
 </div>
+

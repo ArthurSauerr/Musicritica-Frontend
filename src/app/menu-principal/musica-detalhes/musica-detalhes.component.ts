@@ -1,5 +1,5 @@
 import { UsuarioService } from 'src/app/shared/service/usuario.service';
-import { Component, HostListener, OnInit, numberAttribute, ElementRef, Input } from '@angular/core';
+import { Component, HostListener, OnInit, numberAttribute, ElementRef, Input, QueryList, ViewChildren } from '@angular/core';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { ComentarioServiceService } from 'src/app/shared/service/comentario-service.service';
 import { Item } from './../../shared/model/Item';
@@ -17,12 +17,15 @@ import { Avaliacao } from 'src/app/shared/model/Avaliacao';
 import { MapeamentoNotas } from 'src/app/shared/model/MapeamentoNotas';
 import { Denuncia } from 'src/app/shared/model/Denuncia';
 import { DenunciaService } from 'src/app/shared/service/denuncia-service.service';
+import { Pipe, PipeTransform } from '@angular/core';
+
 
 @Component({
   selector: 'app-musica-detalhes',
   templateUrl: './musica-detalhes.component.html',
   styleUrls: ['./musica-detalhes.component.scss']
 })
+
 export class MusicaDetalhesComponent implements OnInit {
   constructor(
     private sanitizer: DomSanitizer,
@@ -71,6 +74,7 @@ export class MusicaDetalhesComponent implements OnInit {
   totalDeComentarios: number;
   totalDeComentariosAssociados: number;
   nomePlaylistNova: string = "";
+  maxLength: number = 34;
   idPlaylistSelecionada: number;
 
   musica: Item;
@@ -92,6 +96,8 @@ export class MusicaDetalhesComponent implements OnInit {
 
   data: any;
   options: any;
+
+  @ViewChildren('playlistCheckbox') checkboxes: QueryList<any>;
 
   ngOnInit(): void {
 
@@ -165,6 +171,15 @@ export class MusicaDetalhesComponent implements OnInit {
     this.buscarQuantidadePorNota();
   }
 
+  get characterCount(): string {
+    return `${this.nomePlaylistNova.length}/${this.maxLength}`;
+  }
+
+  wrapText(text: string, maxLength: number): string {
+    const regex = new RegExp(`(.{1,${maxLength}})`, 'g');
+    return text.match(regex)?.join('\n') ?? text;
+  }
+  
   getStarsArray(numStars: number | undefined): number[] {
     if (numStars === undefined) {
       return [];
@@ -207,7 +222,7 @@ export class MusicaDetalhesComponent implements OnInit {
     );
   }
   
-  // Função para atualizar o gráfico
+
   updateChart(): void {
     if (this.listaDeNotasEQuantidade.length > 0) {
       this.data.labels = this.listaDeNotasEQuantidade.map(item => `Nota ${item.nota}`);
@@ -606,6 +621,10 @@ export class MusicaDetalhesComponent implements OnInit {
   capturarIdPlaylist(idPlaylist: number): void {
     this.idPlaylistSelecionada = idPlaylist;
     console.log("id da playlist clicada: " + this.idPlaylistSelecionada);
+    
+    this.checkboxes.forEach((checkbox) => {
+      checkbox.nativeElement.checked = checkbox.nativeElement.id === `playlist-${idPlaylist}`;
+    });
   }
 
   toggleDropdown(comentario: Comentario): void {
