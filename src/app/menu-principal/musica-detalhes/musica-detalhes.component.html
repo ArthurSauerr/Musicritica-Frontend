@@ -27,36 +27,35 @@
                 </span>
               </button>
             </div>
-            <div>
-              <div *ngFor="let playlist of playlistsDoUsuario" class="mb-4 flex custom-input items-center">
-                <div class="p-2  flex-grow">
-                  {{ playlist.nome }}
-                </div>
-                <div>
-                  <label class="relative flex items-center p-3 rounded-full cursor-pointer" htmlFor="customStyle">
-                    <input type="checkbox" (click)="capturarIdPlaylist(playlist.id)"
-                      class="before:content[''] peer relative h-8 w-8 cursor-pointer appearance-none rounded-full custom-checkbox bg-gray-900/10 transition-all before:absolute before:top-2/4 before:left-2/4 before:block before:h-12 before:w-12 before:-translate-y-2/4 before:-translate-x-2/4 before:rounded-full before:bg-blue-gray-500 before:opacity-0 before:transition-opacity checked:border-gray-100 checked:bg-gray-900 checked:before:bg-gray-900 hover:scale-105 hover:before:opacity-0"
-                      id="customStyle" />
-                    <span
-                      class="absolute text-white transition-opacity opacity-0 pointer-events-none top-2/4 left-2/4 -translate-y-2/4 -translate-x-2/4 peer-checked:opacity-100">
-                      <svg xmlns="http://www.w3.org/2000/svg" class="h-3.5 w-3.5" viewBox="0 0 20 20"
-                        fill="currentColor" stroke="currentColor" stroke-width="1">
-                        <path fill-rule="evenodd"
-                          d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
-                          clip-rule="evenodd"></path>
-                      </svg>
-                    </span>
-                  </label>
-                </div>
+            <div *ngFor="let playlist of playlistsDoUsuario" class="mb-4 flex custom-input items-center">
+              <div class="p-2  flex-grow">
+                {{ playlist.nome }}
               </div>
+              <label class="relative flex items-center p-3 rounded-full cursor-pointer" htmlFor="customStyle"
+                [for]="'playlist-' + playlist.id">
+                <input type="checkbox" #playlistCheckbox (click)="capturarIdPlaylist(playlist.id)"
+                  class="before:content[''] peer relative h-8 w-8 cursor-pointer appearance-none rounded-full custom-checkbox bg-gray-900/10 transition-all before:absolute before:top-2/4 before:left-2/4 before:block before:h-12 before:w-12 before:-translate-y-2/4 before:-translate-x-2/4 before:rounded-full before:bg-blue-gray-500 before:opacity-0 before:transition-opacity checked:border-gray-100 checked:bg-gray-900 checked:before:bg-gray-900 hover:scale-105 hover:before:opacity-0"
+                  [id]="'playlist-' + playlist.id" />
+                <span
+                  class="absolute text-white transition-opacity opacity-0 pointer-events-none top-2/4 left-2/4 -translate-y-2/4 -translate-x-2/4 peer-checked:opacity-100">
+                  <svg xmlns="http://www.w3.org/2000/svg" class="h-3.5 w-3.5" viewBox="0 0 20 20" fill="currentColor"
+                    stroke="currentColor" stroke-width="1">
+                    <path fill-rule="evenodd"
+                      d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                      clip-rule="evenodd"></path>
+                  </svg>
+                </span>
+              </label>
             </div>
           </div>
-          <div *ngIf="showCreatePlaylistInput" class="mb-4 flex-col items-center">
+          <div *ngIf="showCreatePlaylistInput" class="mb-4">
             <h2 class="text-4xl musicritica-button font-bold mb-4">Sua nova playlist: </h2>
             <h3 class="text-2xl musicritica-button font-bold mb-4">{{nomePlaylistNova}}</h3>
-            <input type="text" placeholder="Nome da Playlist" class="musicritica-button p-2 flex-grow custom-input"
-              [(ngModel)]="nomePlaylistNova" />
+            <input type="text" placeholder="Nome da Playlist" class="musicritica-button p-2 custom-input"
+              [(ngModel)]="nomePlaylistNova" maxlength="{{maxLength}}" style="width: 90%;" />
+            <div class="text-right text-sm text-gray-600 mr-8 mt-2">{{ characterCount }}</div>
           </div>
+
           <div class="flex justify-center">
             <button (click)="toggleModal()"
               class="mt-2 w-36 rounded-full relative inline-flex items-center justify-center p-0.5 overflow-hidden text-sm font-medium text-gray-900 group bg-gradient-to-br from-teal-300 to-lime-300 group-hover:from-teal-300 group-hover:to-lime-300 dark:text-white dark:hover:text-gray-900 focus:ring-4 focus:outline-none focus:ring-lime-200 dark:focus:ring-lime-800">
@@ -242,7 +241,7 @@
             </div>
           </div>
         </footer>
-        <p class="text-white dark:text-gray-400 ">{{ comentario.comentario }}</p>
+        <p class="text-white dark:text-gray-400 justify-text">{{ wrapText(comentario.comentario, 50) }}</p>
         <div class="flex items-center mt-4 space-x-4">
           <button type="button" (click)="toggleReply(comentario)"
             class="mt-2 mb-4 flex items-center text-sm text-white hover:underline dark:text-gray-400 font-medium">
