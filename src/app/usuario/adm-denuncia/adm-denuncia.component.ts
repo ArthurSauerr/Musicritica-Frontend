@@ -16,6 +16,7 @@ import * as XLSX from 'xlsx';
 })
 export class AdmDenunciaComponent implements OnInit {
   public denuncias: Denuncia[] = [];
+  public denunciasPaginadas: Denuncia[] = [];
   public denuncia: Denuncia;
   public searchTerm: string = '';
   public startDate: string = '';
@@ -24,8 +25,9 @@ export class AdmDenunciaComponent implements OnInit {
 
   showModalDenuncia: boolean = false;
   comentarioSelecionado: String;
-
-
+  paginaAtual: number = 1;
+  itensPorPagina: number = 10;
+  totalPaginas: number = 0;
 
   constructor(
     private denunciaService: DenunciaService,
@@ -53,6 +55,7 @@ export class AdmDenunciaComponent implements OnInit {
     this.denunciaService.listarDenuncias().subscribe(
       (data: Denuncia[]) => {
         this.denuncias = data;
+        this.atualizarPaginas();  // Atualiza a paginação após obter todas as denúncias
       },
       (error: any) => {
         console.error('Erro ao carregar denúncias:', error);
@@ -65,13 +68,13 @@ export class AdmDenunciaComponent implements OnInit {
     event.preventDefault();
     const usuario = this.searchTerm;
     console.log(`Buscando denúncias para o usuário: ${usuario}`);
-    // Chamar o serviço para buscar denúncias por nome de usuário
-    if(!usuario) {
+    if (!usuario) {
       this.listarTodos();
     }
     this.denunciaService.buscarDenunciaPorNome(usuario).subscribe(
       (data: Denuncia[]) => {
         this.denuncias = data;
+        this.atualizarPaginas();  // Atualiza a paginação após a busca
       },
       (error: any) => {
         console.error('Erro ao buscar denúncias:', error);
@@ -82,11 +85,10 @@ export class AdmDenunciaComponent implements OnInit {
 
   truncateText(text: string, maxLength: number): { truncatedText: string, isTruncated: boolean } {
     if (text.length > maxLength) {
-        return { truncatedText: text.substring(0, maxLength), isTruncated: true };
+      return { truncatedText: text.substring(0, maxLength), isTruncated: true };
     }
     return { truncatedText: text, isTruncated: false };
-}
-
+  }
 
   applyDateMask(event: Event): void {
     let input = event.target as HTMLInputElement;
@@ -106,8 +108,6 @@ export class AdmDenunciaComponent implements OnInit {
     input.value = newValue;
   }
 
-
-
   buscarDenunciaPorData(event: Event): void {
     event.preventDefault();
     const dataInicio = this.startDate ? this.formatDate(this.startDate) : '';
@@ -116,6 +116,7 @@ export class AdmDenunciaComponent implements OnInit {
     this.denunciaService.buscarDenunciaPorData(dataInicio, dataFim).subscribe(
       (data: Denuncia[]) => {
         this.denuncias = data;
+        this.atualizarPaginas();  // Atualiza a paginação após a busca
       },
       (error: any) => {
         console.error('Erro ao buscar denúncias por data:', error);
@@ -138,7 +139,6 @@ export class AdmDenunciaComponent implements OnInit {
     this.showModalDenuncia = true;
   }
 
-
   closeModalDenuncia() {
     this.showModalDenuncia = false;
   }
@@ -148,17 +148,16 @@ export class AdmDenunciaComponent implements OnInit {
     this.denunciaService.fecharDenuncia(denuncia.id).subscribe(response => {
       console.log('Denúncia ID:', denuncia.id);
       this.listarTodos();
-      }, error => {
+    }, error => {
       console.error('Erro ao fechar a denúncia:', error);
     });
   }
 
   deletarComentario(comentario: Comentario, usuario: Usuario) {
     console.log(comentario);
-    this.comentarioService.deletarComentario(usuario.id, comentario.id ).subscribe(response => {
+    this.comentarioService.deletarComentario(usuario.id, comentario.id).subscribe(response => {
       console.log('Comentário deletado:', response);
       this.listarTodos();
-
     }, error => {
       console.error('Erro ao deletar o comentário:', error);
     });
@@ -176,7 +175,6 @@ export class AdmDenunciaComponent implements OnInit {
     XLSX.utils.book_append_sheet(wb, ws, 'Denúncias');
     XLSX.writeFile(wb, 'relatorio_denuncias.xlsx');
   }
-
 
   gerarRelatorioUsuarios() {
     this.usuarioService.getUsuariosDoMes().subscribe(
@@ -196,9 +194,25 @@ export class AdmDenunciaComponent implements OnInit {
     );
   }
 
-
+  atualizarPaginas() {
+    this.totalPaginas = Math.ceil(this.denuncias.length / this.itensPorPagina);
+    const inicio = (this.paginaAtual - 1) * this.itensPorPagina;
+    const fim = this.paginaAtual * this.itensPorPagina;
+    this.denunciasPaginadas = this.denuncias.slice(inicio, fim); // Usa um array temporário para a paginação
+  }
   
+
+  paginaAnterior() {
+    if (this.paginaAtual > 1) {
+      this.paginaAtual--;
+      this.atualizarPaginas();
+    }
+  }
+
+  proximaPagina() {
+    if (this.paginaAtual < this.totalPaginas) {
+      this.paginaAtual++;
+      this.atualizarPaginas();
+    }
+  }
 }
-
-
-
