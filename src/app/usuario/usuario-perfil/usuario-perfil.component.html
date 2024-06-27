@@ -33,6 +33,12 @@
           Nome</button>
         <p class="nomeUsuario drop-shadow-md">{{ usuario.nome }}</p>
         <p class="text-sm">Entrou em {{ formatarData(usuario.dt_cadastro) }}</p>
+        <button id="excluir-perfil" style="visibility: hidden;" (click)="excluirPerfilModal(usuario, $event)" class="w-36 rounded-full relative inline-flex items-center justify-center p-0.5 overflow-hidden text-sm font-medium text-gray-900 group bg-gradient-to-br from-red-400 to-red-800 group-hover:from-red-400 group-hover:to-red-400 dark:text-white dark:hover:text-gray-900 focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800">
+          <span
+          class="w-36 rounded-full relative px-5 py-2.5 transition-all ease-in duration-75 bg-white dark:bg-gray-900 group-hover:bg-opacity-0">
+          Excluir Perfil
+        </span>
+        </button>
         <div class="flex justify-center mt-6">
           <p class="cursor-pointer m-6 group relative w-max" (click)="mostrarConteudo('playlists')" (click)="esconderBotoes()" id="playlists-btn">
             <span class="group-hover:font-bold block" style="width: 100px; text-align: center;">Playlists</span>
@@ -302,6 +308,32 @@
         </span>
       </button>
       <button (click)="excluirMusicaPlaylist()"
+        class="w-36 rounded-full relative inline-flex items-center justify-center p-0.5 overflow-hidden text-sm font-medium text-gray-900 group bg-gradient-to-br from-red-400 to-red-800 group-hover:from-red-400 group-hover:to-red-400 dark:text-white dark:hover:text-gray-900 focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800">
+        <span
+          class="w-36 rounded-full relative px-5 py-2.5 transition-all ease-in duration-75 bg-white dark:bg-gray-900 group-hover:bg-opacity-0">
+          Excluir
+        </span>
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- Modal para excluir perfil -->
+<div *ngIf="isModalPerfilExcluirOpen" class="modal-overlay">
+  <div class="modal-content-excluir bg-black bg-opacity-70 backdrop-filter backdrop-blur-sm ">
+    <h2 class="text-xl font-bold mb-4 nomeUsuario justify-center">Tem certeza que excluir sua conta?</h2>
+    <div class="flex justify-center">
+      <h3 class="text-md font-medium mb-4 justify-center alerta">Essa ação não pode ser desfeita!</h3>
+    </div>
+    <div class="flex justify-center gap-2">
+      <button (click)="fecharModal()"
+        class="w-36 rounded-full relative inline-flex items-center justify-center p-0.5 overflow-hidden text-sm font-medium text-gray-900 group bg-gradient-to-br from-teal-300 to-lime-300 group-hover:from-teal-300 group-hover:to-lime-300 dark:text-white dark:hover:text-gray-900 focus:ring-4 focus:outline-none focus:ring-lime-200 dark:focus:ring-lime-800">
+        <span
+          class="w-36 rounded-full relative px-5 py-2.5 transition-all ease-in duration-75 bg-white dark:bg-gray-900 group-hover:bg-opacity-0">
+          Cancelar
+        </span>
+      </button>
+      <button (click)="excluirPerfil()"
         class="w-36 rounded-full relative inline-flex items-center justify-center p-0.5 overflow-hidden text-sm font-medium text-gray-900 group bg-gradient-to-br from-red-400 to-red-800 group-hover:from-red-400 group-hover:to-red-400 dark:text-white dark:hover:text-gray-900 focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800">
         <span
           class="w-36 rounded-full relative px-5 py-2.5 transition-all ease-in duration-75 bg-white dark:bg-gray-900 group-hover:bg-opacity-0">

@@ -79,6 +79,18 @@ export class UsuarioService {
     return this.httpClient.put<any>(`${this.usuarioUrl}/atualizar`, formData, { headers });
   }
 
+  excluirUsuario(usuarioParaExcluirId: number): Observable<Usuario>{
+    const token = this.getToken();
+    if (!token) {
+      throw new Error('Token de autorização não encontrado');
+    }
+
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${token}`
+    });
+    return this.httpClient.delete<Usuario>(`${this.usuarioUrl}/excluir/${usuarioParaExcluirId}`, { headers });
+  }
+
   getUsuariosDoMes(): Observable<Usuario[]> {
     return this.httpClient.get<Usuario[]>(`${this.usuarioUrl}/buscarUsuarioDoMes`);
   }
