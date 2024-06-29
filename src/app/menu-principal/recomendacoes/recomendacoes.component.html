@@ -37,7 +37,7 @@
         <a class="mt-6 arrow__btn" (click)="moveCarousel('currentIndexPlaylist1', -1)">‹</a>
         <div class="item"
           *ngFor="let item of itensRecomendadosGenero1.slice(currentIndexPlaylist1, currentIndexPlaylist1 + 5)">
-          <div class="carousel-item">
+          <div class="carousel-item" (click)="buscarMusicaPorId(item.id)">
             <img class="h-65 rounded-lg" [src]="item.images[1].url" alt="Describe Image">
           </div>
         </div>
