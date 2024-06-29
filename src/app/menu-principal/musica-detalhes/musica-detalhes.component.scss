@@ -59,6 +59,36 @@
 
 }
 
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 1000;
+}
+
+.alerta {
+  background: linear-gradient(180deg, #64DEA1, #FFFFFF);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+
+.modal-content {
+  padding: 1.5rem;
+  border-radius: 0.5rem;
+  box-shadow: 0 0rem 1rem rgba(100, 222, 161, 0.3)
+}
+
+.modal-content-excluir {
+  padding: 1.5rem;
+  border-radius: 0.5rem;
+  box-shadow: 0 0rem 1rem rgba(112, 0, 0, 0.3)
+}
+
 .custom-border {
   background: none;
   color: white;
