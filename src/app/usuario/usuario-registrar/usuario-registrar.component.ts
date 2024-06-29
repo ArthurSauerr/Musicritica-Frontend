@@ -13,6 +13,7 @@ export class UsuarioRegistrarComponent {
   email: string = '';
   senha: string = '';
   dt_cadastro: string;
+  senhaInvalida: boolean = false;
 
   constructor(
     private usuarioService: UsuarioService,
@@ -22,19 +23,33 @@ export class UsuarioRegistrarComponent {
 
   registrar() {
     if (this.nome && this.email && this.senha) {
-      this.usuarioService.registrar({ nome: this['nome'], email: this['email'], senha: this['senha'] })
-        .subscribe(
-          (response) => {
-            console.log(response.message);
-            this.router.navigate(['usuario/login']);
-          },
-          (error) => {
-            this.alertaService.exibirAlerta('alertaCadastro');
-            console.error('Erro no registro', error);
-          }
-        );
+      if (this.validarSenha(this.senha)) {
+        this.senhaInvalida = false;
+        this.usuarioService.registrar({ nome: this.nome, email: this.email, senha: this.senha })
+          .subscribe(
+            (response) => {
+              console.log(response.message);
+              this.router.navigate(['usuario/login']);
+            },
+            (error) => {
+              this.alertaService.exibirAlerta('alertaCadastro');
+              console.error('Erro no registro', error);
+            }
+          );
+      } else {
+        this.senhaInvalida = true;
+      }
     }
   }
+
+  validarSenha(senha: string): boolean {
+    const senhaValida = senha.length >= 6;
+    if (!senhaValida) {
+      console.error('Senha inválida: deve ter pelo menos 6 caracteres.');
+    }
+    return senhaValida;
+  }
+
   fazerLogin() {
     this.router.navigate(['usuario/login']);
   }
