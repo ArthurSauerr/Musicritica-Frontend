@@ -206,17 +206,27 @@
               </ul>
             </div>
           </div>
-          <div *ngIf="showModalEnviarDenuncia"
-            class="fixed inset-0 flex items-center justify-center bg-opacity-50 backdrop-filter backdrop-blur-sm">
-            <div id="modalComentario"
-              class="fundo-comentarios-modal p-8 rounded-xl shadow-lg w-96 overflow-y-auto max-h-96">
-              <div class="flex-grow mb-6">
-                <button type="button" (click)="enviarReport(idComentarioSelecionado); closeModalDenuncia()"
-                  class="custom-checkbox inline-flex items-center py-2.5 px-4 text-xs font-medium text-center text-white bg-primary-700 rounded-lg focus:ring-4 focus:ring-primary-200 dark:focus:ring-primary-900 hover:bg-primary-800">
-                  Confirmar Denúncia
-                </button>
-              </div>
+          <div *ngIf="showModalEnviarDenuncia" class="modal-overlay">
+            <div class="modal-content bg-gray-800 bg-opacity-20 backdrop-blur-lg ">
+              <h2 class="text-xl font-bold mb-4 musica-info justify-center">Denunciar este comentário?</h2>
               <div class="flex justify-center">
+                <h3 class="text-md font-medium mb-4 justify-center alerta">Ajude a manter uma comunidade melhor!</h3>
+              </div>
+              <div class="flex justify-center gap-2">
+                <button (click)="closeModalDenuncia()"
+                  class="w-36 rounded-full relative inline-flex items-center justify-center p-0.5 overflow-hidden text-sm font-medium text-gray-900 group bg-gradient-to-br from-red-400 to-red-800 group-hover:from-red-400 group-hover:to-red-400 dark:text-white dark:hover:text-gray-900 focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800">
+                  <span
+                    class="w-36 rounded-full relative px-5 py-2.5 transition-all ease-in duration-75 bg-white dark:bg-gray-900 group-hover:bg-opacity-0">
+                    Cancelar
+                  </span>
+                </button>
+                <button (click)="enviarReport(idComentarioSelecionado); closeModalDenuncia()" 
+                class="w-36 rounded-full relative inline-flex items-center justify-center p-0.5 overflow-hidden text-sm font-medium text-gray-900 group bg-gradient-to-br from-teal-300 to-lime-300 group-hover:from-teal-300 group-hover:to-lime-300 dark:text-white dark:hover:text-gray-900 focus:ring-4 focus:outline-none focus:ring-lime-200 dark:focus:ring-lime-800">
+                <span
+                  class="w-36 rounded-full relative px-5 py-2.5 transition-all ease-in duration-75 bg-white dark:bg-gray-900 group-hover:bg-opacity-0">
+                  Enviar
+                </span>
+              </button>
               </div>
             </div>
           </div>
@@ -322,7 +332,7 @@
                   </div>
                 </div>
               </footer>
-              <p class="text-white dark:text-gray-400">{{ comentario.comentario }}</p>
+              <p class="text-white dark:text-gray-400 justify-text">{{ wrapText(comentario.comentario, 50) }}</p>
               <div class="flex items-center mt-4 space-x-4">
                 <button type="button" (click)="toggleReply(comentario)"
                   class="mt-2 mb-4 flex items-center text-sm text-white hover:underline dark:text-gray-400 font-medium">
@@ -333,15 +343,14 @@
                   </svg>
                   Responder
                 </button>
-                <!-- <button type="button" (click)="buscarRespostas(comentario.id)"
+                <button type="button" (click)="buscarRespostas(comentario.id)"
                   class="mt-2 mb-4 flex items-center text-sm text-white hover:underline dark:text-gray-400 font-medium">
                   <svg class="mr-1.5 w-3.5 h-3.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
                     viewBox="0 0 20 18">
                     <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                       d="M5 5h5M5 8h2m6-3h2m-5 3h6m2-7H2a1 1 0 0 0-1 1v9a1 1 0 0 0 1 1h3v5l5-5h8a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1Z" />
                   </svg>
-                  Ver respostas
-                </button> -->
+                </button>
               </div>
               <div class="ml-16 flex-grow mb-6 mt-6" *ngIf="mostrarTextArea[comentario.id]">
                 <div class="py-2 px-4 mb-4 rounded-lg rounded-t-lg custom-checkbox">

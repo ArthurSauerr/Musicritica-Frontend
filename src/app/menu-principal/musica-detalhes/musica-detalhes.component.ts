@@ -574,7 +574,6 @@ export class MusicaDetalhesComponent implements OnInit {
     }
   }
 
-
   enviarMusicaParaPlaylist(): void {
 
     if (this.usuarioService.getToken() == null) {
@@ -594,10 +593,8 @@ export class MusicaDetalhesComponent implements OnInit {
         this.alertaService.exibirAlerta('alert1')
       }, error => {
         console.error('Erro ao salvar uma nova música na playlist:', error);
-        this.alertaService.exibirAlerta('alert2')
+        this.alertaService.exibirAlerta('alert17')
       });
-
-
   }
 
   buscarPlaylistsPorIdUsuario(): void {
