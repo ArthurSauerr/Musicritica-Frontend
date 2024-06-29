@@ -19,22 +19,33 @@ export class MenuPrincipalService {
   buscarMusica(musica: string): Observable<SpotifySearchResponse> {
     return this.httpClient.get<SpotifySearchResponse>(`${this.apiUrl}/buscar/${musica}`);
   }
+
   getTopCharts(): Observable<SpotifySearchResponse[]> {
     return this.httpClient.get<SpotifySearchResponse[]>(`${this.apiUrl}/topCharts`);
   }
+
   getTopChartsYoutube(): Observable<SpotifySearchResponse[]> {
     return this.httpClient.get<SpotifySearchResponse[]>(`${this.apiUrl}/topChartsYoutube`);
   }
+
   getRecommendation(generoPrimario: string, generoSecundario: string): Observable<TrackData> {
     return this.httpClient.get<TrackData>(`${this.apiUrl}/descobrir/${generoPrimario}/${generoSecundario}`);
   }
+
   getAlbum(idAlbum: string): Observable<AlbumBuscado> {
     return this.httpClient.get<AlbumBuscado>(`${this.apiUrl}/buscar/album/${idAlbum}`);
   }
+
+  buscarMusicaPorId(id_spotify: string): Observable<Item> {
+    return this.httpClient.get<Item>(`${this.apiUrl}/buscar/musica/id/${id_spotify}`);
+  }
+
   getTopChartsDoBanco(): Observable<Item[]> {
     return this.httpClient.get<Item[]>(`${this.apiUrl}/topCharts/db`);
   }
+
   getItemsPlaylistRecomendacao(genero: string): Observable<ItemBuscado[]> {
     return this.httpClient.get<ItemBuscado[]>(`${this.apiUrl}/recomendacoes/${genero}`);
   }
+
 }

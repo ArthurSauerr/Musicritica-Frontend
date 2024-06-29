@@ -16,6 +16,14 @@
   color: #259C50;
 }
 
+.musica-info {
+  font-family: 'Poppins', sans-serif;
+  background: linear-gradient(180deg, #64DEA1, #FFFFFF);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
 .musica-selecione {
   font-family: 'Poppins', sans-serif;
   background: linear-gradient(180deg, #007F4F, #64DEA5);
@@ -37,9 +45,14 @@
 }
 
 .bg-card {
-  background: rgb(13,13,13);
-  background: linear-gradient(90deg, rgba(13,13,13,1) 0%, rgba(233,233,233,1) 0%, rgba(241,239,239,1) 20%, rgba(181,181,181,1) 72%);
+  border: 2px solid #64DEA1;
+  border-radius: 10px;
+  backdrop-filter: blur(5px); /* ajuste o valor do desfoque conforme necessário */
+  background-color: rgba(13, 13, 13, 0.3); 
+  padding: 10px;
 }
+
+
 
 .bg-body{
   background-color: #0D0D0D;

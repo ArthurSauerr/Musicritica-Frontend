@@ -116,16 +116,16 @@
       </div>
     </div>
   </div>
-
   <div class="flex mt-16">
     <div class="w-1/2 ml-16">
       <div class="text-2xl font-bold mb-4 musica-info">Deixe um comentário</div>
       <div class="flex-grow mb-6">
         <div class="py-2 px-4 mb-4 rounded-lg rounded-t-lg custom-checkbox">
           <label for="comment" class="sr-only">Seu comentário</label>
-          <textarea id="comment" rows="6" [(ngModel)]="comentario"
+          <textarea id="comment" rows="6" [(ngModel)]="comentario" maxlength="{{maxLengthComentario}}"
             class="px-0 w-full text-sm text-white border-0 focus:ring-0 focus:outline-none dark:text-white dark:placeholder-gray-400 fundo dark:bg-gray-800"
-            placeholder="Deixe seu comentário..." required></textarea>
+            placeholder="Deixe seu comentário..." required style="resize: vertical; max-height: 200px;"></textarea>
+          <div class="text-right text-sm text-gray-600 mr-8 mt-2">{{ characterCountComentario }}</div>
         </div>
         <button type="button" (click)="enviarComentario()"
           class="custom-checkbox inline-flex items-center py-2.5 px-4 text-xs font-medium text-center verde-texto bg-primary-700 rounded-lg focus:ring-4 focus:ring-primary-200 dark:focus:ring-primary-900 hover:bg-primary-800">
@@ -136,7 +136,7 @@
     <div class="w-1/2">
       <div class="ml-14 ">
         <div class="text-2xl font-bold mb-4 musica-info">Ouça uma prévia!</div>
-        <iframe style="border-radius:12px" [src]="spotifyUrl" width="90%" height="200" frameborder="0"
+        <iframe style="border-radius:12px" [src]="spotifyUrl" width="90%" height="260" frameborder="0"
           allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
           loading="lazy">
         </iframe>
@@ -220,13 +220,13 @@
                     Cancelar
                   </span>
                 </button>
-                <button (click)="enviarReport(idComentarioSelecionado); closeModalDenuncia()" 
-                class="w-36 rounded-full relative inline-flex items-center justify-center p-0.5 overflow-hidden text-sm font-medium text-gray-900 group bg-gradient-to-br from-teal-300 to-lime-300 group-hover:from-teal-300 group-hover:to-lime-300 dark:text-white dark:hover:text-gray-900 focus:ring-4 focus:outline-none focus:ring-lime-200 dark:focus:ring-lime-800">
-                <span
-                  class="w-36 rounded-full relative px-5 py-2.5 transition-all ease-in duration-75 bg-white dark:bg-gray-900 group-hover:bg-opacity-0">
-                  Enviar
-                </span>
-              </button>
+                <button (click)="enviarReport(idComentarioSelecionado); closeModalDenuncia()"
+                  class="w-36 rounded-full relative inline-flex items-center justify-center p-0.5 overflow-hidden text-sm font-medium text-gray-900 group bg-gradient-to-br from-teal-300 to-lime-300 group-hover:from-teal-300 group-hover:to-lime-300 dark:text-white dark:hover:text-gray-900 focus:ring-4 focus:outline-none focus:ring-lime-200 dark:focus:ring-lime-800">
+                  <span
+                    class="w-36 rounded-full relative px-5 py-2.5 transition-all ease-in duration-75 bg-white dark:bg-gray-900 group-hover:bg-opacity-0">
+                    Enviar
+                  </span>
+                </button>
               </div>
             </div>
           </div>

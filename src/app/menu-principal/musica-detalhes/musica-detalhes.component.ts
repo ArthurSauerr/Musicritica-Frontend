@@ -75,6 +75,7 @@ export class MusicaDetalhesComponent implements OnInit {
   totalDeComentariosAssociados: number;
   nomePlaylistNova: string = "";
   maxLength: number = 34;
+  maxLengthComentario: number = 1500;
   idPlaylistSelecionada: number;
 
   musica: Item;
@@ -150,7 +151,7 @@ export class MusicaDetalhesComponent implements OnInit {
       }
     }
 
-    this.musica = history.state.musica;
+    this.musica = history.state.musica; 
     this.artista = this.musica.album.artists[0].name;
     console.log('música:', this.artista);
     this.spotifyUrl = this.getSpotifyEmbedUrl(this.musica.id);
@@ -173,6 +174,9 @@ export class MusicaDetalhesComponent implements OnInit {
 
   get characterCount(): string {
     return `${this.nomePlaylistNova.length}/${this.maxLength}`;
+  }
+  get characterCountComentario(): string {
+    return `${this.comentario.length}/${this.maxLengthComentario}`;
   }
 
   wrapText(text: string, maxLength: number): string {

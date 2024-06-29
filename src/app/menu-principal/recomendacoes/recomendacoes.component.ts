@@ -40,6 +40,8 @@ export class RecomendacoesComponent implements OnInit, OnDestroy {
   itensRecomendadosGenero2: ItemBuscado[] = [];
   itensRecomendadosGenero3: ItemBuscado[] = [];
 
+  musicaParaNavegar: Item[] = [];
+
   genero1: string = '';
   genero2: string = '';
   genero3: string = '';
@@ -353,7 +355,18 @@ export class RecomendacoesComponent implements OnInit, OnDestroy {
     return false;
   }
 
-  avancar(musica: ItemBuscado): void {
+  buscarMusicaPorId(id_spotify: string): void {
+    this.spotifyService.buscarMusicaPorId(id_spotify).subscribe(
+      (data: Item) => {
+        this.avancar(data);
+      },
+      (error) => {
+        console.error('Ocorreu um erro ao buscar as músicas:', error);
+      }
+    );
+  }
+
+  avancar(musica: Item): void {
     this.router.navigate(['/detalhes'], { state: { musica: musica } });
   }
 }
