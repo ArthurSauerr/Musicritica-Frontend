@@ -96,15 +96,21 @@ export class UsuarioPerfilComponent implements OnInit {
     const idUsuario = this.dadosCompartilhadosService.getIdUsuario();
     if (this.pageId && idUsuario) {
       if (idUsuario != +this.pageId) {
-        const botoesPlaylistId = ['dropdown-playlist', 'excluir-musica'];
+        // Obtenha todos os elementos com as classes específicas
+        const botoesPlaylist = document.getElementsByClassName("dropdown-playlist");
+        const botoesExcluirMusica = document.getElementsByClassName("excluir-musica");
 
-        botoesPlaylistId.forEach(id => {
-          const element = document.getElementById(id);
-          if(element){
-            element.style.visibility = 'hidden';
-          }
-        })
+        // Oculte todos os elementos com a classe 'dropdown-playlist'
+        for (let i = 0; i < botoesPlaylist.length; i++) {
+          const element = botoesPlaylist[i] as HTMLElement;
+          element.style.visibility = 'hidden';
+        }
 
+        // Oculte todos os elementos com a classe 'excluir-musica'
+        for (let i = 0; i < botoesExcluirMusica.length; i++) {
+          const element = botoesExcluirMusica[i] as HTMLElement;
+          element.style.visibility = 'hidden';
+        }
       }
     }
   }
@@ -306,10 +312,12 @@ export class UsuarioPerfilComponent implements OnInit {
     this.playListService.excluirMusicaPlaylist(idPlaylist, id_spotify).subscribe({
       next: (response) => {
         console.log(response);
-        // Adicione a lógica para remover a música da lista localmente, se necessário
+        this.alertaService.exibirAlerta('alertaMusica');
+        this.fecharModal();
       },
       error: (error) => {
         console.error('Erro ao excluir música:', error);
+        this.alertaService.exibirAlerta('alertaMusicaErro');
       }
     });
   }
