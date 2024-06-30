@@ -32,13 +32,13 @@ export class UsuarioPerfilComponent implements OnInit {
     private cdr: ChangeDetectorRef,
     private alertaService: AlertaServiceService,
     private avaliacaoService: AvaliacaoService,
-  ) {}
+  ) { }
 
   conteudoSelecionado: string | null = null;
   novaPlaylist: Playlist = new Playlist();
   playlistsDoUsuario: Playlist[];
   avaliacoes: Avaliacao[];
-  musicasAvaliadas =  new ListaTracksSpotify();
+  musicasAvaliadas = new ListaTracksSpotify();
   playlistDescobertas = new Playlist();
 
   mostrarDropdown: { [key: number]: boolean } = {};
@@ -66,7 +66,7 @@ export class UsuarioPerfilComponent implements OnInit {
 
   novoNomePlaylist: string;
 
-  playlistSelecionada: Playlist | null = null;
+  playlistSelecionada: Playlist;
   idPlaylistSelecionada: number;
   trackIdSelecionada: string;
 
@@ -96,17 +96,14 @@ export class UsuarioPerfilComponent implements OnInit {
     const idUsuario = this.dadosCompartilhadosService.getIdUsuario();
     if (this.pageId && idUsuario) {
       if (idUsuario != +this.pageId) {
-        // Obtenha todos os elementos com as classes específicas
         const botoesPlaylist = document.getElementsByClassName("dropdown-playlist");
         const botoesExcluirMusica = document.getElementsByClassName("excluir-musica");
 
-        // Oculte todos os elementos com a classe 'dropdown-playlist'
         for (let i = 0; i < botoesPlaylist.length; i++) {
           const element = botoesPlaylist[i] as HTMLElement;
           element.style.visibility = 'hidden';
         }
 
-        // Oculte todos os elementos com a classe 'excluir-musica'
         for (let i = 0; i < botoesExcluirMusica.length; i++) {
           const element = botoesExcluirMusica[i] as HTMLElement;
           element.style.visibility = 'hidden';
@@ -170,31 +167,31 @@ export class UsuarioPerfilComponent implements OnInit {
 
   buscarAvaliacoesPorIdUsuario(idUsuario: number): void {
     this.avaliacaoService.buscarAvaliacoesPorIdUsuario(idUsuario).subscribe(
-        (data: Avaliacao[]) => {
-          this.avaliacoes = data;
-        },
-        (error) => {
-          console.error(
-            'Ocorreu um erro ao buscar as musicas de descobertas:',
-            error
-          );
-        }
-      );
+      (data: Avaliacao[]) => {
+        this.avaliacoes = data;
+      },
+      (error) => {
+        console.error(
+          'Ocorreu um erro ao buscar as musicas de descobertas:',
+          error
+        );
+      }
+    );
   }
 
   buscarMusicasUsuario(idUsuario: number): void {
     this.avaliacaoService.buscarMusicasUsuario(idUsuario).subscribe(
-        (data: ListaTracksSpotify) => {
-          this.musicasAvaliadas = data;
-          console.log("musicas avaliadas: " + this.musicasAvaliadas)
-        },
-        (error) => {
-          console.error(
-            'Ocorreu um erro ao buscar as musicas de descobertas:',
-            error
-          );
-        }
-      );
+      (data: ListaTracksSpotify) => {
+        this.musicasAvaliadas = data;
+        console.log("musicas avaliadas: " + this.musicasAvaliadas)
+      },
+      (error) => {
+        console.error(
+          'Ocorreu um erro ao buscar as musicas de descobertas:',
+          error
+        );
+      }
+    );
   }
 
   buscarTodasMusicasDaPlaylist(id: number): void {
@@ -311,6 +308,8 @@ export class UsuarioPerfilComponent implements OnInit {
 
     this.playListService.excluirMusicaPlaylist(idPlaylist, id_spotify).subscribe({
       next: (response) => {
+        
+        this.buscarTodasMusicasDaPlaylist(idPlaylist);
         console.log(response);
         this.alertaService.exibirAlerta('alertaMusica');
         this.fecharModal();
@@ -363,10 +362,18 @@ export class UsuarioPerfilComponent implements OnInit {
   }
 
   excluirPlaylist(): void {
-    if(this.playlistSelecionada) {
+    if (this.playlistSelecionada) {
       this.playListService.excluirPlaylist(this.playlistSelecionada.id).subscribe(
         (response) => {
-          this.fecharModal();
+          this.buscarTodasMusicasDaPlaylist(this.playlistSelecionada?.id)
+          this.usuarioService.getToken();
+          this.route.paramMap.subscribe((params) => {
+            this.pageId = params.get('id');
+            if (this.pageId) {
+              this.buscarPlaylistsPorIdUsuario(+this.pageId);           
+            }
+            console.log('Id da pagina:', this.pageId);
+          }); this.fecharModal();
           this.alertaService.exibirAlerta('playlistExcluirSucesso');
           console.log('Playlist excluida com sucesso');
         },
@@ -389,7 +396,7 @@ export class UsuarioPerfilComponent implements OnInit {
       const file = (event.target as HTMLInputElement).files?.[0];
       if (file) {
         const validTypes = ['image/png', 'image/jpg', 'image/jpeg'];
-        if(validTypes.includes(file.type)){
+        if (validTypes.includes(file.type)) {
           if (tipo === 'perfil') {
             this.novaImagemPerfil = file;
             this.previsualizarImagem('perfil', file);
@@ -455,7 +462,7 @@ export class UsuarioPerfilComponent implements OnInit {
   }
 
   excluirPerfil() {
-    if(this.usuario){
+    if (this.usuario) {
       this.usuarioService.excluirUsuario(this.usuario.id).subscribe(
         (response => {
           console.log('Usuario excluido com sucesso');

@@ -26,7 +26,7 @@
       Músicas
     </p>
     <div class="ml-auto "></div>
-    <p class="custom-href font-semibold cursor-pointer" (click)="addOfsset()" >
+    <p class="custom-href font-semibold cursor-pointer" (click)="addOfsset()" *ngIf="usuarios.length >= 10">
       Não encontrou? Próximo ->
     </p>
   </div>

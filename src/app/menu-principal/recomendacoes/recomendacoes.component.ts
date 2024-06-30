@@ -265,12 +265,34 @@ export class RecomendacoesComponent implements OnInit, OnDestroy {
     localStorage.setItem('genero3', this.genero3);
   }
 
+  private capitalizeFirstLetter(str: string): string {
+    return str.charAt(0).toUpperCase() + str.slice(1).toLowerCase();
+  }
+  
   carregarGenerosDoLocalStorage(): void {
-    const genero1 = localStorage.getItem('genero1');
-    const genero2 = localStorage.getItem('genero2');
-    const genero3 = localStorage.getItem('genero3');
-
+    let genero1 = localStorage.getItem('genero1');
+    let genero2 = localStorage.getItem('genero2');
+    let genero3 = localStorage.getItem('genero3');
+  
     if (genero1 && genero2 && genero3) {
+      if (genero1.toLowerCase() === "brazil") {
+        genero1 = "Brasil";
+      } else if (this.generosBrasileiros.includes(genero1.toLowerCase())) {
+        genero1 = this.capitalizeFirstLetter(genero1);
+      }
+  
+      if (genero2.toLowerCase() === "brazil") {
+        genero2 = "Brasil";
+      } else if (this.generosBrasileiros.includes(genero2.toLowerCase())) {
+        genero2 = this.capitalizeFirstLetter(genero2);
+      }
+  
+      if (genero3.toLowerCase() === "brazil") {
+        genero3 = "Brasil";
+      } else if (this.generosBrasileiros.includes(genero3.toLowerCase())) {
+        genero3 = this.capitalizeFirstLetter(genero3);
+      }
+  
       this.genero1 = genero1;
       this.genero2 = genero2;
       this.genero3 = genero3;

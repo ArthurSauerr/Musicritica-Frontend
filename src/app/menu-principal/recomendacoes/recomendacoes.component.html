@@ -60,7 +60,7 @@
         <a class="mt-6 arrow__btn" (click)="moveCarousel('currentIndexPlaylist2', -1)">‹</a>
         <div class="item"
           *ngFor="let item of itensRecomendadosGenero2.slice(currentIndexPlaylist2, currentIndexPlaylist2 + 5)">
-          <div class="carousel-item">
+          <div class="carousel-item" (click)="buscarMusicaPorId(item.id)">
             <img class="h-65 rounded-lg" [src]="item.images[1].url" alt="Describe Image">
           </div>
         </div>
@@ -83,7 +83,7 @@
         <a class="mt-6 arrow__btn" (click)="moveCarousel('currentIndexPlaylist3', -1)">‹</a>
         <div class="item"
           *ngFor="let item of itensRecomendadosGenero3.slice(currentIndexPlaylist3, currentIndexPlaylist3 + 5)">
-          <div class="carousel-item">
+          <div class="carousel-item" (click)="buscarMusicaPorId(item.id)">
             <img class="h-65 rounded-lg" [src]="item.images[1].url" alt="Describe Image">
           </div>
         </div>

@@ -33,26 +33,24 @@
         <h1 class="musica-info text-white font-semibold text-5xl ml-8">
           Monte suas playlists com suas músicas preferidas.
         </h1>
-        <div class="mt-24 ml-16">
-          <div class="custom-input relative ml-20" *ngFor="let track of topCharts.slice(0, 3)">
-            <div class="flex items-end">
-              <img [src]="track.album.images[1].url" alt="{{ track.name }}" class="mb-6 rounded-lg max-w-36 h-36 mr-4">
-              <div class="text-left mb-6">
-                <h1 class="text-1xl font-bold mb-4 musica-info">{{ track.name }}</h1>
+        <button class="musica-info text-white font-semibold text-2xl ml-96 mt-16 custom-input">
+          Top Brasil!
+        </button>
+        <div class="mt-12">
+          <div class="custom-input relative ml-16" *ngFor="let track of topChartsYoutube.slice(0, 4); let i = index">
+            <div class="flex">
+              <div class="mt-20 mr-4">
+                <span class="musica-info text-2xl" style="line-height: 0.6;">{{ i === 0 ? '1' : i + 1 }}</span><sup
+                  class="musica-info text-2xl" style="font-size: 0.8rem;">o</sup>
+              </div>
+              <img [src]="track.album.images[1].url" alt="{{ track.name }}" (click)="avancar(track)"
+                class="mb-6 rounded-lg max-w-36 h-36 mr-4 mt-6"  style="cursor: pointer;">
+              <div class="text-left mt-20">
+                <h1 class="text-1xl font-bold mb-2 musica-info">{{ track.name }}</h1>
                 <h2 class="text-1xl font-bold musica-info">{{ track.album.name }}</h2>
               </div>
             </div>
-            <div class="absolute top-0 right-0">
-              <button
-                class="inline-flex items-center p-2 text-sm font-medium text-center text-gray-500 dark:text-gray-400 rounded-lg focus:ring-4 focus:outline-none dark:hover:bg-gray-200 dark:focus:ring-gray-600"
-                type="button">
-                <svg class="w-6 h-6" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor"
-                  viewBox="0 0 16 3">
-                  <path
-                    d="M2 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3Zm6.041 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM14 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3Z" />
-                </svg>
-                <span class="sr-only">Comment settings</span>
-              </button>
+            <div class="absolute top-0 right-0 mt-10">
               <div id="dropdownComment1"
                 class="mt-4 w-36 bg-white rounded divide-y divide-gray-100 shadow dark:bg-gray-700 dark:divide-gray-600">
               </div>
@@ -78,11 +76,11 @@
                     <path
                       d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z" />
                   </svg>
-                  <svg class="w-4 h-4 ms-1 text-gray-300 dark:text-gray-500" aria-hidden="true"
-                    xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 22 20">
-                    <path
-                      d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z" />
-                  </svg>
+                  <svg class="w-4 h-4 text-yellow-300 ms-1" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                  fill="currentColor" viewBox="0 0 22 20">
+                  <path
+                    d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z" />
+                </svg>
                 </div>
               </div>
             </div>
@@ -270,7 +268,8 @@
     <ng-container *ngFor="let setor of [1, 2]">
       <section>
         <a class="mt-6 arrow__btn" (click)="moveCarousel('topChartsYoutube', -1)">‹</a>
-        <div class="item" *ngFor="let chart of topChartsYoutube.slice(currentIndexTopChartsYoutube, currentIndexTopChartsYoutube + 5)">
+        <div class="item"
+          *ngFor="let chart of topChartsYoutube.slice(currentIndexTopChartsYoutube, currentIndexTopChartsYoutube + 5)">
           <div class="carousel-item" (click)="avancar(chart)">
             <img class="h-65 rounded-lg" [src]="chart.album.images[1].url" alt="Describe Image">
           </div>
@@ -279,8 +278,8 @@
       </section>
     </ng-container>
   </div>
-  
-  
+
+
   <div class="mr-12 ml-20 mt-20 mb-10 custom-input">
     <p class="custom-href text-4xl font-semibold mb-4">
       Populares mundialmente
@@ -298,4 +297,3 @@
     </ng-container>
   </div>
 </div>
-
