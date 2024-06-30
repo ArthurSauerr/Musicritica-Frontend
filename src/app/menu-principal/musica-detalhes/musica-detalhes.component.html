@@ -136,7 +136,7 @@
     <div class="w-1/2">
       <div class="ml-14 ">
         <div class="text-2xl font-bold mb-4 musica-info">Ouça uma prévia!</div>
-        <iframe style="border-radius:12px" [src]="spotifyUrl" width="90%" height="260" frameborder="0"
+        <iframe style="border-radius:12px" [src]="spotifyUrl" width="90%" height="240" frameborder="0"
           allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
           loading="lazy">
         </iframe>
@@ -370,3 +370,15 @@
       </article>
     </div>
   </div>
+  <div class="relative">
+    <button class="musica-info custom-input ml-56 mt-16" (click)="addOfsset()" *ngIf="comentariosBuscados.length >= 5">
+      Ver mais +
+    </button>
+  </div>
+  
+  
+  
+
+
+  
+    

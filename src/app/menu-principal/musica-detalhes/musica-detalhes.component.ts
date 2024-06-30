@@ -45,6 +45,7 @@ export class MusicaDetalhesComponent implements OnInit {
   emailParam: string | undefined;
   notasPorComentario: Map<number, number> = new Map<number, number>();
   media: number;
+  showModalLerTudo = false;
 
   mostrarTextarea: boolean = false;
   showRepliesId: number | null = null;
@@ -90,6 +91,9 @@ export class MusicaDetalhesComponent implements OnInit {
 
   rating: number = 0;
   stars: number[] = [5];
+
+  limit: number = 5;
+  offset: number = 0;
 
   rate(stars: number) {
     this.rating = stars;
@@ -172,6 +176,11 @@ export class MusicaDetalhesComponent implements OnInit {
     this.buscarQuantidadePorNota();
   }
 
+  addOfsset(){
+    this.offset += 5;
+    this.buscarComentarios();
+  }
+
   get characterCount(): string {
     return `${this.nomePlaylistNova.length}/${this.maxLength}`;
   }
@@ -206,13 +215,14 @@ export class MusicaDetalhesComponent implements OnInit {
   buscarMediaPorIdMusica(): void {
     this.avaliacaoService.buscarMediaPorIdMusica(this.musica.id).subscribe(
       (data: number) => {
-        this.media = data;
+        this.media = parseFloat(data.toFixed(1));
       },
       (error) => {
         console.error('Ocorreu um erro ao buscar a média da música:', error);
       }
     );
   }
+  
 
   buscarQuantidadePorNota(): void {
     this.avaliacaoService.buscarQuantidadePorNota(this.musica.id).subscribe(
@@ -252,7 +262,8 @@ export class MusicaDetalhesComponent implements OnInit {
   }
 
   buscarComentarios(): void {
-    this.comentarioService.buscarComentarioPorIdMusica(this.musica.id).subscribe(
+    console.log("limit atual: " + this.limit + "off set atual: " + this.offset)
+    this.comentarioService.buscarComentarioPorIdMusica(this.musica.id,  this.limit, this.offset).subscribe(
       (data: Comentario[]) => {
         this.comentariosBuscados = data;
         for (let index = 0; index < data.length; index++) {
@@ -339,6 +350,7 @@ export class MusicaDetalhesComponent implements OnInit {
             this.avaliacaoService.salvar(this.novaAvaliacao).subscribe(
               (avaliacaoEnviada) => {
                 this.buscarQuantidadePorNota();
+                this.buscarMediaPorIdMusica();
                 this.alertaService.exibirAlerta('alert10')
                 console.log("avalição enviada: " + avaliacaoEnviada)
               }, error => {
@@ -426,7 +438,6 @@ export class MusicaDetalhesComponent implements OnInit {
     );
   }
 
-
   atualizarComentario(comentarioId: number): void {
     console.log("comentario: " + this.comentario);
     this.usuarioService.buscarIdPorEmail(this.emailParam).subscribe(
@@ -434,6 +445,7 @@ export class MusicaDetalhesComponent implements OnInit {
         this.comentarioSelecionado
         this.comentarioService.atualizarComentario(usuarioId, comentarioId, this.comentarioSelecionado).subscribe(
           (comentarioSalvo) => {
+            this.buscarComentarios()
             console.log('Comentário enviado com sucesso: ', comentarioSalvo);
             this.comentario = '';
             this.alertaService.exibirAlerta('alert5')
@@ -710,4 +722,10 @@ export class MusicaDetalhesComponent implements OnInit {
   closeModalDenuncia() {
     this.showModalEnviarDenuncia = false;
   }
+
+  toggleModalLerTudo() {
+    this.showModalLerTudo = !this.showModalLerTudo;
+  }
 }
+
+

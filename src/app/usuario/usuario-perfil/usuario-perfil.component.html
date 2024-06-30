@@ -114,7 +114,7 @@
             <h2 class="text-1xl font-bold musica-info">{{ track.album.name }}</h2>
           </div>
         </div>
-        <div class="absolute top-0 right-0">
+        <div class="absolute top-0 right-0" *ngIf="musicasDaPlaylist.tracks.length > 1">
           <button id="excluir-musica" (click)="excluirMusicaModal(track.id, $event)"
             class="excluir-musica inline-flex items-center p-2 text-sm font-medium text-center text-gray-500 dark:text-gray-400 rounded-lg focus:ring-4 focus:outline-none dark:hover:bg-gray-200 dark:focus:ring-gray-600"
             type="button">
@@ -127,6 +127,7 @@
         </div>
       </div>
     </div>
+    
   </div>
 
   <div *ngIf="conteudoSelecionado === 'avaliacoes'" class="mt-4">
