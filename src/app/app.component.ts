@@ -87,6 +87,7 @@ export class AppComponent {
       console.log('Email do usuario logado: ' + email);
       this.buscarUsuarioLogado(email);
     } else {
+      this.usuario == null;
       console.log('Token não encontrado.');
     }
   }

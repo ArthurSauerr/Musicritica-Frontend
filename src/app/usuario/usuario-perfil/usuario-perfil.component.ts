@@ -11,6 +11,7 @@ import { AlertaServiceService } from 'src/app/shared/service/alerta-service.serv
 import { AvaliacaoService } from 'src/app/shared/service/avaliacao.service';
 import { Avaliacao } from 'src/app/shared/model/Avaliacao';
 import { Router, NavigationEnd } from '@angular/router';
+import { delay } from 'rxjs';
 
 @Component({
   selector: 'app-usuario-perfil',
@@ -80,16 +81,29 @@ export class UsuarioPerfilComponent implements OnInit {
         this.buscarPlaylistsPorIdUsuario(+this.pageId);
         this.buscarPlaylistDescobertas(+this.pageId);
         this.buscarAvaliacoesPorIdUsuario(+this.pageId);
-        this.buscarMusicasUsuario(+this.pageId);
-
+        //this.buscarMusicasUsuario(+this.pageId);
         this.dadosCompartilhadosService.setPageId(this.pageId);
       }
       console.log('Id da pagina:', this.pageId);
     });
+    this.observarMudancasDOM();
   }
 
   ngAfterViewInit() {
     this.esconderBotoes();
+  }
+
+  observarMudancasDOM() {
+    const observer = new MutationObserver((mutations) => {
+      mutations.forEach((mutation) => {
+        if (mutation.type === 'childList' && mutation.addedNodes.length > 0) {
+          this.esconderBotoes();
+        }
+      });
+    });
+
+    const config = { childList: true, subtree: true };
+    observer.observe(document.body, config);
   }
 
   esconderBotoes() {
@@ -120,7 +134,10 @@ export class UsuarioPerfilComponent implements OnInit {
     this.usuarioService.buscarUsuarioPorId(idUsuario).subscribe(
       (usuario: Usuario) => {
         this.usuario = usuario;
-        console.log('Usuario buscado:', usuario);
+        console.log('Usuario buscado para preencher informações de perfil:', usuario);
+        if(usuario == null) {
+          this.router.navigate(['/']);
+        }
       },
       (error) => {
         console.error('Erro ao buscar usuário:', error);
@@ -153,7 +170,11 @@ export class UsuarioPerfilComponent implements OnInit {
       .subscribe(
         (data: Playlist) => {
           this.playlistDescobertas = data;
-          this.buscarTodasMusicasDaPlaylistDescobertas(idUsuario);
+          if(data.musicaSpotifyList.length == 0){
+            console.log('Esse usuário não tem músicas descobertas.');
+          } else {
+            this.buscarTodasMusicasDaPlaylistDescobertas(idUsuario);
+          }
           console.log(data);
         },
         (error) => {
@@ -169,6 +190,11 @@ export class UsuarioPerfilComponent implements OnInit {
     this.avaliacaoService.buscarAvaliacoesPorIdUsuario(idUsuario).subscribe(
       (data: Avaliacao[]) => {
         this.avaliacoes = data;
+        if(data.length == 0){
+          console.log('Esse usuário não tem avaliações');
+        } else {
+          this.buscarMusicasUsuario(idUsuario);
+        }
       },
       (error) => {
         console.error(
@@ -187,7 +213,7 @@ export class UsuarioPerfilComponent implements OnInit {
       },
       (error) => {
         console.error(
-          'Ocorreu um erro ao buscar as musicas de descobertas:',
+          'Ocorreu um erro ao buscar as musicas avaliadas:',
           error
         );
       }
@@ -222,14 +248,6 @@ export class UsuarioPerfilComponent implements OnInit {
       .buscarTodasMusicasDaPlaylistDescobertas(usuarioId)
       .subscribe(
         (data: ListaTracksSpotify) => {
-          if (data.tracks && data.tracks.length > 0) {
-            const primeiraMusica = data.tracks[0];
-            const imageUrl =
-              primeiraMusica.album.images.length > 0
-                ? primeiraMusica.album.images[0].url
-                : '';
-            //this.primeirasMusicasDasPlaylists[id] = imageUrl;
-          }
           this.musicasDaPlaylistDescobertas = data;
         },
         (error) => {
@@ -308,7 +326,7 @@ export class UsuarioPerfilComponent implements OnInit {
 
     this.playListService.excluirMusicaPlaylist(idPlaylist, id_spotify).subscribe({
       next: (response) => {
-        
+
         this.buscarTodasMusicasDaPlaylist(idPlaylist);
         console.log(response);
         this.alertaService.exibirAlerta('alertaMusica');
@@ -370,7 +388,7 @@ export class UsuarioPerfilComponent implements OnInit {
           this.route.paramMap.subscribe((params) => {
             this.pageId = params.get('id');
             if (this.pageId) {
-              this.buscarPlaylistsPorIdUsuario(+this.pageId);           
+              this.buscarPlaylistsPorIdUsuario(+this.pageId);
             }
             console.log('Id da pagina:', this.pageId);
           }); this.fecharModal();
@@ -464,12 +482,15 @@ export class UsuarioPerfilComponent implements OnInit {
   excluirPerfil() {
     if (this.usuario) {
       this.usuarioService.excluirUsuario(this.usuario.id).subscribe(
-        (response => {
+        (response) => {
           console.log('Usuario excluido com sucesso');
           this.usuarioService.deleteToken();
-          this.router.navigate(['']);
-        })
-      )
+          window.location.reload();
+        },
+        (error) => {
+          console.error('Erro ao excluir usuario:', error);
+        }
+      );
     }
   }
 }
