@@ -110,13 +110,17 @@ export class AdmDenunciaComponent implements OnInit {
 
   buscarDenunciaPorData(event: Event): void {
     event.preventDefault();
-    const dataInicio = this.startDate ? this.formatDate(this.startDate) : '';
-    const dataFim = this.endDate ? this.formatDate(this.endDate) : '';
-
+    const dataInicio = this.startDate ? this.startDate : '';
+    const dataFim = this.endDate ? this.endDate : '';
+  
+    console.log(dataInicio);
+    console.log(dataFim);
+  
     this.denunciaService.buscarDenunciaPorData(dataInicio, dataFim).subscribe(
       (data: Denuncia[]) => {
         this.denuncias = data;
         this.atualizarPaginas();  // Atualiza a paginação após a busca
+        console.log(this.denuncias);
       },
       (error: any) => {
         console.error('Erro ao buscar denúncias por data:', error);
@@ -124,14 +128,6 @@ export class AdmDenunciaComponent implements OnInit {
         // Tratar o erro conforme necessário, exibir mensagem de erro, etc.
       }
     );
-  }
-
-  formatDate(date: string): string {
-    const parts = date.split('/');
-    if (parts.length === 3) {
-      return `${parts[2]}-${parts[1]}-${parts[0]}`;
-    }
-    return date;
   }
 
   openModal(comentario: String) {
