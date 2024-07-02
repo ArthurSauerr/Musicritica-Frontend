@@ -27,12 +27,11 @@ export class UsuarioLoginComponent {
   login() {
     this.usuarioService.login({ email: this.email, senha: this.senha }).subscribe(
       (response) => {
-        // Verifica se a resposta contém o token JWT
         if (response.token) {
           this.usuarioService.armazenarTokenJWT(response.token);
           this.router.navigate(['/']);
           console.log('Login bem-sucedido');
-          
+
           this.appComponent.verificarLogin();
         } else {
           this.alertaService.exibirAlerta('alertaLogin');
