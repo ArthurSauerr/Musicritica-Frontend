@@ -76,7 +76,7 @@ export class UsuarioPerfilComponent implements OnInit {
     this.route.paramMap.subscribe((params) => {
       this.pageId = params.get('id');
       if (this.pageId) {
-
+        this.limparDadosMusicas();
         this.buscarUsuario(+this.pageId);
         this.buscarPlaylistsPorIdUsuario(+this.pageId);
         this.buscarPlaylistDescobertas(+this.pageId);
@@ -91,6 +91,12 @@ export class UsuarioPerfilComponent implements OnInit {
 
   ngAfterViewInit() {
     this.esconderBotoes();
+  }
+
+  limparDadosMusicas(): void {
+    this.musicasDaPlaylist = new ListaTracksSpotify();
+    this.musicasDaPlaylistDescobertas = new ListaTracksSpotify();
+    this.musicasAvaliadas = new ListaTracksSpotify();
   }
 
   observarMudancasDOM() {
@@ -108,7 +114,7 @@ export class UsuarioPerfilComponent implements OnInit {
 
   esconderBotoes() {
     const idUsuario = this.dadosCompartilhadosService.getIdUsuario();
-    if (this.pageId && idUsuario) {
+    if (this.pageId && idUsuario || idUsuario == null && this.pageId) {
       if (idUsuario != +this.pageId) {
         const botoesPlaylist = document.getElementsByClassName("dropdown-playlist");
         const botoesExcluirMusica = document.getElementsByClassName("excluir-musica");
