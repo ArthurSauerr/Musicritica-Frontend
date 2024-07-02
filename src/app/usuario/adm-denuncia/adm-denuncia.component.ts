@@ -117,10 +117,10 @@ export class AdmDenunciaComponent implements OnInit {
     event.preventDefault();
     const dataInicio = this.startDate ? this.startDate : '';
     const dataFim = this.endDate ? this.endDate : '';
-  
+
     console.log(dataInicio);
     console.log(dataFim);
-  
+
     this.denunciaService.buscarDenunciaPorData(dataInicio, dataFim).subscribe(
       (data: Denuncia[]) => {
         this.denuncias = data;
@@ -166,7 +166,7 @@ export class AdmDenunciaComponent implements OnInit {
   }
 
   fecharModal(): void {
-    this.isModalExcluirComentarioOpen = false; 
+    this.isModalExcluirComentarioOpen = false;
   }
 
   excluirPlaylistModal(comentario: Comentario, usuario: Usuario, event: Event) {
@@ -187,6 +187,26 @@ export class AdmDenunciaComponent implements OnInit {
     const wb: XLSX.WorkBook = XLSX.utils.book_new();
     XLSX.utils.book_append_sheet(wb, ws, 'Denúncias');
     XLSX.writeFile(wb, 'relatorio_denuncias.xlsx');
+  }
+
+  gerarRelatorioDenunciasFechadas() {
+    this.denunciaService.getDenunciasFechadas().subscribe(
+      denuncias => {
+        const ws: XLSX.WorkSheet = XLSX.utils.json_to_sheet(denuncias.map(denuncia => ({
+          'Nome': denuncia.usuarioReportado.nome,
+          'Denunciado por': denuncia.usuario.nome,
+          'Comentário': denuncia.comentario.comentario,
+          'Status': denuncia.status,
+          'Data': denuncia.dt_denuncia
+        })));
+        const wb: XLSX.WorkBook = XLSX.utils.book_new();
+        XLSX.utils.book_append_sheet(wb, ws, 'Denuncias Fechadas');
+        XLSX.writeFile(wb, 'denuncias_fechadas.xlsx');
+      },
+      error => {
+        console.error('Erro ao buscar denuncias:', error);
+      }
+    );
   }
 
   gerarRelatorioUsuarios() {
@@ -213,7 +233,7 @@ export class AdmDenunciaComponent implements OnInit {
     const fim = this.paginaAtual * this.itensPorPagina;
     this.denunciasPaginadas = this.denuncias.slice(inicio, fim); // Usa um array temporário para a paginação
   }
-  
+
 
   paginaAnterior() {
     if (this.paginaAtual > 1) {

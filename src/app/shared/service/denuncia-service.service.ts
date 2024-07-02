@@ -37,4 +37,8 @@ export class DenunciaService {
   buscarMusicaComMedia4(): Observable<MusicaSpotify[]> {
     return this.httpClient.get<MusicaSpotify[]>(`${this.denunciaUrl}/buscarPorMedia4`);
   }
+
+  getDenunciasFechadas(): Observable<Denuncia[]> {
+    return this.httpClient.get<Denuncia[]>(`${this.denunciaUrl}/buscarDenunciasFechadas`);
+  }
 }
