@@ -107,7 +107,7 @@
     </div>
     <div class="mt-32">
       <div class="custom-music mb-6 relative" *ngFor="let track of musicasDaPlaylist.tracks; let i = index">
-        <div class="flex items-end">
+        <div class="flex items-end cursor-pointer" (click)="buscarMusicaPorId(track.id)">
           <img [src]="track.album.images[1].url" alt="{{ track.name }}" class="mb-2 rounded-lg w-40 h-40 mr-4">
           <div class="text-left mb-2">
             <h1 class="text-3xl font-bold mb-4 musica-info">{{ track.name }}</h1>
@@ -130,7 +130,7 @@
   </div>
 
   <div *ngIf="conteudoSelecionado === 'avaliacoes'" class="mt-6">
-    <div *ngFor="let musica of musicasAvaliadas.tracks" class="custom-music mb-6 relative">
+    <div *ngFor="let musica of musicasAvaliadas.tracks" class="custom-music mb-6 relative cursor-pointer" (click)="buscarMusicaPorId(musica.id)">
       <div class="flex items-end">
         <img [src]="musica.album.images[1].url" alt="{{ musica.name }}" class="mb-6 rounded-lg w-40 h-40 mr-4">
         <div class="text-left mb-6">
@@ -143,8 +143,8 @@
 
   <div *ngIf="conteudoSelecionado === 'descobertas'" class="text-white mt-6 mb-6 overflow-hidden">
     <div>
-      <div class="custom-music mb-6 relative" *ngFor="let track of musicasDaPlaylistDescobertas.tracks">
-        <div class="flex items-end">
+      <div class="custom-music mb-6 relative cursor-pointer" *ngFor="let track of musicasDaPlaylistDescobertas.tracks">
+        <div class="flex items-end" (click)="buscarMusicaPorId(track.id)">
           <img [src]="track.album.images[1].url" alt="{{ track.name }}" class="mb-6 rounded-lg w-40 h-40 mr-4">
           <div class="text-left mb-6">
             <h1 class="text-3xl font-bold mb-4 musica-info">{{ track.name }}</h1>

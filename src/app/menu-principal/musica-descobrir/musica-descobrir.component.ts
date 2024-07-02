@@ -12,6 +12,7 @@ import { PlaylistService } from 'src/app/shared/service/playlist.service';
 import { UsuarioService } from 'src/app/shared/service/usuario.service';
 import { jwtDecode } from 'jwt-decode';
 import { Usuario } from 'src/app/shared/model/Usuario';
+import { AlertaServiceService } from 'src/app/shared/service/alerta-service.service';
 
 @Component({
   selector: 'app-musica-descobrir',
@@ -20,7 +21,15 @@ import { Usuario } from 'src/app/shared/model/Usuario';
 })
 export class MusicaDescobrirComponent implements OnInit {
 
-  constructor(private usuarioService: UsuarioService, private renderer: Renderer2, private sanitizer: DomSanitizer, private spotifyService: MenuPrincipalService, private dadosCompartilhadosService: DadosCompartilhadosService, private playlistService: PlaylistService) { }
+  constructor(
+    private usuarioService: UsuarioService,
+    private renderer: Renderer2,
+    private sanitizer: DomSanitizer,
+    private spotifyService: MenuPrincipalService,
+    private dadosCompartilhadosService: DadosCompartilhadosService,
+    private playlistService: PlaylistService,
+    private alertaService: AlertaServiceService
+  ) { }
 
   isClicked: boolean = false;
   album: AlbumDescobrir;
@@ -30,8 +39,8 @@ export class MusicaDescobrirComponent implements OnInit {
   idMusicaSpotify: string | null = null;
   nomeArtista: string | null = null;
   musicaEartista: string | null = null;
-  generoPrimario: string;
-  generoSecundario: string;
+  generoPrimario: string | null;
+  generoSecundario: string | null;
   emailParam: string | undefined;
   usuarioLogado: Usuario = new Usuario();
 
@@ -73,11 +82,16 @@ export class MusicaDescobrirComponent implements OnInit {
   }
 
   selecionarGenero(genero: string): void {
-    if (!this.generoPrimario) {
+    if (this.generoPrimario === genero) {
+      this.generoPrimario = null;
+    } else if (this.generoSecundario === genero) {
+      this.generoSecundario = null;
+    } else if (!this.generoPrimario) {
       this.generoPrimario = genero;
     } else if (!this.generoSecundario) {
       this.generoSecundario = genero;
     } else {
+      this.generoSecundario = genero;
     }
   }
 
@@ -85,7 +99,7 @@ export class MusicaDescobrirComponent implements OnInit {
     console.log("genero 1: " + this.generoPrimario)
     console.log("genero 2: " + this.generoSecundario)
 
-    this.spotifyService.getRecommendation(this.generoPrimario, this.generoSecundario).subscribe(
+    this.spotifyService.getRecommendation(this.generoPrimario!, this.generoSecundario!).subscribe(
       (data: TrackData) => {
         console.log(data);
         const musicId = data.tracks[0].album.id;
@@ -94,6 +108,7 @@ export class MusicaDescobrirComponent implements OnInit {
         this.buscarAlbum();
       },
       (error) => {
+        this.alertaService.exibirAlerta('alert18')
         console.error('Ocorreu um erro ao buscar o id do álbum:', error);
       }
     );
@@ -111,11 +126,13 @@ export class MusicaDescobrirComponent implements OnInit {
         console.log(data);
         this.idMusicaSpotify = data.tracks.items[0].id;
         console.log("id da primeira musica do album: " + this.albumBuscado.tracks.items[0].id);
-        
-   
+
+
         this.enviarMusicaParaDescobertas(this.idMusicaSpotify, this.idMusicaSpotify);
       },
       (error) => {
+        this.alertaService.exibirAlerta('alert18')
+
         console.error('Ocorreu um erro ao buscar as músicas:', error);
       }
     );

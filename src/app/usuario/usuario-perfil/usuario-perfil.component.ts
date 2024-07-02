@@ -12,6 +12,8 @@ import { AvaliacaoService } from 'src/app/shared/service/avaliacao.service';
 import { Avaliacao } from 'src/app/shared/model/Avaliacao';
 import { Router, NavigationEnd } from '@angular/router';
 import { delay } from 'rxjs';
+import { Item } from 'src/app/shared/model/Item';
+import { MenuPrincipalService } from 'src/app/shared/service/menu-principal.service';
 
 @Component({
   selector: 'app-usuario-perfil',
@@ -33,6 +35,7 @@ export class UsuarioPerfilComponent implements OnInit {
     private cdr: ChangeDetectorRef,
     private alertaService: AlertaServiceService,
     private avaliacaoService: AvaliacaoService,
+    private spotifyService: MenuPrincipalService
   ) { }
 
   conteudoSelecionado: string | null = null;
@@ -498,5 +501,19 @@ export class UsuarioPerfilComponent implements OnInit {
         }
       );
     }
+  }
+
+  buscarMusicaPorId(id_spotify: string): void {
+    this.spotifyService.buscarMusicaPorId(id_spotify).subscribe(
+      (data: Item) => {
+        this.avancar(data);
+      },
+      (error) => {
+        console.error('Ocorreu um erro ao buscar as músicas:', error);
+      }
+    );
+  }
+  avancar(musica: Item): void {
+    this.router.navigate(['/detalhes'], { state: { musica: musica } });
   }
 }

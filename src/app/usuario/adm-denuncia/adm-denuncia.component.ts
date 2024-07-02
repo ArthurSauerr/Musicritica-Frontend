@@ -8,6 +8,7 @@ import { of } from 'rxjs';
 import { Comentario } from 'src/app/shared/model/Comentario';
 import { ComentarioServiceService } from 'src/app/shared/service/comentario-service.service';
 import * as XLSX from 'xlsx';
+import { AlertaServiceService } from 'src/app/shared/service/alerta-service.service';
 
 @Component({
   selector: 'app-adm-denuncia',
@@ -22,7 +23,10 @@ export class AdmDenunciaComponent implements OnInit {
   public startDate: string = '';
   public endDate: string = '';
   public usuarios: Usuario[] = [];
+  usuarioSelecionado: Usuario;
+  comentarioSelecionadoParaDeletar: Comentario;
 
+  isModalExcluirComentarioOpen: boolean;
   showModalDenuncia: boolean = false;
   comentarioSelecionado: String;
   paginaAtual: number = 1;
@@ -32,7 +36,8 @@ export class AdmDenunciaComponent implements OnInit {
   constructor(
     private denunciaService: DenunciaService,
     private usuarioService: UsuarioService,
-    private comentarioService: ComentarioServiceService
+    private comentarioService: ComentarioServiceService,
+    private alertaService: AlertaServiceService
   ) {}
 
   ngOnInit(): void {
@@ -152,11 +157,23 @@ export class AdmDenunciaComponent implements OnInit {
   deletarComentario(comentario: Comentario, usuario: Usuario) {
     console.log(comentario);
     this.comentarioService.deletarComentario(usuario.id, comentario.id).subscribe(response => {
+      this.alertaService.exibirAlerta("alertaDeletarComentario");
       console.log('Comentário deletado:', response);
       this.listarTodos();
     }, error => {
       console.error('Erro ao deletar o comentário:', error);
     });
+  }
+
+  fecharModal(): void {
+    this.isModalExcluirComentarioOpen = false; 
+  }
+
+  excluirPlaylistModal(comentario: Comentario, usuario: Usuario, event: Event) {
+    event.stopPropagation();
+    this.comentarioSelecionadoParaDeletar = comentario;
+    this.usuarioSelecionado = usuario;
+    this.isModalExcluirComentarioOpen = true;
   }
 
   gerarRelatorioDenuncias() {
