@@ -78,12 +78,13 @@
             <img src="https://i.ibb.co/BwSz8Tr/logo-removebg-preview.png" width="150" alt="" />
           </div>
           <h3 class="mb-4 text-3xl musica-selecione mb-4 font-semibold leading-normal">
-            Selecione seus gêneros preferidos!
+            Selecione até 2 gêneros preferidos!
           </h3>
           <div>
 
             <div class="h-1/5">
               <button (click)="selecionarGenero('brazil')"
+                [ngClass]="{'selected': generoPrimario === 'brazil' || generoSecundario === 'brazil'}"
                 class=" rounded-full relative inline-flex items-center justify-center p-0.5 mb-2 me-2 overflow-hidden text-sm font-medium text-gray-900 group bg-gradient-to-br from-teal-300 to-lime-300 group-hover:from-teal-300 group-hover:to-lime-300 dark:text-white dark:hover:text-gray-900 focus:ring-4 focus:outline-none focus:ring-lime-200 dark:focus:ring-lime-800">
                 <span class="rounded-full relative px-5 py-2.5 transition-all
                        ease-in duration-75 bg-white dark:bg-gray-900  group-hover:bg-opacity-0">
@@ -91,6 +92,7 @@
                 </span>
               </button>
               <button (click)="selecionarGenero('funk')"
+                [ngClass]="{'selected': generoPrimario === 'funk' || generoSecundario === 'funk'}"
                 class=" rounded-full relative inline-flex items-center justify-center p-0.5 mb-2 me-2 overflow-hidden text-sm font-medium text-gray-900 group bg-gradient-to-br from-teal-300 to-lime-300 group-hover:from-teal-300 group-hover:to-lime-300 dark:text-white dark:hover:text-gray-900 focus:ring-4 focus:outline-none focus:ring-lime-200 dark:focus:ring-lime-800">
                 <span class="rounded-full relative px-5 py-2.5 transition-all
                        ease-in duration-75 bg-white dark:bg-gray-900  group-hover:bg-opacity-0">
@@ -98,6 +100,7 @@
                 </span>
               </button>
               <button (click)="selecionarGenero('jazz')"
+                [ngClass]="{'selected': generoPrimario === 'jazz' || generoSecundario === 'jazz'}"
                 class=" rounded-full relative inline-flex items-center justify-center p-0.5 mb-2 me-2 overflow-hidden text-sm font-medium text-gray-900 group bg-gradient-to-br from-teal-300 to-lime-300 group-hover:from-teal-300 group-hover:to-lime-300 dark:text-white dark:hover:text-gray-900 focus:ring-4 focus:outline-none focus:ring-lime-200 dark:focus:ring-lime-800">
                 <span class="rounded-full relative px-5 py-2.5 transition-all
                  ease-in duration-75 bg-white dark:bg-gray-900  group-hover:bg-opacity-0">
@@ -105,6 +108,7 @@
                 </span>
               </button>
               <button (click)="selecionarGenero('metal')"
+                [ngClass]="{'selected': generoPrimario === 'metal' || generoSecundario === 'metal'}"
                 class=" rounded-full relative inline-flex items-center justify-center p-0.5 mb-2 me-2 overflow-hidden text-sm font-medium text-gray-900 group bg-gradient-to-br from-teal-300 to-lime-300 group-hover:from-teal-300 group-hover:to-lime-300 dark:text-white dark:hover:text-gray-900 focus:ring-4 focus:outline-none focus:ring-lime-200 dark:focus:ring-lime-800">
                 <span class="rounded-full relative px-5 py-2.5 transition-all
                  ease-in duration-75 bg-white dark:bg-gray-900  group-hover:bg-opacity-0">
@@ -112,6 +116,7 @@
                 </span>
               </button>
               <button (click)="selecionarGenero('indie')"
+                [ngClass]="{'selected': generoPrimario === 'indie' || generoSecundario === 'indie'}"
                 class=" rounded-full relative inline-flex items-center justify-center p-0.5 mb-2 me-2 overflow-hidden text-sm font-medium text-gray-900 group bg-gradient-to-br from-teal-300 to-lime-300 group-hover:from-teal-300 group-hover:to-lime-300 dark:text-white dark:hover:text-gray-900 focus:ring-4 focus:outline-none focus:ring-lime-200 dark:focus:ring-lime-800">
                 <span class="rounded-full relative px-5 py-2.5 transition-all
                  ease-in duration-75 bg-white dark:bg-gray-900  group-hover:bg-opacity-0">
@@ -119,22 +124,25 @@
                 </span>
               </button>
               <button (click)="selecionarGenero('soul')"
+                [ngClass]="{'selected': generoPrimario === 'soul' || generoSecundario === 'soul'}"
                 class=" rounded-full relative inline-flex items-center justify-center p-0.5 mb-2 me-2 overflow-hidden text-sm font-medium text-gray-900 group bg-gradient-to-br from-teal-300 to-lime-300 group-hover:from-teal-300 group-hover:to-lime-300 dark:text-white dark:hover:text-gray-900 focus:ring-4 focus:outline-none focus:ring-lime-200 dark:focus:ring-lime-800">
                 <span class="rounded-full relative px-5 py-2.5 transition-all
                  ease-in duration-75 bg-white dark:bg-gray-900  group-hover:bg-opacity-0">
                   Soul
                 </span>
               </button>
-              <button (click)="selecionarGenero('emo')"
+              <button (click)="selecionarGenero('hip-hop')"
+                [ngClass]="{'selected': generoPrimario === 'hip-hop' || generoSecundario === 'hip-hop'}"
                 class=" rounded-full relative inline-flex items-center justify-center p-0.5 mb-2 me-2 overflow-hidden text-sm font-medium text-gray-900 group bg-gradient-to-br from-teal-300 to-lime-300 group-hover:from-teal-300 group-hover:to-lime-300 dark:text-white dark:hover:text-gray-900 focus:ring-4 focus:outline-none focus:ring-lime-200 dark:focus:ring-lime-800">
                 <span class="rounded-full relative px-5 py-2.5 transition-all
                  ease-in duration-75 bg-white dark:bg-gray-900  group-hover:bg-opacity-0">
-                  Emo
+                  Rap
                 </span>
               </button>
             </div>
             <div class="h-1/5">
               <button (click)="selecionarGenero('minimal-techno')"
+                [ngClass]="{'selected': generoPrimario === 'minimal-techno' || generoSecundario === 'minimal-techno'}"
                 class=" rounded-full relative inline-flex items-center justify-center p-0.5 mb-2 me-2 overflow-hidden text-sm font-medium text-gray-900 group bg-gradient-to-br from-teal-300 to-lime-300 group-hover:from-teal-300 group-hover:to-lime-300 dark:text-white dark:hover:text-gray-900 focus:ring-4 focus:outline-none focus:ring-lime-200 dark:focus:ring-lime-800">
                 <span class="rounded-full relative px-5 py-2.5 transition-all
                  ease-in duration-75 bg-white dark:bg-gray-900  group-hover:bg-opacity-0">
@@ -142,6 +150,7 @@
                 </span>
               </button>
               <button (click)="selecionarGenero('rock-n-roll')"
+                [ngClass]="{'selected': generoPrimario === 'rock-n-roll' || generoSecundario === 'rock-n-roll'}"
                 class=" rounded-full relative inline-flex items-center justify-center p-0.5 mb-2 me-2 overflow-hidden text-sm font-medium text-gray-900 group bg-gradient-to-br from-teal-300 to-lime-300 group-hover:from-teal-300 group-hover:to-lime-300 dark:text-white dark:hover:text-gray-900 focus:ring-4 focus:outline-none focus:ring-lime-200 dark:focus:ring-lime-800">
                 <span class="rounded-full relative px-5 py-2.5 transition-all
                  ease-in duration-75 bg-white dark:bg-gray-900  group-hover:bg-opacity-0">
@@ -149,6 +158,7 @@
                 </span>
               </button>
               <button (click)="selecionarGenero('samba')"
+                [ngClass]="{'selected': generoPrimario === 'samba' || generoSecundario === 'samba'}"
                 class=" rounded-full relative inline-flex items-center justify-center p-0.5 mb-2 me-2 overflow-hidden text-sm font-medium text-gray-900 group bg-gradient-to-br from-teal-300 to-lime-300 group-hover:from-teal-300 group-hover:to-lime-300 dark:text-white dark:hover:text-gray-900 focus:ring-4 focus:outline-none focus:ring-lime-200 dark:focus:ring-lime-800">
                 <span class="rounded-full relative px-5 py-2.5 transition-all
                  ease-in duration-75 bg-white dark:bg-gray-900  group-hover:bg-opacity-0">
@@ -156,6 +166,7 @@
                 </span>
               </button>
               <button (click)="selecionarGenero('trap')"
+                [ngClass]="{'selected': generoPrimario === 'trap' || generoSecundario === 'trap'}"
                 class=" rounded-full relative inline-flex items-center justify-center p-0.5 mb-2 me-2 overflow-hidden text-sm font-medium text-gray-900 group bg-gradient-to-br from-teal-300 to-lime-300 group-hover:from-teal-300 group-hover:to-lime-300 dark:text-white dark:hover:text-gray-900 focus:ring-4 focus:outline-none focus:ring-lime-200 dark:focus:ring-lime-800">
                 <span class="rounded-full relative px-5 py-2.5 transition-all
                  ease-in duration-75 bg-white dark:bg-gray-900  group-hover:bg-opacity-0">
@@ -163,6 +174,7 @@
                 </span>
               </button>
               <button (click)="selecionarGenero('bossa-nova')"
+                [ngClass]="{'selected': generoPrimario === 'bossa-nova' || generoSecundario === 'bossa-nova'}"
                 class=" rounded-full relative inline-flex items-center justify-center p-0.5 mb-2 me-2 overflow-hidden text-sm font-medium text-gray-900 group bg-gradient-to-br from-teal-300 to-lime-300 group-hover:from-teal-300 group-hover:to-lime-300 dark:text-white dark:hover:text-gray-900 focus:ring-4 focus:outline-none focus:ring-lime-200 dark:focus:ring-lime-800">
                 <span class="rounded-full relative px-5 py-2.5 transition-all
                  ease-in duration-75 bg-white dark:bg-gray-900  group-hover:bg-opacity-0">
@@ -172,6 +184,7 @@
             </div>
             <div class="h-1/6">
               <button (click)="selecionarGenero('salsa')"
+                [ngClass]="{'selected': generoPrimario === 'salsa' || generoSecundario === 'salsa'}"
                 class="rounded-full relative inline-flex items-center justify-center p-0.5 mb-2 me-2 overflow-hidden text-sm font-medium text-gray-900 group bg-gradient-to-br from-teal-300 to-lime-300 group-hover:from-teal-300 group-hover:to-lime-300 dark:text-white dark:hover:text-gray-900 focus:ring-4 focus:outline-none focus:ring-lime-200 dark:focus:ring-lime-800">
                 <span class="rounded-full relative px-5 py-2.5 transition-all
                  ease-in duration-75 bg-white dark:bg-gray-900  group-hover:bg-opacity-0">
@@ -179,6 +192,7 @@
                 </span>
               </button>
               <button (click)="selecionarGenero('new-age')"
+                [ngClass]="{'selected': generoPrimario === 'new-age' || generoSecundario === 'new-age'}"
                 class=" rounded-full relative inline-flex items-center justify-center p-0.5 mb-2 me-2 overflow-hidden text-sm font-medium text-gray-900 group bg-gradient-to-br from-teal-300 to-lime-300 group-hover:from-teal-300 group-hover:to-lime-300 dark:text-white dark:hover:text-gray-900 focus:ring-4 focus:outline-none focus:ring-lime-200 dark:focus:ring-lime-800">
                 <span class="rounded-full relative px-5 py-2.5 transition-all
                  ease-in duration-75 bg-white dark:bg-gray-900  group-hover:bg-opacity-0">
@@ -186,6 +200,7 @@
                 </span>
               </button>
               <button (click)="selecionarGenero('mpb')"
+                [ngClass]="{'selected': generoPrimario === 'mpb' || generoSecundario === 'mpb'}"
                 class=" rounded-full relative inline-flex items-center justify-center p-0.5 mb-2 me-2 overflow-hidden text-sm font-medium text-gray-900 group bg-gradient-to-br from-teal-300 to-lime-300 group-hover:from-teal-300 group-hover:to-lime-300 dark:text-white dark:hover:text-gray-900 focus:ring-4 focus:outline-none focus:ring-lime-200 dark:focus:ring-lime-800">
                 <span class="rounded-full relative px-5 py-2.5 transition-all
                  ease-in duration-75 bg-white dark:bg-gray-900  group-hover:bg-opacity-0">
@@ -193,6 +208,7 @@
                 </span>
               </button>
               <button (click)="selecionarGenero('classical')"
+                [ngClass]="{'selected': generoPrimario === 'classical' || generoSecundario === 'classical'}"
                 class=" rounded-full relative inline-flex items-center justify-center p-0.5 mb-2 me-2 overflow-hidden text-sm font-medium text-gray-900 group bg-gradient-to-br from-teal-300 to-lime-300 group-hover:from-teal-300 group-hover:to-lime-300 dark:text-white dark:hover:text-gray-900 focus:ring-4 focus:outline-none focus:ring-lime-200 dark:focus:ring-lime-800">
                 <span class="rounded-full relative px-5 py-2.5 transition-all
                  ease-in duration-75 bg-white dark:bg-gray-900  group-hover:bg-opacity-0">
@@ -200,6 +216,7 @@
                 </span>
               </button>
               <button (click)="selecionarGenero('pop')"
+                [ngClass]="{'selected': generoPrimario === 'pop' || generoSecundario === 'pop'}"
                 class=" rounded-full relative inline-flex items-center justify-center p-0.5 mb-2 me-2 overflow-hidden text-sm font-medium text-gray-900 group bg-gradient-to-br from-teal-300 to-lime-300 group-hover:from-teal-300 group-hover:to-lime-300 dark:text-white dark:hover:text-gray-900 focus:ring-4 focus:outline-none focus:ring-lime-200 dark:focus:ring-lime-800">
                 <span class="rounded-full relative px-5 py-2.5 transition-all
                  ease-in duration-75 bg-white dark:bg-gray-900  group-hover:bg-opacity-0">
@@ -207,6 +224,7 @@
                 </span>
               </button>
               <button (click)="selecionarGenero('j-pop')"
+                [ngClass]="{'selected': generoPrimario === 'j-pop' || generoSecundario === 'j-pop'}"
                 class="w-28 rounded-full relative inline-flex items-center justify-center p-0.5 mb-2 me-2 overflow-hidden text-sm font-medium text-gray-900 group bg-gradient-to-br from-teal-300 to-lime-300 group-hover:from-teal-300 group-hover:to-lime-300 dark:text-white dark:hover:text-gray-900 focus:ring-4 focus:outline-none focus:ring-lime-200 dark:focus:ring-lime-800">
                 <span class="w-28 rounded-full relative px-5 py-2.5 transition-all
                  ease-in duration-75 bg-white dark:bg-gray-900  group-hover:bg-opacity-0">
@@ -215,6 +233,7 @@
               </button>
             </div>
             <button (click)="selecionarGenero('k-pop')"
+              [ngClass]="{'selected': generoPrimario === 'k-pop' || generoSecundario === 'k-pop'}"
               class=" rounded-full relative inline-flex items-center justify-center p-0.5 mb-2 me-2 overflow-hidden text-sm font-medium text-gray-900 group bg-gradient-to-br from-teal-300 to-lime-300 group-hover:from-teal-300 group-hover:to-lime-300 dark:text-white dark:hover:text-gray-900 focus:ring-4 focus:outline-none focus:ring-lime-200 dark:focus:ring-lime-800">
               <span class="rounded-full relative px-5 py-2.5 transition-all
                  ease-in duration-75 bg-white dark:bg-gray-900  group-hover:bg-opacity-0">
@@ -222,6 +241,7 @@
               </span>
             </button>
             <button (click)="selecionarGenero('country')"
+              [ngClass]="{'selected': generoPrimario === 'country' || generoSecundario === 'country'}"
               class=" rounded-full relative inline-flex items-center justify-center p-0.5 mb-2 me-2 overflow-hidden text-sm font-medium text-gray-900 group bg-gradient-to-br from-teal-300 to-lime-300 group-hover:from-teal-300 group-hover:to-lime-300 dark:text-white dark:hover:text-gray-900 focus:ring-4 focus:outline-none focus:ring-lime-200 dark:focus:ring-lime-800">
               <span class="rounded-full relative px-5 py-2.5 transition-all
                  ease-in duration-75 bg-white dark:bg-gray-900  group-hover:bg-opacity-0">
@@ -229,6 +249,7 @@
               </span>
             </button>
             <button (click)="selecionarGenero('heavy-metal')"
+              [ngClass]="{'selected': generoPrimario === 'heavy-metal' || generoSecundario === 'heavy-metal'}"
               class=" rounded-full relative inline-flex items-center justify-center p-0.5 mb-2 me-2 overflow-hidden text-sm font-medium text-gray-900 group bg-gradient-to-br from-teal-300 to-lime-300 group-hover:from-teal-300 group-hover:to-lime-300 dark:text-white dark:hover:text-gray-900 focus:ring-4 focus:outline-none focus:ring-lime-200 dark:focus:ring-lime-800">
               <span class="rounded-full relative px-5 py-2.5 transition-all
                  ease-in duration-75 bg-white dark:bg-gray-900  group-hover:bg-opacity-0">
@@ -236,6 +257,7 @@
               </span>
             </button>
             <button (click)="selecionarGenero('acoustic')"
+              [ngClass]="{'selected': generoPrimario === 'acoustic' || generoSecundario === 'acoustic'}"
               class=" rounded-full relative inline-flex items-center justify-center p-0.5 mb-2 me-2 overflow-hidden text-sm font-medium text-gray-900 group bg-gradient-to-br from-teal-300 to-lime-300 group-hover:from-teal-300 group-hover:to-lime-300 dark:text-white dark:hover:text-gray-900 focus:ring-4 focus:outline-none focus:ring-lime-200 dark:focus:ring-lime-800">
               <span class="rounded-full relative px-5 py-2.5 transition-all
                  ease-in duration-75 bg-white dark:bg-gray-900  group-hover:bg-opacity-0">
@@ -243,6 +265,7 @@
               </span>
             </button>
             <button (click)="selecionarGenero('hardstyle')"
+              [ngClass]="{'selected': generoPrimario === 'hardstyle' || generoSecundario === 'acoustic'}"
               class="w-36 rounded-full relative inline-flex items-center justify-center p-0.5 mb-2 me-2 overflow-hidden text-sm font-medium text-gray-900 group bg-gradient-to-br from-teal-300 to-lime-300 group-hover:from-teal-300 group-hover:to-lime-300 dark:text-white dark:hover:text-gray-900 focus:ring-4 focus:outline-none focus:ring-lime-200 dark:focus:ring-lime-800">
               <span class=" w-36 rounded-full relative px-5 py-2.5 transition-all
                  ease-in duration-75 bg-white dark:bg-gray-900  group-hover:bg-opacity-0">
@@ -250,13 +273,15 @@
               </span>
             </button>
             <button (click)="selecionarGenero('alt-rock')"
-              class=" rounded-full relative inline-flex items-center justify-center p-0.5 mb-2 me-2 overflow-hidden text-sm font-medium text-gray-900 group bg-gradient-to-br from-teal-300 to-lime-300 group-hover:from-teal-300 group-hover:to-lime-300 dark:text-white dark:hover:text-gray-900 focus:ring-4 focus:outline-none focus:ring-lime-200 dark:focus:ring-lime-800">
-              <span class="rounded-full relative px-5 py-2.5 transition-all
-                 ease-in duration-75 bg-white dark:bg-gray-900  group-hover:bg-opacity-0">
+              [ngClass]="{'selected': generoPrimario === 'alt-rock' || generoSecundario === 'alt-rock'}"
+              class="rounded-full relative inline-flex items-center justify-center p-0.5 mb-2 me-2 overflow-hidden text-sm font-medium text-gray-900 group bg-gradient-to-br from-teal-300 to-lime-300 group-hover:from-teal-300 group-hover:to-lime-300 dark:text-white dark:hover:text-gray-900 focus:ring-4 focus:outline-none focus:ring-lime-200 dark:focus:ring-lime-800">
+              <span
+                class="rounded-full relative px-5 py-2.5 transition-all ease-in duration-75 bg-white dark:bg-gray-900 group-hover:bg-opacity-0">
                 Rock Alternativo
               </span>
             </button>
             <button (click)="selecionarGenero('blues')"
+              [ngClass]="{'selected': generoPrimario === 'blues' || generoSecundario === 'blues'}"
               class=" rounded-full relative inline-flex items-center justify-center p-0.5 mb-2 me-2 overflow-hidden text-sm font-medium text-gray-900 group bg-gradient-to-br from-teal-300 to-lime-300 group-hover:from-teal-300 group-hover:to-lime-300 dark:text-white dark:hover:text-gray-900 focus:ring-4 focus:outline-none focus:ring-lime-200 dark:focus:ring-lime-800">
               <span class="rounded-full relative px-5 py-2.5 transition-all
                  ease-in duration-75 bg-white dark:bg-gray-900  group-hover:bg-opacity-0">
@@ -264,6 +289,7 @@
               </span>
             </button>
             <button (click)="selecionarGenero('latino')"
+              [ngClass]="{'selected': generoPrimario === 'latino' || generoSecundario === 'latino'}"
               class=" rounded-full relative inline-flex items-center justify-center p-0.5 mb-2 me-2 overflow-hidden text-sm font-medium text-gray-900 group bg-gradient-to-br from-teal-300 to-lime-300 group-hover:from-teal-300 group-hover:to-lime-300 dark:text-white dark:hover:text-gray-900 focus:ring-4 focus:outline-none focus:ring-lime-200 dark:focus:ring-lime-800">
               <span class="rounded-full relative px-5 py-2.5 transition-all
                ease-in duration-75 bg-white dark:bg-gray-900  group-hover:bg-opacity-0">
@@ -271,6 +297,7 @@
               </span>
             </button>
             <button (click)="selecionarGenero('pagode')"
+              [ngClass]="{'selected': generoPrimario === 'pagode' || generoSecundario === 'pagode'}"
               class=" rounded-full relative inline-flex items-center justify-center p-0.5 mb-2 me-2 overflow-hidden text-sm font-medium text-gray-900 group bg-gradient-to-br from-teal-300 to-lime-300 group-hover:from-teal-300 group-hover:to-lime-300 dark:text-white dark:hover:text-gray-900 focus:ring-4 focus:outline-none focus:ring-lime-200 dark:focus:ring-lime-800">
               <span class="rounded-full relative px-5 py-2.5 transition-all
              ease-in duration-75 bg-white dark:bg-gray-900  group-hover:bg-opacity-0">
@@ -278,6 +305,7 @@
               </span>
             </button>
             <button (click)="selecionarGenero('post-dubstep')"
+              [ngClass]="{'selected': generoPrimario === 'post-dubstep' || generoSecundario === 'post-dubstep'}"
               class=" rounded-full relative inline-flex items-center justify-center p-0.5 mb-2 me-2 overflow-hidden text-sm font-medium text-gray-900 group bg-gradient-to-br from-teal-300 to-lime-300 group-hover:from-teal-300 group-hover:to-lime-300 dark:text-white dark:hover:text-gray-900 focus:ring-4 focus:outline-none focus:ring-lime-200 dark:focus:ring-lime-800">
               <span class="rounded-full relative px-5 py-2.5 transition-all
              ease-in duration-75 bg-white dark:bg-gray-900  group-hover:bg-opacity-0">
@@ -287,8 +315,19 @@
           </div>
           <div class="w-full flex justify-center mr-12 mt-6 h-14">
             <button (click)="descobriMusica()"
-              class=" text-white  bg-gradient-to-r from-green-600 via-green-700 to-green-700 hover:bg-green-800 focus:outline-none focus:ring-4 focus:ring-green-300 font-medium rounded-full text-sm px-5 py-2.5 text-center me-2 mb-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-400 transform hover:scale-110 transition-transform duration-300 ease-in-out">Descobrir
-              uma nova música!</button>
+              [disabled]="!generoPrimario"
+              class="text-white bg-gradient-to-r from-green-600 via-green-700 to-green-700 
+                     hover:bg-green-800 focus:outline-none focus:ring-4 focus:ring-green-300 
+                     font-medium rounded-full text-sm px-5 py-2.5 text-center me-2 mb-2 
+                     dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-400 
+                     transform hover:scale-110 transition-transform duration-300 ease-in-out"
+              [ngClass]="{'disabled-button': !generoPrimario}">
+              Descobrir uma nova música!
+            </button>
+          </div> 
+          <div class="">
+            <p class="musica-info mr-6">Gênero 1: {{generoPrimario}}</p>
+            <p class="musica-info">Gênero 2: {{generoSecundario}}</p>
           </div>
         </div>
         <div class="w-full md:w-4/12 px-4 mr-auto ml-auto">
@@ -337,9 +376,10 @@
               <img src="https://i.ibb.co/BwSz8Tr/logo-removebg-preview.png" width="150" alt="" />
 
             </div>
-            <h3 class="text-3xl text-white font-semibold">{{ albumBuscado.tracks.items[0].name }}</h3>
-            <p class="mt-4 text-lg leading-relaxed text-white">
-              {{ albumBuscado.tracks.items[0].name }}
+            <h3 class="text-3xl text-white font-semibold musica-info">Faixa: {{ albumBuscado.tracks.items[0].name }}
+            </h3>
+            <p class="mt-4 text-lg leading-relaxed text-white musica-info">
+              Álbum: {{ albumBuscado.tracks.items[0].name }}
             </p>
           </div>
         </div>

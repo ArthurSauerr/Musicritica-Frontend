@@ -24,6 +24,16 @@
   color: transparent;
 }
 
+.selected {
+  border: 2px solid #ffffff; /* Exemplo de estilo para indicar seleção */
+}
+
+.disabled-button {
+  background-color: #ccc; /* Cor de fundo cinza para indicar botão desativado */
+  cursor: not-allowed; /* Cursor indicando que o botão não pode ser clicado */
+}
+
+
 .musica-selecione {
   font-family: 'Poppins', sans-serif;
   background: linear-gradient(180deg, #007F4F, #64DEA5);

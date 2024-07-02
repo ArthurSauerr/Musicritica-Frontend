@@ -55,8 +55,10 @@ export class MusicaDetalhesComponent implements OnInit {
   showModalEditarComentario: boolean = false;
   showModalEnviarDenuncia: boolean = false;
   comentarioSelecionado: string;
+  objetoComentarioSelecionado: Comentario;
   idComentarioSelecionado: number;
   playlistSelecionada: boolean = false;
+  isModalComentarioExcluirOpen: boolean;
 
   novoComentario: Comentario = new Comentario();
   novaDenuncia: Denuncia = new Denuncia();
@@ -78,6 +80,7 @@ export class MusicaDetalhesComponent implements OnInit {
   maxLength: number = 34;
   maxLengthComentario: number = 1500;
   idPlaylistSelecionada: number;
+  quantidadeAvaliacaoes: number;
 
   musica: Item;
   comentariosBuscados: Comentario[];
@@ -227,8 +230,9 @@ export class MusicaDetalhesComponent implements OnInit {
   buscarQuantidadePorNota(): void {
     this.avaliacaoService.buscarQuantidadePorNota(this.musica.id).subscribe(
       (data: MapeamentoNotas[]) => {
+        this.quantidadeAvaliacaoes = data.reduce((sum, current) => sum + current.quantidade, 0);
         this.listaDeNotasEQuantidade = data;
-        this.updateChart(); // Atualiza o gráfico após buscar os dados
+        this.updateChart(); 
       },
       (error) => {
         console.error('Ocorreu um erro ao buscar a média da música:', error);
@@ -424,6 +428,7 @@ export class MusicaDetalhesComponent implements OnInit {
 
         this.denunciaService.enviarReport(idComentarioSelecionado, idUsuarioAutenticado).subscribe(
           (response: any) => {
+            this.alertaService.exibirAlerta('denunciaEnviada')
             console.log('Denúncia enviada com sucesso', response);
             this.closeModal;
           },
@@ -700,6 +705,16 @@ export class MusicaDetalhesComponent implements OnInit {
 
   toggleCreatePlaylistInput() {
     this.showCreatePlaylistInput = !this.showCreatePlaylistInput;
+  }
+
+  fecharModalExcluirComentario(): void {
+    this.isModalComentarioExcluirOpen = false; 
+  }
+
+  excluirComentarioModal(comentario: Comentario, event: Event) {
+    event.stopPropagation();
+    this.objetoComentarioSelecionado = comentario;
+    this.isModalComentarioExcluirOpen = true;
   }
 
   openModal(comentarioTexto: Comentario) {

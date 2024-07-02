@@ -170,6 +170,36 @@
   box-shadow: 0 6px 12px rgba(0, 0, 0, 0.175);
 }
 
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 1000;
+}
+
+.modal-content {
+  padding: 1.5rem;
+  border-radius: 0.5rem;
+  box-shadow: 0 0rem 1rem rgba(100, 222, 161, 0.3)
+}
+
+.modal-content-excluir {
+  padding: 1.5rem;
+  border-radius: 0.5rem;
+  box-shadow: 0 0rem 1rem rgba(112, 0, 0, 0.3)
+}
+
+.input-modal {
+  background: none;
+  color: white;
+  border: none;
+  border-bottom: 2px solid #64DEA1;
+  padding-bottom: 5px;
+}
+
 .dropdown-menu.show {
   display: block;
 }
