@@ -149,6 +149,7 @@ export class AdmDenunciaComponent implements OnInit {
   fecharDenuncia(denuncia: Denuncia) {
     console.log(denuncia);
     this.denunciaService.fecharDenuncia(denuncia.id).subscribe(response => {
+      this.alertaService.exibirAlerta("alertaFecharDenuncia");
       console.log('Denúncia ID:', denuncia.id);
       this.listarTodos();
     }, error => {
