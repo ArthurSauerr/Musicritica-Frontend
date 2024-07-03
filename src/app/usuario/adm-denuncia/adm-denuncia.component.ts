@@ -25,7 +25,9 @@ export class AdmDenunciaComponent implements OnInit {
   public usuarios: Usuario[] = [];
   usuarioSelecionado: Usuario;
   comentarioSelecionadoParaDeletar: Comentario;
+  denunciaSelecionadaParaDeletar: Denuncia;
 
+  isModalFecharDenunciaOpen: boolean;
   isModalExcluirComentarioOpen: boolean;
   showModalDenuncia: boolean = false;
   comentarioSelecionado: String;
@@ -167,13 +169,19 @@ export class AdmDenunciaComponent implements OnInit {
 
   fecharModal(): void {
     this.isModalExcluirComentarioOpen = false;
+    this.isModalFecharDenunciaOpen = false;
   }
 
-  excluirPlaylistModal(comentario: Comentario, usuario: Usuario, event: Event) {
+  excluirComentarioModal(comentario: Comentario, usuario: Usuario, event: Event) {
     event.stopPropagation();
     this.comentarioSelecionadoParaDeletar = comentario;
     this.usuarioSelecionado = usuario;
     this.isModalExcluirComentarioOpen = true;
+  }
+
+  fecharDenunciaModal(denuncia: Denuncia) {
+    this.denunciaSelecionadaParaDeletar = denuncia;
+    this.isModalFecharDenunciaOpen = true;
   }
 
   gerarRelatorioDenuncias() {

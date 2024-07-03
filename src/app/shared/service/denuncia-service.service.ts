@@ -41,4 +41,9 @@ export class DenunciaService {
   getDenunciasFechadas(): Observable<Denuncia[]> {
     return this.httpClient.get<Denuncia[]>(`${this.denunciaUrl}/buscarDenunciasFechadas`);
   }
+
+  verificarDenunciaExistente(idComentario: number, idUsuario: number): Observable<boolean> {
+    return this.httpClient.get<boolean>(`${this.denunciaUrl}/denuncias/buscarDenunciaPorUsuario/${idComentario}/${idUsuario}`);
+  }
+  
 }

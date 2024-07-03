@@ -433,6 +433,7 @@ export class MusicaDetalhesComponent implements OnInit {
             this.closeModal;
           },
           (error: any) => {
+            this.alertaService.exibirAlerta("denunciaRecusada");
             console.error('Erro ao enviar report:', error);
           }
         );
