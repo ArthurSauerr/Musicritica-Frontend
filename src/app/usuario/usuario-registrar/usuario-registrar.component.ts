@@ -15,29 +15,39 @@ export class UsuarioRegistrarComponent {
   dt_cadastro: string;
   senhaInvalida: boolean = false;
 
+  maxLengthNome: number = 20;
+
   constructor(
     private usuarioService: UsuarioService,
     private router: Router,
     private alertaService: AlertaServiceService
   ) { }
 
+  get characterCountNome(): string {
+    return `${this.nome.length}/${this.maxLengthNome}`;
+  }
+
   registrar() {
     if (this.nome && this.email && this.senha) {
-      if (this.validarSenha(this.senha)) {
-        this.senhaInvalida = false;
-        this.usuarioService.registrar({ nome: this.nome, email: this.email, senha: this.senha })
-          .subscribe(
-            (response) => {
-              console.log(response.message);
-              this.router.navigate(['usuario/login']);
-            },
-            (error) => {
-              this.alertaService.exibirAlerta('alertaCadastro');
-              console.error('Erro no registro', error);
-            }
-          );
+      if(this.nome.length > this.maxLengthNome){
+        this.alertaService.exibirAlerta('alertaCadastro');
       } else {
-        this.senhaInvalida = true;
+        if (this.validarSenha(this.senha)) {
+          this.senhaInvalida = false;
+          this.usuarioService.registrar({ nome: this.nome, email: this.email, senha: this.senha })
+            .subscribe(
+              (response) => {
+                console.log(response.message);
+                this.router.navigate(['usuario/login']);
+              },
+              (error) => {
+                this.alertaService.exibirAlerta('alertaCadastro');
+                console.error('Erro no registro', error);
+              }
+            );
+        } else {
+          this.senhaInvalida = true;
+        }
       }
     }
   }

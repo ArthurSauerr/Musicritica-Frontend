@@ -130,7 +130,7 @@
   </div>
 
   <div *ngIf="conteudoSelecionado === 'avaliacoes'" class="mt-6">
-    <div *ngFor="let musica of musicasAvaliadas.tracks" class="custom-music mb-6 relative cursor-pointer" (click)="buscarMusicaPorId(musica.id)">
+    <div *ngFor="let musica of musicasAvaliadas.tracks; let i = index" class="custom-music mb-6 relative cursor-pointer flex justify-between items-end" (click)="buscarMusicaPorId(musica.id)">
       <div class="flex items-end">
         <img [src]="musica.album.images[1].url" alt="{{ musica.name }}" class="mb-6 rounded-lg w-40 h-40 mr-4">
         <div class="text-left mb-6">
@@ -138,8 +138,18 @@
           <h2 class="text-1xl font-bold musica-info">{{ musica.album.name }}</h2>
         </div>
       </div>
+      <div class="text-right mb-6">
+        <h2 class="text-1xl font-bold musica-info">Nota de {{usuario.nome}}</h2>
+        <div class="flex justify-end">
+          <span *ngFor="let star of getStars(avaliacoes[i].nota); let i = index" class="star">
+            <mat-icon class="text-yellow-500">{{ star }}</mat-icon>
+          </span>
+        </div>
+      </div>
     </div>
   </div>
+
+
 
   <div *ngIf="conteudoSelecionado === 'descobertas'" class="text-white mt-6 mb-6 overflow-hidden">
     <div>
@@ -175,7 +185,8 @@
   <div class="modal-content bg-black bg-opacity-50 backdrop-filter backdrop-blur-sm ">
     <h2 class="text-xl font-bold mb-4 nomeUsuario justify-center">Editar Nome</h2>
     <input [(ngModel)]="novoNome" type="text" class="input-modal w-full p-2 border border-gray-300 rounded mb-4 "
-      placeholder="Novo Nome">
+      placeholder="Novo Nome" maxlength="{{maxLengthNome}}">
+      <div class="text-right text-sm text-gray-600 mr-8 mt-2">{{ characterCountNome }}</div>
     <div class="flex justify-center gap-2">
       <button (click)="fecharModal()"
         class="w-36 rounded-full relative inline-flex items-center justify-center p-0.5 overflow-hidden text-sm font-medium text-gray-900 group bg-gradient-to-br from-teal-300 to-lime-300 group-hover:from-teal-300 group-hover:to-lime-300 dark:text-white dark:hover:text-gray-900 focus:ring-4 focus:outline-none focus:ring-lime-200 dark:focus:ring-lime-800">
