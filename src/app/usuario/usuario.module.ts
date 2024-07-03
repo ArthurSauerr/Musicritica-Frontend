@@ -10,6 +10,7 @@ import { UsuarioRedefinirSenhaComponent } from './usuario-redefinir-senha/usuari
 import { UsuarioPerfilComponent } from './usuario-perfil/usuario-perfil.component';
 import { AdmDenunciaComponent } from './adm-denuncia/adm-denuncia.component';
 import { AlertaUsuarioComponent } from './alerta-usuario/alerta-usuario.component';
+import { MatIconModule } from '@angular/material/icon';
 
 @NgModule({
   declarations: [
@@ -25,6 +26,7 @@ import { AlertaUsuarioComponent } from './alerta-usuario/alerta-usuario.componen
     CommonModule,
     UsuarioRoutingModule,
     FormsModule,
+    MatIconModule,
   ]
 })
 export class UsuarioModule { }

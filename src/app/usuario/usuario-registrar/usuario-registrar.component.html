@@ -20,7 +20,8 @@
                 <input
                   class="rounded-3xl border-none bg-gray-400 bg-opacity-50 px-6 py-2 text-center text-inherit placeholder-slate-200 shadow-lg outline-none backdrop-blur-md"
                   placeholder="Nome" type="text" name="nome" [(ngModel)]="nome" required
-                  [ngClass]="{'border-red-500': form.submitted && !nome}">
+                  [ngClass]="{'border-red-500': form.submitted && !nome}" maxlength="{{maxLengthNome}}">
+                  <span class="absolute right-0 top-0 mt-2 mr-4 text-sm text-gray-300">{{ nome.length }}/{{ maxLengthNome }}</span>
                 <div class="alert-container">
                   <div *ngIf="form.submitted && !nome" class="text-red-500 text-sm">Campo obrigatório</div>
                 </div>

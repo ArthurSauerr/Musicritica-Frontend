@@ -74,6 +74,10 @@ export class UsuarioPerfilComponent implements OnInit {
   idPlaylistSelecionada: number;
   trackIdSelecionada: string;
 
+  stars: number[] = [5];
+
+  maxLengthNome: number = 20;
+
   ngOnInit(): void {
     this.usuarioService.getToken();
     this.route.paramMap.subscribe((params) => {
@@ -94,6 +98,12 @@ export class UsuarioPerfilComponent implements OnInit {
 
   ngAfterViewInit() {
     this.esconderBotoes();
+  }
+
+  getStars(nota: number): string[] {
+    const filledStars = Array(nota).fill('star');
+    const emptyStars = Array(5 - nota).fill('star_border');
+    return [...filledStars, ...emptyStars];
   }
 
   limparDadosMusicas(): void {
@@ -348,20 +358,28 @@ export class UsuarioPerfilComponent implements OnInit {
     });
   }
 
+  get characterCountNome(): string {
+    return `${this.novoNome.length}/${this.maxLengthNome}`;
+  }
+
   salvarNome(): void {
     if (this.novoNome) {
-      this.usuarioService.atualizarUsuario(this.novoNome).subscribe(
-        (response) => {
-          this.usuario.nome = this.novoNome;
-          this.fecharModal();
-          this.alertaService.exibirAlerta('alert17');
-          console.log('Nome atualizado com sucesso');
-        },
-        (error) => {
-          this.alertaService.exibirAlerta('alert18');
-          console.error('Erro ao atualizar nome:', error);
-        }
-      );
+      if(this.novoNome.length > this.maxLengthNome){
+        this.alertaService.exibirAlerta('alert18');
+      } else {
+        this.usuarioService.atualizarUsuario(this.novoNome).subscribe(
+          (response) => {
+            this.usuario.nome = this.novoNome;
+            this.fecharModal();
+            this.alertaService.exibirAlerta('alert17');
+            console.log('Nome atualizado com sucesso');
+          },
+          (error) => {
+            this.alertaService.exibirAlerta('alert18');
+            console.error('Erro ao atualizar nome:', error);
+          }
+        );
+      }
     } else {
       this.alertaService.exibirAlerta('alert18');
       console.error('Novo nome não fornecido');
