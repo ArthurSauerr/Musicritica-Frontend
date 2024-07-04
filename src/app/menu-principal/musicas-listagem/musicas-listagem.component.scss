@@ -35,13 +35,13 @@
   opacity: 0;
   transition: opacity 0.3s ease-in-out;
 }
+
 .custom-input{
   background: none;
   color: white;
   border-bottom: 3px solid #64DEA1;
   padding-bottom: 5px;
 }
-
 
 .chart-container:hover .chart-info {
   opacity: 1;

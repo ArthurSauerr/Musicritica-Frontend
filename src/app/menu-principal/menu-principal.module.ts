@@ -13,7 +13,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { ChartModule } from 'primeng/chart';
 import { RecomendacoesComponent } from './recomendacoes/recomendacoes.component';
 import { AlertaComponentComponent } from './alerta-component/alerta-component.component';
-
+import { PoliticaPrivacidadeComponent } from './politica-privacidade/politica-privacidade.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +22,8 @@ import { AlertaComponentComponent } from './alerta-component/alerta-component.co
     MusicaDescobrirComponent,
     MenuBuscarMusicaComponent,
     RecomendacoesComponent,
-    AlertaComponentComponent
+    AlertaComponentComponent,
+    PoliticaPrivacidadeComponent
   ],
   imports: [
     CommonModule,

@@ -5,6 +5,7 @@ import { MusicaDetalhesComponent } from './musica-detalhes/musica-detalhes.compo
 import { MusicaDescobrirComponent } from './musica-descobrir/musica-descobrir.component';
 import { MenuBuscarMusicaComponent } from './menu-buscar-musica/menu-buscar-musica.component';
 import { RecomendacoesComponent } from './recomendacoes/recomendacoes.component';
+import { PoliticaPrivacidadeComponent } from './politica-privacidade/politica-privacidade.component';
 
 const routes: Routes = [
   {path: "", component: MusicasListagemComponent},
@@ -12,6 +13,7 @@ const routes: Routes = [
   {path: "descobrir", component: MusicaDescobrirComponent},
   {path: "detalhes", component: MusicaDetalhesComponent},
   {path: "recomendacoes", component: RecomendacoesComponent},
+  {path: "politica-privacidade", component: PoliticaPrivacidadeComponent},
 ];
 
 @NgModule({
