@@ -190,8 +190,8 @@ export class AdmDenunciaComponent implements OnInit {
       'Usuário Denunciado': denuncia.usuarioReportado.nome,
       'Denunciado por': denuncia.usuario.nome,
       'Comentário': denuncia.comentario.comentario,
-      'Status': denuncia.status,
-      'Data': denuncia.dt_denuncia
+      'Status': denuncia.status ? 'ABERTO' : 'FECHADO',
+      'Data': denuncia.dt_denuncia 
     })));
     const wb: XLSX.WorkBook = XLSX.utils.book_new();
     XLSX.utils.book_append_sheet(wb, ws, 'Denúncias');
@@ -205,7 +205,7 @@ export class AdmDenunciaComponent implements OnInit {
           'Nome': denuncia.usuarioReportado.nome,
           'Denunciado por': denuncia.usuario.nome,
           'Comentário': denuncia.comentario.comentario,
-          'Status': denuncia.status,
+          'Status': denuncia.status ? 'ABERTO' : 'FECHADO',
           'Data': denuncia.dt_denuncia
         })));
         const wb: XLSX.WorkBook = XLSX.utils.book_new();
