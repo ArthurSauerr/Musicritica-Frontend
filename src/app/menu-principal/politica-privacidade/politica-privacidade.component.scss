@@ -1,0 +1,34 @@
+.custom-bg {
+    background-color: #0D0D0D;
+}
+
+.custom-href {
+    font-family: 'Inter', sans-serif;
+    color: #64DEA1;
+    position: relative;
+}
+
+.chart-info {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: rgba(0, 0, 0, 0.5);
+    color: white;
+    font-size: 1.5rem;
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out;
+}
+
+.musica-info {
+    font-family: 'Poppins', sans-serif;
+    background: linear-gradient(180deg, #64DEA1, #FFFFFF);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+  
