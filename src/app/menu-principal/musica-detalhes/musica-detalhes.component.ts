@@ -518,14 +518,20 @@ export class MusicaDetalhesComponent implements OnInit {
     }
   }
 
-  deletarComentario(comentarioId: number): void {
+  mostrar(id: number){
+    console.log("ID DO COMENTARIO:" + id)
+  }
+
+  deletarComentario(): void {
     this.usuarioService.buscarIdPorEmail(this.emailParam).subscribe(
       (usuarioId: number) => {
-        this.comentarioService.deletarComentario(usuarioId, comentarioId).subscribe(
+        this.comentarioService.deletarComentario(usuarioId, this.objetoComentarioSelecionado.id).subscribe(
           (response) => {
             console.log('Comentário deletado com sucesso');
             this.buscarComentarios();
+            this.buscarRespostas(this.objetoComentarioSelecionado.id);
             this.buscarQuantidadeComentarios();
+            this.isModalComentarioExcluirOpen = false;
             this.alertaService.exibirAlerta('alert7')
           },
           (error) => {
