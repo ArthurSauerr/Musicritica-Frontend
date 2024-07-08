@@ -165,6 +165,7 @@ export class AdmDenunciaComponent implements OnInit {
       this.listarTodos();
     }, error => {
       console.error('Erro ao deletar o comentário:', error);
+      console.log("Comentario para ser deletado:", comentario)
     });
   }
 
