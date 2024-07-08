@@ -9,6 +9,7 @@
 
         <h1 class="text-6xl font-bold mb-4 musica-info">{{ musica.name }}</h1>
         <h2 class="text-2xl font-bold mb-6 musica-info">{{ musica.album.name }}</h2>
+        <h2 class="text-2xl font-bold mb-6 musica-info">{{ musica.album.artists[0].name }}</h2>
       </div>
     </div>
     <div>
@@ -188,14 +189,14 @@
             </button>
             <div *ngIf="mostrarDropdown[comentario.id]" id="dropdownComment1"
               class="mt-4 w-36 bg-white rounded divide-y divide-gray-100 shadow dark:bg-gray-700 dark:divide-gray-600">
-              <ul class="py-1 text-sm text-gray-700 dark:text-gray-200"
+              <ul class="py-1 text-sm text-gray-700 dark:text-gray-200 cursor-pointer"
                 aria-labelledby="dropdownMenuIconHorizontalButton">
                 <li *ngIf="usuarioLogado.id == comentario.usuario.id">
                   <a (click)="openModal(comentario)"
                     class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Editar</a>
                 </li>
                 <li *ngIf="usuarioLogado.id == comentario.usuario.id">
-                  <a (click)="excluirComentarioModal(comentario, $event)"
+                  <a (click)="excluirComentarioModal(comentario, $event); mostrar(comentario.id)"
                     class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Remover</a>
                 </li>
                 <li *ngIf="usuarioLogado.id != comentario.usuario.id">
@@ -219,7 +220,7 @@
                       Cancelar
                     </span>
                   </button>
-                  <button (click)="deletarComentario(comentario.id)"
+                  <button (click)="deletarComentario()"
                     class="w-36 rounded-full relative inline-flex items-center justify-center p-0.5 overflow-hidden text-sm font-medium text-gray-900 group bg-gradient-to-br from-red-400 to-red-800 group-hover:from-red-400 group-hover:to-red-400 dark:text-white dark:hover:text-gray-900 focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800">
                     <span
                       class="w-36 rounded-full relative px-5 py-2.5 transition-all ease-in duration-75 bg-white dark:bg-gray-900 group-hover:bg-opacity-0">
@@ -275,7 +276,7 @@
             </div>
           </div>
         </footer>
-        <p class="text-white dark:text-gray-400 justify-text">{{ wrapText(comentario.comentario, 50) }}</p>
+        <p class="text-white dark:text-gray-400 justify-text" (click)="mostrar(comentario.id)" >{{ wrapText(comentario.comentario, 50) }} "</p>
         <div class="flex items-center mt-4 space-x-4">
           <button type="button" (click)="toggleReply(comentario)"
             class="mt-2 mb-4 flex items-center text-sm text-white hover:underline dark:text-gray-400 font-medium">
@@ -338,14 +339,14 @@
                   </button>
                   <div *ngIf="mostrarDropdown[comentario.id]" id="dropdownComment1"
                     class="mt-4 w-36 bg-white rounded divide-y divide-gray-100 shadow dark:bg-gray-700 dark:divide-gray-600">
-                    <ul class="py-1 text-sm text-gray-700 dark:text-gray-200"
+                    <ul class="py-1 text-sm text-gray-700 dark:text-gray-200 cursor-pointer"
                       aria-labelledby="dropdownMenuIconHorizontalButton">
                       <li *ngIf="usuarioLogado.id == comentario.usuario.id">
                         <a
                           class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Editar</a>
                       </li>
                       <li *ngIf="usuarioLogado.id == comentario.usuario.id">
-                        <a (click)="deletarComentario(comentario.id)"
+                        <a (click)="excluirComentarioModal(comentario, $event); mostrar(comentario.id)"
                           class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Remover</a>
                       </li>
                       <li *ngIf="usuarioLogado.id != comentario.usuario.id">
