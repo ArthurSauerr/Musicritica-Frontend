@@ -33,11 +33,14 @@
                 <input
                   class="rounded-3xl border-none bg-gray-400 bg-opacity-50 px-6 py-2 text-center text-inherit placeholder-slate-200 shadow-lg outline-none backdrop-blur-md"
                   placeholder="E-mail" type="email" name="email" [(ngModel)]="email" required
-                  [ngClass]="{'border-red-500': form.submitted && !email}">
+                  pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"
+                  [ngClass]="{'border-red-500': form.submitted && !emailValido()}">
                 <div class="alert-container">
+                  <div *ngIf="form.submitted && !emailValido()" class="text-red-500 text-sm">Email inválido</div>
                   <div *ngIf="form.submitted && !email" class="text-red-500 text-sm">Campo obrigatório</div>
                 </div>
               </div>
+
               <div class="relative mb-4">
                 <span class="absolute left-0 top-0 mt-2 ml-2">
                   <img width="20" height="20" src="https://img.icons8.com/ios-filled/50/FFFFFF/password.png" alt="password" />
