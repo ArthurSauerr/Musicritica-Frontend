@@ -32,7 +32,7 @@ export class UsuarioRegistrarComponent {
       if(this.nome.length > this.maxLengthNome){
         this.alertaService.exibirAlerta('alertaCadastro');
       } else {
-        if (this.validarSenha(this.senha)) {
+        if (this.validarEmail(this.email) && this.validarSenha(this.senha)) {
           this.senhaInvalida = false;
           this.usuarioService.registrar({ nome: this.nome, email: this.email, senha: this.senha })
             .subscribe(
@@ -52,12 +52,25 @@ export class UsuarioRegistrarComponent {
     }
   }
 
+  validarEmail(email: string): boolean {
+    const emailPattern = /^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$/;
+    const emailValido = emailPattern.test(email);
+    if (!emailValido) {
+      console.error('Email inválido');
+    }
+    return emailValido;
+  }
+
   validarSenha(senha: string): boolean {
     const senhaValida = senha.length >= 6;
     if (!senhaValida) {
       console.error('Senha inválida: deve ter pelo menos 6 caracteres.');
     }
     return senhaValida;
+  }
+
+  emailValido(): boolean {
+    return this.validarEmail(this.email);
   }
 
   fazerLogin() {

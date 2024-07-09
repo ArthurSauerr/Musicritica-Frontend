@@ -112,6 +112,7 @@
           <div class="text-left mb-2">
             <h1 class="text-3xl font-bold mb-4 musica-info">{{ track.name }}</h1>
             <h2 class="text-1xl font-bold musica-info">{{ track.album.name }}</h2>
+            <h2 class="text-1xl font-bold musica-info">{{ track.album.artists[0].name }}</h2>
           </div>
         </div>
         <div class="absolute top-0 right-0" *ngIf="musicasDaPlaylist.tracks.length > 1">
@@ -136,6 +137,7 @@
         <div class="text-left mb-6">
           <h1 class="text-3xl font-bold mb-4 musica-info">{{ musica.name }}</h1>
           <h2 class="text-1xl font-bold musica-info">{{ musica.album.name }}</h2>
+          <h2 class="text-1xl font-bold musica-info">{{ musica.album.artists[0].name }}</h2>
         </div>
       </div>
       <div class="text-right mb-6">
@@ -159,6 +161,7 @@
           <div class="text-left mb-6">
             <h1 class="text-3xl font-bold mb-4 musica-info">{{ track.name }}</h1>
             <h2 class="text-1xl font-bold musica-info">{{ track.album.name }}</h2>
+            <h2 class="text-1xl font-bold musica-info">{{ track.album.artists[0].name }}</h2>
           </div>
         </div>
         <div *ngFor="let playlist" class="mt-6">
