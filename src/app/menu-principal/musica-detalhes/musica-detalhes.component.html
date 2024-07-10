@@ -97,7 +97,9 @@
     </div>
   </div>
   <div class="ml-16 flex">
-    <div class="mr-2 text-2xl font-bold mb-4 musica-info">Média geral - {{media}} ({{quantidadeAvaliacaoes}})</div>
+    <div class="mr-2 text-2xl font-bold mb-4 musica-info">
+      Média geral ‎ ‎ - ‎ ‎{{media}}‎ ‎({{formatarQuantidade(quantidadeAvaliacaoes)}})
+    </div>
     <span *ngFor="let star of stars; let i = index" class="star" (click)="rate(i + 1)">
       <mat-icon>{{ 1 < 2 ? 'star' : 'star_border' }}</mat-icon>
     </span>
@@ -152,7 +154,7 @@
     </div>
   </div>
 </div>
-<div class="ml-16 mt-20">
+<div class="ml-16 ">
   <div class="max-w-2xl">
     <div class="flex justify-between items-center mb-6">
       <h2 class="text-lg lg:text-2xl font-bold text-white verde-texto">Comentários ({{totalDeComentarios}})</h2>
@@ -208,7 +210,8 @@
             <!-- //excluir comentario -->
             <div *ngIf="isModalComentarioExcluirOpen" class="modal-overlay">
               <div class="modal-content bg-black bg-opacity-70 backdrop-filter backdrop-blur-sm ">
-                <h2 class="text-xl font-bold mb-4 musica-info justify-center">Tem certeza que deseja excluir comentário?</h2>
+                <h2 class="text-xl font-bold mb-4 musica-info justify-center">Tem certeza que deseja excluir comentário?
+                </h2>
                 <div class="flex justify-center">
                   <h3 class="text-md font-medium mb-4 justify-center alerta">Essa ação não pode ser desfeita!</h3>
                 </div>
@@ -276,7 +279,8 @@
             </div>
           </div>
         </footer>
-        <p class="text-white dark:text-gray-400 justify-text" (click)="mostrar(comentario.id)" >{{ wrapText(comentario.comentario, 50) }} "</p>
+        <p class="text-white dark:text-gray-400 justify-text" (click)="mostrar(comentario.id)">{{
+          wrapText(comentario.comentario, 100) }}</p>
         <div class="flex items-center mt-4 space-x-4">
           <button type="button" (click)="toggleReply(comentario)"
             class="mt-2 mb-4 flex items-center text-sm text-white hover:underline dark:text-gray-400 font-medium">
@@ -370,12 +374,7 @@
                 </button>
                 <button type="button" (click)="buscarRespostas(comentario.id)"
                   class="mt-2 mb-4 flex items-center text-sm text-white hover:underline dark:text-gray-400 font-medium">
-                  <svg class="mr-1.5 w-3.5 h-3.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
-                    viewBox="0 0 20 18">
-                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                      d="M5 5h5M5 8h2m6-3h2m-5 3h6m2-7H2a1 1 0 0 0-1 1v9a1 1 0 0 0 1 1h3v5l5-5h8a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1Z" />
-                  </svg>
-                </button>
+                  <img width="16" height="16" src="https://img.icons8.com/ios-glyphs/16/CCCCCC/visible--v1.png" alt="visible--v1"/>                </button>
               </div>
               <div class="ml-16 flex-grow mb-6 mt-6" *ngIf="mostrarTextArea[comentario.id]">
                 <div class="py-2 px-4 mb-4 rounded-lg rounded-t-lg custom-checkbox">
@@ -400,10 +399,3 @@
       Ver mais +
     </button>
   </div>
-  
-  
-  
-
-
-  
-    

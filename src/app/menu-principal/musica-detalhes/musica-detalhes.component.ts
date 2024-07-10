@@ -1,5 +1,5 @@
 import { UsuarioService } from 'src/app/shared/service/usuario.service';
-import { Component, HostListener, OnInit, numberAttribute, ElementRef, Input, QueryList, ViewChildren } from '@angular/core';
+import { Component, HostListener, OnInit, numberAttribute, ElementRef, Input, QueryList, ViewChildren, AfterViewInit } from '@angular/core';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { ComentarioServiceService } from 'src/app/shared/service/comentario-service.service';
 import { Item } from './../../shared/model/Item';
@@ -26,7 +26,7 @@ import { Pipe, PipeTransform } from '@angular/core';
   styleUrls: ['./musica-detalhes.component.scss']
 })
 
-export class MusicaDetalhesComponent implements OnInit {
+export class MusicaDetalhesComponent implements OnInit, AfterViewInit {
   constructor(
     private sanitizer: DomSanitizer,
     private comentarioService: ComentarioServiceService,
@@ -179,6 +179,17 @@ export class MusicaDetalhesComponent implements OnInit {
     this.buscarQuantidadePorNota();
   }
 
+  ngAfterViewInit(): void {
+    window.scrollTo(0, 0);
+  }
+
+  formatarQuantidade(quantidade: number): string {
+    if (quantidade >= 1000) {
+      return (quantidade / 1000).toFixed(1) + 'k';
+    }
+    return quantidade.toString();
+  }
+
   addOfsset(){
     this.offset += 5;
     this.buscarComentarios();
@@ -317,6 +328,10 @@ export class MusicaDetalhesComponent implements OnInit {
 
   enviarAvaliacao() {
 
+    if(this.rating == 0){
+      this.alertaService.exibirAlerta("alertaNota");
+    } else {
+
     if (this.usuarioService.getToken() == null) {
       this.alertaService.exibirAlerta("alert16");
     }
@@ -355,6 +370,7 @@ export class MusicaDetalhesComponent implements OnInit {
               (avaliacaoEnviada) => {
                 this.buscarQuantidadePorNota();
                 this.buscarMediaPorIdMusica();
+                this.buscarComentarios();
                 this.alertaService.exibirAlerta('alert10')
                 console.log("avalição enviada: " + avaliacaoEnviada)
               }, error => {
@@ -369,6 +385,7 @@ export class MusicaDetalhesComponent implements OnInit {
       }, error => {
         console.error('Usuário não encontrad:', error);
       });
+    }
   }
 
   enviarComentario(): void {

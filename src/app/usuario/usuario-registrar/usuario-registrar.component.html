@@ -37,7 +37,6 @@
                   [ngClass]="{'border-red-500': form.submitted && !emailValido()}">
                 <div class="alert-container">
                   <div *ngIf="form.submitted && !emailValido()" class="text-red-500 text-sm">Email inválido</div>
-                  <div *ngIf="form.submitted && !email" class="text-red-500 text-sm">Campo obrigatório</div>
                 </div>
               </div>
 

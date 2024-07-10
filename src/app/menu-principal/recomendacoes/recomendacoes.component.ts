@@ -292,13 +292,69 @@ export class RecomendacoesComponent implements OnInit, OnDestroy {
       } else if (this.generosBrasileiros.includes(genero3.toLowerCase())) {
         genero3 = this.capitalizeFirstLetter(genero3);
       }
+      
   
       this.genero1 = genero1;
       this.genero2 = genero2;
       this.genero3 = genero3;
+
     } else {
       this.atualizarRecomendacoes();
     }
+    if (genero1 && genero2 && genero3) {
+      if (genero1.toLowerCase() === "forro") {
+        genero1 = "Forró";
+      } else if (this.generosBrasileiros.includes(genero1.toLowerCase())) {
+        genero1 = this.capitalizeFirstLetter(genero1);
+      }
+  
+      if (genero2.toLowerCase() === "forro") {
+        genero2 = "Forró";
+      } else if (this.generosBrasileiros.includes(genero2.toLowerCase())) {
+        genero2 = this.capitalizeFirstLetter(genero2);
+      }
+  
+      if (genero3.toLowerCase() === "forro") {
+        genero3 = "Forró";
+      } else if (this.generosBrasileiros.includes(genero3.toLowerCase())) {
+        genero3 = this.capitalizeFirstLetter(genero3);
+      }
+  
+      this.genero1 = genero1;
+      this.genero2 = genero2;
+      this.genero3 = genero3;
+
+    } else {
+      this.atualizarRecomendacoes();
+    }
+
+    if (genero1 && genero2 && genero3) {
+      if (genero1.toLowerCase() === "mpb") {
+        genero1 = "MPB";
+      } else if (this.generosBrasileiros.includes(genero1.toLowerCase())) {
+        genero1 = this.capitalizeFirstLetter(genero1);
+      }
+  
+      if (genero2.toLowerCase() === "mpb") {
+        genero2 = "MPB";
+      } else if (this.generosBrasileiros.includes(genero2.toLowerCase())) {
+        genero2 = this.capitalizeFirstLetter(genero2);
+      }
+  
+      if (genero3.toLowerCase() === "mpb") {
+        genero3 = "MPB";
+      } else if (this.generosBrasileiros.includes(genero3.toLowerCase())) {
+        genero3 = this.capitalizeFirstLetter(genero3);
+      }
+  
+      this.genero1 = genero1;
+      this.genero2 = genero2;
+      this.genero3 = genero3;
+
+    } else {
+      this.atualizarRecomendacoes();
+    }
+
   }
 
   sortearGeneros(array: string[]): [string, string, string] {
